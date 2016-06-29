@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- INSDC Sequence Read Archive resource Submission (SRA/ERA/DRA) object XML specification -->
-<!-- $Id: SRA.submission.xsd,v 1.4 2012/05/24 15:27:05 rajeshr Exp $ -->
+<!-- $Id: SRA.submission.xsd,v 1.2 2013/02/22 11:52:58 rajeshr Exp $ -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
   <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
@@ -15,6 +15,8 @@
 
     <xs:sequence>
 
+      <xs:element name="IDENTIFIERS" type="com:IdentifierType" maxOccurs="1" minOccurs="0">
+      </xs:element>
       <xs:element name="TITLE" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>
@@ -97,6 +99,7 @@
                             <xs:enumeration value="dac"/>
                             <xs:enumeration value="project"/>
                             <xs:enumeration value="checklist"/>
+                            <xs:enumeration value="sampleGroup"/>
                           </xs:restriction>
                         </xs:simpleType>
                       </xs:attribute>
@@ -144,6 +147,7 @@
                             <xs:enumeration value="dac"/>
                             <xs:enumeration value="project"/>
                             <xs:enumeration value="checklist"/>
+                            <xs:enumeration value="sampleGroup"/>
                           </xs:restriction>
                         </xs:simpleType>
                       </xs:attribute>
@@ -327,6 +331,7 @@
                             <xs:enumeration value="dac"/>
                             <xs:enumeration value="project"/>
                             <xs:enumeration value="checklist"/>
+                            <xs:enumeration value="sampleGroup"/>
                           </xs:restriction>
                         </xs:simpleType>
                       </xs:attribute>

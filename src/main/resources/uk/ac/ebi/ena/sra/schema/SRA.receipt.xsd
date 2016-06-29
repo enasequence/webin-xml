@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--?xml-stylesheet type="text/xsl" href="https://wwwdev.ebi.ac.uk/ena/submit/drop-box/submit/receipt.xsl"?-->
+<?xml-stylesheet type="text/xsl" href="https://wwwdev.ebi.ac.uk/ena/submit/drop-box/submit/receipt.xsl"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:complexType name="ID">
         <xs:sequence>
@@ -23,6 +23,7 @@
                                 <xs:enumeration value="study"/>
                                 <xs:enumeration value="experiment"/>
                                 <xs:enumeration value="sample"/>
+                                <xs:enumeration value="sampleGroup"/>
                                 <xs:enumeration value="run"/>
                                 <xs:enumeration value="analysis"/>
                                 <xs:enumeration value="dataset"/>
@@ -43,7 +44,7 @@
             <xs:simpleType>
                 <xs:restriction base="xs:string">
                     <xs:pattern
-                        value="(ER[ABPRSXZC]\d{6}|EGA[CPDNSXRZ]\d{10}|EGA\d{11}|PRJ[END][A-Z]\d|BN\d|BQ\d|CZ\d)"/>
+                        value="(ER[ABPRSXZCG]\d{6}|EGA[CPDNSXRZ]\d{10}|EGA\d{11}|PRJ[END][A-Z]\d|BN\d|BQ\d|CZ\d)"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -74,6 +75,7 @@
                 <xs:element maxOccurs="unbounded" minOccurs="0" name="EXPERIMENT" type="ID"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" name="RUN" type="ID"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" name="SAMPLE" type="ID"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="SAMPLEGROUP" type="ID"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" name="STUDY" type="ID"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" name="DAC" type="ID"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" name="POLICY" type="ID"/>

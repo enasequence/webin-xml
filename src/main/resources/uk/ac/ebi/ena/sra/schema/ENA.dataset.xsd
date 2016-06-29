@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- INSDC Short Read Archive resource Submission (SRA) object XML specification --> 
-<!-- $Id: ENA.dataset.xsd,v 1.1 2011/07/11 15:48:59 rasko Exp $ --> 
+<!-- $Id: ENA.dataset.xsd,v 1.2 2012/06/22 09:24:13 rasko Exp $ --> 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
 	<xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
@@ -10,6 +10,7 @@
     </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS" type="com:IdentifierType"> </xs:element>
 			<xs:element name="NAME" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation/>
@@ -27,6 +28,19 @@
 			</xs:element>
 			<xs:element name="RUN_REF">
 				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
+							type="com:IdentifierType"> </xs:element>
+					</xs:sequence>
+					<xs:attributeGroup ref="com:RefNameGroup"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ANALYSIS_REF">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
+							type="com:IdentifierType"> </xs:element>
+					</xs:sequence>
 					<xs:attributeGroup ref="com:RefNameGroup"/>
 				</xs:complexType>
 			</xs:element>

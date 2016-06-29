@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- INSDC Sequence Read Archive resource Run (SRR/ERR/DRR) object XML specification -->
-<!-- $Id: ENA.checklist.xsd,v 1.8 2012/05/29 14:21:00 rajeshr Exp $ -->
+<!-- $Id: ENA.checklist.xsd,v 1.2 2013/01/10 17:28:53 rajeshr Exp $ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
     <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
@@ -9,6 +9,7 @@
             <xs:documentation/>
         </xs:annotation>
         <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS" type="com:IdentifierType"> </xs:element>
             <xs:element name="DESCRIPTOR">
                 <xs:complexType>
                     <xs:sequence>
@@ -64,117 +65,130 @@
                                         type="xs:string">
                                         <xs:annotation>
                                             <xs:documentation>Description of the checklist group.
-        </xs:documentation>
+                                            </xs:documentation>
                                         </xs:annotation>
                                     </xs:element>
                                     <xs:element name="CHECKLIST_ATTRIBUTE" maxOccurs="unbounded">
                                         <xs:complexType>
                                             <xs:sequence>
                                                 <xs:element maxOccurs="1" minOccurs="1" name="TAG"
-                                                 type="xs:string">
-                                                 <xs:annotation>
-                                                 <xs:documentation> Name of the attribute.</xs:documentation>
-                                                 </xs:annotation>
+                                                    type="xs:string">
+                                                    <xs:annotation>
+                                                        <xs:documentation> Name of the attribute.</xs:documentation>
+                                                    </xs:annotation>
                                                 </xs:element>
                                                 <xs:element maxOccurs="1" minOccurs="0"
-                                                 name="DESCRIPTION" type="xs:string">
-                                                 <xs:annotation>
-                                                 <xs:documentation>Description of the attribute.
-        </xs:documentation>
-                                                 </xs:annotation>
+                                                    name="DESCRIPTION" type="xs:string">
+                                                    <xs:annotation>
+                                                        <xs:documentation>Description of the attribute.
+                                                        </xs:documentation>
+                                                    </xs:annotation>
                                                 </xs:element>
                                                 <xs:element maxOccurs="1" minOccurs="0"
-                                                 name="MANDATORY">
-                                                 <xs:annotation>
-                                                 <xs:documentation>Defines if the attribute is mandatory, recommended or optional.</xs:documentation>
-                                                 </xs:annotation>
-                                                 <xs:simpleType>
-                                                 <xs:restriction base="xs:string">
-                                                 <xs:enumeration value="mandatory">
-                                                 <xs:annotation>
-                                                 <xs:documentation>
-                              Random sequencing of the whole genome.
-                          </xs:documentation>
-                                                 </xs:annotation>
-                                                 </xs:enumeration>
-                                                 <xs:enumeration value="recommended">
-                                                 <xs:annotation>
-                                                 <xs:documentation>
-                                  Random sequencing of exonic regions selected from the genome.
-                              </xs:documentation>
-                                                 </xs:annotation>
-                                                 </xs:enumeration>
-                                                 <xs:enumeration value="optional">
-                                                 <xs:annotation>
-                                                 <xs:documentation>
-                                  Random sequencing of whole transcriptome.
-                              </xs:documentation>
-                                                 </xs:annotation>
-                                                 </xs:enumeration>
-                                                 </xs:restriction>
-                                                 </xs:simpleType>
+                                                    name="MANDATORY">
+                                                    <xs:annotation>
+                                                        <xs:documentation>Defines if the attribute is mandatory, recommended or optional.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                        <xs:restriction base="xs:string">
+                                                            <xs:enumeration value="mandatory">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Random sequencing of the whole genome.
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:enumeration>
+                                                            <xs:enumeration value="recommended">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Random sequencing of exonic regions selected from the genome.
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:enumeration>
+                                                            <xs:enumeration value="optional">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Random sequencing of whole transcriptome.
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:enumeration>
+                                                        </xs:restriction>
+                                                    </xs:simpleType>
+                                                </xs:element>
+                                                <xs:element minOccurs="0" name="MULTIPLICITY">
+                                                    <xs:annotation>
+                                                        <xs:documentation>The attribute can appear more than once if the multiplicity value is set to multiple and at most once if the value is set to single. By default an attribute can occur no more than once.
+                                                            
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:simpleType>
+                                                        <xs:restriction base="xs:string">
+                                                            <xs:enumeration value="single"/>
+                                                            <xs:enumeration value="multiple"/>
+                                                        </xs:restriction>
+                                                    </xs:simpleType>
                                                 </xs:element>
                                                 <xs:element minOccurs="0" name="VALUE">
-                                                 <xs:annotation>
-                                                 <xs:documentation>Attribute type.</xs:documentation>
-                                                 </xs:annotation>
-                                                 <xs:complexType>
-                                                 <xs:choice>
-                                                 <xs:element name="TEXT_VALUE">
-                                                 <xs:annotation>
-                                                 <xs:documentation>A single-line text value.</xs:documentation>
-                                                 </xs:annotation>
-                                                 </xs:element>
-                                                 <xs:element name="TEXT_AREA">
-                                                 <xs:annotation>
-                                                 <xs:documentation>A multi-line text value.</xs:documentation>
-                                                 </xs:annotation>
-                                                 </xs:element>
-                                                 <xs:element name="TEXT_CHOICE">
-                                                 <xs:annotation>
-                                                 <xs:documentation>A value from a controlled list.</xs:documentation>
-                                                 </xs:annotation>
-                                                 <xs:complexType>
-                                                 <xs:sequence maxOccurs="1">
-                                                 <xs:element maxOccurs="unbounded" name="VALUE"
-                                                 type="xs:string">
-                                                 <xs:annotation>
-                                                 <xs:documentation>Allowed value.</xs:documentation>
-                                                 </xs:annotation>
-                                                 </xs:element>
-                                                 </xs:sequence>
-                                                 </xs:complexType>
-                                                 </xs:element>
-                                                 <xs:element name="REGEXP_VALUE" type="xs:string">
-                                                 <xs:annotation>
-                                                 <xs:documentation>A single-line text value restricted by a regular expression.</xs:documentation>
-                                                 </xs:annotation>
-                                                 </xs:element>
-                                                 <xs:element name="DATE_VALUE">
-                                                 <xs:annotation>
-                                                 <xs:documentation>A date value.</xs:documentation>
-                                                 </xs:annotation>
-                                                 </xs:element>
-                                                 </xs:choice>
-                                                 </xs:complexType>
+                                                    <xs:annotation>
+                                                        <xs:documentation>Attribute type.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                        <xs:choice>
+                                                            <xs:element name="TEXT_VALUE">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>A single-line text value.</xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="TEXT_AREA">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>A multi-line text value.</xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="TEXT_CHOICE">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>A value from a controlled list.</xs:documentation>
+                                                                </xs:annotation>
+                                                                <xs:complexType>
+                                                                    <xs:sequence maxOccurs="1">
+                                                                        <xs:element maxOccurs="unbounded" name="VALUE"
+                                                                            type="xs:string">
+                                                                            <xs:annotation>
+                                                                                <xs:documentation>Allowed value.</xs:documentation>
+                                                                            </xs:annotation>
+                                                                        </xs:element>
+                                                                    </xs:sequence>
+                                                                </xs:complexType>
+                                                            </xs:element>
+                                                            <xs:element name="REGEXP_VALUE" type="xs:string">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>A single-line text value restricted by a regular expression.</xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="DATE_VALUE">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>A date value.</xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                        </xs:choice>
+                                                    </xs:complexType>
                                                 </xs:element>
                                                 <xs:element minOccurs="0" name="UNITS">
-                                                 <xs:annotation>
-                                                 <xs:documentation>Allowed units.</xs:documentation>
-                                                 </xs:annotation>
-                                                 <xs:complexType>
-                                                 <xs:sequence maxOccurs="1">
-                                                 <xs:element maxOccurs="unbounded" name="UNIT"
-                                                 type="xs:string">
-                                                 <xs:annotation>
-                                                 <xs:documentation>Allowed units.</xs:documentation>
-                                                 </xs:annotation>
-                                                 </xs:element>
-                                                 </xs:sequence>
-                                                 </xs:complexType>
+                                                    <xs:annotation>
+                                                        <xs:documentation>Allowed units.</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                        <xs:sequence maxOccurs="1">
+                                                            <xs:element maxOccurs="unbounded" name="UNIT"
+                                                                type="xs:string">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>Allowed units.</xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
                                                 </xs:element>
                                                 <xs:element minOccurs="0" name="GROUP"
-                                                 type="xs:string"/>
+                                                    type="xs:string"/>
                                             </xs:sequence>
                                         </xs:complexType>
                                     </xs:element>
@@ -187,19 +201,19 @@
         </xs:sequence>
         <xs:attributeGroup ref="com:NameGroup"/>
     </xs:complexType>
-
+    
     <xs:complexType name="ChecklistSetType">
         <xs:sequence minOccurs="1" maxOccurs="unbounded">
             <xs:element name="CHECKLIST" type="ChecklistType"/>
         </xs:sequence>
     </xs:complexType>
-
+    
     <xs:element name="CHECKLIST_SET" type="ChecklistSetType">
         <xs:annotation>
             <xs:documentation/>
         </xs:annotation>
-
+        
     </xs:element>
-
+    
     <xs:element name="CHECKLIST" type="ChecklistType"/>
 </xs:schema>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- INSDC Short Read Archive resource DAC (EGA) object XML specification -->
-<!-- $Id: EGA.policy.xsd,v 1.1 2011/07/19 15:51:16 rasko Exp $ -->
+<!-- $Id: EGA.policy.xsd,v 1.2 2012/06/22 09:22:03 rasko Exp $ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
 	<xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
@@ -9,6 +9,7 @@
 			<xs:documentation>Describes an object that contains data access policy information.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS" type="com:IdentifierType"> </xs:element>
 			<xs:element name="TITLE" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Short text that can be used to call out data access policies in searches or in displays.</xs:documentation>
@@ -20,6 +21,10 @@
                         </xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
+							type="com:IdentifierType"> </xs:element>
+					</xs:sequence>
 					<xs:attributeGroup ref="com:RefNameGroup"/>
 				</xs:complexType>
 			</xs:element>

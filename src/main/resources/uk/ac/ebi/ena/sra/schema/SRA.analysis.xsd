@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- INSDC Sequence Read Archive resource Analysis (SRZ/ERZ/DRZ) object XML specification -->
-<!-- $Id: SRA.analysis.xsd,v 1.9 2012/04/25 12:40:07 rasko Exp $ -->
+<!-- $Id: SRA.analysis.xsd,v 1.6 2013/03/13 09:48:47 rajeshr Exp $ -->
 <xs:schema xmlns:com="SRA.common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:import namespace="SRA.common" schemaLocation="SRA.common.xsd"/>
 
@@ -44,7 +44,9 @@
                                 http://sourceforge.net/projects/samtools/ </xs:documentation>
                         </xs:annotation>
                     </xs:enumeration>
+                    <xs:enumeration value="cram"/>
                     <xs:enumeration value="vcf"/>
+                    <xs:enumeration value="fasta"/>                    
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -71,8 +73,8 @@
         <xs:attribute name="unencrypted_checksum" type="xs:string" use="optional">
             <xs:annotation>
                 <xs:documentation>
-                                                            Checksum of unenrypted file(used in conjunction with checksum of encrypted file).
-                                                        </xs:documentation>
+                    Checksum of unenrypted file(used in conjunction with checksum of encrypted file).
+                </xs:documentation>
             </xs:annotation>
         </xs:attribute>
     </xs:complexType>
@@ -82,23 +84,28 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS" type="com:IdentifierType"> </xs:element>
             <xs:element maxOccurs="1" minOccurs="1" name="TITLE" type="xs:string">
                 <xs:annotation>
                     <xs:documentation>Title of the analyis object which will be displayed in
                         database search results. </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element maxOccurs="1" minOccurs="1" name="DESCRIPTION" type="xs:string">
+            <xs:element maxOccurs="1" minOccurs="0" name="DESCRIPTION" type="xs:string">
                 <xs:annotation>
                     <xs:documentation>Describes the analysis in detail.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="STUDY_REF">
+            <xs:element name="STUDY_REF" maxOccurs="1" minOccurs="0" >
                 <xs:annotation>
                     <xs:documentation>Establishes a relationship between the analysis and the
                         parent study.</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
+                            type="com:IdentifierType"> </xs:element>
+                    </xs:sequence>
                     <xs:attributeGroup ref="com:RefNameGroup"/>
                 </xs:complexType>
             </xs:element>
@@ -108,6 +115,10 @@
                         analysis.</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
+                            type="com:IdentifierType"> </xs:element>
+                    </xs:sequence>
                     <xs:attributeGroup ref="com:RefNameGroup"/>
                     <xs:attribute name="label" type="xs:string">
                         <xs:annotation>
@@ -122,6 +133,10 @@
                         analysis.</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
+                            type="com:IdentifierType"> </xs:element>
+                    </xs:sequence>
                     <xs:attributeGroup ref="com:RefNameGroup"/>
                     <xs:attribute name="label" type="xs:string">
                         <xs:annotation>
@@ -144,10 +159,11 @@
                         <xs:element name="SEQUENCE_VARIATION" type="com:ReferenceSequenceType"> </xs:element>
                         <xs:element name="SEQUENCE_ANNOTATION">
                             <xs:annotation>
-                                <xs:documentation>Annotated sequences. </xs:documentation>
+                                <xs:documentation/>
                             </xs:annotation>
                             <xs:complexType> </xs:complexType>
                         </xs:element>
+                        <xs:element name="REFERENCE_SEQUENCE"/>
                     </xs:choice>
                 </xs:complexType>
             </xs:element>
