@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- INSDC Short Read Archive resource Submission (SRA) object XML specification --> 
-<!-- $Id: EGA.dataset.xsd,v 1.4 2013/01/10 17:11:05 rajeshr Exp $ --> 
+<!-- INSDC Short Read Archive resource Submission (SRA) object XML specification 
+     European Genome-Phenome Archive (EGA : www.ebi.ac.uk/ega) resource
+     Dataset object XML specification by European Nucleotide Archive (ENA : www.ebi.ac.uk/ena) --> 
+<!-- $Id: EGA.dataset.xsd,v 1.8 2014/08/07 13:24:21 rajeshr Exp $ --> 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
 	<xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
@@ -11,7 +13,7 @@
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS" type="com:IdentifierType"> </xs:element>
-			<xs:element name="TITLE" type="xs:string">
+			<xs:element name="TITLE" maxOccurs="1" minOccurs="1" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Short text that can be used to call out data sets in searches or in displays.</xs:documentation>
 				</xs:annotation>
@@ -21,24 +23,28 @@
 					<xs:documentation>
 						Free-form text describing the data sets.
 					</xs:documentation>
-				</xs:annotation>  
+				</xs:annotation>
 			</xs:element>
-			<xs:element minOccurs="0" name="DATASET_TYPE">
+			<xs:element minOccurs="0" name="DATASET_TYPE" maxOccurs="unbounded">
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
+						<xs:enumeration value="Whole genome sequencing"/>
+						<xs:enumeration value="Exome sequencing"/>
 						<xs:enumeration value="Genotyping by array"/>
-						<xs:enumeration value="Whole genome shotgun sequencing"/>
-						<xs:enumeration value="Random exome sequencing"/>
 						<xs:enumeration
 							value="Transcriptome profiling by high-throughput sequencing"/>
+						<xs:enumeration value="Transcriptome profiling by array"/>
 						<xs:enumeration value="Amplicon sequencing"/>
-						<xs:enumeration value="Random chromosome sequencing"/>
 						<xs:enumeration value="Methylation binding domain sequencing"/>
 						<xs:enumeration value="Methylation profiling by high-throughput sequencing"/>
-						<xs:enumeration value="Transcriptome profiling by array"/>
 						<xs:enumeration value="Phenotype information"/>
 						<xs:enumeration value="Study summary information"/>
-						<xs:enumeration value="Genomic variant calling "/>
+						<xs:enumeration value="Genomic variant calling"/>
+						<xs:enumeration
+							value="Chromatin accessibility profiling by high-throughput sequencing"/>
+						<xs:enumeration
+							value="Histone modification profiling by high-throughput sequencing"/>
+						<xs:enumeration value="Chip-Seq"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>

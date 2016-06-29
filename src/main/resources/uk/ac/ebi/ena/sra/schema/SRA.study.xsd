@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- INSDC Sequence Read Archive resource Study (SRP/ERP/DRP) object XML specification -->
-<!-- $Id: SRA.study.xsd,v 1.1 2012/06/15 13:56:14 rasko Exp $ -->
+<!-- $Id: SRA.study.xsd,v 1.1 2013/01/22 14:49:55 rasko Exp $ -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
 <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>

@@ -34,28 +34,15 @@
                                 <xs:enumeration value="Taxon"/>
                                 <xs:enumeration value="Project"/>
                                 <xs:enumeration value="checklist"/>
+                                <xs:enumeration value="biosample"/>
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:attribute>
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
-        <xs:attribute name="accession" use="optional">
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:pattern
-                        value="(ER[ABPRSXZCG]\d{6}|EGA[CPDNSXRZ]\d{10}|EGA\d{11}|PRJ[END][A-Z]\d|BN\d|BQ\d|CZ\d)"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="alias" use="required">
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:minLength value="1"/>
-                    <xs:maxLength value="1024"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
+        <xs:attribute name="accession" type="xs:string" use="optional"/>
+        <xs:attribute name="alias" type="xs:string" use="required"/>
         <xs:attribute name="holdUntilDate" type="xs:date"/>
         <xs:attribute name="status" use="optional">
             <xs:simpleType>
@@ -102,6 +89,8 @@
                             <xs:enumeration value="HOLD"/>
                             <xs:enumeration value="VALIDATE"/>
                             <xs:enumeration value="PROTECT"/>
+                            <xs:enumeration value="RECEIPT"/>
+                            <xs:enumeration value="ROLLBACK"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>

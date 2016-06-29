@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <!--
-     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.analysis.xsd" ></xs:include>
-     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.experiment.xsd" ></xs:include>
-     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.run.xsd" ></xs:include>
-     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.study.xsd" ></xs:include>
-     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.sample.xsd" ></xs:include>
-     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.submission.xsd" ></xs:include>
-     <xs:include schemaLocation="ftp://ftp.ebi.ac.uk/pub/databases/ena/doc/ENA.embl.xsd" ></xs:include>
-     <xs:include schemaLocation="ftp://ftp.ebi.ac.uk/pub/databases/ena/doc/ENA.taxonomy.xsd" ></xs:include>
+ 
+     <!--
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/SRA.analysis.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/SRA.experiment.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/SRA.run.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/SRA.study.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/SRA.sample.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/SRA.submission.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/ENA.embl.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/ENA.taxonomy.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/ENA.project.xsd" ></xs:include>
      -->
-
+    
     <xs:include schemaLocation="SRA.analysis.xsd"/>
     <xs:include schemaLocation="SRA.experiment.xsd"/>
     <xs:include schemaLocation="SRA.run.xsd"/>
@@ -20,7 +22,8 @@
     <xs:include schemaLocation="ENA.embl.xsd"/>
     <xs:include schemaLocation="ENA.taxonomy.xsd"/>
     <xs:include schemaLocation="ENA.project.xsd"/>
-     
+    
+
     <xs:complexType name="EntrySetType">
         <xs:sequence minOccurs="1" maxOccurs="unbounded">
             <xs:element name="entry" type="EntryType"/>

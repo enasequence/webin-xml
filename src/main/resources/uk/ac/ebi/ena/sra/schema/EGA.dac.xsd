@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- INSDC Short Read Archive resource DAC (EGA) object XML specification -->
-<!-- $Id: EGA.dac.xsd,v 1.1 2012/06/19 12:00:57 rasko Exp $ -->
+<!-- European Genome-Phenome Archive (EGA : www.ebi.ac.uk/ega) resource
+     Data Access Committe (DAC) object XML specification by European Nucleotide Archive (ENA : www.ebi.ac.uk/ena) -->
+<!-- $Id: EGA.dac.xsd,v 1.3 2014/08/07 13:22:35 rajeshr Exp $ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
 	<xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
@@ -50,6 +51,11 @@
 								<xs:attribute name="organisation" type="xs:string" use="required">
 									<xs:annotation>
 										<xs:documentation>Center or institution name .</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+								<xs:attribute name="main_contact" type="xs:boolean">
+									<xs:annotation>
+										<xs:documentation>If true then this is the main contact.</xs:documentation>
 									</xs:annotation>
 								</xs:attribute>
 							</xs:complexType>

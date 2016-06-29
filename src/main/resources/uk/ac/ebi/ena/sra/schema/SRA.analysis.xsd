@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- INSDC Sequence Read Archive resource Analysis (SRZ/ERZ/DRZ) object XML specification -->
-<!-- $Id: SRA.analysis.xsd,v 1.6 2013/03/13 09:48:47 rajeshr Exp $ -->
+<!-- $Id: SRA.analysis.xsd,v 1.8 2015/02/20 13:17:34 neilg Exp $ -->
 <xs:schema xmlns:com="SRA.common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:import namespace="SRA.common" schemaLocation="SRA.common.xsd"/>
 
     <xs:complexType name="AnalysisFileType">
-
-        <xs:sequence>
-            <xs:element minOccurs="0" name="CHECKLIST">
-                <xs:complexType>
-                    <xs:attributeGroup ref="com:NameGroup"/>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
         <xs:attribute name="filename" type="xs:string" use="required">
             <xs:annotation>
                 <xs:documentation>The file name. </xs:documentation>
@@ -46,13 +38,39 @@
                     </xs:enumeration>
                     <xs:enumeration value="cram"/>
                     <xs:enumeration value="vcf"/>
-                    <xs:enumeration value="fasta"/>                    
+                    <xs:enumeration value="vcf_aggregate"/>
+                    <xs:enumeration value="bcf"/>
+                    <xs:enumeration value="tabix"/>
+                    <xs:enumeration value="wig"/>
+                    <xs:enumeration value="bed"/>
+                    <xs:enumeration value="gff"/>
+                    <xs:enumeration value="fasta"/>
+                    <xs:enumeration value="fastq"/>
+                    <xs:enumeration value="contig_fasta"/>
+                    <xs:enumeration value="contig_flatfile"/>
+                    <xs:enumeration value="scaffold_fasta"/>
+                    <xs:enumeration value="scaffold_flatfile"/>
+                    <xs:enumeration value="scaffold_agp"/>
+                    <xs:enumeration value="chromosome_fasta"/>
+                    <xs:enumeration value="chromosome_flatfile"/>
+                    <xs:enumeration value="chromosome_agp"/>
+                    <xs:enumeration value="chromosome_list"/>
+                    <xs:enumeration value="unlocalised_contig_list"/>
+                    <xs:enumeration value="unlocalised_scaffold_list"/>
+                    <xs:enumeration value="sample_list"/>
+                    <xs:enumeration value="readme_file"/>
+                    <xs:enumeration value="phenotype_file"/>
+                    <xs:enumeration value="bnx"/>
+                    <xs:enumeration value="cmap"/>
+                    <xs:enumeration value="vis_cmap"/>
+                    <xs:enumeration value="vis_xmap"/>
+                    <xs:enumeration value="other"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
         <xs:attribute name="checksum_method" use="required">
             <xs:annotation>
-                <xs:documentation> Checksum method used. </xs:documentation>
+                <xs:documentation>The checksum method. </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:string">
@@ -67,17 +85,32 @@
         </xs:attribute>
         <xs:attribute name="checksum" type="xs:string" use="required">
             <xs:annotation>
-                <xs:documentation> Checksum of the file. </xs:documentation>
+                <xs:documentation>The file checksum.</xs:documentation>
             </xs:annotation>
         </xs:attribute>
         <xs:attribute name="unencrypted_checksum" type="xs:string" use="optional">
             <xs:annotation>
-                <xs:documentation>
-                    Checksum of unenrypted file(used in conjunction with checksum of encrypted file).
+                <xs:documentation>The checksum of the unencrypted file (used in conjunction with the checksum of an encrypted file).
                 </xs:documentation>
             </xs:annotation>
         </xs:attribute>
+        <xs:attribute name="checklist" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>The name of the checklist.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
+    <xs:complexType name="AnalysisSetType">
+        <xs:sequence maxOccurs="unbounded" minOccurs="1">
+            <xs:element name="ANALYSIS" type="AnalysisType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ANALYSIS_SET" type="AnalysisSetType">
+        <xs:annotation>
+            <xs:documentation>A container of analysis objects. </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="ANALYSIS" type="AnalysisType"/>
     <xs:complexType name="AnalysisType">
         <xs:annotation>
             <xs:documentation>A SRA analysis object captures sequence analysis results including sequence alignments, sequence variations and sequence annotations.
@@ -91,12 +124,12 @@
                         database search results. </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element maxOccurs="1" minOccurs="0" name="DESCRIPTION" type="xs:string">
+            <xs:element maxOccurs="1" minOccurs="1" name="DESCRIPTION" type="xs:string">
                 <xs:annotation>
                     <xs:documentation>Describes the analysis in detail.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="STUDY_REF" maxOccurs="1" minOccurs="0" >
+            <xs:element name="STUDY_REF" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>Establishes a relationship between the analysis and the
                         parent study.</xs:documentation>
@@ -127,7 +160,34 @@
                     </xs:attribute>
                 </xs:complexType>
             </xs:element>
+            <xs:element name="EXPERIMENT_REF" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
+                            type="com:IdentifierType"> </xs:element>
+                    </xs:sequence>
+                    <xs:attributeGroup ref="com:RefNameGroup"/>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="RUN_REF" maxOccurs="unbounded" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>One or more runs associated with the
+                        analysis.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
+                            type="com:IdentifierType"> </xs:element>
+                    </xs:sequence>
+                    <xs:attributeGroup ref="com:RefNameGroup"/>
+                    <xs:attribute name="label" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>A label associating the run with BAM (@RG/ID).</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ANALYSIS_REF" maxOccurs="unbounded" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>One or more runs associated with the
                         analysis.</xs:documentation>
@@ -156,7 +216,56 @@
                                 <xs:documentation/>
                             </xs:annotation>
                         </xs:element>
-                        <xs:element name="SEQUENCE_VARIATION" type="com:ReferenceSequenceType"> </xs:element>
+                        <xs:element name="SEQUENCE_VARIATION">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="com:ReferenceSequenceType">
+                                        <xs:sequence>
+                                            <xs:element name="EXPERIMENT_TYPE" minOccurs="0"
+                                                maxOccurs="unbounded">
+                                                <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:enumeration value="Whole genome sequencing"/>
+                                                  <xs:enumeration value="Exome sequencing"/>
+                                                  <xs:enumeration value="Genotyping by array"/>
+                                                  <xs:enumeration value="transcriptomics"/>
+                                                  <xs:enumeration value="Curation"/>
+                                                  </xs:restriction>
+                                                </xs:simpleType>
+                                            </xs:element>
+                                            <xs:element minOccurs="0" name="PROGRAM"
+                                                type="xs:string"/>
+                                            <xs:element name="PLATFORM" type="xs:string"
+                                                minOccurs="0"/>
+                                            <xs:element minOccurs="0" name="IMPUTATION"
+                                                type="xs:boolean"/>
+                                        </xs:sequence>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="SEQUENCE_ASSEMBLY">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="NAME" type="xs:string"/>
+                                    <xs:element name="PARTIAL" type="xs:boolean"> </xs:element>
+                                    <xs:element name="COVERAGE" type="xs:string"/>
+                                    <xs:element name="PROGRAM" type="xs:string"/>
+                                    <xs:element name="PLATFORM" type="xs:string"/>
+                                    <xs:element minOccurs="0" name="MIN_GAP_LENGTH"
+                                        type="xs:integer"/>
+                                    <xs:element minOccurs="0" name="MOL_TYPE">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="genomic DNA"/>
+                                                <xs:enumeration value="genomic RNA"/>
+                                                <xs:enumeration value="viral cRNA"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                         <xs:element name="SEQUENCE_ANNOTATION">
                             <xs:annotation>
                                 <xs:documentation/>
@@ -164,6 +273,28 @@
                             <xs:complexType> </xs:complexType>
                         </xs:element>
                         <xs:element name="REFERENCE_SEQUENCE"/>
+                        <xs:element name="SAMPLE_PHENOTYPE">
+                            <xs:annotation>
+                                <xs:documentation/>
+                            </xs:annotation>
+                            <xs:complexType> </xs:complexType>
+                        </xs:element>
+                        <xs:element name="PROCESSED_READS"/>
+                        <xs:element name="GENOME_MAP">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="PROGRAM" type="xs:string"/>
+                                    <xs:element name="PLATFORM">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="BioNano"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element minOccurs="0" name="DESCRIPTION" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
                     </xs:choice>
                 </xs:complexType>
             </xs:element>
@@ -220,15 +351,4 @@
             </xs:annotation>
         </xs:attribute>
     </xs:complexType>
-    <xs:complexType name="AnalysisSetType">
-        <xs:sequence maxOccurs="unbounded" minOccurs="1">
-            <xs:element name="ANALYSIS" type="AnalysisType"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:element name="ANALYSIS_SET" type="AnalysisSetType">
-        <xs:annotation>
-            <xs:documentation>A container of analysis objects. </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-    <xs:element name="ANALYSIS" type="AnalysisType"/>
 </xs:schema>
