@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:complexType name="ID">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="EXT_ID" nillable="true">
+                <xs:annotation>
+                    <xs:documentation>The REF identifies the reference of that object .
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:attribute name="accession" use="optional">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+				                <xs:minLength value="1"/>
+                                <xs:maxLength value="1024"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                    <xs:attribute name="type" use="optional">
+                        <xs:simpleType>
+                            <xs:restriction base = "xs:string">
+                                <xs:enumeration value = "study"/>
+                                <xs:enumeration value = "experiment"/>
+                                <xs:enumeration value = "sample"/>
+                                <xs:enumeration value = "run"/>
+                                <xs:enumeration value = "analysis"/>
+                                <xs:enumeration value= "dataset"/>
+                                <xs:enumeration value= "policy"/>
+                                <xs:enumeration value= "dac"/> 
+                                <xs:enumeration value= "ArrayExpress"/>
+                                <xs:enumeration value= "Taxon"/>
+                                <xs:enumeration value= "Project"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="accession" use="optional">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="(ER[ABPRSXZ]\d{6}|EGA[CPDNSXRZ]\d{10}|EGA\d{11}|PRJ[END][A-Z]\d)"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="alias" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="1024"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="holdUntilDate" type="xs:date"/>
+        <xs:attribute name="status" use="optional">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="PRIVATE"/>
+                    <xs:enumeration value="PUBLIC"/>
+                    <xs:enumeration value="KILLED"/>
+                    <xs:enumeration value="SUPPRESSED"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:element name="RECEIPT">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="ANALYSIS" type="ID"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="EXPERIMENT" type="ID"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="RUN" type="ID"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="SAMPLE" type="ID"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="STUDY" type="ID"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="DAC" type="ID"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="POLICY" type="ID"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="DATASET" type="ID"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="PROJECT" type="ID"/>
+                <xs:element minOccurs="0" name="SUBMISSION" type="ID"/>
+                <xs:element minOccurs="0" name="MESSAGES">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="ERROR"
+                                type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="INFO"
+                                type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="unbounded" name="ACTIONS">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ADD"/>
+                            <xs:enumeration value="MODIFY"/>
+                            <xs:enumeration value="RELEASE"/>
+                            <xs:enumeration value="HOLD"/>
+                            <xs:enumeration value="VALIDATE"/>
+                            <xs:enumeration value="PROTECT"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="success" type="xs:boolean" use="required"/>
+            <xs:attribute name="receiptDate" type="xs:dateTime" use="required"/>
+            <xs:attribute name="submissionFile" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value=".+\.xml"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

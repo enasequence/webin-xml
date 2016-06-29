@@ -17,7 +17,10 @@
 			<xs:element maxOccurs="1" minOccurs="1" name="description" type="xs:string"/>
 			<xs:element maxOccurs="1" minOccurs="0" name="comment" type="xs:string"/>
 			<xs:element maxOccurs="unbounded" minOccurs="0" name="keyword" type="xs:string"/>
-			<xs:element maxOccurs="unbounded" minOccurs="1" name="reference">
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="reference">
+				<xs:annotation>
+					<xs:documentation>Not supported for EMBL-CDS.</xs:documentation>
+				</xs:annotation>
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element maxOccurs="1" minOccurs="0" name="title" type="xs:string"/>
@@ -186,7 +189,11 @@
 		</xs:sequence>
 		<xs:attribute name="accession" type="xs:string" use="required"/>
 		<xs:attribute name="version" type="xs:integer" use="required"/>
-		<xs:attribute name="entryVersion" type="xs:integer" use="required"/>
+		<xs:attribute name="entryVersion" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Not supported for EMBL-CDS.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 		<xs:attribute name="dataClass" type="xs:string" use="required"/>
 		<xs:attribute name="taxonomicDivision" type="xs:string" use="required"/>
 		<xs:attribute name="moleculeType" type="xs:string" use="required"/>
@@ -199,10 +206,26 @@
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="firstPublic" type="xs:date" use="required"/>
-		<xs:attribute name="firstPublicRelease" type="xs:integer" use="required"/>
-		<xs:attribute name="lastUpdated" type="xs:date" use="required"/>
-		<xs:attribute name="lastUpdatedRelease" type="xs:integer" use="required"/>
+		<xs:attribute name="firstPublic" type="xs:date">
+			<xs:annotation>
+				<xs:documentation>Not supported for EMBL-CDS.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="firstPublicRelease" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Not supported for EMBL-CDS.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="lastUpdated" type="xs:date">
+			<xs:annotation>
+				<xs:documentation>Not supported for EMBL-CDS.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="lastUpdatedRelease" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>Not supported for EMBL-CDS.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:element name="entrySet">
 		<xs:complexType>

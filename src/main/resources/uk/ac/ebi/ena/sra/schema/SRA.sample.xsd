@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- INSDC Short Read Archive resource Sample (SRS) object XML specification -->
-<!-- $Id$ -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <!-- BEGIN COMMON BLOCK -->
-  <xs:include schemaLocation="SRA.common.xsd" ></xs:include>
-  <!--  END COMMON BLOCK -->
+<!-- INSDC Sequence Read Archive resource Sample (SRS/ERS/DRS) object XML specification -->
+<!-- $Id: SRA.sample.xsd,v 1.1 2010/10/22 15:31:27 rasko Exp $ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
+<xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
   <xs:complexType name="SampleType">
     <xs:annotation>
@@ -14,14 +12,14 @@
         accession or an anonymized individual identifier.  Or, it may fully specify
         provenance and isolation method of the starting material.
       </xs:documentation>
-    </xs:annotation>
+    </xs:annotation>  
     <xs:sequence>
       <xs:element name="TITLE" type="xs:string" minOccurs="0" maxOccurs="1">
-        <xs:annotation>
-          <xs:documentation>
+       <xs:annotation>
+         <xs:documentation>
            Short text that can be used to call out sample records in search results or in displays.
          </xs:documentation>
-        </xs:annotation>
+       </xs:annotation>
       </xs:element>
       <xs:element name="SAMPLE_NAME">
         <xs:complexType>
@@ -32,7 +30,7 @@
                   NCBI Taxonomy Identifier.  This is appropriate for individual organisms and
                   some environmental samples.
                 </xs:documentation>
-              </xs:annotation>
+              </xs:annotation>  
             </xs:element>
             <xs:element name="SCIENTIFIC_NAME" minOccurs="0" maxOccurs="1" type="xs:string">
               <xs:annotation>
@@ -41,21 +39,21 @@
                   name or synonym that is tracked in the INSDC Taxonomy database. 
                   Also, this field can be used to confirm the TAXON_ID setting.
                 </xs:documentation>
-              </xs:annotation>
+              </xs:annotation>  
             </xs:element>
             <xs:element name="COMMON_NAME" minOccurs="0" maxOccurs="1" type="xs:string">
               <xs:annotation>
                 <xs:documentation>
                   GenBank common name of the organism.  Examples: human, mouse.
                 </xs:documentation>
-              </xs:annotation>
+              </xs:annotation>  
             </xs:element>
             <xs:element name="ANONYMIZED_NAME" minOccurs="0" maxOccurs="1" type="xs:string">
               <xs:annotation>
                 <xs:documentation>
                   Anonymous public name of the sample.   For example, HapMap human isolate NA12878.
                 </xs:documentation>
-              </xs:annotation>
+              </xs:annotation>  
             </xs:element>
             <xs:element name="INDIVIDUAL_NAME" minOccurs="0" maxOccurs="1" type="xs:string">
               <xs:annotation>
@@ -64,7 +62,7 @@
                   a sample where appropriate (this is usually NOT appropriate for human subjects).  Example:
                   "Glennie" the platypus.  
                 </xs:documentation>
-              </xs:annotation>
+              </xs:annotation>  
             </xs:element>
           </xs:all>
         </xs:complexType>
@@ -74,10 +72,10 @@
           <xs:documentation>
             Free-form text describing the sample, its origin, and its method of isolation.
           </xs:documentation>
-        </xs:annotation>
+        </xs:annotation>  
       </xs:element>
-
-
+ 
+     
       <xs:element name="SAMPLE_LINKS" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>
@@ -86,11 +84,11 @@
         </xs:annotation>
         <xs:complexType>
           <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="SAMPLE_LINK" type="LinkType"/>
+            <xs:element name="SAMPLE_LINK" type="com:LinkType"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-
+      
       <xs:element name="SAMPLE_ATTRIBUTES" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>
@@ -101,27 +99,29 @@
         </xs:annotation>
         <xs:complexType>
           <xs:sequence maxOccurs="unbounded" minOccurs="1">
-            <xs:element name="SAMPLE_ATTRIBUTE" type="AttributeType"/>
-
+            <xs:element name="SAMPLE_ATTRIBUTE" type="com:AttributeType"/>
+ 
           </xs:sequence>
         </xs:complexType>
-      </xs:element>
+      </xs:element> 
     </xs:sequence>
-    <xs:attributeGroup ref="NameGroup"/>
+    <xs:attributeGroup ref="com:NameGroup"/>
+  </xs:complexType>
+  
+  <xs:complexType name ="SampleSetType" >
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="SAMPLE" type="SampleType"/>
+    </xs:sequence>
   </xs:complexType>
 
-  <xs:element name="SAMPLE_SET">
+  <xs:element name="SAMPLE_SET" type="SampleSetType">
     <xs:annotation>
       <xs:documentation>
         SAMPLE_SET serves as a container for a set of samples and a name space
         for establishing referential integrity between them. 
       </xs:documentation>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence minOccurs="1" maxOccurs="unbounded">
-        <xs:element name="SAMPLE" type="SampleType"/>
-      </xs:sequence>
-    </xs:complexType>
+    </xs:annotation>  
+
   </xs:element>
 
   <xs:element name="SAMPLE" type="SampleType"/>

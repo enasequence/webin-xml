@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- NCBI Short Read Archive resource Run (SRR) object XML specification -->
-<!-- $Id$ -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <!-- BEGIN COMMON BLOCK -->
-    <xs:include schemaLocation="SRA.common.xsd" ></xs:include>
-    <!--  END COMMON BLOCK -->
-    
+<!-- INSDC Sequence Read Archive resource Run (SRR/ERR/DRR) object XML specification -->
+<!-- $Id: SRA.run.xsd,v 1.4 2011/07/19 13:21:19 rasko Exp $ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
+    <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
+
     <xs:complexType name="RunType">
         <xs:annotation>
             <xs:documentation>
@@ -25,9 +23,51 @@
                         </xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
-                    <xs:attributeGroup ref="RefNameGroup"/>
+                    <xs:attributeGroup ref="com:RefNameGroup"/>
                 </xs:complexType>
             </xs:element>
+            <xs:element name="SPOT_DESCRIPTOR" type="com:SpotDescriptorType" maxOccurs="1"
+                minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                            The spot descriptor can be used to define a spot layout specific to the run, 
+                            or to override a generic spot descriptor defined at the level of SRA Experiment
+                        </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="GAP_DESCRIPTOR"
+                type="com:GapDescriptorType">
+                <xs:annotation>
+                    <xs:documentation>
+                        The gap descriptor can be used to define a spot tag gaps and orientation specific to the run, 
+                        or to override a generic gap descriptor defined at the level of SRA Experiment
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PLATFORM" type="com:PlatformType" maxOccurs="1" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                            The platform block can be used to set the instrument configuration (eg read length), 
+                            or to override a generic  instrument configuration defined at the level of SRA Experiment.                         
+                        </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="PROCESSING" maxOccurs="1" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Identify the processing steps used to produce the sequencing data, and specify
+                        directives used to load and interpret the data supplied by the submitter.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="PIPELINE" type="com:PipelineType"/>
+                        <xs:element name="DIRECTIVES" type="com:SequencingDirectivesType"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+
             <xs:sequence maxOccurs="unbounded" minOccurs="0">
                 <xs:element name="DATA_BLOCK" nillable="false">
                     <xs:annotation>
@@ -169,6 +209,11 @@
                                                   <xs:documentation>Sequence Read Archives native format in serialized (single file) form.</xs:documentation>
                                                   </xs:annotation>
                                                   </xs:enumeration>
+                                                  <xs:enumeration value="kar">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Sequence Read Archives native format in serialized (single file) form.</xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
                                                   <xs:enumeration value="srf">
                                                   <xs:annotation>
                                                   <xs:documentation>Standard Short Read Format file (.srf), all platforms</xs:documentation>
@@ -197,7 +242,6 @@
                                                             </xs:documentation>
                                                   </xs:annotation>
                                                   </xs:enumeration>
-                                                  <xs:enumeration value="bam"/>                                                          
                                                   <xs:enumeration
                                                   value="_seq.txt, _prb.txt, _sig2.txt, _qhg.txt">
                                                   <xs:annotation>
@@ -345,6 +389,34 @@
                                                             </xs:documentation>
                                                   </xs:annotation>
                                                   </xs:enumeration>
+                                                  <xs:enumeration value="bam">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                Binary SAM format for use by loaders that combine alignment and sequencing data.
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                  </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="PacBio_HDF5">
+                                                  <xs:annotation>
+                                                  <xs:documentation>                                                              
+                                                              Please see SRA File Formats Guide for definitions of these file formats, 
+                                                              and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                              Sequence and qualities are minimally required.
+                                                          </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="CompleteGenomics_native">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                              Please see SRA File Formats Guide for definitions of these file formats, 
+                                                              and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                              Sequence and qualities are minimally required.
+                                                          </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
                                                   </xs:restriction>
                                                   </xs:simpleType>
                                                 </xs:attribute>
@@ -463,6 +535,14 @@
                                                 </xs:documentation>
                                                   </xs:annotation>
                                                 </xs:attribute>
+                                                <xs:attribute name="unencrypted_checksum"
+                                                  type="xs:string" use="optional">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                            Checksum of unenrypted file(used in conjunction with checksum of encrypted file).
+                                                        </xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:attribute>
                                             </xs:complexType>
                                         </xs:element>
                                     </xs:sequence>
@@ -573,7 +653,7 @@
                 </xs:annotation>
                 <xs:complexType>
                     <xs:sequence minOccurs="1" maxOccurs="unbounded">
-                        <xs:element name="RUN_LINK" type="LinkType"/>
+                        <xs:element name="RUN_LINK" type="com:LinkType"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -588,12 +668,14 @@
                 </xs:annotation>
                 <xs:complexType>
                     <xs:sequence maxOccurs="unbounded" minOccurs="1">
-                        <xs:element name="RUN_ATTRIBUTE" type="AttributeType"/>
+                        <xs:element name="RUN_ATTRIBUTE" type="com:AttributeType"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
-        <xs:attributeGroup ref="NameGroup"/>
+
+        <xs:attributeGroup ref="com:NameGroup"/>
+
         <xs:attribute name="instrument_model" use="optional">
             <xs:annotation>
                 <xs:documentation>
@@ -658,18 +740,20 @@
         </xs:attribute>
     </xs:complexType>
 
-    <xs:element name="RUN_SET">
+    <xs:complexType name="RunSetType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="RUN" type="RunType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="RUN_SET" type="RunSetType">
         <xs:annotation>
             <xs:documentation>
                 RUN_SET serves as a container for a set of runs and a name space
                 for establishing referential integrity between them. 
             </xs:documentation>
         </xs:annotation>
-        <xs:complexType>
-            <xs:sequence minOccurs="1" maxOccurs="unbounded">
-                <xs:element name="RUN" type="RunType"/>
-            </xs:sequence>
-        </xs:complexType>
+
     </xs:element>
 
     <xs:element name="RUN" type="RunType"/>

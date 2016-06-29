@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- INSDC Short Read Archive resource Submission (SRA) object XML specification -->
-<!-- $Id$ -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<!-- INSDC Sequence Read Archive resource Submission (SRA/ERA/DRA) object XML specification -->
+<!-- $Id: SRA.submission.xsd,v 1.3 2011/07/01 11:11:39 rajeshr Exp $ -->
 
-  <!-- BEGIN COMMON BLOCK -->
-  <xs:include schemaLocation="SRA.common.xsd" ></xs:include>
-  <!--  END COMMON BLOCK -->
-  
-  <xs:complexType name="SubmissionType">
-    <xs:annotation>
-      <xs:documentation>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
+<xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
+
+<xs:complexType name="SubmissionType">
+  <xs:annotation>
+    <xs:documentation>
        A Submission type is used to describe an object that contains submission information, contacts for
        the submission, actions to be performed by the Archive, and file manifest.
     </xs:documentation>
-    </xs:annotation>
+  </xs:annotation>  
 
     <xs:sequence>
 
@@ -31,21 +29,21 @@
           <xs:sequence minOccurs="1" maxOccurs="unbounded">
             <xs:element name="CONTACT">
               <xs:complexType>
-                <xs:attribute name="name" type="xs:string" use="optional">
+                <xs:attribute name="name"  type="xs:string" use="optional">
                   <xs:annotation>
                     <xs:documentation>
                       Name of contact person for this submission.
                     </xs:documentation>
                   </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="inform_on_status" type="xs:anyURI" use="optional">
+                <xs:attribute name="inform_on_status"  type="xs:anyURI" use="optional">
                   <xs:annotation>
                     <xs:documentation>
                       Internet address of person or service to inform on any status changes for this submission.
                     </xs:documentation>
                   </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="inform_on_error" type="xs:anyURI" use="optional">
+                <xs:attribute name="inform_on_error"  type="xs:anyURI" use="optional">
                   <xs:annotation>
                     <xs:documentation>
                       Internet address of person or service to inform on any errors for this submission.
@@ -53,7 +51,7 @@
                   </xs:annotation>
                 </xs:attribute>
               </xs:complexType>
-            </xs:element>
+            </xs:element> 
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -62,264 +60,288 @@
         <xs:complexType>
           <xs:sequence minOccurs="1" maxOccurs="unbounded">
             <xs:element name="ACTION">
-              <xs:annotation>
-                <xs:documentation>
+                   <xs:annotation>
+                    <xs:documentation>
                       Select an action to execute with respect to this submission session.
                     </xs:documentation>
-              </xs:annotation>
-              <xs:complexType>
-                <xs:choice>
-                  <xs:element name="ADD">
-                    <xs:annotation>
-                      <xs:documentation>
+                  </xs:annotation>
+                  <xs:complexType>
+                    <xs:choice>
+                        <xs:element name = "ADD">
+                          <xs:annotation>
+                              <xs:documentation>
                                  Add a study, experiment, sample, run, or analysis to the submission session.
                               </xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                      <xs:attribute name="source" type="xs:string" use="required">
-                        <xs:annotation>
-                          <xs:documentation>
+                          </xs:annotation>
+                          <xs:complexType>
+                            <xs:attribute name="source" type="xs:string" use="required">
+                              <xs:annotation>
+                                <xs:documentation>
                                   Filename or relative path of filename containing XML that defines the action.  
                                   This will include study, experiment, sample, run, or analysis files. Note that the
                                   run data files are named within the run XML and not in this file.
                                 </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                      <xs:attribute name="schema" use="required">
-                        <xs:annotation>
-                          <xs:documentation>
+                              </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="schema"  use="required">
+                              <xs:annotation>
+                                <xs:documentation>
                                   Select a source type (schema) for the file.
                                 </xs:documentation>
-                        </xs:annotation>
-                        <xs:simpleType>
-                          <xs:restriction base="xs:string">
-                            <xs:enumeration value="study"/>
-                            <xs:enumeration value="experiment"/>
-                            <xs:enumeration value="sample"/>
-                            <xs:enumeration value="run"/>
-                            <xs:enumeration value="analysis"/>
-                            <xs:enumeration value="dataset"/>
-                            <xs:enumeration value="policy"/>
-                            <xs:enumeration value="dac"/>                            
-                          </xs:restriction>
-                        </xs:simpleType>
-                      </xs:attribute>
-                      <xs:attribute name="notes" type="xs:string" use="optional">
-                        <xs:annotation>
-                          <xs:documentation>
+                              </xs:annotation>
+                              <xs:simpleType>
+                                <xs:restriction base = "xs:string">
+                                    <xs:enumeration value = "study"/>
+                                    <xs:enumeration value = "experiment"/>
+                                    <xs:enumeration value = "sample"/>
+                                    <xs:enumeration value = "run"/>
+                                    <xs:enumeration value = "analysis"/>
+                                    <xs:enumeration value="dataset"/>
+                                    <xs:enumeration value="policy"/>
+                                    <xs:enumeration value="dac"/> 
+                                    <xs:enumeration value="project"/>
+                                </xs:restriction>
+                              </xs:simpleType>
+                            </xs:attribute>
+                            <xs:attribute name="notes" type="xs:string" use="optional">
+                              <xs:annotation>
+                                  <xs:documentation>
                                     Optional submitter notes about the action.
                                   </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                    </xs:complexType>
-                  </xs:element>
-                  <xs:element name="MODIFY">
-                    <xs:annotation>
-                      <xs:documentation>
+                              </xs:annotation>
+                            </xs:attribute>
+                          </xs:complexType>
+                        </xs:element>
+                        <xs:element name = "MODIFY">
+                          <xs:annotation>
+                              <xs:documentation>
                                  Modify a study, experiment, sample, or analysis object that was submitted under this submission session.
                               </xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                      <xs:attribute name="source" type="xs:string" use="required">
-                        <xs:annotation>
-                          <xs:documentation>
+                          </xs:annotation>
+                          <xs:complexType>
+                            <xs:attribute name="source" type="xs:string" use="required">
+                              <xs:annotation>
+                                <xs:documentation>
                                  Modify SRA metadata: a study, experiment, sample, run, or analysis object that was 
                                  submitted under this submission session.  Submit ammended XML for an existing
                                  accession.  Note that the run data itself cannot be amended.  To to that, 
                                  withdraw the existing Run for the specified Experiment and add a new Run in its place. 
                                 </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                      <xs:attribute name="target" type="xs:string" use="required">
-                        <xs:annotation>
-                          <xs:documentation>
+                              </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="schema"  use="optional">
+                              <xs:annotation>
+                                <xs:documentation>
+                                  Select a source type (schema) for the file.  This will actually be required by the 
+                                  business layer if the source documentation reference aliases that are not
+                                  unique outside of their document type.
+                                </xs:documentation>
+                              </xs:annotation>
+                              <xs:simpleType>
+                                <xs:restriction base = "xs:string">
+                                  <xs:enumeration value = "study"/>
+                                  <xs:enumeration value = "experiment"/>
+                                  <xs:enumeration value = "sample"/>
+                                  <xs:enumeration value = "run"/>
+                                  <xs:enumeration value = "analysis"/>
+                                  <xs:enumeration value="dataset"/>
+                                  <xs:enumeration value="policy"/>
+                                  <xs:enumeration value="dac"/>  
+                                  <xs:enumeration value="project"/>
+                                </xs:restriction>
+                              </xs:simpleType>
+                            </xs:attribute>
+                            <xs:attribute name="target" type="xs:string" use="optional">
+                              <xs:annotation>
+                                  <xs:documentation>
                                     Accession or refname that is the target for the action.
                                   </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                      <xs:attribute name="notes" type="xs:string" use="optional">
-                        <xs:annotation>
-                          <xs:documentation>
+                              </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="notes" type="xs:string" use="optional">
+                              <xs:annotation>
+                                  <xs:documentation>
                                     Optional submitter notes about the action.
                                   </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                    </xs:complexType>
-                  </xs:element>
-                  <xs:element name="SUPPRESS">
-                    <xs:annotation>
-                      <xs:documentation>
+                              </xs:annotation>
+                            </xs:attribute>
+                          </xs:complexType>
+                        </xs:element>
+                        <xs:element name = "SUPPRESS">
+                          <xs:annotation>
+                              <xs:documentation>
                                  Suppress object from view, indexing, and download from public site as prescribed 
                                  by INSDC rules.  The object is not removed from the Archive, and can be obtained
                                  again by accession if requested.  Suppression is explicit and there is no cascade suppression.
                                  User must take care to remove only objects that do not have active references.
                               </xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                      <xs:attribute name="target" type="xs:string" use="required">
-                        <xs:annotation>
-                          <xs:documentation>
+                          </xs:annotation>
+                          <xs:complexType>
+                            <xs:attribute name="target" type="xs:string" use="required">
+                              <xs:annotation>
+                                  <xs:documentation>
                                     Accession or refname that is the target for the action.
                                   </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                      <xs:attribute name="notes" type="xs:string" use="optional">
-                        <xs:annotation>
-                          <xs:documentation>
+                              </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="notes" type="xs:string" use="optional">
+                              <xs:annotation>
+                                  <xs:documentation>
                                     Optional submitter notes about the action.
                                   </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                    </xs:complexType>
-                  </xs:element>
-                  <xs:element name="HOLD">
-                    <xs:annotation>
-                      <xs:documentation>
-                                 Hold content from public view for any study, experiment, sample, run, or analysis object that was 
+                              </xs:annotation>
+                            </xs:attribute>
+                          </xs:complexType>
+                        </xs:element>
+                        <xs:element name = "HOLD">
+                          <xs:annotation>
+                              <xs:documentation>
+                                 Hold content from public view for any study, experiment, sample, project, run, or analysis object that was 
                                  submitted under this submission session.
                               </xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                      <xs:attribute name="target" type="xs:string" use="optional">
-                        <xs:annotation>
-                          <xs:documentation>
+                          </xs:annotation>
+                          <xs:complexType>
+                            <xs:attribute name="target" type="xs:string" use="optional">
+                              <xs:annotation>
+                                  <xs:documentation>
                                     Accession or refname that is the target for the action.
                                     If a target is not specified, then the hold is taken to
                                     include all objects referenced by this submission.
                                     If a modifier is not specified, then the hold is taken to mean
                                     hold until released by the submitter.
                                   </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                      <xs:attribute name="HoldForPeriod" type="xs:int" use="optional">
-                        <xs:annotation>
-                          <xs:documentation>
+                              </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="HoldForPeriod" type="xs:int" use="optional">
+                              <xs:annotation>
+                                <xs:documentation>
                                   DEPRECATED.  Direct the SRA to release the record after the specified number of days have elapsed since submission.
                                 </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                      <xs:attribute name="HoldUntilDate" type="xs:date" use="optional">
-                        <xs:annotation>
-                          <xs:documentation>
+                              </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="HoldUntilDate"  type="xs:date" use="optional">
+                              <xs:annotation>
+                                <xs:documentation>
                                   Direct the SRA to release the record on or after the specified number of date.
                                 </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                      <xs:attribute name="notes" type="xs:string" use="optional">
-                        <xs:annotation>
-                          <xs:documentation>
+                              </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="notes" type="xs:string" use="optional">
+                              <xs:annotation>
+                                  <xs:documentation>
                                     Optional submitter notes about the action.
                                   </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                    </xs:complexType>
-                  </xs:element>
-                  <xs:element name="RELEASE">
-                    <xs:annotation>
-                      <xs:documentation>
-                                 Release content to public view and indexing for any study, experiment, sample, run, or analysis object that was 
+                              </xs:annotation>
+                            </xs:attribute>
+                          </xs:complexType>
+                        </xs:element>
+                        <xs:element name = "RELEASE">
+                          <xs:annotation>
+                              <xs:documentation>
+                                 Release content to public view and indexing for any study, experiment, sample, project, run, or analysis object that was 
                                  submitted under this submission session.
                               </xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                      <xs:attribute name="target" type="xs:string" use="optional">
-                        <xs:annotation>
-                          <xs:documentation>
+                          </xs:annotation>
+                          <xs:complexType>
+                            <xs:attribute name="target" type="xs:string" use="optional">
+                              <xs:annotation>
+                                  <xs:documentation>
                                     Accession or refname that is the target for the action.
                                     If this field is not provided, then validate all objects in this submission.
                                   </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                      <xs:attribute name="notes" type="xs:string" use="optional">
-                        <xs:annotation>
-                          <xs:documentation>
+                              </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="notes" type="xs:string" use="optional">
+                              <xs:annotation>
+                                  <xs:documentation>
                                     Optional submitter notes about the action.
                                   </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                    </xs:complexType>
-                  </xs:element>
-                  <xs:element name="CLOSE">
-                    <xs:annotation>
-                      <xs:documentation>
+                              </xs:annotation>
+                            </xs:attribute>
+                          </xs:complexType>
+                        </xs:element>
+                      <xs:element name = "CLOSE">
+                        <xs:annotation>
+                          <xs:documentation>
                             Communicate the intention to no longer actively update the dataset referred to by
                             this submission.  Users should be able to confidently use closed datasets without
                             fear of change.
                           </xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                      <xs:attribute name="target" type="xs:string" use="optional">
-                        <xs:annotation>
-                          <xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                          <xs:attribute name="target" type="xs:string" use="optional">
+                            <xs:annotation>
+                              <xs:documentation>
                                 Accession or refname that is the target for the action.
                                 Refer to the study to close the study and all its component objects.
                               </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                      <xs:attribute name="notes" type="xs:string" use="optional">
-                        <xs:annotation>
-                          <xs:documentation>
+                            </xs:annotation>
+                          </xs:attribute>
+                          <xs:attribute name="notes" type="xs:string" use="optional">
+                            <xs:annotation>
+                              <xs:documentation>
                                 Optional submitter notes about the action.
                               </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                    </xs:complexType>
-                  </xs:element>
-                  <xs:element name="PROTECT">
-                    <xs:annotation>
-                      <xs:documentation>
+                            </xs:annotation>
+                          </xs:attribute>
+                        </xs:complexType>
+                      </xs:element>
+                        <xs:element name = "PROTECT">
+                          <xs:annotation>
+                              <xs:documentation>
                                  Communicate the intention that the data are to be deposited in a protected
                                  database and not made public under any circumstances.  This is separate from
                                  hold/release directives, which indicate the public visibility of the records.
                               </xs:documentation>
-                    </xs:annotation>
-                  </xs:element>
-                  <xs:element name="VALIDATE">
-                    <xs:annotation>
-                      <xs:documentation>
+                          </xs:annotation>
+                        </xs:element>
+                        <xs:element name = "VALIDATE">
+                          <xs:annotation>
+                              <xs:documentation>
                                 Process the submission but do not archive anything or issue valid accessions for any object.
                               </xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                      <xs:attribute name="source" type="xs:string" use="optional">
-                        <xs:annotation>
-                          <xs:documentation>
+                          </xs:annotation>
+                          <xs:complexType>
+                            <xs:attribute name="source" type="xs:string" use="optional">
+                              <xs:annotation>
+                                <xs:documentation>
                                   Filename or relative path of filename containing XML to validate.              
                                   If this field is not provided, then validate all XML files in this submission.
                                 </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                      <xs:attribute name="schema" use="required">
-                        <xs:annotation>
-                          <xs:documentation>
+                              </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="schema"  use="required">
+                              <xs:annotation>
+                                <xs:documentation>
                                   Select a source type (schema) for the file.
                                 </xs:documentation>
-                        </xs:annotation>
-                        <xs:simpleType>
-                          <xs:restriction base="xs:string">
-                            <xs:enumeration value="study"/>
-                            <xs:enumeration value="experiment"/>
-                            <xs:enumeration value="sample"/>
-                            <xs:enumeration value="run"/>
-                            <xs:enumeration value="analysis"/>
-                            <xs:enumeration value="dataset"/>
-                            <xs:enumeration value="policy"/>
-                            <xs:enumeration value="dac"/>                            
-                          </xs:restriction>
-                        </xs:simpleType>
-                      </xs:attribute>
-                      <xs:attribute name="notes" type="xs:string" use="optional">
-                        <xs:annotation>
-                          <xs:documentation>
+                              </xs:annotation>
+                              <xs:simpleType>
+                                <xs:restriction base = "xs:string">
+                                    <xs:enumeration value = "study"/>
+                                    <xs:enumeration value = "experiment"/>
+                                    <xs:enumeration value = "sample"/>
+                                    <xs:enumeration value = "run"/>
+                                    <xs:enumeration value = "analysis"/>
+                                    <xs:enumeration value="dataset"/>
+                                    <xs:enumeration value="policy"/>
+                                    <xs:enumeration value="dac"/>   
+                                    <xs:enumeration value="project"/>
+                                </xs:restriction>
+                              </xs:simpleType>
+                            </xs:attribute>
+                            <xs:attribute name="notes" type="xs:string" use="optional">
+                              <xs:annotation>
+                                  <xs:documentation>
                                     Optional submitter notes about the action.
                                   </xs:documentation>
-                        </xs:annotation>
-                      </xs:attribute>
-                    </xs:complexType>
-                  </xs:element>
-                </xs:choice>
+                              </xs:annotation>
+                            </xs:attribute>
+                          </xs:complexType>
+                      </xs:element>
+                    </xs:choice>
               </xs:complexType>
-            </xs:element>
+            </xs:element> 
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -329,7 +351,7 @@
           <xs:sequence minOccurs="0" maxOccurs="unbounded">
             <xs:element name="FILE">
               <xs:complexType>
-                <xs:attribute name="filename" type="xs:string" use="required">
+                <xs:attribute name="filename"  type="xs:string" use="required">
                   <xs:annotation>
                     <xs:documentation>
                       Filename or relative path and name of the xml or data file.
@@ -338,15 +360,15 @@
                     </xs:documentation>
                   </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="checksum_method" use="required">
+                <xs:attribute name="checksum_method"  use="required">
                   <xs:annotation>
                     <xs:documentation>
                       Checksum method used.
                     </xs:documentation>
                   </xs:annotation>
                   <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                      <xs:enumeration value="MD5">
+                    <xs:restriction base = "xs:string">
+                      <xs:enumeration value = "MD5">
                         <xs:annotation>
                           <xs:documentation>
                             Checksum generated by the MD5 method (md5sum in unix). 
@@ -356,7 +378,7 @@
                     </xs:restriction>
                   </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="checksum" type="xs:string" use="required">
+                <xs:attribute name="checksum"  type="xs:string" use="required">
                   <xs:annotation>
                     <xs:documentation>
                       Checksum of uncompressed file. 
@@ -364,7 +386,7 @@
                   </xs:annotation>
                 </xs:attribute>
               </xs:complexType>
-            </xs:element>
+            </xs:element> 
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -377,11 +399,11 @@
         </xs:annotation>
         <xs:complexType>
           <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="SUBMISSION_LINK" type="LinkType"/>
+            <xs:element name="SUBMISSION_LINK" type="com:LinkType"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-
+   
       <xs:element name="SUBMISSION_ATTRIBUTES" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>
@@ -390,77 +412,44 @@
         </xs:annotation>
         <xs:complexType>
           <xs:sequence maxOccurs="unbounded" minOccurs="1">
-            <xs:element name="SUBMISSION_ATTRIBUTE" type="AttributeType"/>
+            <xs:element name="SUBMISSION_ATTRIBUTE" type="com:AttributeType"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-
+    
     </xs:sequence>
 
-    <xs:attribute name="accession" type="xs:string" use="optional">
-      <xs:annotation>
-        <xs:documentation>
-          Public SRA accession assigned upon submission which appears in messages and
-          tracking.  This value needs to be supplied with any future 
-          directives concerning this SRA submission object.  Omit for new submissions.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="alias" type="xs:string" use="optional">
-      <xs:annotation>
-        <xs:documentation>
-          Submitter supplied name or id for the submission.  This value can be used by the submitter
-          to track a submission without waiting for the Archive to assign an accession.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="submission_id" type="xs:string" use="optional">
+    <xs:attributeGroup ref="com:NameGroup"/>
+   
+    <xs:attribute name="submission_id"  type="xs:string" use="optional"> 
       <xs:annotation>
         <xs:documentation>
           DEPRECATED (use alias instead). 
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="submission_date" type="xs:dateTime" use="optional">
+    <xs:attribute name="submission_date"  type="xs:dateTime" use="optional"> 
       <xs:annotation>
         <xs:documentation>
           Submitter assigned preparation date of this submission object.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="submission_comment" type="xs:string" use="optional">
+    <xs:attribute name="submission_comment"  type="xs:string" use="optional"> 
       <xs:annotation>
         <xs:documentation>
           Submitter assigned comment.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="center_name" type="xs:string" use="required">
-      <xs:annotation>
-        <xs:documentation>
-          Center or institution name of submitter.  The center name (or institution name)
-          is a controlled vocabulary that changes too quickly to obtain from the XML schema.
-          Please consult the Archive web site for latest information.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="lab_name" type="xs:string" use="optional">
+    <xs:attribute name="lab_name"  type="xs:string" use="optional">
       <xs:annotation>
         <xs:documentation>
           Laboratory name within submitting institution.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="broker_name" type="xs:string" use="optional">
-      <xs:annotation>
-        <xs:documentation>
-          Identity of broker authority responsible for the submission.  This is used to
-          determine ownership and editorial authority, hold and release control, and
-          future editing capability.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="handle" type="xs:string" use="optional">
+    <xs:attribute name="handle"  type="xs:string" use="optional">
       <xs:annotation>
         <xs:documentation>
           DEPRECATED.  Do not use.
@@ -468,21 +457,23 @@
       </xs:annotation>
     </xs:attribute>
 
+</xs:complexType>
+
+  <xs:complexType name="SubmissionSetType">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="SUBMISSION" type="SubmissionType"/>        
+    </xs:sequence>
   </xs:complexType>
 
-  <xs:element name="SUBMISSION_SET">
-    <xs:annotation>
-      <xs:documentation>
+<xs:element name="SUBMISSION_SET" type="SubmissionSetType">
+  <xs:annotation>
+    <xs:documentation>
       An SUBMISSION_SET is a container for a set of studies and a common namespace.
     </xs:documentation>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence minOccurs="1" maxOccurs="unbounded">
-        <xs:element name="SUBMISSION" type="SubmissionType"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+  </xs:annotation>  
 
-  <xs:element name="SUBMISSION" type="SubmissionType"/>
+</xs:element> 
+
+<xs:element name="SUBMISSION" type="SubmissionType"/>
 
 </xs:schema>

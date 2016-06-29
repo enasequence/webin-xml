@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <!--
      <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.analysis.xsd" ></xs:include>
      <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.experiment.xsd" ></xs:include>
@@ -19,43 +19,6 @@
     <xs:include schemaLocation="SRA.submission.xsd"/>
     <xs:include schemaLocation="ENA.embl.xsd"/>
     <xs:include schemaLocation="ENA.taxonomy.xsd"/>
-
-
-    <xs:complexType name="AnalysisSetType">
-        <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="ANALYSIS" type="AnalysisType"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="ExperimentSetType">
-        <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="EXPERIMENT" type="ExperimentType"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="RunSetType">
-        <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="RUN" type="RunType"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="StudySetType">
-        <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="STUDY" type="StudyType"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="SampleSetType">
-        <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="SAMPLE" type="SampleType"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="SubmissionSetType">
-        <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="SUBMISSION" type="SubmissionType"/>
-        </xs:sequence>
-    </xs:complexType>
 
     <xs:complexType name="EntrySetType">
         <xs:sequence minOccurs="1" maxOccurs="unbounded">

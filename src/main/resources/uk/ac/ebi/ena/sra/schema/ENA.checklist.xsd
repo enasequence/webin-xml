@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- INSDC Sequence Read Archive resource Run (SRR/ERR/DRR) object XML specification -->
+<!-- $Id: ENA.checklist.xsd,v 1.1 2011/06/27 08:59:27 rasko Exp $ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
+    <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
+
+    <xs:complexType name="ChecklistType">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="DESCRIPTOR">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="1" name="CHECKLIST_NAME" type="xs:string">
+                            <xs:annotation>
+                                <xs:documentation>Checklist name.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="CHECKLIST_DESCRIPTION" type="xs:string">
+                            <xs:annotation>
+                                <xs:documentation>Description of the checklist.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="CHECKLIST_VERSION" type="xs:positiveInteger">
+                            <xs:annotation>
+                                <xs:documentation>The checklist version.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="CHECKLIST_ATTRIBUTE" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element maxOccurs="1" minOccurs="1" name="TAG"
+                                        type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation> Name of the attribute.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element maxOccurs="1" minOccurs="0" name="DESCRIPTION"
+                                        type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>Description of the attribute.
+        </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element maxOccurs="1" minOccurs="1" name="MANDATORY"
+                                        type="xs:boolean">
+                                        <xs:annotation>
+                                            <xs:documentation>True if the attribute is mandatory.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attributeGroup ref="com:NameGroup"/>
+    </xs:complexType>
+
+    <xs:complexType name="ChecklistSetType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="CHECKLIST" type="ChecklistType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="CHECKLIST_SET" type="ChecklistSetType">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+
+    </xs:element>
+
+    <xs:element name="CHECKLIST" type="ChecklistType"/>
+</xs:schema>
