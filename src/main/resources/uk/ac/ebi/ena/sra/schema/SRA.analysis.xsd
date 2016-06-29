@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NCBI Short Read Archive resource Analysis (SRZ) object XML specification -->
+<!-- $Id: SRA.analysis.xsd 144440 2008-10-29 20:19:39Z sponomar $ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:complexType name="AnalysisType">
+  <xs:annotation>
+    <xs:documentation>
+      An analysis object contains results and data from the run data as analyzed
+      with respect to the experiment's design.  These objects are unstructured and
+      with time may be passed along to downstream archival services.  Typically
+      these data are best available and captured as part of the sequencing output.
+      Examples include oligo profiles and pairwise alignments to reference sequences. 
+    </xs:documentation>
+  </xs:annotation>
+ 
+          <xs:sequence>
+            <xs:element name="STUDY_REF">
+              <xs:annotation>
+                <xs:documentation>
+                  The STUDY_REF descriptor establishes the relationship of the experiment to the parent
+                  study.  This can either be the accession of an existing archived study record, or
+                  a reference to a new study record in the same submission (which does not yet have an
+                  accession).
+                </xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:attribute name="refname" type="xs:string" use="optional">
+                  <xs:annotation>
+                    <xs:documentation>
+                      Identifies parent study record by name that is known within the submission namespace.
+                      Use this field when referencing a study contained in the current submission for which
+                      an accession has not yet been issued.
+                    </xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="accession" type="xs:string" use="optional">
+                  <xs:annotation>
+                    <xs:documentation>
+                      Identifies parent study record by its accession.
+                    </xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+              </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="1" name="ANALYSIS_NAME" type="xs:string"/>                                                                            
+            <xs:element maxOccurs="1" minOccurs="0" name="ANALYSIS_DESCRIPTION" type="xs:string"/>                               
+            <xs:element name="ANALYSIS_FILES" minOccurs="0" maxOccurs="1">
+              <xs:annotation>
+                  <xs:documentation>
+                      Submitter supplied analysis objects in file form.             
+                  </xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                    <xs:element name="FILE" minOccurs="1" maxOccurs="1">
+                       <xs:complexType>
+                         <xs:attribute name="filename" type="xs:string">
+                           <xs:annotation>     
+                             <xs:documentation>The name or relative pathname of an analysis file.</xs:documentation>
+                           </xs:annotation>
+                         </xs:attribute>
+                         <xs:attribute name="filetype">
+                           <xs:annotation>
+                             <xs:documentation>The type of file (text or other) of the analysis file.</xs:documentation>
+                           </xs:annotation>
+                           <xs:simpleType>
+                             <xs:restriction base="xs:string">
+                               <xs:enumeration value="text"/>
+                               <xs:enumeration value="other"/>                                                                                                
+                             </xs:restriction>
+                           </xs:simpleType>
+                         </xs:attribute>
+                       </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+
+            <xs:element name="ANALYSIS_LINKS" minOccurs="0" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  Links to resources related to this sample or sample set (publication, datasets, online databases).
+                </xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="ANALYSIS_LINK">
+              <xs:complexType>
+                <xs:choice>                    
+                  <xs:element name="URL_LINK">
+                    <xs:complexType>
+                        <xs:all>
+                          <xs:element name="LABEL" type="xs:string" minOccurs="1" maxOccurs="1">                                                    
+                            <xs:annotation>
+                              <xs:documentation>
+                                 Text label to display for the link.
+                              </xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="URL" minOccurs="1" maxOccurs="1" type="xs:anyURI">
+                            <xs:annotation>
+                              <xs:documentation>
+                                 The internet service link (file:, http:, ftp:, etc).
+                              </xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                      </xs:all>
+                  </xs:complexType>
+              </xs:element>
+              <xs:element name="ENTREZ_LINK">
+                  <xs:complexType>
+                      <xs:all>
+                          <xs:element name="DB" type="xs:string" minOccurs="1" maxOccurs="1">
+                            <xs:annotation>
+                              <xs:documentation>
+                                 Short name of the NCBI database resource (e.g. pubmed).
+                              </xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="ID" type="xs:string" minOccurs="1" maxOccurs="1">
+                            <xs:annotation>
+                              <xs:documentation>
+                                 Accession to the record of interest in the NCBI Entrez system.
+                              </xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:all>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:choice>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+      </xs:element>
+
+      <xs:element name="ANALYSIS_ATTRIBUTES" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+               Properties and attributes of a sample.  These can be entered as free-form 
+               tag-value pairs. For certain studies, submitters may be asked to follow a
+               community established ontology when describing the work.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence maxOccurs="unbounded" minOccurs="1">
+              <xs:element name="ANALYSIS_ATTRIBUTE">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="TAG" type="xs:string" minOccurs="1" maxOccurs="1">                                                    
+                            <xs:annotation>
+                              <xs:documentation>
+                                 Name of the attribute.
+                              </xs:documentation>
+                            </xs:annotation>
+                    </xs:element>
+                    <xs:element name="VALUE" type="xs:string" minOccurs="1" maxOccurs="1">
+                            <xs:annotation>
+                              <xs:documentation>
+                                 Value of the attribute.
+                              </xs:documentation>
+                            </xs:annotation>
+                    </xs:element>
+                    <xs:element name="UNITS" type="xs:string" minOccurs="0" maxOccurs="1">          
+                            <xs:annotation>
+                              <xs:documentation>
+                                 Optional scientific units.
+                              </xs:documentation>
+                            </xs:annotation>
+                    </xs:element>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+          </xs:element>
+    </xs:sequence>
+
+    <xs:attribute name="alias" type="xs:string" use="optional">
+     <xs:annotation>
+       <xs:documentation>
+         Submitter designated name of the analysis or analysis group.  This name should
+         be unique throughout the submission.  This field is only needed if the analysis
+         record does not yet have an accession.
+       </xs:documentation>
+     </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="accession" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          The analysis accession.  Use when performing certain update operations.
+        </xs:documentation>
+      </xs:annotation>
+     </xs:attribute>
+</xs:complexType>
+   
+<xs:element name="ANALYSIS_SET">
+  <xs:annotation>
+    <xs:documentation>
+      An ANALYSIS_SET is a container of analysis objects with a shared namespace. 
+    </xs:documentation>
+  </xs:annotation>
+  <xs:complexType>
+    <xs:sequence maxOccurs="unbounded" minOccurs="1">
+      <xs:element name="ANALYSIS" type="AnalysisType"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>                     
+ 
+<xs:element name="ANALYSIS" type="AnalysisType"/>     
+                    
+</xs:schema>

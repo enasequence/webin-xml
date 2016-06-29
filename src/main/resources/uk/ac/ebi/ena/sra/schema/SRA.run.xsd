@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NCBI Short Read Archive resource Run (SRR) object XML specification -->
+<!-- $Id: SRA.run.xsd 144440 2008-10-29 20:19:39Z sponomar $ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:complexType name="RunType">
+        <xs:annotation>
+            <xs:documentation>
+                A Run contains the sequencing results from a particular run on a sequencing instrument.  The Run was done in fulfillment 
+                of an Experiment that was designed into the Study.  
+                One SRA run may consist of only a portion of the plate or slide if the instrument run was partitioned among distinct experiments 
+                or between distinct RUNs.  By policy the Center should separate these data into distinct SRA Run objects.
+            </xs:documentation>
+        </xs:annotation>        
+            <xs:sequence>
+                <xs:element name="EXPERIMENT_REF" nillable="false"  maxOccurs="1" minOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation> The EXPERIMENT_REF descriptor identifies the parent experiment
+                            to which this run pertains.
+                            The Experiment object contains all the mapping information needed to decode each spot and map application reads
+                            to RUN objects.
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="accession" type="xs:string" use="optional">
+                            <xs:annotation>
+                                <xs:documentation>
+                                   Reference to the experiment for which this run pertains by its accession.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="refname" type="xs:string" use="optional">
+                            <xs:annotation>
+                                <xs:documentation>
+                                   Reference to the experiment for which this run pertains by its alias. 
+                                   Use this field when the experiment is in the current submission and
+                                   an accession has not yet been issued.            
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element> 
+                <xs:sequence maxOccurs="unbounded" minOccurs="1" >
+                    <xs:element name="DATA_BLOCK" nillable="false">           
+                        <xs:annotation>                           
+                             <xs:documentation>
+                                 Convenience partition for processing large datasets.         
+                             </xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>                        
+
+                            <xs:sequence>
+                               <xs:element name="FILES">
+                                   <xs:annotation>
+                                       <xs:documentation> Actual run data are contained in one of the files listed in the submission manifest. 
+                                           Each data block is represented by one SRF file, one SFF file, one compressed fastq file, 
+                                           or one compressed tar archive file.
+                                       </xs:documentation>
+                                   </xs:annotation>
+                                  <xs:complexType>
+                                      <xs:sequence maxOccurs="unbounded" minOccurs="1">
+                                     <xs:element name="FILE">                                        
+                                    <xs:complexType>
+                                        <xs:attribute name="filename" type="xs:string">
+                                            <xs:annotation>
+                                                <xs:documentation>The name or relative pathname of a run data file.</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:attribute>
+                                        <xs:attribute name="filetype">
+                                            <xs:annotation>
+                                                <xs:documentation>The run data file type.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:enumeration value="srf">                                                                 
+                                                      <xs:annotation>
+                                                        <xs:documentation>Standard Short Read Format file (.srf), all platforms</xs:documentation>
+                                                      </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="sff">
+                                                      <xs:annotation>
+                                                        <xs:documentation>454 Standard Flowgram Format file (.sff)</xs:documentation>
+                                                      </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="fastq">               
+                                                      <xs:annotation>
+                                                        <xs:documentation>Combined nucleotide/qualities sequence file in fastq format (.fastq)</xs:documentation>
+                                                      </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="_seq.txt, _prb.txt, _sig2.txt, _qhg.txt">               
+                                                        <xs:annotation>
+                                                            <xs:documentation>DEPRECATED</xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="Illumina_native">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+Some combination of Illumina primary analysis output files delivered in a tar file, including:
+
+  _seq.txt
+  _prb.txt
+  _qcal.txt
+  _sig2.txt
+  _int.txt
+  _nse.txt   
+ 
+Please see SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                    <xs:enumeration value="SOLiD_native">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+Some combination of SOLiD primary analysis output files delivered in a tar file, including:
+
+  .csfasta
+  _QV.qual
+  _intensity.ScaledCY3.fasta
+  _intensity.ScaledCY5.fasta
+  _intensity.ScaledFTC.fasta
+  _intensity.ScaledTXR.fasta
+
+Please see SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:enumeration>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:attribute>
+                                      </xs:complexType>
+                                     </xs:element>
+                                      </xs:sequence>                                      
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+
+                            <xs:attribute name="name" type="xs:string" use="optional">
+                                <xs:annotation>
+                                    <xs:documentation>The plate/slide/flowcell name for this data block.
+                                                                         (454) plate name
+                                                                         (Illumina) flowcell name
+                                                                         (SOLiD) slide name  
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="sector" type="xs:nonNegativeInteger" use="optional">
+                                <xs:annotation>
+                                    <xs:documentation>Higher level partition of run data to which this data block pertains.
+                                                                         (454) not used
+                                                                         (Illumina) Lane number
+                                                                         (SOLiD) not used 
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="region" type="xs:nonNegativeInteger" use="optional">
+                                <xs:annotation>
+                                    <xs:documentation>Lower level partition of run data to which this data block pertains,
+                                        typically the field of view for the imaging camera.
+                                        (454) 0 if whole plate is used, 1..16 for gasket partition.
+                                        (Illumina) Tile number (1..200+), or use 0 if file contains all tiles. 
+                                        (SOLiD) Panel number (1..4096), or use 0 if file contains all panels. 
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="total_spots" type="xs:nonNegativeInteger" use="optional">
+                                <xs:annotation>
+                                    <xs:documentation>The number of spots in this data block.</xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="total_reads" type="xs:nonNegativeInteger" use="optional">
+                                <xs:annotation>
+                                    <xs:documentation>The number of read records in the data block.</xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="number_channels" type="xs:nonNegativeInteger" use="optional">
+                                <xs:annotation>
+                                    <xs:documentation>The number of channels for which instrument data are provided. 
+                                        This may be different from the data the instrument actually produced during the run.
+                                        0 - no instrumentation data provided, bases only are provided.
+                                        1 - one channel of instrumentation data per spot.
+                                        4 - four channels of instrumentation data per spot.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="format_code" type="xs:int" use="optional">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        The format code determines alternate interpretations of the data.
+                                        1 - Use the default for each platform.
+                                        (454) Equivalent to published SFF flowgram format code #1.  
+                                        Bases are interpreted as is.  Peaks are delta encoded for indexing into the flow sequence.
+                                        The peak code is used to lookup the signal intensity (amplitude) for that flow to verify the decision
+                                        of the base caller in calling base runs.  The intensity measurement is expressed as a two
+                                        decimal place fixed point  integer value with maximum measured value 655.35.
+                                        Qualities are estimated phred quality scores for each
+                                        base call.  The spot name is set to the read name of the input data.  The cartesian coordinates
+                                        of the spot are derived from the read name, which has base 36 encoding of x and y in the latter
+                                        characters.  Flow sequence is factory default (TACG)*42 and the key sequence is factory default
+                                        TCAG, unless these values are overridden in the experiment descriptor.
+                                        (Illumina) 
+                                        Bases are presented masked by binary peak values.   Qualities are delivered in 4-channel integer values which
+                                        indicate probability of substitution.  Intensities are delivered in 4-channel decimal values scaled
+                                        such that the minimum base-called channel intensity is still non-negative.  Spot coordinates pertain
+                                        to x-y sites on the tile.  
+                                        (SOLiD)
+                                        Bases are presented in color space with the last base of the adapter sequence provided, which
+                                        long with the appropriate color space conversion matrix can be used to decode the sequence.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:complexType>
+                    </xs:element>   
+                </xs:sequence>
+                <xs:element name="RUN_LINKS" minOccurs="0" maxOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Links to resources related to this RUN or RUN set (publication, datasets, online databases).
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                            <xs:element name="RUN_LINK">
+                                <xs:complexType>
+                                    <xs:choice>                    
+                                        <xs:element name="URL_LINK">
+                                            <xs:complexType>
+                                                <xs:all>
+                                                    <xs:element name="LABEL" type="xs:string" minOccurs="1" maxOccurs="1">                                                    
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                Text label to display for the link.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="URL" minOccurs="1" maxOccurs="1" type="xs:anyURI">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                The internet service link (file:, http:, ftp:, etc).
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                </xs:all>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="ENTREZ_LINK">
+                                            <xs:complexType>
+                                                <xs:all>
+                                                    <xs:element name="DB" type="xs:string" minOccurs="1" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                Short name of the NCBI database resource (e.g. pubmed).
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element name="ID" type="xs:string" minOccurs="1" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation>
+                                                                Accession to the record of interest in the NCBI Entrez system.
+                                                            </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                </xs:all>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:choice>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="RUN_ATTRIBUTES" minOccurs="0" maxOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Properties and attributes of a RUN.  These can be entered as free-form 
+                            tag-value pairs. For certain studies, submitters may be asked to follow a
+                            community established ontology when describing the work.
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence maxOccurs="unbounded" minOccurs="1">
+                            <xs:element name="RUN_ATTRIBUTE">
+                                <xs:complexType>
+                                    <xs:all>
+                                        <xs:element name="TAG" type="xs:string" minOccurs="1" maxOccurs="1">                                                    
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    Name of the attribute.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="VALUE" type="xs:string" minOccurs="1" maxOccurs="1">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    Value of the attribute.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="UNITS" type="xs:string" minOccurs="0" maxOccurs="1">          
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    Optional scientific units.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                    </xs:all>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element> 
+            </xs:sequence>
+            <xs:attribute name="alias" use="optional" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                        Submitter assigned name of the run that should be unique throughout the submission.
+                        (454) This is normally assigned from the first 7 characters of the read name 
+                              when .sff files are submitted, equivalent to the "accession_prefix" in the manifest.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="accession" use="optional" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                      NCBI assigned accession when known.  Normally there will be no external
+                      use cases that need this attribute.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="instrument_model" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Instrument model actually used in the run.  Normally this is inherited from
+                            the Experiment but may be overidden with the actual model.
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="454 GS"/>
+                            <xs:enumeration value="454 GS 20"/>
+                            <xs:enumeration value="454 GS FLX"/>
+                            <xs:enumeration value="Solexa 1G Genome Analyzer"><xs:annotation><xs:documentation>DEPRECATED</xs:documentation></xs:annotation></xs:enumeration>
+                            <xs:enumeration value="Illumina Genome Analyzer"/>
+                            <xs:enumeration value="Illumina Genome Analyzer II"/>
+                            <xs:enumeration value="AB SOLiD System"/>
+                            <xs:enumeration value="AB SOLiD System 2.0"/>
+                            <xs:enumeration value="Other"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="instrument_name" type="xs:string" use="optional">
+                <xs:annotation>
+                    <xs:documentation>
+                        Center-assigned name or id of the instrument used in the run.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="run_date" use="optional" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>
+                        ISO date when the run took place.  
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute> 
+            <xs:attribute name="run_file" use="optional" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>
+                    Name of the submission file containing the run.  This file may have
+                    included multiple runs.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:attribute>            
+            <xs:attribute name="run_center" use="optional" type="xs:string">
+                <xs:annotation >
+                    <xs:documentation >
+                        If applicable, the name of the contract sequencing center that executed the run.
+                        Example: 454MSC.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="total_data_blocks" type="xs:positiveInteger" use="required">
+                <xs:annotation >
+                    <xs:documentation >
+                        The number of data blocks to expect in this run.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+
+    <xs:element name="RUN_SET">
+        <xs:annotation>
+            <xs:documentation>
+                RUN_SET serves as a container for a set of runs and a name space
+                for establishing referential integrity between them. 
+            </xs:documentation>
+        </xs:annotation>  
+        <xs:complexType >
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="RUN" type="RunType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="RUN" type="RunType"/>
+</xs:schema>
