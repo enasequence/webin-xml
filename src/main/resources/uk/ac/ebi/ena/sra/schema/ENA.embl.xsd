@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:ebi="http://www.ebi.ac.uk/embl/schema" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.1">
+	<xs:complexType name="XrefType">
+		<xs:annotation>
+			<xs:documentation>Database cross-reference.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="db" type="xs:string" use="required"/>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="secondaryId" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="EntryType">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="secondaryAccession"
+				type="xs:string"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="projectAccession" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="description" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="comment" type="xs:string"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="keyword" type="xs:string"/>
+			<xs:element maxOccurs="unbounded" minOccurs="1" name="reference">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="1" minOccurs="0" name="title" type="xs:string"/>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="author"
+							type="xs:string"/>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="applicant"
+							type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Patent applicant.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element maxOccurs="1" minOccurs="0" name="consortium" type="xs:string"/>
+						<xs:element maxOccurs="1" minOccurs="0" name="submissionDate" type="xs:date">
+							<xs:annotation>
+								<xs:documentation>The submission date (used only for submission references).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element maxOccurs="1" minOccurs="0" name="journal" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>The journal name (used only for article references).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element maxOccurs="1" minOccurs="0" name="year" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>The publication year (used only for article references).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element maxOccurs="1" minOccurs="0" name="volume" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>The volume number (used only for article references).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element maxOccurs="1" minOccurs="0" name="issue" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>The issue number (used only for article references).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element maxOccurs="1" minOccurs="0" name="firstPage" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>The first page (used only for article references).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element maxOccurs="1" minOccurs="0" name="lastPage" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>The last page (used only for article references).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element maxOccurs="1" minOccurs="0" name="comment" type="xs:string"/>
+						<xs:element maxOccurs="1" minOccurs="0" name="referenceLocation"
+							type="xs:string"/>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="xref" type="XrefType"
+						/>
+					</xs:sequence>
+					<xs:attribute name="type" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="submission"/>
+								<xs:enumeration value="book"/>
+								<xs:enumeration value="article"/>
+								<xs:enumeration value="patent"/>
+								<xs:enumeration value="thesis"/>
+								<xs:enumeration value="unpublished"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="number" type="xs:integer" use="required"/>
+					<xs:attribute name="location" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="xref" type="XrefType"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="feature">
+				<xs:annotation>
+					<xs:documentation>Sequence feature.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="1" minOccurs="0" name="taxon">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element maxOccurs="1" minOccurs="0" name="lineage">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element maxOccurs="unbounded" minOccurs="1"
+												name="taxon">
+												<xs:complexType>
+												<xs:attribute name="scientificName"
+												type="xs:string" use="required"/>
+												</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="scientificName" type="xs:string" use="required"/>
+								<xs:attribute name="commonName" type="xs:string" use="optional"/>
+								<xs:attribute name="taxId" type="xs:integer" use="optional"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="xref" type="XrefType"/>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="qualifier">
+							<xs:annotation>
+								<xs:documentation>Sequence feature qualifier.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element maxOccurs="1" minOccurs="0" name="value"
+										type="xs:string"/>
+								</xs:sequence>
+								<xs:attribute name="name" type="xs:string" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="name" type="xs:string" use="required"/>
+					<xs:attribute name="location" type="xs:string" use="required"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="assembly">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="1" name="range">
+							<xs:complexType>
+								<xs:attribute name="begin" type="xs:integer" use="required"/>
+								<xs:attribute name="end" type="xs:integer" use="required"/>
+								<xs:attribute name="primaryBegin" type="xs:integer" use="optional"/>
+								<xs:attribute name="primaryEnd" type="xs:integer" use="optional"/>
+								<xs:attribute name="accession" type="xs:string" use="required"/>
+								<xs:attribute name="version" type="xs:integer" use="required"/>
+								<xs:attribute default="false" name="complement" type="xs:boolean"
+									use="optional"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="contig">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:choice maxOccurs="unbounded" minOccurs="0">
+							<xs:element maxOccurs="1" minOccurs="1" name="range">
+								<xs:complexType>
+									<xs:attribute name="begin" type="xs:integer" use="required"/>
+									<xs:attribute name="end" type="xs:integer" use="required"/>
+									<xs:attribute name="primaryBegin" type="xs:integer"
+										use="optional"/>
+									<xs:attribute name="primaryEnd" type="xs:integer" use="optional"/>
+									<xs:attribute name="accession" type="xs:string" use="required"/>
+									<xs:attribute name="version" type="xs:integer" use="required"/>
+									<xs:attribute default="false" name="complement"
+										type="xs:boolean" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element maxOccurs="1" minOccurs="1" name="gap">
+								<xs:complexType>
+									<xs:attribute name="begin" type="xs:integer" use="required"/>
+									<xs:attribute name="end" type="xs:integer" use="required"/>
+									<xs:attribute name="length" type="xs:integer" use="required"/>
+									<xs:attribute default="false" name="unknownLength"
+										type="xs:boolean" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="sequence" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="accession" type="xs:string" use="required"/>
+		<xs:attribute name="version" type="xs:integer" use="required"/>
+		<xs:attribute name="entryVersion" type="xs:integer" use="required"/>
+		<xs:attribute name="dataClass" type="xs:string" use="required"/>
+		<xs:attribute name="taxonomicDivision" type="xs:string" use="required"/>
+		<xs:attribute name="moleculeType" type="xs:string" use="required"/>
+		<xs:attribute name="sequenceLength" type="xs:integer" use="required"/>
+		<xs:attribute name="topology" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="circular"/>
+					<xs:enumeration value="linear"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="firstPublic" type="xs:date" use="required"/>
+		<xs:attribute name="firstPublicRelease" type="xs:integer" use="required"/>
+		<xs:attribute name="lastUpdated" type="xs:date" use="required"/>
+		<xs:attribute name="lastUpdatedRelease" type="xs:integer" use="required"/>
+	</xs:complexType>
+	<xs:element name="entrySet">
+		<xs:complexType>
+			<xs:sequence maxOccurs="unbounded" minOccurs="1">
+				<xs:element name="entry" type="EntryType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="entry" type="EntryType"/>
+</xs:schema>

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- NCBI Short Read Archive resource Sample (SRS) object XML specification -->
-<!-- $Id: SRA.sample.xsd 144440 2008-10-29 20:19:39Z sponomar $ -->
+<!-- INSDC Short Read Archive resource Sample (SRS) object XML specification -->
+<!-- $Id$ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- BEGIN COMMON BLOCK -->
+  <xs:include schemaLocation="SRA.common.xsd" ></xs:include>
+  <!--  END COMMON BLOCK -->
+
   <xs:complexType name="SampleType">
     <xs:annotation>
       <xs:documentation>
@@ -10,8 +14,15 @@
         accession or an anonymized individual identifier.  Or, it may fully specify
         provenance and isolation method of the starting material.
       </xs:documentation>
-    </xs:annotation>  
+    </xs:annotation>
     <xs:sequence>
+      <xs:element name="TITLE" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+           Short text that can be used to call out sample records in search results or in displays.
+         </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name="SAMPLE_NAME">
         <xs:complexType>
           <xs:all minOccurs="1">
@@ -21,22 +32,39 @@
                   NCBI Taxonomy Identifier.  This is appropriate for individual organisms and
                   some environmental samples.
                 </xs:documentation>
-              </xs:annotation>  
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="SCIENTIFIC_NAME" minOccurs="0" maxOccurs="1" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>
+                  Scientific name of sample that distinguishes its taxonomy.  Please use a 
+                  name or synonym that is tracked in the INSDC Taxonomy database. 
+                  Also, this field can be used to confirm the TAXON_ID setting.
+                </xs:documentation>
+              </xs:annotation>
             </xs:element>
             <xs:element name="COMMON_NAME" minOccurs="0" maxOccurs="1" type="xs:string">
               <xs:annotation>
                 <xs:documentation>
-                  Common name of sample that might be used in publication or other communications,
-                  or will be relevant and distinct within any study that refers to this sample.
+                  GenBank common name of the organism.  Examples: human, mouse.
                 </xs:documentation>
-              </xs:annotation>  
+              </xs:annotation>
             </xs:element>
             <xs:element name="ANONYMIZED_NAME" minOccurs="0" maxOccurs="1" type="xs:string">
               <xs:annotation>
                 <xs:documentation>
-                  Anonymous public name of the sample.
+                  Anonymous public name of the sample.   For example, HapMap human isolate NA12878.
                 </xs:documentation>
-              </xs:annotation>  
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="INDIVIDUAL_NAME" minOccurs="0" maxOccurs="1" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>
+                  Individual name of the sample.  This field can be used to identify the individual identity of
+                  a sample where appropriate (this is usually NOT appropriate for human subjects).  Example:
+                  "Glennie" the platypus.  
+                </xs:documentation>
+              </xs:annotation>
             </xs:element>
           </xs:all>
         </xs:complexType>
@@ -46,47 +74,10 @@
           <xs:documentation>
             Free-form text describing the sample, its origin, and its method of isolation.
           </xs:documentation>
-        </xs:annotation>  
+        </xs:annotation>
       </xs:element>
-      <xs:element name="MEMBERS" minOccurs="0" maxOccurs="1">
-        <xs:annotation>
-          <xs:documentation>
-            Identifies a list of group/pool/multiplex sample members.  This implies that
-            this sample record is a group, pool, or multiplex, but is continues to receive
-            its own accession and can be referenced by an experiment.
-          </xs:documentation>
-        </xs:annotation>  
-        <xs:complexType>
-          <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="MEMBER">
-              <xs:complexType>
-                <xs:attribute name="sample_ref" type="xs:string" use="optional">
-                  <xs:annotation>
-                    <xs:documentation>
-                      Sample identified within the namespace of the submission.
-                    </xs:documentation>
-                  </xs:annotation>  
-                </xs:attribute>
-                <xs:attribute name="sample_id" type="xs:string" use="optional">
-                  <xs:annotation>
-                    <xs:documentation>
-                      Sample identified by its global SRS accession. 
-                    </xs:documentation>
-                  </xs:annotation>  
-                </xs:attribute>
-                <xs:attribute name="barcode_seqence" type="xs:string" use="required">
-                  <xs:annotation>
-                    <xs:documentation>
-                      Bar code sequence used to map the read to its individual sample.
-                    </xs:documentation>
-                  </xs:annotation>  
-                </xs:attribute>
-              </xs:complexType>
-            </xs:element>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      
+
+
       <xs:element name="SAMPLE_LINKS" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>
@@ -95,56 +86,11 @@
         </xs:annotation>
         <xs:complexType>
           <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="SAMPLE_LINK">
-              <xs:complexType>
-                <xs:choice>                    
-                  <xs:element name="URL_LINK">
-                    <xs:complexType>
-                      <xs:all>
-                        <xs:element name="LABEL" type="xs:string" minOccurs="1" maxOccurs="1">                                                    
-                          <xs:annotation>
-                            <xs:documentation>
-                              Text label to display for the link.
-                            </xs:documentation>
-                          </xs:annotation>
-                        </xs:element>
-                        <xs:element name="URL" minOccurs="1" maxOccurs="1" type="xs:anyURI">
-                          <xs:annotation>
-                            <xs:documentation>
-                              The internet service link (file:, http:, ftp:, etc).
-                            </xs:documentation>
-                          </xs:annotation>
-                        </xs:element>
-                      </xs:all>
-                    </xs:complexType>
-                  </xs:element>
-                  <xs:element name="ENTREZ_LINK">
-                    <xs:complexType>
-                      <xs:all>
-                        <xs:element name="DB" type="xs:string" minOccurs="1" maxOccurs="1">
-                          <xs:annotation>
-                            <xs:documentation>
-                              Short name of the NCBI database resource (e.g. pubmed).
-                            </xs:documentation>
-                          </xs:annotation>
-                        </xs:element>
-                        <xs:element name="ID" type="xs:string" minOccurs="1" maxOccurs="1">
-                          <xs:annotation>
-                            <xs:documentation>
-                              Accession to the record of interest in the NCBI Entrez system.
-                            </xs:documentation>
-                          </xs:annotation>
-                        </xs:element>
-                      </xs:all>
-                    </xs:complexType>
-                  </xs:element>
-                </xs:choice>
-              </xs:complexType>
-            </xs:element>
+            <xs:element name="SAMPLE_LINK" type="LinkType"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      
+
       <xs:element name="SAMPLE_ATTRIBUTES" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>
@@ -155,53 +101,13 @@
         </xs:annotation>
         <xs:complexType>
           <xs:sequence maxOccurs="unbounded" minOccurs="1">
-            <xs:element name="SAMPLE_ATTRIBUTE">
-              <xs:complexType>
-                <xs:all>
-                  <xs:element name="TAG" type="xs:string" minOccurs="1" maxOccurs="1">                                                    
-                    <xs:annotation>
-                      <xs:documentation>
-                        Name of the attribute.
-                      </xs:documentation>
-                    </xs:annotation>
-                  </xs:element>
-                  <xs:element name="VALUE" type="xs:string" minOccurs="1" maxOccurs="1">
-                    <xs:annotation>
-                      <xs:documentation>
-                        Value of the attribute.
-                      </xs:documentation>
-                    </xs:annotation>
-                  </xs:element>
-                  <xs:element name="UNITS" type="xs:string" minOccurs="0" maxOccurs="1">          
-                    <xs:annotation>
-                      <xs:documentation>
-                        Optional scientific units.
-                      </xs:documentation>
-                    </xs:annotation>
-                  </xs:element>
-                </xs:all>
-              </xs:complexType>
-            </xs:element>
+            <xs:element name="SAMPLE_ATTRIBUTE" type="AttributeType"/>
+
           </xs:sequence>
         </xs:complexType>
-      </xs:element> 
+      </xs:element>
     </xs:sequence>
-    <xs:attribute name="alias" type="xs:string" use="optional">
-     <xs:annotation>
-       <xs:documentation>
-         Submission name of the sample.  This field is only needed if the study
-         record does not yet have an accession and needs to be referenced by other objects.
-       </xs:documentation>
-     </xs:annotation>  
-    </xs:attribute>
-    <xs:attribute name="accession" type="xs:string" use="optional">
-      <xs:annotation>
-        <xs:documentation>
-          NCBI sample accession supplied when known.  This is used when
-          performing certain update functions.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attributeGroup ref="NameGroup"/>
   </xs:complexType>
 
   <xs:element name="SAMPLE_SET">
@@ -210,8 +116,8 @@
         SAMPLE_SET serves as a container for a set of samples and a name space
         for establishing referential integrity between them. 
       </xs:documentation>
-    </xs:annotation>  
-    <xs:complexType >
+    </xs:annotation>
+    <xs:complexType>
       <xs:sequence minOccurs="1" maxOccurs="unbounded">
         <xs:element name="SAMPLE" type="SampleType"/>
       </xs:sequence>

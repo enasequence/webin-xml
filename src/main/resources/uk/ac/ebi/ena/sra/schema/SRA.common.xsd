@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- INSDC Short Read Archive resource Submission (SRA) object XML specification -->
+<!-- $Id$ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- BEGIN COMMON BLOCK -->
+  <xs:attributeGroup name="NameGroup">
+    <xs:attribute name="alias" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          Submitter designated name of the SRA document of this type.  At minimum alias should
+          be unique throughout the submission of this document type.  If center_name is specified, the name should
+          be unique in all submissions from that center of this document type.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="center_name" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          Owner authority of this document and namespace for submitter's name of this document. 
+          If not provided, then the submitter is regarded as "Individual" and document resolution
+          can only happen within the submission.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="broker_name" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          Broker authority of this document.  If not provided, then the broker is considered "direct".
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="accession" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          The document's accession as assigned by the Home Archive.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="RefNameGroup">
+    <xs:attribute name="refname" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          Identifies a record by name that is known within the namespace defined by attribute "refcenter"
+          Use this field when referencing an object for which an accession has not yet been issued.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="refcenter" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          The namespace of the attribute "refname". When absent, the namespace is assumed to be the current submission.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="accession" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          Identifies a record by its accession.  The scope of resolution is the entire Archive.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:complexType name="AttributeType">
+    <xs:annotation>
+      <xs:documentation>
+        Reusable attributes to encode tag-value pairs with optional units.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="TAG" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            Name of the attribute.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="VALUE" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            Value of the attribute.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="UNITS" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            Optional scientific units.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="SraLinkType">
+    <xs:annotation>
+      <xs:documentation>
+        The SraLinkType mechanism encodes local references between SRA objects.  These 
+        references are local to the Home Archive and during archival are resolved to
+        exportable references suitable for mirroring between Archives.  SraLinks can be used
+        as temporary place holders for pre-published or post-suppressed relationships that
+        will not be mirrored between Archives.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="sra_object_type" use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          SRA link type.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="STUDY"/>
+          <xs:enumeration value="SAMPLE"/>
+          <xs:enumeration value="ANALYSIS"/>
+          <xs:enumeration value="EXPERIMENT"/>
+          <xs:enumeration value="RUN"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attributeGroup ref="RefNameGroup"/>
+
+  </xs:complexType>
+
+
+
+
+  <xs:complexType name="LinkType">
+    <xs:annotation>
+      <xs:documentation>
+        Reusable external links type to encode URL links, Entrez links, and db_xref links.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice>
+      <xs:element name="SRA_LINK" type="SraLinkType"/>
+      <xs:element name="URL_LINK">
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="LABEL" type="xs:string" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  Text label to display for the link.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="URL" minOccurs="1" maxOccurs="1" type="xs:anyURI">
+              <xs:annotation>
+                <xs:documentation>
+                  The internet service link (file:, http:, ftp:, etc).
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="XREF_LINK">
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="DB" type="xs:string" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  INSDC controlled vocabulary of permitted cross references.  Please see http://www.insdc.org/page.php?page=db_xref .
+                  For example, FLYBASE.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ID" minOccurs="1" maxOccurs="1" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>
+                  Accession in the referenced database.    For example,  FBtr0080008 (in FLYBASE).
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="LABEL" type="xs:string" minOccurs="0" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  Text label to display for the link.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ENTREZ_LINK">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="DB" type="xs:string" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  NCBI controlled vocabulary of permitted cross references.  Please see http://www.ncbi.nlm.nih.gov/entrez/eutils/einfo.fcgi? .
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:choice>
+              <xs:element name="ID" type="xs:nonNegativeInteger" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                  <xs:documentation>
+                    Numeric record id meaningful to the NCBI Entrez system.
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="QUERY" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                  <xs:documentation>
+                    Accession string meaningful to the NCBI Entrez system.
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:choice>
+            <xs:element name="LABEL" type="xs:string" minOccurs="0" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  How to label the link.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+
+  <!--  END COMMON BLOCK -->
+
+</xs:schema>

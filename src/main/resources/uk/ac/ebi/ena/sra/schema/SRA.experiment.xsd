@@ -1,782 +1,1085 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- NCBI Short Read Archive resource Experiment (SRX) object XML specification -->
-<!-- $Id: SRA.experiment.xsd 144440 2008-10-29 20:19:39Z sponomar $ -->
+<!-- INSDC Short Read Archive resource Experiment (SRX) object XML specification -->
+<!-- $Id$ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
- <xs:complexType name="ExperimentType">
+    <!-- BEGIN COMMON BLOCK -->
+    <xs:include schemaLocation="SRA.common.xsd" ></xs:include>
+    <!--  END COMMON BLOCK -->
 
-              <xs:annotation>
-                <xs:documentation>
+    <xs:complexType name="ExperimentType">
+
+        <xs:annotation>
+            <xs:documentation>
                   An Experiment specifies of what will be sequenced and how the sequencing will be performed.  
                   It does not contain results.  
                   An Experiment is composed of a design, a platform selection, and processing parameters.
                 </xs:documentation>
-              </xs:annotation>  
-        
-                <xs:sequence >
-                  <xs:element name="TITLE" type="xs:string" minOccurs="0" maxOccurs="1">
-                    <xs:annotation>
-                      <xs:documentation>
+        </xs:annotation>
+
+        <xs:sequence>
+            <xs:element name="TITLE" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
                         Short text that can be used to call out experiment records in searches or in displays.
                         This element is technically optional but should be used for all new records.
                       </xs:documentation>
-                    </xs:annotation>
-                  </xs:element>
-                  <xs:element name="STUDY_REF" minOccurs="1" maxOccurs="1">
-                    <xs:annotation>
-                      <xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="STUDY_REF" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
                         The STUDY_REF descriptor establishes the relationship of the experiment to the parent
                         study.  This can either be the accession of an existing archived study record, or
                         a reference to a new study record in the same submission (which does not yet have an
                         accession).
                       </xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                      <xs:attribute name="refname" type="xs:string" use="optional">
-                       <xs:annotation>
-                         <xs:documentation>
-                           Identifies parent study record by name that is known within the submission namespace.
-                           Use this field when referencing a study in the current submission for which an accession
-                           has not yet been issued.
-                         </xs:documentation>
-                       </xs:annotation>
-                      </xs:attribute>
-                      <xs:attribute name="accession" type="xs:string" use="optional">
-                       <xs:annotation>
-                         <xs:documentation>
-                           Identifies parent study record by its accession.
-                         </xs:documentation>
-                       </xs:annotation>
-                      </xs:attribute>
-                    </xs:complexType>
-                  </xs:element>
-                  <xs:element name="DESIGN" maxOccurs="1" minOccurs="1">
-                    <xs:complexType>
-                      <xs:sequence>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:attributeGroup ref="RefNameGroup"/>
+
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DESIGN" maxOccurs="1" minOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
                         <xs:element name="DESIGN_DESCRIPTION" type="xs:string">
-                          <xs:annotation>
-                          <xs:documentation>
+                            <xs:annotation>
+                                <xs:documentation>
                               More details about the setup and goals of the experiment as supplied by the Investigator.
                           </xs:documentation>
-                          </xs:annotation>                                              
+                            </xs:annotation>
                         </xs:element>
+
+
+
                         <xs:element name="SAMPLE_DESCRIPTOR" minOccurs="1" maxOccurs="1">
-                          <xs:annotation>
-                            <xs:documentation>
+                            <xs:annotation>
+                                <xs:documentation>
                               Pick a sample to associate this experiment with.  
                               The sample may be an individual or a pool, depending on how it is specified.
                             </xs:documentation>
-                          </xs:annotation>  
-                          <xs:complexType>
-                            <xs:attribute name="accession" type="xs:string" use="optional">
-                              <xs:annotation>
-                                <xs:documentation>
-                                  Identifies associated sample record by accession.
-                                </xs:documentation>
-                              </xs:annotation>  
-                            </xs:attribute>
-                            <xs:attribute name="refname" type="xs:string" use="optional">
-                              <xs:annotation>
-                                <xs:documentation>
-                                  Identifies associated sample record by its alias within the submission.
-                                </xs:documentation>
-                              </xs:annotation>  
-                            </xs:attribute>
-                          </xs:complexType>
-                        </xs:element>                      
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="POOL" minOccurs="0" maxOccurs="1">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                          Identifies a list of group/pool/multiplex sample members.  This implies that
+                                          this sample record is a group, pool, or multiplex, but is continues to receive
+                                          its own accession and can be referenced by an experiment.  By default if
+                                          no match to any of the listed members can be determined, then the default
+                                          sampel reference is used.
+                                      </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="MEMBER" minOccurs="1"
+                                                  maxOccurs="unbounded">
+                                                  <xs:complexType>
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                          Impementation of lookup table between Sample Pool member and identified read_group_tags for a given READ_LABEL
+                                                      </xs:documentation>
+                                                  </xs:annotation>
+                                                  <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                                                  <xs:element name="READ_LABEL">
+                                                  <xs:complexType>
+                                                  <xs:simpleContent>
+                                                  <xs:extension base="xs:string">
+                                                  <xs:attribute name="read_group_tag"
+                                                  type="xs:string">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                                  Assignment of read_group_tag to decoded read
+                                                                              </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:attribute>
+                                                  </xs:extension>
+                                                  </xs:simpleContent>
+                                                  </xs:complexType>
+
+                                                  </xs:element>
+
+                                                  </xs:sequence>
+                                                  <xs:attributeGroup ref="RefNameGroup">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                              Reference to SRA sample
+                                                          </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:attributeGroup>
+
+                                                  <xs:attribute name="member_name" type="xs:string"
+                                                  use="optional">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                             Label a sample within a scope of the pool 
+                                                          </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:attribute>
+                                                  <xs:attribute name="proportion" type="xs:float"
+                                                  use="optional">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                              Proportion of this sample (in percent) that was included in sample pool.
+                                                          </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:attribute>
+                                                  </xs:complexType>
+
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                                <xs:attributeGroup ref="RefNameGroup"/>
+                            </xs:complexType>
+                        </xs:element>
+
                         <xs:element name="LIBRARY_DESCRIPTOR">
-                          <xs:annotation>
-                              <xs:documentation>
+                            <xs:annotation>
+                                <xs:documentation>
                                   The LIBRARY_DESCRIPTOR specifies the origin of the material being sequenced and any treatments that the 
                                   material might have undergone that affect the sequencing result.  This specification is needed even if the platform
                                   does not require a library construction step per se.
                               </xs:documentation>
-                          </xs:annotation>  
-                          <xs:complexType>
-                              <xs:sequence>
-                                  <xs:element name="LIBRARY_NAME" type="xs:string"/>
-                                  <xs:element name="LIBRARY_STRATEGY" maxOccurs="1" minOccurs="0">
-                                      <xs:annotation>
-                                          <xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="LIBRARY_NAME" type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                              The submitter's name for this library.
+                                          </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="LIBRARY_STRATEGY" maxOccurs="1" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
                                               Sequencing technique intended for this library.
                                           </xs:documentation>
-                                      </xs:annotation> 
-                                      <xs:simpleType>
-                                          <xs:restriction base="xs:string">
-                                              <xs:enumeration value="WGS">                                                                    
-                                              <xs:annotation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="WGS">
+                                                  <xs:annotation>
                                                   <xs:documentation>
                                                       Whole genome shotgun.
                                                   </xs:documentation>
-                                              </xs:annotation> 
-                                              </xs:enumeration>    
-                                              <xs:enumeration value="WCS" >
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="WCS">
                                                   <xs:annotation>
-                                                      <xs:documentation>
+                                                  <xs:documentation>
                                                           Whole chromosome (or other replicon) shotgun.
                                                       </xs:documentation>
-                                                  </xs:annotation>                                                                   
-                                              </xs:enumeration>
-                                              <xs:enumeration value="CLONE" >
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="CLONE">
                                                   <xs:annotation>
-                                                      <xs:documentation>
+                                                  <xs:documentation>
                                                           Genomic clone based (hierarchical) sequencing.
                                                       </xs:documentation>
-                                                  </xs:annotation>                                                                   
-                                              </xs:enumeration>
-                                              <xs:enumeration value="POOLCLONE" >
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="POOLCLONE">
                                                   <xs:annotation>
-                                                      <xs:documentation>
+                                                  <xs:documentation>
                                                           Shotgun of pooled clones (usually BACs and Fosmids).
                                                       </xs:documentation>
-                                                  </xs:annotation>                                                                   
-                                              </xs:enumeration>
-                                              <xs:enumeration value="AMPLICON" >
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="AMPLICON">
                                                   <xs:annotation>
-                                                      <xs:documentation>
+                                                  <xs:documentation>
                                                          Sequencing of overlapping or distinct PCR or RT-PCR products.
                                                       </xs:documentation>
-                                                  </xs:annotation>                                                                   
-                                              </xs:enumeration>
-                                              <xs:enumeration value="BARCODE" >
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="BARCODE">
                                                   <xs:annotation>
-                                                      <xs:documentation>
-                                                          Sequencing of overlapping or distinct  products that have been
+                                                  <xs:documentation>
+                                                          DEPRECATED.  Sequencing of overlapping or distinct  products that have been
                                                           tagged with a short identifying sequence (barcode).  Each sequence read can
                                                           therefore be assigned to an individual product.
                                                       </xs:documentation>
-                                                  </xs:annotation>                                                                   
-                                              </xs:enumeration>
-                                              <xs:enumeration value="CLONEEND" >
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="CLONEEND">
                                                   <xs:annotation>
-                                                      <xs:documentation>
+                                                  <xs:documentation>
                                                           Clone end (5', 3', or both) sequencing.
                                                       </xs:documentation>
-                                                  </xs:annotation>                                                                   
-                                              </xs:enumeration>
-                                              <xs:enumeration value="FINISHING" >
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="FINISHING">
                                                   <xs:annotation>
-                                                      <xs:documentation>
+                                                  <xs:documentation>
                                                           Sequencing intended to finish (close) gaps in existing coverage.
                                                       </xs:documentation>
-                                                  </xs:annotation>                                                                   
-                                              </xs:enumeration>
-                                              <xs:enumeration value="ChIP-Seq">
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="ChIP-Seq">
                                                   <xs:annotation>
-                                                      <xs:documentation>
+                                                  <xs:documentation>
                                                           Direct sequencing of chromatin immunoprecipitates.
                                                       </xs:documentation>
-                                                  </xs:annotation>                                                                                               
-                                              </xs:enumeration>
-                                              <xs:enumeration value="MNase-Seq">
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="MNase-Seq">
                                                   <xs:annotation>
-                                                      <xs:documentation>
+                                                  <xs:documentation>
                                                           Direct sequencing following MNase digestion.
                                                       </xs:documentation>
-                                                  </xs:annotation>                                                                                               
-                                              </xs:enumeration>
-                                              <xs:enumeration value="EST">
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="DNase-Hypersensitivity">
                                                   <xs:annotation>
-                                                      <xs:documentation>
+                                                  <xs:documentation>
+                                                          Sequencing of hypersensitive sites, or segments of open chromatin that are more readily cleaved by DNaseI.
+                                                      </xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="Bisulfite-Seq">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                          Sequencing following treatment of DNA with bisulfite to convert cytosine residues to uracil depending on methylation status.
+                                                      </xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="EST">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
                                                           Single pass sequencing of cDNA templates
                                                       </xs:documentation>
-                                                  </xs:annotation>                                                                                               
-                                              </xs:enumeration> 
-                                              <xs:enumeration value="FL-cDNA">
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="FL-cDNA">
                                                   <xs:annotation>
-                                                      <xs:documentation>
+                                                  <xs:documentation>
                                                           Full-length sequencing of cDNA templates
                                                       </xs:documentation>
-                                                  </xs:annotation>                                                                                               
-                                              </xs:enumeration>
-                                              <xs:enumeration value="CTS">
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="CTS">
                                                   <xs:annotation>
-                                                      <xs:documentation>
+                                                  <xs:documentation>
                                                           Concatenated Tag Sequencing
                                                       </xs:documentation>
-                                                  </xs:annotation>                                                                                               
-                                              </xs:enumeration>  
-                                              <xs:enumeration value="OTHER">
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="OTHER">
                                                   <xs:annotation>
-                                                      <xs:documentation>
+                                                  <xs:documentation>
                                                           Library strategy not listed.
                                                       </xs:documentation>
-                                                  </xs:annotation>                                                                                                                
-                                              </xs:enumeration>
-                                          </xs:restriction>
-                                      </xs:simpleType>
-                                  </xs:element>
-                                  <xs:element name="LIBRARY_SOURCE" >
-                                      <xs:annotation>
-                                          <xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="LIBRARY_SOURCE">
+                                        <xs:annotation>
+                                            <xs:documentation>
                                               The LIBRARY_SOURCE specifies the type of source material that is being sequenced.
                                           </xs:documentation>
-                                      </xs:annotation>
-                                      <xs:simpleType>
-                                          <xs:restriction base="xs:string">
-                                              <xs:enumeration value="GENOMIC"/>
-                                              <xs:enumeration value="NON GENOMIC" />
-                                              <xs:enumeration value="SYNTHETIC"/>
-                                              <xs:enumeration value="VIRAL RNA"/>                                                               
-                                              <xs:enumeration value="OTHER"/>
-                                          </xs:restriction>
-                                      </xs:simpleType>
-                                  </xs:element>
- 
-                                  <xs:element name="LIBRARY_SELECTION">
-                                      <xs:annotation>
-                                          <xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="GENOMIC"/>
+                                                <xs:enumeration value="NON GENOMIC"/>
+                                                <xs:enumeration value="SYNTHETIC"/>
+                                                <xs:enumeration value="VIRAL RNA"/>
+                                                <xs:enumeration value="OTHER"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+
+                                    <xs:element name="LIBRARY_SELECTION">
+                                        <xs:annotation>
+                                            <xs:documentation>
                                               Whether any method was used to select and/or enrich the material being sequenced.     
                                           </xs:documentation>
-                                      </xs:annotation> 
-                                      <xs:simpleType>
-                                          <xs:restriction base="xs:string">
-                                              <xs:enumeration value="RANDOM">
-                                              <xs:annotation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="RANDOM">
+                                                  <xs:annotation>
                                                   <xs:documentation>Random shearing only.</xs:documentation>
-                                              </xs:annotation>
-                                              </xs:enumeration>
-                                              <xs:enumeration value="PCR">
-                                              <xs:annotation>
-                                                  <xs:documentation>Source material was selected by designed primers.</xs:documentation>
-                                              </xs:annotation>
-                                              </xs:enumeration>
-                                              <xs:enumeration value="RANDOM PCR">
-                                              <xs:annotation>
-                                                  <xs:documentation>Source material was selected by randomly generated primers.</xs:documentation>
-                                              </xs:annotation>
-                                              </xs:enumeration>
-                                              <xs:enumeration value="RT-PCR">                    
-                                              <xs:annotation>
-                                                  <xs:documentation>Source material was selected by reverse transcription PCR</xs:documentation>
-                                              </xs:annotation>
-                                              </xs:enumeration>
-                                              <xs:enumeration value="HMPR">
-                                              <xs:annotation>
-                                                  <xs:documentation>Hypo-methylated partial restriction digest</xs:documentation>
-                                              </xs:annotation>
-                                              </xs:enumeration>
-                                              <xs:enumeration value="MF" >
-                                              <xs:annotation>
-                                                  <xs:documentation>Methyl Filtrated</xs:documentation>
-                                              </xs:annotation>
-                                              </xs:enumeration>
-                                              <xs:enumeration value="CF-S">
-                                              <xs:annotation>
-                                                  <xs:documentation>Cot-filtered single/low-copy genomic DNA</xs:documentation>
-                                              </xs:annotation>
-                                              </xs:enumeration>
-                                              <xs:enumeration value="CF-M">
-                                              <xs:annotation>
-                                                  <xs:documentation>Cot-filtered moderately repetitive genomic DNA</xs:documentation>
-                                              </xs:annotation>
-                                              </xs:enumeration>
-                                              <xs:enumeration value="CF-H">
-                                              <xs:annotation>
-                                                  <xs:documentation>Cot-filtered highly repetitive genomic DNA</xs:documentation>
-                                              </xs:annotation>
-                                              </xs:enumeration>
-                                              <xs:enumeration value="CF-T">
-                                              <xs:annotation>
-                                                  <xs:documentation>Cot-filtered theoretical single-copy genomic DNA</xs:documentation>
-                                              </xs:annotation>
-                                              </xs:enumeration>
-                                              <xs:enumeration value="MSLL">
-                                                  <xs:annotation>
-                                                      <xs:documentation>Methylation Spanning Linking Library</xs:documentation>
                                                   </xs:annotation>
-                                              </xs:enumeration>
-                                              <xs:enumeration value="cDNA">
+                                                </xs:enumeration>
+                                                <xs:enumeration value="PCR">
                                                   <xs:annotation>
-                                                      <xs:documentation>complementary DNA</xs:documentation>
-                                                  </xs:annotation>                                                                   
-                                              </xs:enumeration>  
-                                              <xs:enumeration value="ChIP">
+                                                  <xs:documentation>Source material was selected by designed primers.</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="RANDOM PCR">
                                                   <xs:annotation>
-                                                      <xs:documentation>Chromatin immunoprecipitation</xs:documentation>
-                                                  </xs:annotation>                                                                   
-                                              </xs:enumeration>
-                                              <xs:enumeration value="MNase">
+                                                  <xs:documentation>Source material was selected by randomly generated primers.</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="RT-PCR">
                                                   <xs:annotation>
-                                                      <xs:documentation>Micrococcal Nuclease (MNase) digestion</xs:documentation>
-                                                  </xs:annotation>                                                                   
-                                              </xs:enumeration>                                                               
-                                              <xs:enumeration value="other"/>                                                                
-                                              <xs:enumeration value="unspecified"/>
-                                          </xs:restriction>
-                                      </xs:simpleType>
-                                  </xs:element>
-                                  <xs:element name="LIBRARY_LAYOUT">
-                                      <xs:annotation>
-                                          <xs:documentation>
+                                                  <xs:documentation>Source material was selected by reverse transcription PCR</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="HMPR">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Hypo-methylated partial restriction digest</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="MF">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Methyl Filtrated</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="CF-S">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Cot-filtered single/low-copy genomic DNA</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="CF-M">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Cot-filtered moderately repetitive genomic DNA</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="CF-H">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Cot-filtered highly repetitive genomic DNA</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="CF-T">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Cot-filtered theoretical single-copy genomic DNA</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="MSLL">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Methylation Spanning Linking Library</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="cDNA">
+                                                  <xs:annotation>
+                                                  <xs:documentation>complementary DNA</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="ChIP">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Chromatin immunoprecipitation</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="MNase">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Micrococcal Nuclease (MNase) digestion</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="DNAse">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Deoxyribonuclease (MNase) digestion</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="Hybrid Selection">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Selection by hybridization in array or solution.</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="Reduced Representation">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Reproducible genomic subsets, often generated by restriction fragment size selection, 
+                                                          containing a manageable number of loci to facilitate re-sampling.
+                                                      </xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="other"/>
+                                                <xs:enumeration value="unspecified"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="LIBRARY_LAYOUT">
+                                        <xs:annotation>
+                                            <xs:documentation>
                                               LIBRARY_LAYOUT specifies whether to expect single, paired, or other configuration of reads.  
                                               In the case of paired reads, information about the relative distance and orientation is specified.
                                           </xs:documentation>
-                                      </xs:annotation>                                                        
-                                      <xs:complexType>
-                                          <xs:choice>
-                                              <xs:element name="SINGLE">
-                                                <xs:annotation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:choice>
+                                                <xs:element name="SINGLE">
+                                                  <xs:complexType>
+                                                  <xs:annotation>
                                                   <xs:documentation>
                                                     Reads are unpaired (usual case).
                                                   </xs:documentation>
-                                                </xs:annotation>                                                        
-                                              </xs:element>
-                                              <xs:element name="PAIRED">
-                                                  <xs:complexType>
-                                                    <xs:attribute name="ORIENTATION" type="xs:string">
-                                                      <xs:annotation>
-                                                        <xs:documentation>
-                                                        </xs:documentation>
-                                                      </xs:annotation>                                                        
-                                                    </xs:attribute>
-                                                    <xs:attribute name="NOMINAL_LENGTH" type="xs:nonNegativeInteger">
-                                                      <xs:annotation>
-                                                        <xs:documentation>
-                                                        </xs:documentation>
-                                                      </xs:annotation>                                                        
-                                                    </xs:attribute>
-                                                    <xs:attribute name="NOMINAL_SDEV" type="xs:double">
-                                                      <xs:annotation>
-                                                        <xs:documentation>
-                                                        </xs:documentation>
-                                                      </xs:annotation>                                                        
-                                                    </xs:attribute>
+                                                  </xs:annotation>
                                                   </xs:complexType>
-                                              </xs:element>
-                                          </xs:choice>
-                                      </xs:complexType>
-                                  </xs:element>
-                                  <xs:element name="LIBRARY_CONSTRUCTION_PROTOCOL" type="xs:string" minOccurs="0" maxOccurs="1">
-                                      <xs:annotation>
-                                          <xs:documentation>
+                                                </xs:element>
+                                                <xs:element name="PAIRED">
+                                                  <xs:complexType>
+                                                  <xs:attribute name="ORIENTATION" type="xs:string">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                        </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:attribute>
+                                                  <xs:attribute name="NOMINAL_LENGTH"
+                                                  type="xs:nonNegativeInteger">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                        </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:attribute>
+                                                  <xs:attribute name="NOMINAL_SDEV" type="xs:double">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                        </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:attribute>
+                                                  </xs:complexType>
+                                                </xs:element>
+                                            </xs:choice>
+                                        </xs:complexType>
+                                    </xs:element>
+
+                                    <xs:element name="LIBRARY_CONSTRUCTION_PROTOCOL"
+                                        type="xs:string" minOccurs="0" maxOccurs="1">
+                                        <xs:annotation>
+                                            <xs:documentation>
                                               Free form text describing the protocol by which the sequencing library was constructed.                             
                                           </xs:documentation>
-                                      </xs:annotation>                                                        
-                                  </xs:element>
-                              </xs:sequence>
-                          </xs:complexType>
-                      </xs:element>
-                      <xs:element name="SPOT_DESCRIPTOR">
-                          <xs:annotation>
-                              <xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="SPOT_DESCRIPTOR">
+                            <xs:annotation>
+                                <xs:documentation>
                                   The SPOT_DESCRIPTOR specifies how to decode the individual reads of interest from the 
                                   monolithic spot sequence.  The spot descriptor contains aspects of the experimental design, 
                                   platform, and processing information.  There will be two methods of specification: one 
                                   will be an index into a table of typical decodings, the other being an exact specification.                                      
                               </xs:documentation>
-                          </xs:annotation>
-                          <xs:complexType>
-                              <xs:choice>
-                                  <xs:element name="SPOT_DECODE_METHOD" type="xs:unsignedInt"  />
-                                  <xs:element name="SPOT_DECODE_SPEC" >
-                                      <xs:complexType   >
-                                          <xs:sequence>
-                                              <xs:element name="NUMBER_OF_READS_PER_SPOT" type="xs:unsignedInt" minOccurs="1" maxOccurs="1" default="1"/>
-                                              <xs:element name="ADAPTER_SPEC" maxOccurs="1" minOccurs="0" nillable="false" type="xs:string">
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="SPOT_DECODE_METHOD" type="xs:unsignedInt">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                             DEPRECATED.                                    
+                                          </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="SPOT_DECODE_SPEC">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="NUMBER_OF_READS_PER_SPOT"
+                                                  type="xs:unsignedInt" minOccurs="0" maxOccurs="1">
                                                   <xs:annotation>
-                                                      <xs:documentation>
+                                                  <xs:documentation>
+                                                          DEPRECATED.  Number of tags (reads) per spot.
+                                                      </xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="SPOT_LENGTH" type="xs:unsignedInt"
+                                                  minOccurs="0" maxOccurs="1">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                          Expected number of base calls or cycles per spot.
+                                                      </xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="ADAPTER_SPEC" maxOccurs="1"
+                                                  minOccurs="0" nillable="false" type="xs:string">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
                                                           Some technologies will require knowledge of the sequencing adapter or the last base of the adapter in order to decode the spot.
                                                       </xs:documentation>
-                                                  </xs:annotation>   
-                                              </xs:element>
-                                              <xs:element minOccurs="1" maxOccurs="unbounded" name="READ_SPEC">
-                                                  <xs:complexType>                              
-                                                      <xs:sequence>
-                                                          <xs:element name="READ_INDEX" type="xs:nonNegativeInteger" nillable="false">
-                                                              <xs:annotation>
-                                                                  <xs:documentation>READ_INDEX starts at 0 and is incrementally increased for each sequential READ_SPEC within a SPOT_DECODE_SPEC</xs:documentation>
-                                                              </xs:annotation> 
-                                                          </xs:element>                                      
-                                                          <xs:element name="READ_CLASS" >
-                                                              <xs:simpleType>
-                                                                  <xs:restriction base = "xs:string">
-                                                                      <xs:enumeration value = "Application Read"/>
-                                                                      <xs:enumeration value = "Technical Read"/>
-                                                                  </xs:restriction>                                   
-                                                              </xs:simpleType>   
-                                                          </xs:element>
-                                                          <xs:element name="READ_TYPE"  default="Forward">
-                                                              <xs:simpleType>
-                                                                  <xs:restriction base = "xs:string">
-                                                                      <xs:enumeration value = "Forward"/>
-                                                                      <xs:enumeration value = "Reverse"/>
-                                                                      <xs:enumeration value = "Adapter"/>                                   
-                                                                      <xs:enumeration value = "Primer"/>
-                                                                      <xs:enumeration value = "Linker"/>
-                                                                      <xs:enumeration value = "BarCode"/>                                   
-                                                                      <xs:enumeration value = "Other"/>
-                                                                  </xs:restriction>                                   
-                                                              </xs:simpleType>   
-                                                          </xs:element>
-                                                          <xs:choice>
-                                                              <xs:annotation>
-                                                                  <xs:documentation>
-                                                                      There are three methods to obtaining the layout of reads on the spot: absolute coordinates as determined by base calls,
-                                                                      absolute coordinates as determined by cycles, and relative coordinates as determined by alignment of the expected sequence
-                                                                      of a technical read.
+                                                  </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="READ_SPEC" minOccurs="1"
+                                                  maxOccurs="unbounded">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="READ_INDEX"
+                                                  type="xs:nonNegativeInteger" nillable="false">
+                                                  <xs:annotation>
+                                                  <xs:documentation>READ_INDEX starts at 0 and is incrementally increased for each sequential READ_SPEC within a SPOT_DECODE_SPEC</xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:element>
+                                                  <xs:element name="READ_LABEL" type="xs:string"
+                                                  minOccurs="0" maxOccurs="1">
+                                                  <xs:annotation>
+                                                  <xs:documentation>READ_LABEL is a name for this tag, and can be used to on output to determine read name, for example F or R.</xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:element>
+                                                  <xs:element name="READ_CLASS">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:enumeration value="Application Read"/>
+                                                  <xs:enumeration value="Technical Read"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:element name="READ_TYPE" default="Forward">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:enumeration value="Forward"/>
+                                                  <xs:enumeration value="Reverse"/>
+                                                  <xs:enumeration value="Adapter"/>
+                                                  <xs:enumeration value="Primer"/>
+                                                  <xs:enumeration value="Linker"/>
+                                                  <xs:enumeration value="BarCode"/>
+                                                  <xs:enumeration value="Other"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                  <xs:choice>
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                      There are various methods to ordering the reads on the spot.
                                                                   </xs:documentation>
-                                                              </xs:annotation>   
-                                                              <xs:element name="BASE_COORD" type="xs:integer" />
-                                                              <xs:element name="CYCLE_COORD" type="xs:integer" />
-                                                              <xs:element name="EXPECTED_BASECALL" type="xs:string" />
-                                                          </xs:choice>
-                                                      </xs:sequence>
+                                                  </xs:annotation>
+                                                  <xs:element name="RELATIVE_ORDER">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                          The read is located beginning at the offset or cycle relative to another read.  
+                                                                          This choice is appropriate for example when specifying a read
+                                                                          that follows a variable length expected sequence(s).
+                                                                      </xs:documentation>
+                                                  </xs:annotation>
+                                                  <xs:complexType>
+                                                  <xs:attribute name="follows_read_index"
+                                                  type="xs:nonNegativeInteger" use="optional">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                                  Specify the read index that precedes this read.
+                                                                              </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:attribute>
+                                                  <xs:attribute name="precedes_read_index"
+                                                  type="xs:nonNegativeInteger" use="optional">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                                  Specify the read index that follows this read.
+                                                                              </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:attribute>
                                                   </xs:complexType>
-                                              </xs:element>
-                                          </xs:sequence>
-                                      </xs:complexType>
-                                  </xs:element>
-                              </xs:choice>
-                          </xs:complexType>
-                      </xs:element>
-                  </xs:sequence>
+                                                  </xs:element>
+                                                  <xs:element name="BASE_COORD" type="xs:integer">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                      The location of the read start in terms of base count (1 is beginning of spot).
+                                                                  </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:element>
+                                                  <xs:element name="CYCLE_COORD" type="xs:integer">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                      The location of the read start in terms of cycle count (1 is beginning of spot).
+                                                                  </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:element>
+
+                                                  <xs:element name="EXPECTED_BASECALL"
+                                                  type="xs:string">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                      An expected basecall for a current read. Read will be zero-length if basecall is not present.
+                                                                  </xs:documentation>
+                                                  </xs:annotation>
+
+                                                  </xs:element>
+                                                  <xs:element name="EXPECTED_BASECALL_TABLE">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                              A set of choices of expected basecalls for a current read. Read will be zero-length if none is found.
+                                                                          </xs:documentation>
+                                                  </xs:annotation>
+                                                  <xs:complexType>
+                                                  <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                                                  <xs:element name="BASECALL">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                                          Element's body contains a basecall, attribute provide description of this read meaning as well as matching rules.
+                                                                                      </xs:documentation>
+                                                  </xs:annotation>
+                                                  <xs:complexType>
+                                                  <xs:simpleContent>
+                                                  <xs:extension base="xs:string">
+                                                  <xs:attribute name="read_group_tag"
+                                                  type="xs:string" use="optional">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                                                          When match occurs, the read will be tagged with this group membership
+                                                                                                      </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:attribute>
+                                                  <xs:attribute name="min_match"
+                                                  type="xs:nonNegativeInteger" use="optional">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                                                          Minimum number of matches to trigger identification.
+                                                                                                      </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:attribute>
+                                                  <xs:attribute name="max_mismatch"
+                                                  type="xs:nonNegativeInteger" use="optional">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                                                          Maximum number of mismatches 
+                                                                                                      </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:attribute>
+                                                  <xs:attribute name="match_edge">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                                                          Where the match should occur. Changes the rules on how min_match and max_mismatch are counted.                                                                                                          
+                                                                                                      </xs:documentation>
+                                                  </xs:annotation>
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:enumeration value="full">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                                                                      Only @max_mismatch influences matching process                                                                                                          
+                                                                                                                  </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="start">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                                                                      Both matches and mismatches are counted. 
+                                                                                                                      When @max_mismatch is exceeded - it is not a match.
+                                                                                                                      When @min_match is reached - match is declared.                                                                                                                                                                                                                           
+                                                                                                                  </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="end">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                                                                      Both matches and mismatches are counted. 
+                                                                                                                      When @max_mismatch is exceeded - it is not a match.
+                                                                                                                      When @min_match is reached - match is declared.                                                                                                                                                                                                                           
+                                                                                                                  </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:attribute>
+                                                  </xs:extension>
+                                                  </xs:simpleContent>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:choice>
+
+
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                </xs:element>
+
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:choice>
+
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
                 </xs:complexType>
-              </xs:element>
-              <xs:element name="PLATFORM" maxOccurs="1" minOccurs="1">
-                  <xs:annotation>
+            </xs:element>
+
+
+            <xs:element name="PLATFORM" maxOccurs="1" minOccurs="1">
+                <xs:annotation>
                     <xs:documentation>
                       The PLATFORM record selects which sequencing platform and platform-specific runtime parameters.  
                       This will be determined by the Center.
                     </xs:documentation>
-                  </xs:annotation>  
-                  <xs:complexType>
+                </xs:annotation>
+                <xs:complexType>
                     <xs:choice>
-                      <xs:element name="LS454">
-                          <xs:annotation>
-                              <xs:documentation>
+                        <xs:element name="LS454">
+                            <xs:annotation>
+                                <xs:documentation>
                                   454 technology use 1-color sequential flows 
                               </xs:documentation>
-                          </xs:annotation>
-                          <xs:complexType>
-                              <xs:all>
-                                  <xs:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1">
-                                      <xs:simpleType>
-                                          <xs:restriction base = "xs:string">
-                                              <xs:enumeration value="454 GS"/>
-                                              <xs:enumeration value="454 GS 20"/>
-                                              <xs:enumeration value="454 GS FLX"/>
-                                              <xs:enumeration value = "GS 20">
-                                                <xs:annotation><xs:documentation>DEPRECATED</xs:documentation></xs:annotation></xs:enumeration>
-                                              <xs:enumeration value = "GS FLX">
-                                                <xs:annotation><xs:documentation>DEPRECATED</xs:documentation></xs:annotation></xs:enumeration>
-                                              <xs:enumeration value = "unspecified"/>                   
-                                          </xs:restriction>                                   
-                                      </xs:simpleType>  
-                                  </xs:element>
-                                  <xs:element name="FLOW_SEQUENCE" type="xs:string" minOccurs="1" />
-                                  <xs:element name="FLOW_COUNT" type="xs:positiveInteger" />
-                              </xs:all>
-                          </xs:complexType>
-                      </xs:element>
-                      <xs:element name="ILLUMINA">
-                          <xs:annotation>
-                              <xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="454 GS"/>
+                                                <xs:enumeration value="454 GS 20"/>
+                                                <xs:enumeration value="454 GS FLX"/>
+                                                <xs:enumeration value="454 Titanium"/>
+                                                <xs:enumeration value="GS 20">
+                                                  <xs:annotation>
+                                                  <xs:documentation>DEPRECATED</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="GS FLX">
+                                                  <xs:annotation>
+                                                  <xs:documentation>DEPRECATED</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="unspecified"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="KEY_SEQUENCE" type="xs:string" minOccurs="0"
+                                        maxOccurs="1">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                              The first bases that are expected to be produced by the challenge bases.  
+                                              This is optional in the schema now but will be required by business rules and future schema versions.
+                                          </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="FLOW_SEQUENCE" type="xs:string" minOccurs="0"
+                                        maxOccurs="1">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                              The fixed sequence of challenge bases that flow across the picotiter plate.  
+                                              This is optional in the schema now but will be required by business rules and future schema versions.
+                                          </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="FLOW_COUNT" type="xs:positiveInteger"
+                                        minOccurs="0" maxOccurs="1">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                              The number of flows of challenge bases.  This is a constraint on maximum read length, but not equivalent.
+                                              This is optional in the schema now but will be required by business rules and future schema versions.
+                                          </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="ILLUMINA">
+                            <xs:annotation>
+                                <xs:documentation>
                                   Illumina is 4-channel flowgram with 1-to-1 mapping between basecalls and flows
                               </xs:documentation>
-                          </xs:annotation>
-                          <xs:complexType>
-                              <xs:sequence>
-                                  <xs:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1">
-                                      <xs:simpleType>
-                                          <xs:restriction base = "xs:string">
-                                            <xs:enumeration value="Solexa 1G Genome Analyzer">
-                                              <xs:annotation><xs:documentation>DEPRECATED</xs:documentation></xs:annotation></xs:enumeration>
-                                            <xs:enumeration value="Illumina Genome Analyzer"/>
-                                            <xs:enumeration value="Illumina Genome Analyzer II"/>
-                                            <xs:enumeration value = "unspecified"/>                   
-                                          </xs:restriction>                                   
-                                      </xs:simpleType>  
-                                  </xs:element>
-                                  <xs:element name="CYCLE_SEQUENCE" type="xs:string" minOccurs="1" maxOccurs="1" />
-                                  <xs:element name="CYCLE_COUNT" type="xs:positiveInteger" minOccurs="1" maxOccurs="1"/>
-                              </xs:sequence>
-                          </xs:complexType>
-                      </xs:element>
-                      <xs:element name="HELICOS">
-                          <xs:annotation>
-                              <xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="Solexa 1G Genome Analyzer">
+                                                  <xs:annotation>
+                                                  <xs:documentation>DEPRECATED</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:enumeration>
+                                                <xs:enumeration value="Illumina Genome Analyzer"/>
+                                                <xs:enumeration value="Illumina Genome Analyzer II"/>
+                                                <xs:enumeration value="unspecified"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="CYCLE_SEQUENCE" type="xs:string" minOccurs="0"
+                                        maxOccurs="1">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                              DEPRECATED.
+                                          </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="CYCLE_COUNT" type="xs:positiveInteger"
+                                        minOccurs="1" maxOccurs="1">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                              DEPRECATED, use SEQUENCE_LENGTH instead.  The fixed number of bases  in each raw sequence, including both mate pairs and any technical reads.
+                                          </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="SEQUENCE_LENGTH" type="xs:positiveInteger"
+                                        minOccurs="0" maxOccurs="1">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                              The fixed number of bases expected in each raw sequence, including both mate pairs and any technical reads.
+                                          </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="HELICOS">
+                            <xs:annotation>
+                                <xs:documentation>
                                   Helicos is similar to 454 technology - uses 1-color sequential flows   
                               </xs:documentation>
-                          </xs:annotation>
-                          <xs:complexType>
-                              <xs:all>
-                                  <xs:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1">
-                                      <xs:simpleType>
-                                          <xs:restriction base = "xs:string">
-                                            <xs:enumeration value="Helicos HeliScope"/>
-                                            <xs:enumeration value = "unspecified"/>                   
-                                          </xs:restriction>                                   
-                                      </xs:simpleType>  
-                                  </xs:element>
-                                  <xs:element name="FLOW_SEQUENCE" type="xs:string" minOccurs="1" />
-                                  <xs:element name="FLOW_COUNT" type="xs:positiveInteger">
-                                  </xs:element>
-                              </xs:all>
-                          </xs:complexType>
-                      </xs:element>
-                      <xs:element name="ABI_SOLID">
-                          <xs:annotation>
-                              <xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="Helicos HeliScope"/>
+                                                <xs:enumeration value="unspecified"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="FLOW_SEQUENCE" type="xs:string" minOccurs="0"
+                                        maxOccurs="1">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                              The fixed sequence of challenge bases that flow across the flowcell. 
+                                              This is optional in the schema now but will be required by business rules and future schema versions.
+                                          </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="FLOW_COUNT" type="xs:positiveInteger"
+                                        minOccurs="0" maxOccurs="1">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                              The number of flows of challenge bases.  This is a constraint on maximum read length, but not equivalent. 
+                                              This is optional in the schema now but will be required by business rules and future schema versions.
+                                          </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="ABI_SOLID">
+                            <xs:annotation>
+                                <xs:documentation>
                                   ABI is 4-channel flowgram with 1-to-1 mapping between basecalls and flows
                               </xs:documentation>
-                          </xs:annotation>
-                          <xs:complexType>
-                              <xs:sequence>
-                                  <xs:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1">
-                                      <xs:simpleType>
-                                          <xs:restriction base = "xs:string">
-                                            <xs:enumeration value="AB SOLiD System"/>
-                                            <xs:enumeration value="AB SOLiD System 2.0"/>
-                                            <xs:enumeration value = "unspecified"/>                   
-                                          </xs:restriction>                                   
-                                      </xs:simpleType>  
-                                  </xs:element>
-                                  <xs:element name="COLOR_MATRIX"  minOccurs="0"  maxOccurs="1">
-                                      <xs:complexType>
-                                          <xs:sequence >
-                                              <xs:element name="COLOR"  minOccurs="1" maxOccurs="unbounded">
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="AB SOLiD System"/>
+                                                <xs:enumeration value="AB SOLiD System 2.0"/>
+                                                <xs:enumeration value="AB SOLiD System 3.0"/>
+                                                <xs:enumeration value="unspecified"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="COLOR_MATRIX" minOccurs="0" maxOccurs="1">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="COLOR" minOccurs="1"
+                                                  maxOccurs="unbounded">
                                                   <xs:complexType mixed="true">
-                                                      <xs:simpleContent>
-                                                          <xs:extension base="xs:string">
-                                                              <xs:attribute name="dibase" type="xs:string" />
-                                                          </xs:extension>
-                                                      </xs:simpleContent>
+                                                  <xs:simpleContent>
+                                                  <xs:extension base="xs:string">
+                                                  <xs:attribute name="dibase" type="xs:string"/>
+                                                  </xs:extension>
+                                                  </xs:simpleContent>
                                                   </xs:complexType>
-                                              </xs:element>
-                                          </xs:sequence>
-                                      </xs:complexType>
-                                  </xs:element>
-                                  <xs:element name="COLOR_MATRIX_CODE" type="xs:string" minOccurs="0" maxOccurs="1">
-                                  </xs:element>
-                                  <xs:element name="CYCLE_COUNT" type="xs:positiveInteger">
-                                  </xs:element>
-
-                              </xs:sequence>
-                          </xs:complexType>
-                      </xs:element>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="COLOR_MATRIX_CODE" type="xs:string"
+                                        minOccurs="0" maxOccurs="1"> </xs:element>
+                                    <xs:element name="CYCLE_COUNT" type="xs:positiveInteger">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                              DEPRECATED.  Use SEQUENCE_LENGTH instead.
+                                          </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="SEQUENCE_LENGTH" type="xs:positiveInteger"
+                                        minOccurs="0" maxOccurs="1">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                  The fixed number of bases expected in each raw sequence, including both mate pairs and any technical reads.
+                                                  This is optional in the schema now but will be required by business rules and future schema versions.
+                                              </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="COMPLETE_GENOMICS">
+                            <xs:annotation>
+                                <xs:documentation>
+                                  Placeholder for CompleteGenomics platform type.   
+                              </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="PACBIO_SMRT">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Placeholder for PacificBiosciences platform type.   
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
                     </xs:choice>
-                  </xs:complexType>
-                </xs:element>
-                <xs:element name="PROCESSING" maxOccurs="1" minOccurs="1">
-                  <xs:annotation>
-                    <xs:documentation>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="PROCESSING" maxOccurs="1" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation> 
                       The PROCESSING block specifies how sequencing is processed from image files.  
                       This information should be  vendor determined based on the PLATFORM selection.
                       </xs:documentation>
-                    </xs:annotation>  
-                  <xs:complexType>
+                </xs:annotation>
+                <xs:complexType>
                     <xs:sequence>
-                      <xs:element name="BASE_CALLS" maxOccurs="1" minOccurs="1">
-                          <xs:complexType>
-                              <xs:all>
-                                  <xs:element name="SEQUENCE_SPACE">
-                                                        <xs:simpleType>
-                                                            <xs:restriction base = "xs:string">
-                                                                <xs:enumeration value = "Base Space"/>
-                                                                <xs:enumeration value = "Color Space"/>
-                                                            </xs:restriction>                                   
-                                                        </xs:simpleType>
-                                                        </xs:element>
-                                                        <xs:element name="BASE_CALLER" maxOccurs="1" minOccurs="1" type="xs:string">
-                                                            <xs:annotation>
-                                                                <xs:documentation>
+                        <xs:element name="BASE_CALLS" maxOccurs="1" minOccurs="1">
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="SEQUENCE_SPACE">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="Base Space"/>
+                                                <xs:enumeration value="Color Space"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="BASE_CALLER" maxOccurs="1" minOccurs="1"
+                                        type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>
                                                                     Name and version of the base or color calling software.
                                                                 </xs:documentation>
-                                                            </xs:annotation>
-                                                        </xs:element>
-                                                </xs:all>
-                                            </xs:complexType>
-                                        </xs:element>
-                                        <xs:element name="QUALITY_SCORES" maxOccurs="unbounded" minOccurs="1">
-                                            <xs:complexType>
-                                                <xs:all>
-                                                    <xs:element name="QUALITY_SCORER" maxOccurs="1" minOccurs="1" type="xs:string">              
-                                                    <xs:annotation>
-                                                        <xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="QUALITY_SCORES" maxOccurs="unbounded" minOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>
+                                                    In the future there will be only one instance allowed of the QUALITY_SCORES spec.
+                                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element name="QUALITY_SCORER" maxOccurs="1" minOccurs="1"
+                                        type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>
                                                             Name and version of the quality scoring software.
                                                         </xs:documentation>
-                                                    </xs:annotation>
-                                                    </xs:element>
-                                                    <xs:element name="NUMBER_OF_LEVELS" maxOccurs="1" minOccurs="1" type="xs:int"/>
-                                                    <xs:element name="MULTIPLIER" maxOccurs="1" minOccurs="1" type="xs:double"/>
-                                                </xs:all>
-                                                <xs:attribute name="qtype" use="optional">
-                                                   <xs:simpleType>
-                                                     <xs:restriction base = "xs:string">
-                                                       <xs:enumeration value = "phred">
-                                                         <xs:annotation>
-                                                           <xs:documentation>
-                                                             Name of quality scoring system. 
-                                                           </xs:documentation>
-                                                         </xs:annotation>
-                                                       </xs:enumeration>
-                                                       <xs:enumeration value = "other"/>
-                                                     </xs:restriction>                                   
-                                                   </xs:simpleType>
-                                                </xs:attribute>
-                                            </xs:complexType>
-                                        </xs:element>
- 
-                </xs:sequence>
-              </xs:complexType>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="NUMBER_OF_LEVELS" maxOccurs="1" minOccurs="1"
+                                        type="xs:int">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                                DEPRECATED.  Number of distinct values possible with this scoring system.
+                                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="MULTIPLIER" maxOccurs="1" minOccurs="1"
+                                        type="xs:double">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                                DEPRECATED.
+                                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:all>
+                                <xs:attribute name="qtype" use="optional">
+                                    <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                            <xs:enumeration value="phred">
+                                                <xs:annotation>
+                                                  <xs:documentation>
+                                                                         The quality score is expressed as a probability of error in log form:
+                                                                         -10 log(1/p) where p is the probability of error, with value range 0..63,
+                                                                         0 meaning no base call.
+                                                                     </xs:documentation>
+                                                </xs:annotation>
+                                            </xs:enumeration>
+                                            <xs:enumeration value="other">
+                                                <xs:annotation>
+                                                  <xs:documentation>
+                                                                         Another quality scoring system is used.  Please contact NCBI with details so that correct conversion can take place.
+                                                                     </xs:documentation>
+                                                </xs:annotation>
+                                            </xs:enumeration>
+                                        </xs:restriction>
+                                    </xs:simpleType>
+                                </xs:attribute>
+                            </xs:complexType>
+                        </xs:element>
+
+                    </xs:sequence>
+                </xs:complexType>
             </xs:element>
-	    <xs:element name="EXPERIMENT_LINKS" minOccurs="0" maxOccurs="1">
-		  <xs:annotation>
-		      <xs:documentation>
+            <xs:element name="EXPERIMENT_LINKS" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
 			  Links to resources related to this experiment or experiment set (publication, datasets, online databases).
 		      </xs:documentation>
-		  </xs:annotation>
-		  <xs:complexType>
-		    <xs:sequence minOccurs="1" maxOccurs="unbounded">
-		      <xs:element name="EXPERIMENT_LINK">
-		      <xs:complexType>
-			<xs:choice>                    
-			  <xs:element name="URL_LINK">
-			    <xs:complexType>
-				<xs:all>
-				  <xs:element name="LABEL" type="xs:string" minOccurs="1" maxOccurs="1">                                                    
-				    <xs:annotation>
-				      <xs:documentation>
-					 Text label to display for the link.
-				      </xs:documentation>
-				    </xs:annotation>
-				  </xs:element>
-				  <xs:element name="URL" minOccurs="1" maxOccurs="1" type="xs:anyURI">
-				    <xs:annotation>
-				      <xs:documentation>
-					 The internet service link (file:, http:, ftp:, etc).
-				      </xs:documentation>
-				    </xs:annotation>
-				  </xs:element>
-			      </xs:all>
-			  </xs:complexType>
-		      </xs:element>
-		      <xs:element name="ENTREZ_LINK">
-			  <xs:complexType>
-			      <xs:all>
-				  <xs:element name="DB" type="xs:string" minOccurs="1" maxOccurs="1">
-				    <xs:annotation>
-				      <xs:documentation>
-					 Short name of the NCBI database resource (e.g. pubmed).
-				      </xs:documentation>
-				    </xs:annotation>
-				  </xs:element>
-				  <xs:element name="ID" type="xs:string" minOccurs="1" maxOccurs="1">
-				    <xs:annotation>
-				      <xs:documentation>
-					 Accession to the record of interest in the NCBI Entrez system.
-				      </xs:documentation>
-				    </xs:annotation>
-				  </xs:element>
-				</xs:all>
-			      </xs:complexType>
-			    </xs:element>
-			  </xs:choice>
-			</xs:complexType>
-		      </xs:element>
-		    </xs:sequence>
-		  </xs:complexType>
-	        </xs:element>
-                <xs:element name="EXPERIMENT_ATTRIBUTES" minOccurs="0" maxOccurs="1">
-               	  <xs:annotation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                        <xs:element name="EXPERIMENT_LINK" type="LinkType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EXPERIMENT_ATTRIBUTES" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
                     <xs:documentation>
                        Properties and attributes of the experiment.  These can be entered as free-form 
                        tag-value pairs. 
                     </xs:documentation>
-                  </xs:annotation>
-                  <xs:complexType>
+                </xs:annotation>
+                <xs:complexType>
                     <xs:sequence maxOccurs="unbounded" minOccurs="1">
-                      <xs:element name="EXPERIMENT_ATTRIBUTE">
-                        <xs:complexType>
-                          <xs:all>
-                            <xs:element name="TAG" type="xs:string" minOccurs="1" maxOccurs="1">                                                    
-                              <xs:annotation>
-                                 <xs:documentation>
-                                    Name of the attribute.
-                                 </xs:documentation>
-                               </xs:annotation>
-                            </xs:element>
-                            <xs:element name="VALUE" type="xs:string" minOccurs="1" maxOccurs="1">
-                              <xs:annotation>
-                                <xs:documentation>
-                                  Value of the attribute.
-                                </xs:documentation>
-                              </xs:annotation>
-                            </xs:element>
-                            <xs:element name="UNITS" type="xs:string" minOccurs="0" maxOccurs="1">          
-                              <xs:annotation>
-                                <xs:documentation>
-                                  Optional scientific units.
-                                </xs:documentation>
-                              </xs:annotation>
-                            </xs:element>
-                          </xs:all>
-                        </xs:complexType>
-                      </xs:element>
+                        <xs:element name="EXPERIMENT_ATTRIBUTE" type="AttributeType"/>
                     </xs:sequence>
-                  </xs:complexType>
-                </xs:element>
-              </xs:sequence>
-              <xs:attribute name="alias" type="xs:string">
-               <xs:annotation>
-                 <xs:documentation>
-                   Submission name of the experiment.  This field is only needed if the study
-                   record does not yet have an accession and needs to be referenced by other objects.
-                 </xs:documentation>
-               </xs:annotation>                                              
-              </xs:attribute>
-              <xs:attribute name="accession" type="xs:string" use="optional">
-                <xs:annotation>
-                  <xs:documentation>
-                    NCBI experiment accession supplied when known.  This is used when
-                    performing certain update functions. 
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attributeGroup ref="NameGroup"/>
+
+
+
+        <xs:attribute name="expected_number_runs" use="optional" type="xs:positiveInteger">
+            <xs:annotation>
+                <xs:documentation>
+                      DEPRECATED.  Number of runs expected to be submitted  for this experiment. 
                   </xs:documentation>
-                </xs:annotation>
-              </xs:attribute>
-              <xs:attribute name="expected_number_runs" use="optional" type="xs:positiveInteger">
-                <xs:annotation>
-                  <xs:documentation>
-                      Number of runs expected to be submitted  for this experiment. 
-                  </xs:documentation>
-                </xs:annotation>
-              </xs:attribute>
-              <xs:attribute name="expected_number_spots" use="optional" type="xs:positiveInteger">
-                  <xs:annotation>
-                     <xs:documentation>
-                       Number of spots expected to be submitted  for this experiment. 
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="expected_number_spots" use="optional" type="xs:positiveInteger">
+            <xs:annotation>
+                <xs:documentation>
+                       DEPRECATED. Number of spots expected to be submitted  for this experiment. 
                      </xs:documentation>
-                  </xs:annotation>
-              </xs:attribute>
-              <xs:attribute name="expected_number_reads" use="optional" type="xs:positiveInteger">
-                  <xs:annotation>
-                    <xs:documentation>
-                      Number of reads expected to be submitted  for this experiment. 
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="expected_number_reads" use="optional" type="xs:positiveInteger">
+            <xs:annotation>
+                <xs:documentation>
+                      DEPRECATED. Number of reads expected to be submitted  for this experiment. 
                     </xs:documentation>
-                  </xs:annotation>
-              </xs:attribute>
-              <xs:attribute name="center_name" use="optional" type="xs:string">
-                  <xs:annotation>
-                    <xs:documentation>
-                      Controlled vocabulary identifying the sequencing center or laboratory that produced this record.
-                    </xs:documentation>
-                  </xs:annotation>
-              </xs:attribute>
-</xs:complexType>
-    
-    
-<xs:element name="EXPERIMENT_SET" >
-  <xs:annotation>
-    <xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+
+    </xs:complexType>
+
+
+    <xs:element name="EXPERIMENT_SET">
+        <xs:annotation>
+            <xs:documentation>
       An EXPERMENT_SET is a container for a set of experiments and a common namespace.
     </xs:documentation>
-  </xs:annotation>  
-  <xs:complexType>
-    <xs:sequence minOccurs="1" maxOccurs="unbounded">
-        <xs:element name="EXPERIMENT" type="ExperimentType"/>        
-    </xs:sequence>
-  </xs:complexType>
-</xs:element> 
- 
-<xs:element name="EXPERIMENT" type="ExperimentType"/>        
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="EXPERIMENT" type="ExperimentType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="EXPERIMENT" type="ExperimentType"/>
 
 </xs:schema>

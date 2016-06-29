@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.analysis.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.experiment.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.run.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.study.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.sample.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_1/SRA.submission.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.ebi.ac.uk/pub/databases/ena/doc/ENA.embl.xsd" ></xs:include>
+     <xs:include schemaLocation="ftp://ftp.ebi.ac.uk/pub/databases/ena/doc/ENA.taxonomy.xsd" ></xs:include>
+     -->
+
+    <xs:include schemaLocation="SRA.analysis.xsd"/>
+    <xs:include schemaLocation="SRA.experiment.xsd"/>
+    <xs:include schemaLocation="SRA.run.xsd"/>
+    <xs:include schemaLocation="SRA.study.xsd"/>
+    <xs:include schemaLocation="SRA.sample.xsd"/>
+    <xs:include schemaLocation="SRA.submission.xsd"/>
+    <xs:include schemaLocation="ENA.embl.xsd"/>
+    <xs:include schemaLocation="ENA.taxonomy.xsd"/>
+
+
+    <xs:complexType name="AnalysisSetType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="ANALYSIS" type="AnalysisType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ExperimentSetType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="EXPERIMENT" type="ExperimentType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RunSetType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="RUN" type="RunType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="StudySetType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="STUDY" type="StudyType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SampleSetType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="SAMPLE" type="SampleType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SubmissionSetType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="SUBMISSION" type="SubmissionType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EntrySetType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="entry" type="EntryType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TaxonSetType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="taxon" type="TaxonType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RootType">
+        <xs:annotation>
+            <xs:documentation>
+               A container for any combination of ENA objects.
+            </xs:documentation>
+        </xs:annotation>
+
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:choice>
+                <xs:element name="ANALYSIS_SET" type="AnalysisSetType"/>
+                <xs:element name="ANALYSIS" type="AnalysisType"/>
+                <xs:element name="EXPERIMENT_SET" type="ExperimentSetType"/>
+                <xs:element name="EXPERIMENT" type="ExperimentType"/>
+                <xs:element name="RUN_SET" type="RunSetType"/>
+                <xs:element name="RUN" type="RunType"/>
+                <xs:element name="STUDY_SET" type="StudySetType"/>
+                <xs:element name="STUDY" type="StudyType"/>
+                <xs:element name="SAMPLE_SET" type="SampleSetType"/>
+                <xs:element name="SAMPLE" type="SampleType"/>
+                <xs:element name="SUBMISSION_SET" type="SubmissionSetType"/>
+                <xs:element name="SUBMISSION" type="SubmissionType"/>
+                <xs:element name="entrySet" type="EntrySetType"/>
+                <xs:element name="entry" type="EntryType"/>
+                <xs:element name="taxonSet" type="TaxonSetType"/>
+                <xs:element name="taxon" type="TaxonType"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="request" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:element name="ROOT" type="RootType"/>
+</xs:schema>

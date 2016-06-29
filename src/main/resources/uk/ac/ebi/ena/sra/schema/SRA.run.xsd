@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- NCBI Short Read Archive resource Run (SRR) object XML specification -->
-<!-- $Id: SRA.run.xsd 144440 2008-10-29 20:19:39Z sponomar $ -->
+<!-- $Id$ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!-- BEGIN COMMON BLOCK -->
+    <xs:include schemaLocation="SRA.common.xsd" ></xs:include>
+    <!--  END COMMON BLOCK -->
+    
     <xs:complexType name="RunType">
         <xs:annotation>
             <xs:documentation>
@@ -10,181 +14,518 @@
                 One SRA run may consist of only a portion of the plate or slide if the instrument run was partitioned among distinct experiments 
                 or between distinct RUNs.  By policy the Center should separate these data into distinct SRA Run objects.
             </xs:documentation>
-        </xs:annotation>        
-            <xs:sequence>
-                <xs:element name="EXPERIMENT_REF" nillable="false"  maxOccurs="1" minOccurs="1">
-                    <xs:annotation>
-                        <xs:documentation> The EXPERIMENT_REF descriptor identifies the parent experiment
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="EXPERIMENT_REF" nillable="false" maxOccurs="1" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation> The EXPERIMENT_REF descriptor identifies the parent experiment
                             to which this run pertains.
                             The Experiment object contains all the mapping information needed to decode each spot and map application reads
                             to RUN objects.
                         </xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                        <xs:attribute name="accession" type="xs:string" use="optional">
-                            <xs:annotation>
-                                <xs:documentation>
-                                   Reference to the experiment for which this run pertains by its accession.
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:attribute>
-                        <xs:attribute name="refname" type="xs:string" use="optional">
-                            <xs:annotation>
-                                <xs:documentation>
-                                   Reference to the experiment for which this run pertains by its alias. 
-                                   Use this field when the experiment is in the current submission and
-                                   an accession has not yet been issued.            
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:attribute>
-                    </xs:complexType>
-                </xs:element> 
-                <xs:sequence maxOccurs="unbounded" minOccurs="1" >
-                    <xs:element name="DATA_BLOCK" nillable="false">           
-                        <xs:annotation>                           
-                             <xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:attributeGroup ref="RefNameGroup"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                <xs:element name="DATA_BLOCK" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>
                                  Convenience partition for processing large datasets.         
                              </xs:documentation>
-                        </xs:annotation>
-                        <xs:complexType>                        
+                    </xs:annotation>
+                    <xs:complexType>
 
-                            <xs:sequence>
-                               <xs:element name="FILES">
-                                   <xs:annotation>
-                                       <xs:documentation> Actual run data are contained in one of the files listed in the submission manifest. 
+                        <xs:sequence>
+                            <xs:element name="FILES">
+                                <xs:annotation>
+                                    <xs:documentation> Actual run data are contained in one of the files listed in the submission manifest. 
                                            Each data block is represented by one SRF file, one SFF file, one compressed fastq file, 
                                            or one compressed tar archive file.
                                        </xs:documentation>
-                                   </xs:annotation>
-                                  <xs:complexType>
-                                      <xs:sequence maxOccurs="unbounded" minOccurs="1">
-                                     <xs:element name="FILE">                                        
-                                    <xs:complexType>
-                                        <xs:attribute name="filename" type="xs:string">
-                                            <xs:annotation>
-                                                <xs:documentation>The name or relative pathname of a run data file.</xs:documentation>
-                                            </xs:annotation>
-                                        </xs:attribute>
-                                        <xs:attribute name="filetype">
-                                            <xs:annotation>
-                                                <xs:documentation>The run data file type.</xs:documentation>
-                                            </xs:annotation>
-                                            <xs:simpleType>
-                                                <xs:restriction base="xs:string">
-                                                    <xs:enumeration value="srf">                                                                 
-                                                      <xs:annotation>
-                                                        <xs:documentation>Standard Short Read Format file (.srf), all platforms</xs:documentation>
-                                                      </xs:annotation>
-                                                    </xs:enumeration>
-                                                    <xs:enumeration value="sff">
-                                                      <xs:annotation>
-                                                        <xs:documentation>454 Standard Flowgram Format file (.sff)</xs:documentation>
-                                                      </xs:annotation>
-                                                    </xs:enumeration>
-                                                    <xs:enumeration value="fastq">               
-                                                      <xs:annotation>
-                                                        <xs:documentation>Combined nucleotide/qualities sequence file in fastq format (.fastq)</xs:documentation>
-                                                      </xs:annotation>
-                                                    </xs:enumeration>
-                                                    <xs:enumeration value="_seq.txt, _prb.txt, _sig2.txt, _qhg.txt">               
-                                                        <xs:annotation>
-                                                            <xs:documentation>DEPRECATED</xs:documentation>
-                                                        </xs:annotation>
-                                                    </xs:enumeration>
-                                                    <xs:enumeration value="Illumina_native">
-                                                        <xs:annotation>
-                                                            <xs:documentation>
-Some combination of Illumina primary analysis output files delivered in a tar file, including:
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence maxOccurs="unbounded" minOccurs="1">
+                                        <xs:element name="FILE">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="READ_LABEL" type="xs:string"
+                                                  minOccurs="0" maxOccurs="unbounded">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                        The READ_LABEL can associate a certain file to a certain read_label defined in the SPOT_DESCRIPTOR.
+                                                        For example, the file "slide1_F3.csfasta" can be associated with read labeled F3 (the first forward read in a mate pair).
+                                                        The FILE may contain data from multiple READ_LABELs.
+                                                    </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:element>
 
-  _seq.txt
-  _prb.txt
-  _qcal.txt
-  _sig2.txt
-  _int.txt
-  _nse.txt   
- 
-Please see SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                  <xs:element name="DATA_SERIES_LABEL" minOccurs="0"
+                                                  maxOccurs="unbounded">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                        The DATA_SERIES_LABEL can associate a certain file to a certain data series (column) defined in the SPOT_DESCRIPTOR.
+                                                        The FILE may contain data from multiple DATA_SERIES_LABELs.
+                                                    </xs:documentation>
+                                                  </xs:annotation>
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:enumeration value="INSDC:read">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                    Base/color calls data series, one value per call.
+                                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="INSDC:read_filter">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                    Read filter flags, one value per read.
+                                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="INSDC:quality">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                    Quality scores, one score per base/color call.
+                                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="INSDC:intensity">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                    Spot image intensity measurements, 4 values per call.
+                                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="INSDC:signal">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                    Flow measurements, one value per flow.
+                                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="INSDC:noise">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                    Spot image noise measurements, 4 values per call.
+                                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="INSDC:position">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                    Position calls, one value per call.
+                                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="INSDC:clip_quality_left">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                    Clip quality left, 1-based coordinate, inclusive.
+                                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="INSDC:clip_quality_right">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                    Clip quality right, 1-based coordinate, inclusive.
+                                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="INSDC:readname">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                    Name of the individual read (spot sequence).
+                                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="INSDC:read_seg">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                    Vector of coordinates describing the location of a certain tag (spot sub-sequence).
+                                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="filename" type="xs:string"
+                                                  use="required">
+                                                  <xs:annotation>
+                                                  <xs:documentation>The name or relative pathname of a run data file.</xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:attribute>
+                                                <xs:attribute name="filetype" use="required">
+                                                  <xs:annotation>
+                                                  <xs:documentation> The run data file model.</xs:documentation>
+                                                  </xs:annotation>
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:enumeration value="sra">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Sequence Read Archives native format in serialized (single file) form.</xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="srf">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Standard Short Read Format file (.srf), all platforms</xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="sff">
+                                                  <xs:annotation>
+                                                  <xs:documentation>454 Standard Flowgram Format file (.sff)</xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="fastq">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                              Combined nucleotide/qualities sequence file in .fastq form.
+                                                              Please see SRA File Formats Guide for definitions of the definition and restrictions on this form.
+                                                          </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="tab">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                Tab delimited text file used to deliver certain auxiliary data along with sequencing submissions (only needed for certain
+                                                                use cases).   The first line is devoted to column headers.  Each column is dedicated to an INDSC
+                                                                data series type.
+                                                                Please see SRA File Formats Guide for definitions of the definition and restrictions on this form.
                                                             </xs:documentation>
-                                                        </xs:annotation>
-                                                    </xs:enumeration>
-                                                    <xs:enumeration value="SOLiD_native">
-                                                        <xs:annotation>
-                                                            <xs:documentation>
-Some combination of SOLiD primary analysis output files delivered in a tar file, including:
-
-  .csfasta
-  _QV.qual
-  _intensity.ScaledCY3.fasta
-  _intensity.ScaledCY5.fasta
-  _intensity.ScaledFTC.fasta
-  _intensity.ScaledTXR.fasta
-
-Please see SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="bam"/>                                                          
+                                                  <xs:enumeration
+                                                  value="_seq.txt, _prb.txt, _sig2.txt, _qhg.txt">
+                                                  <xs:annotation>
+                                                  <xs:documentation>DEPRECATED</xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="454_native">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                A combination of 454 primary analysis output files, including 
+                                                                seq
+                                                                qual
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
                                                             </xs:documentation>
-                                                        </xs:annotation>
-                                                    </xs:enumeration>
-                                                </xs:restriction>
-                                            </xs:simpleType>
-                                        </xs:attribute>
-                                      </xs:complexType>
-                                     </xs:element>
-                                      </xs:sequence>                                      
-                                    </xs:complexType>
-                                </xs:element>
-                            </xs:sequence>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="454_native_seq">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                454 base calls (for example  .seq or .fna).
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="454_native_qual">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                454 quality scores  (for example  .qual).
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="Helicos_native">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                A kind of fastq format specific to the Helicos platform.
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="Illumina_native">
+                                                  <xs:annotation>
+                                                  <xs:documentation> 
+                                                               Please see SRA File Formats Guide for definitions of these file formats, 
+                                                               and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                               Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="Illumina_native_seq">
+                                                  <xs:annotation>
+                                                  <xs:documentation> 
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="Illumina_native_prb">
+                                                  <xs:annotation>
+                                                  <xs:documentation> 
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="Illumina_native_int">
+                                                  <xs:annotation>
+                                                  <xs:documentation> 
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="Illumina_native_qseq">
+                                                  <xs:annotation>
+                                                  <xs:documentation> 
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="Illumina_native_fastq">
+                                                  <xs:annotation>
+                                                  <xs:documentation> 
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="Illumina_native_scarf">
+                                                  <xs:annotation>
+                                                  <xs:documentation> 
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="SOLiD_native">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                A combination of SOLiD  primary analysis output files, including:
+                                                                csfasta
+                                                                _QV.qual
+                                                                _intensity.ScaledCY3.fasta
+                                                                _intensity.ScaledCY5.fasta
+                                                                _intensity.ScaledFTC.fasta
+                                                                _intensity.ScaledTXR.fasta
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="SOLiD_native_csfasta">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                Colorspace calls (for example .csfasta)
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="SOLiD_native_qual">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                Colorspace quality scores (for example .qual)
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                </xs:attribute>
 
-                            <xs:attribute name="name" type="xs:string" use="optional">
-                                <xs:annotation>
-                                    <xs:documentation>The plate/slide/flowcell name for this data block.
+                                                <xs:attribute name="quality_scoring_system"
+                                                  use="optional">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                    How the input data are scored for quality.  
+                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:enumeration value="phred">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                The quality score is expressed as a probability of error in log form:
+                                                                -10 log(1/p) where p is the probability of error, with value range 0..63,
+                                                                0 meaning no base call.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="log-odds">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                The quality score is expressed as the ratio of error to non-error in log form:
+                                                                -10 log(p/(1-p)) where p is the probability of error, with value range -40..40.
+                                                                The SRA will convert these into phred scale during loadtime.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                </xs:attribute>
+                                                <xs:attribute name="quality_encoding" use="optional">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                    Character used in representing the minimum quality value.  Helps specify how to decode text rendering of quality data.
+                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:enumeration value="ascii">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                ASCII character based encoding.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="decimal">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                               Single decimal value per quality score.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="hexadecimal">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                Single hexadecimal value per quality score.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                </xs:attribute>
+                                                <xs:attribute name="ascii_offset" use="optional">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                    Character used in representing the minimum quality value.  Helps specify how to decode text rendering of quality data.
+                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:enumeration value="!">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                ASCII value 33.  Typically used for range 0..63.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="@">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                ASCII value 64.  Typically used for range 0..60.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                </xs:attribute>
+                                                <xs:attribute name="checksum_method" use="optional">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                    Checksum method used.
+                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:enumeration value="MD5">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                                Checksum generated by the MD5 method (md5sum in unix). 
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                </xs:attribute>
+                                                <xs:attribute name="checksum" type="xs:string"
+                                                  use="optional">
+                                                  <xs:annotation>
+                                                  <xs:documentation>
+                                                    Checksum of uncompressed file.
+                                                </xs:documentation>
+                                                  </xs:annotation>
+                                                </xs:attribute>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+
+                        <xs:attribute name="name" type="xs:string" use="optional">
+                            <xs:annotation>
+                                <xs:documentation>The plate/slide/flowcell name for this data block.
                                                                          (454) plate name
                                                                          (Illumina) flowcell name
-                                                                         (SOLiD) slide name  
+                                                                         (SOLiD) slide name
+                                                                         (Helicos) flowcell
                                     </xs:documentation>
-                                </xs:annotation>
-                            </xs:attribute>
-                            <xs:attribute name="sector" type="xs:nonNegativeInteger" use="optional">
-                                <xs:annotation>
-                                    <xs:documentation>Higher level partition of run data to which this data block pertains.
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="sector" type="xs:nonNegativeInteger" use="optional">
+                            <xs:annotation>
+                                <xs:documentation>Higher level partition of run data to which this data block pertains.
                                                                          (454) not used
                                                                          (Illumina) Lane number
-                                                                         (SOLiD) not used 
+                                                                         (SOLiD) slide
+                                                                         (Helicos) channel
                                     </xs:documentation>
-                                </xs:annotation>
-                            </xs:attribute>
-                            <xs:attribute name="region" type="xs:nonNegativeInteger" use="optional">
-                                <xs:annotation>
-                                    <xs:documentation>Lower level partition of run data to which this data block pertains,
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="region" type="xs:nonNegativeInteger" use="optional">
+                            <xs:annotation>
+                                <xs:documentation>Lower level partition of run data to which this data block pertains,
                                         typically the field of view for the imaging camera.
                                         (454) 0 if whole plate is used, 1..16 for gasket partition.
                                         (Illumina) Tile number (1..200+), or use 0 if file contains all tiles. 
                                         (SOLiD) Panel number (1..4096), or use 0 if file contains all panels. 
+                                        (Helicos)  Field
                                     </xs:documentation>
-                                </xs:annotation>
-                            </xs:attribute>
-                            <xs:attribute name="total_spots" type="xs:nonNegativeInteger" use="optional">
-                                <xs:annotation>
-                                    <xs:documentation>The number of spots in this data block.</xs:documentation>
-                                </xs:annotation>
-                            </xs:attribute>
-                            <xs:attribute name="total_reads" type="xs:nonNegativeInteger" use="optional">
-                                <xs:annotation>
-                                    <xs:documentation>The number of read records in the data block.</xs:documentation>
-                                </xs:annotation>
-                            </xs:attribute>
-                            <xs:attribute name="number_channels" type="xs:nonNegativeInteger" use="optional">
-                                <xs:annotation>
-                                    <xs:documentation>The number of channels for which instrument data are provided. 
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="total_spots" type="xs:nonNegativeInteger" use="optional">
+                            <xs:annotation>
+                                <xs:documentation>DEPRECATED. The number of spots in this data block.</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="total_reads" type="xs:nonNegativeInteger" use="optional">
+                            <xs:annotation>
+                                <xs:documentation>DEPRECATED. The number of read records in the data block.</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="number_channels" type="xs:nonNegativeInteger"
+                            use="optional">
+                            <xs:annotation>
+                                <xs:documentation>DEPRECATED. The number of channels for which instrument data are provided. 
                                         This may be different from the data the instrument actually produced during the run.
                                         0 - no instrumentation data provided, bases only are provided.
                                         1 - one channel of instrumentation data per spot.
                                         4 - four channels of instrumentation data per spot.
                                     </xs:documentation>
-                                </xs:annotation>
-                            </xs:attribute>
-                            <xs:attribute name="format_code" type="xs:int" use="optional">
-                                <xs:annotation>
-                                    <xs:documentation>
-                                        The format code determines alternate interpretations of the data.
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="format_code" type="xs:int" use="optional">
+                            <xs:annotation>
+                                <xs:documentation>
+                                        DEPRECATED.  The format code determines alternate interpretations of the data.
                                         1 - Use the default for each platform.
                                         (454) Equivalent to published SFF flowgram format code #1.  
                                         Bases are interpreted as is.  Peaks are delta encoded for indexing into the flow sequence.
@@ -205,186 +546,117 @@ Please see SRA Submission Guidelines document for data series that are appropria
                                         Bases are presented in color space with the last base of the adapter sequence provided, which
                                         long with the appropriate color space conversion matrix can be used to decode the sequence.
                                     </xs:documentation>
-                                </xs:annotation>
-                            </xs:attribute>
-                        </xs:complexType>
-                    </xs:element>   
-                </xs:sequence>
-                <xs:element name="RUN_LINKS" minOccurs="0" maxOccurs="1">
-                    <xs:annotation>
-                        <xs:documentation>
-                            Links to resources related to this RUN or RUN set (publication, datasets, online databases).
-                        </xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                        <xs:sequence minOccurs="1" maxOccurs="unbounded">
-                            <xs:element name="RUN_LINK">
-                                <xs:complexType>
-                                    <xs:choice>                    
-                                        <xs:element name="URL_LINK">
-                                            <xs:complexType>
-                                                <xs:all>
-                                                    <xs:element name="LABEL" type="xs:string" minOccurs="1" maxOccurs="1">                                                    
-                                                        <xs:annotation>
-                                                            <xs:documentation>
-                                                                Text label to display for the link.
-                                                            </xs:documentation>
-                                                        </xs:annotation>
-                                                    </xs:element>
-                                                    <xs:element name="URL" minOccurs="1" maxOccurs="1" type="xs:anyURI">
-                                                        <xs:annotation>
-                                                            <xs:documentation>
-                                                                The internet service link (file:, http:, ftp:, etc).
-                                                            </xs:documentation>
-                                                        </xs:annotation>
-                                                    </xs:element>
-                                                </xs:all>
-                                            </xs:complexType>
-                                        </xs:element>
-                                        <xs:element name="ENTREZ_LINK">
-                                            <xs:complexType>
-                                                <xs:all>
-                                                    <xs:element name="DB" type="xs:string" minOccurs="1" maxOccurs="1">
-                                                        <xs:annotation>
-                                                            <xs:documentation>
-                                                                Short name of the NCBI database resource (e.g. pubmed).
-                                                            </xs:documentation>
-                                                        </xs:annotation>
-                                                    </xs:element>
-                                                    <xs:element name="ID" type="xs:string" minOccurs="1" maxOccurs="1">
-                                                        <xs:annotation>
-                                                            <xs:documentation>
-                                                                Accession to the record of interest in the NCBI Entrez system.
-                                                            </xs:documentation>
-                                                        </xs:annotation>
-                                                    </xs:element>
-                                                </xs:all>
-                                            </xs:complexType>
-                                        </xs:element>
-                                    </xs:choice>
-                                </xs:complexType>
-                            </xs:element>
-                        </xs:sequence>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="serial" type="xs:int" use="optional">
+                            <xs:annotation>
+                                <xs:documentation>
+                                        Integer value used to order loading of DATA_BLOCKs.
+                                    </xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="member_name" type="xs:string" use="optional">
+                            <xs:annotation>
+                                <xs:documentation>
+                                        Allow for an individual DATA_BLOCK to be associated with a member of a sample pool.
+                                    </xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
                     </xs:complexType>
                 </xs:element>
-                
-                <xs:element name="RUN_ATTRIBUTES" minOccurs="0" maxOccurs="1">
-                    <xs:annotation>
-                        <xs:documentation>
+            </xs:sequence>
+            <xs:element name="RUN_LINKS" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                            Links to resources related to this RUN or RUN set (publication, datasets, online databases).
+                        </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                        <xs:element name="RUN_LINK" type="LinkType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="RUN_ATTRIBUTES" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
                             Properties and attributes of a RUN.  These can be entered as free-form 
                             tag-value pairs. For certain studies, submitters may be asked to follow a
                             community established ontology when describing the work.
                         </xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                        <xs:sequence maxOccurs="unbounded" minOccurs="1">
-                            <xs:element name="RUN_ATTRIBUTE">
-                                <xs:complexType>
-                                    <xs:all>
-                                        <xs:element name="TAG" type="xs:string" minOccurs="1" maxOccurs="1">                                                    
-                                            <xs:annotation>
-                                                <xs:documentation>
-                                                    Name of the attribute.
-                                                </xs:documentation>
-                                            </xs:annotation>
-                                        </xs:element>
-                                        <xs:element name="VALUE" type="xs:string" minOccurs="1" maxOccurs="1">
-                                            <xs:annotation>
-                                                <xs:documentation>
-                                                    Value of the attribute.
-                                                </xs:documentation>
-                                            </xs:annotation>
-                                        </xs:element>
-                                        <xs:element name="UNITS" type="xs:string" minOccurs="0" maxOccurs="1">          
-                                            <xs:annotation>
-                                                <xs:documentation>
-                                                    Optional scientific units.
-                                                </xs:documentation>
-                                            </xs:annotation>
-                                        </xs:element>
-                                    </xs:all>
-                                </xs:complexType>
-                            </xs:element>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element> 
-            </xs:sequence>
-            <xs:attribute name="alias" use="optional" type="xs:string">
-                <xs:annotation>
-                    <xs:documentation>
-                        Submitter assigned name of the run that should be unique throughout the submission.
-                        (454) This is normally assigned from the first 7 characters of the read name 
-                              when .sff files are submitted, equivalent to the "accession_prefix" in the manifest.
-                    </xs:documentation>
                 </xs:annotation>
-            </xs:attribute>
-            <xs:attribute name="accession" use="optional" type="xs:string">
-                <xs:annotation>
-                    <xs:documentation>
-                      NCBI assigned accession when known.  Normally there will be no external
-                      use cases that need this attribute.
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:attribute>
-            <xs:attribute name="instrument_model" use="optional">
-                    <xs:annotation>
-                        <xs:documentation>
-                            Instrument model actually used in the run.  Normally this is inherited from
-                            the Experiment but may be overidden with the actual model.
-                        </xs:documentation>
-                    </xs:annotation>
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:enumeration value="454 GS"/>
-                            <xs:enumeration value="454 GS 20"/>
-                            <xs:enumeration value="454 GS FLX"/>
-                            <xs:enumeration value="Solexa 1G Genome Analyzer"><xs:annotation><xs:documentation>DEPRECATED</xs:documentation></xs:annotation></xs:enumeration>
-                            <xs:enumeration value="Illumina Genome Analyzer"/>
-                            <xs:enumeration value="Illumina Genome Analyzer II"/>
-                            <xs:enumeration value="AB SOLiD System"/>
-                            <xs:enumeration value="AB SOLiD System 2.0"/>
-                            <xs:enumeration value="Other"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="instrument_name" type="xs:string" use="optional">
-                <xs:annotation>
-                    <xs:documentation>
-                        Center-assigned name or id of the instrument used in the run.
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:attribute>
-            <xs:attribute name="run_date" use="optional" type="xs:dateTime">
-                <xs:annotation>
-                    <xs:documentation>
-                        ISO date when the run took place.  
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:attribute> 
-            <xs:attribute name="run_file" use="optional" type="xs:string">
+                <xs:complexType>
+                    <xs:sequence maxOccurs="unbounded" minOccurs="1">
+                        <xs:element name="RUN_ATTRIBUTE" type="AttributeType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attributeGroup ref="NameGroup"/>
+        <xs:attribute name="instrument_model" use="optional">
             <xs:annotation>
                 <xs:documentation>
-                    Name of the submission file containing the run.  This file may have
+                            DEPRECATED (use EXPERIMENT.PLATFORM..Instrument_model).  Instrument model actually used in the run.  Normally this is inherited from
+                            the Experiment but may be overidden with the actual model.
+                        </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="454 GS"/>
+                    <xs:enumeration value="454 GS 20"/>
+                    <xs:enumeration value="454 GS FLX"/>
+                    <xs:enumeration value="Solexa 1G Genome Analyzer">
+                        <xs:annotation>
+                            <xs:documentation>DEPRECATED</xs:documentation>
+                        </xs:annotation>
+                    </xs:enumeration>
+                    <xs:enumeration value="Illumina Genome Analyzer"/>
+                    <xs:enumeration value="Illumina Genome Analyzer II"/>
+                    <xs:enumeration value="AB SOLiD System"/>
+                    <xs:enumeration value="AB SOLiD System 2.0"/>
+                    <xs:enumeration value="Other"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="instrument_name" type="xs:string" use="optional">
+            <xs:annotation>
+                <xs:documentation>
+                        Center-assigned name or id of the instrument used in the run.
+                    </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="run_date" use="optional" type="xs:dateTime">
+            <xs:annotation>
+                <xs:documentation>
+                        ISO date when the run took place.  
+                    </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="run_file" use="optional" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>
+                    DEPRECATED.  Name of the submission file containing the run.  This file may have
                     included multiple runs.
                 </xs:documentation>
             </xs:annotation>
-            </xs:attribute>            
-            <xs:attribute name="run_center" use="optional" type="xs:string">
-                <xs:annotation >
-                    <xs:documentation >
+        </xs:attribute>
+        <xs:attribute name="run_center" use="optional" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>
                         If applicable, the name of the contract sequencing center that executed the run.
                         Example: 454MSC.
                     </xs:documentation>
-                </xs:annotation>
-            </xs:attribute>
-            <xs:attribute name="total_data_blocks" type="xs:positiveInteger" use="required">
-                <xs:annotation >
-                    <xs:documentation >
-                        The number of data blocks to expect in this run.
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="total_data_blocks" type="xs:positiveInteger" use="optional">
+            <xs:annotation>
+                <xs:documentation>
+                        DEPRECATED.  The number of data blocks to expect in this run.
                     </xs:documentation>
-                </xs:annotation>
-            </xs:attribute>
-        </xs:complexType>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
 
     <xs:element name="RUN_SET">
         <xs:annotation>
@@ -392,13 +664,13 @@ Please see SRA Submission Guidelines document for data series that are appropria
                 RUN_SET serves as a container for a set of runs and a name space
                 for establishing referential integrity between them. 
             </xs:documentation>
-        </xs:annotation>  
-        <xs:complexType >
+        </xs:annotation>
+        <xs:complexType>
             <xs:sequence minOccurs="1" maxOccurs="unbounded">
                 <xs:element name="RUN" type="RunType"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    
+
     <xs:element name="RUN" type="RunType"/>
 </xs:schema>

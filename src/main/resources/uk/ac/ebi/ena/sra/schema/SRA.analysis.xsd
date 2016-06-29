@@ -1,213 +1,328 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- NCBI Short Read Archive resource Analysis (SRZ) object XML specification -->
-<!-- $Id: SRA.analysis.xsd 144440 2008-10-29 20:19:39Z sponomar $ -->
+<!-- INSDC Short Read Archive resource Analysis (SRZ) object XML specification -->
+<!-- $Id$ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- BEGIN COMMON BLOCK -->
+  <xs:include schemaLocation="SRA.common.xsd" ></xs:include>
+  <!--  END COMMON BLOCK -->
 
-<xs:complexType name="AnalysisType">
-  <xs:annotation>
-    <xs:documentation>
-      An analysis object contains results and data from the run data as analyzed
-      with respect to the experiment's design.  These objects are unstructured and
-      with time may be passed along to downstream archival services.  Typically
-      these data are best available and captured as part of the sequencing output.
-      Examples include oligo profiles and pairwise alignments to reference sequences. 
+  <xs:complexType name="AnalysisType">
+    <xs:annotation>
+      <xs:documentation>
+      A SRA analysis object captures secondary analysis results from a short read dataset.
+      This analysis can the results of short reads used in assembly, alignment, 
+      abundance instrumentation.  The analysis can also be a list of reads, or
+      a fasta file of trimmed reads associated with the experiment.  The analysis
+      can be a QC report or other free text or spreadsheet that is attached
+      to a SRA object.  Analysis objects can be immediately or eventually passed
+      downstream for submission to an appropriate archive.  
     </xs:documentation>
-  </xs:annotation>
- 
-          <xs:sequence>
-            <xs:element name="STUDY_REF">
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="TITLE" maxOccurs="1" minOccurs="1" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+           Title of the analyis object which will be displayed in short form in the Analysis browser
+           and in Entrez search results.
+        </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="STUDY_REF">
+        <xs:annotation>
+          <xs:documentation>
+          The STUDY_REF descriptor establishes the relationship of the analysis to the parent
+          study.  This can either be the accession of an existing archived study record, or
+          a reference to a new study record in the same submission  or same center (which does not yet have an accession).
+        </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:attributeGroup ref="RefNameGroup"/>
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="DESCRIPTION" maxOccurs="1" minOccurs="1" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+          Describes the contents of the analysis objects, their relationship
+          with one another, the parent short read object, and their place in
+          the overall study.
+        </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ANALYSIS_TYPE" maxOccurs="1" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+          Analysis type.  This is a controlled vocabulary specified outside the XML schema.
+        </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="ASSEMBLY">
               <xs:annotation>
                 <xs:documentation>
-                  The STUDY_REF descriptor establishes the relationship of the experiment to the parent
-                  study.  This can either be the accession of an existing archived study record, or
-                  a reference to a new study record in the same submission (which does not yet have an
-                  accession).
-                </xs:documentation>
+                A placement of sequences including trace, SRA, GI records into a multiple alignment from which
+                a consensus is computed.  
+              </xs:documentation>
               </xs:annotation>
-              <xs:complexType>
-                <xs:attribute name="refname" type="xs:string" use="optional">
-                  <xs:annotation>
-                    <xs:documentation>
-                      Identifies parent study record by name that is known within the submission namespace.
-                      Use this field when referencing a study contained in the current submission for which
-                      an accession has not yet been issued.
-                    </xs:documentation>
-                  </xs:annotation>
-                </xs:attribute>
-                <xs:attribute name="accession" type="xs:string" use="optional">
-                  <xs:annotation>
-                    <xs:documentation>
-                      Identifies parent study record by its accession.
-                    </xs:documentation>
-                  </xs:annotation>
-                </xs:attribute>
-              </xs:complexType>
             </xs:element>
-            <xs:element maxOccurs="1" minOccurs="1" name="ANALYSIS_NAME" type="xs:string"/>                                                                            
-            <xs:element maxOccurs="1" minOccurs="0" name="ANALYSIS_DESCRIPTION" type="xs:string"/>                               
-            <xs:element name="ANALYSIS_FILES" minOccurs="0" maxOccurs="1">
+
+
+            <xs:element name="REFERENCE_ALIGNMENT">
               <xs:annotation>
-                  <xs:documentation>
+                <xs:documentation>
+                A multiple alignment of short reads against a reference substrate.
+              </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="SEQUENCE_ANNOTATION">
+              <xs:annotation>
+                <xs:documentation>
+              Per sequence annotation of named attributes and values.
+              Example: Processed sequencing data for submission to dbEST without assembly.
+              Reads have already been submitted to one of the sequence read archives in raw form.
+              The fasta data submitted under this analysis object result from the following
+              treatments, which may serve to filter reads from the raw dataset:
+              - sequencing adapter removal
+              - low quality trimming
+              - poly-A tail removal
+              - strand orientation 
+              - contaminant removal
+            </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ABUNDANCE_MEASUREMENT">
+              <xs:annotation>
+                <xs:documentation>
+                A track of read placement coverage used to measure abundance of a library with respect to a reference.
+              </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="REPORT">
+              <xs:annotation>
+                <xs:documentation>
+             Description of assays and results from quality control analysis of sequencing.
+            </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="TRANSCRIPT_SEQUENCING">
+              <xs:annotation>
+                <xs:documentation>
+              DEPRECATED.  Processed sequencing data for submission to dbEST without assembly.
+              Reads have already been submitted to one of the sequence read archives in raw form.
+              The fasta data submitted under this analysis object result from the following
+              treatments, which may serve to filter reads from the raw dataset:
+              - sequencing adapter removal
+              - low quality trimming
+              - poly-A tail removal
+              - strand orientation 
+              - contaminant removal
+            </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="ANALYSIS_TARGETS" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+         A collection of SRA objects that are the target of the analysis records.  For example, a run, sample, or sequence can be the 
+         object of the analysis.
+       </xs:documentation>
+        </xs:annotation>
+
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation> The EXPERIMENT_REF descriptor identifies the parent experiment
+             to which this run pertains.
+             The Experiment object contains all the mapping information needed to decode each spot and map application reads
+             to RUN objects.
+           </xs:documentation>
+            </xs:annotation>
+            <xs:element name="TARGET" minOccurs="1" maxOccurs="1" type="SraLinkType">
+              <xs:annotation>
+                <xs:documentation>
+               A SRA object that is the target of the analysis records.  For example, a run, sample, or sequence can be the 
+               object of the analysis.
+             </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ANALYSIS_FILES" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
                       Submitter supplied analysis objects in file form.             
                   </xs:documentation>
-              </xs:annotation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="FILE" minOccurs="1" maxOccurs="1">
               <xs:complexType>
-                <xs:sequence minOccurs="1" maxOccurs="unbounded">
-                    <xs:element name="FILE" minOccurs="1" maxOccurs="1">
-                       <xs:complexType>
-                         <xs:attribute name="filename" type="xs:string">
-                           <xs:annotation>     
-                             <xs:documentation>The name or relative pathname of an analysis file.</xs:documentation>
-                           </xs:annotation>
-                         </xs:attribute>
-                         <xs:attribute name="filetype">
-                           <xs:annotation>
-                             <xs:documentation>The type of file (text or other) of the analysis file.</xs:documentation>
-                           </xs:annotation>
-                           <xs:simpleType>
-                             <xs:restriction base="xs:string">
-                               <xs:enumeration value="text"/>
-                               <xs:enumeration value="other"/>                                                                                                
-                             </xs:restriction>
-                           </xs:simpleType>
-                         </xs:attribute>
-                       </xs:complexType>
-                    </xs:element>
-                </xs:sequence>
+                <xs:attribute name="filename" type="xs:string" use="required">
+                  <xs:annotation>
+                    <xs:documentation>The name or relative pathname of an analysis file.  The actual file name extension is irrelevant
+                                               so long as the filetype is correctly indicated, and in the case of binary files the correct magic
+                                               number is embedded in the file.
+                             </xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="filetype" use="required">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:enumeration value=".fasta">
+                        <xs:annotation>
+                          <xs:documentation>
+                                     Sequence data format indicating sequence base calls.
+                                     The format is simple: a header line initiated with the &gt; character,
+                                     data lines following with base calls. 
+                                   </xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value=".ace">
+                        <xs:annotation>
+                          <xs:documentation>
+                                     Multiple alignment file output from the phred assembler and similar programs.
+                                     See http://www.phrap.org/consed/distributions/README.16.0.txt for a description of the ACE file format. 
+                                   </xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value=".wig">
+                        <xs:annotation>
+                          <xs:documentation>
+                                     The wiggle (WIG) format allows display of continuous-valued data in track format. 
+                                     This display type is useful for GC percent, probability scores, and transcriptome data. 
+                                     See http://genome.ucsc.edu/goldenPath/help/wiggle.html for a description of the Wiggle Track format. 
+                                   </xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value=".bed">
+                        <xs:annotation>
+                          <xs:documentation>
+                                     BED format provides a flexible way to define the data lines that are displayed in an annotation track.
+                                     See http://genome.ucsc.edu/FAQ/FAQformat#format1 for a description of the BED format. 
+                                   </xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value=".tab">
+                        <xs:annotation>
+                          <xs:documentation>
+                                     A tab delimited text file that can be viewed as a spreadsheet.  The first line should contain
+                                     column headers.
+                                   </xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value=".pdf">
+                        <xs:annotation>
+                          <xs:documentation>
+                                     A pdf file.  This is an alternative to text for delivery of a QC report.
+                                   </xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value=".sam">
+                        <xs:annotation>
+                          <xs:documentation>
+                                     Sequence alignment/map format for read placements, from the SAM tools project.
+                                     See http://sourceforge.net/projects/samtools/
+                                   </xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value=".bam">
+                        <xs:annotation>
+                          <xs:documentation>
+                                     Binary form of the Sequence alignment/map format for read placements, from the SAM tools project.
+                                     See http://sourceforge.net/projects/samtools/
+                                   </xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="checksum_method" use="optional">
+                  <xs:annotation>
+                    <xs:documentation>
+                               Checksum method used.
+                             </xs:documentation>
+                  </xs:annotation>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:enumeration value="MD5">
+                        <xs:annotation>
+                          <xs:documentation>
+                                     Checksum generated by the MD5 method (md5sum in unix). 
+                                   </xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="checksum" type="xs:string" use="optional">
+                  <xs:annotation>
+                    <xs:documentation>
+                               Checksum of uncompressed file.
+                             </xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
               </xs:complexType>
             </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
 
-            <xs:element name="ANALYSIS_LINKS" minOccurs="0" maxOccurs="1">
-              <xs:annotation>
-                <xs:documentation>
-                  Links to resources related to this sample or sample set (publication, datasets, online databases).
+      <xs:element name="ANALYSIS_LINKS" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+                  Links to resources related to this analysis or analysis set (publication, datasets, online databases).
                 </xs:documentation>
-              </xs:annotation>
-              <xs:complexType>
+        </xs:annotation>
+        <xs:complexType>
           <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="ANALYSIS_LINK">
-              <xs:complexType>
-                <xs:choice>                    
-                  <xs:element name="URL_LINK">
-                    <xs:complexType>
-                        <xs:all>
-                          <xs:element name="LABEL" type="xs:string" minOccurs="1" maxOccurs="1">                                                    
-                            <xs:annotation>
-                              <xs:documentation>
-                                 Text label to display for the link.
-                              </xs:documentation>
-                            </xs:annotation>
-                          </xs:element>
-                          <xs:element name="URL" minOccurs="1" maxOccurs="1" type="xs:anyURI">
-                            <xs:annotation>
-                              <xs:documentation>
-                                 The internet service link (file:, http:, ftp:, etc).
-                              </xs:documentation>
-                            </xs:annotation>
-                          </xs:element>
-                      </xs:all>
-                  </xs:complexType>
-              </xs:element>
-              <xs:element name="ENTREZ_LINK">
-                  <xs:complexType>
-                      <xs:all>
-                          <xs:element name="DB" type="xs:string" minOccurs="1" maxOccurs="1">
-                            <xs:annotation>
-                              <xs:documentation>
-                                 Short name of the NCBI database resource (e.g. pubmed).
-                              </xs:documentation>
-                            </xs:annotation>
-                          </xs:element>
-                          <xs:element name="ID" type="xs:string" minOccurs="1" maxOccurs="1">
-                            <xs:annotation>
-                              <xs:documentation>
-                                 Accession to the record of interest in the NCBI Entrez system.
-                              </xs:documentation>
-                            </xs:annotation>
-                          </xs:element>
-                        </xs:all>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:choice>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
+            <xs:element name="ANALYSIS_LINK" type="LinkType"/>
+          </xs:sequence>
+        </xs:complexType>
       </xs:element>
 
       <xs:element name="ANALYSIS_ATTRIBUTES" minOccurs="0" maxOccurs="1">
-          <xs:annotation>
-            <xs:documentation>
-               Properties and attributes of a sample.  These can be entered as free-form 
+        <xs:annotation>
+          <xs:documentation>
+               Properties and attributes of an analysis.  These can be entered as free-form 
                tag-value pairs. For certain studies, submitters may be asked to follow a
                community established ontology when describing the work.
             </xs:documentation>
-          </xs:annotation>
-          <xs:complexType>
-            <xs:sequence maxOccurs="unbounded" minOccurs="1">
-              <xs:element name="ANALYSIS_ATTRIBUTE">
-                <xs:complexType>
-                  <xs:all>
-                    <xs:element name="TAG" type="xs:string" minOccurs="1" maxOccurs="1">                                                    
-                            <xs:annotation>
-                              <xs:documentation>
-                                 Name of the attribute.
-                              </xs:documentation>
-                            </xs:annotation>
-                    </xs:element>
-                    <xs:element name="VALUE" type="xs:string" minOccurs="1" maxOccurs="1">
-                            <xs:annotation>
-                              <xs:documentation>
-                                 Value of the attribute.
-                              </xs:documentation>
-                            </xs:annotation>
-                    </xs:element>
-                    <xs:element name="UNITS" type="xs:string" minOccurs="0" maxOccurs="1">          
-                            <xs:annotation>
-                              <xs:documentation>
-                                 Optional scientific units.
-                              </xs:documentation>
-                            </xs:annotation>
-                    </xs:element>
-                  </xs:all>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-          </xs:element>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence maxOccurs="unbounded" minOccurs="1">
+            <xs:element name="ANALYSIS_ATTRIBUTE" type="AttributeType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:sequence>
+    <xs:attributeGroup ref="NameGroup"/>
 
-    <xs:attribute name="alias" type="xs:string" use="optional">
-     <xs:annotation>
-       <xs:documentation>
-         Submitter designated name of the analysis or analysis group.  This name should
-         be unique throughout the submission.  This field is only needed if the analysis
-         record does not yet have an accession.
-       </xs:documentation>
-     </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="accession" type="xs:string" use="optional">
+    <xs:attribute name="analysis_center" use="optional" type="xs:string">
       <xs:annotation>
         <xs:documentation>
-          The analysis accession.  Use when performing certain update operations.
+          DEPRECATED:  use center_name.  If applicable, the center name of the institution responsible for this analysis.
         </xs:documentation>
       </xs:annotation>
-     </xs:attribute>
-</xs:complexType>
-   
-<xs:element name="ANALYSIS_SET">
-  <xs:annotation>
-    <xs:documentation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:element name="ANALYSIS_SET">
+    <xs:annotation>
+      <xs:documentation>
       An ANALYSIS_SET is a container of analysis objects with a shared namespace. 
     </xs:documentation>
-  </xs:annotation>
-  <xs:complexType>
-    <xs:sequence maxOccurs="unbounded" minOccurs="1">
-      <xs:element name="ANALYSIS" type="AnalysisType"/>
-    </xs:sequence>
-  </xs:complexType>
-</xs:element>                     
- 
-<xs:element name="ANALYSIS" type="AnalysisType"/>     
-                    
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence maxOccurs="unbounded" minOccurs="1">
+        <xs:element name="ANALYSIS" type="AnalysisType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ANALYSIS" type="AnalysisType"/>
+
 </xs:schema>
