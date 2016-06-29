@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- INSDC Sequence Read Archive resource Study (SRP/ERP/DRP) object XML specification -->
-<!-- $Id: SRA.study.xsd,v 1.1 2010/10/22 15:31:27 rasko Exp $ -->
+<!-- $Id: SRA.study.xsd,v 1.1 2011/07/19 15:51:16 rasko Exp $ -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
 <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
@@ -26,7 +26,7 @@
                     </xs:documentation>
                 </xs:annotation>  
             </xs:element>
-            <xs:element name="STUDY_TYPE"  maxOccurs="1" minOccurs="1" nillable="false">
+            <xs:element name="STUDY_TYPE" maxOccurs="1" minOccurs="1">
               <xs:annotation>
                 <xs:documentation>The STUDY_TYPE presents a controlled vocabulary for expressing the overall purpose of the study.</xs:documentation>
               </xs:annotation>
@@ -161,7 +161,7 @@
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="CENTER_PROJECT_NAME" type="xs:string" minOccurs="1" maxOccurs="1"  nillable="false">
+            <xs:element name="CENTER_PROJECT_NAME" type="xs:string" minOccurs="0" maxOccurs="1"  nillable="false">
                 <xs:annotation>
                     <xs:documentation>
                         Submitter defined project name.  This field is intended for backward tracking of the study record to the submitter's LIMS.
@@ -179,25 +179,6 @@
             </xs:element>
             <xs:element name="RELATED_STUDIES" minOccurs="0" maxOccurs="1">
               <xs:complexType>
-                <xs:choice>
-                <xs:sequence maxOccurs="unbounded" minOccurs="1">
-                  <xs:element name="STUDY" type="com:LinkType" minOccurs="1" maxOccurs="1">
-                    <xs:annotation>
-                      <xs:documentation>
-                        DEPRECATED.  Please use RELATED_STUDY.
-                        Related study or project record from a list of supported databases.  The study's information is
-                        derived from this project record rather than stored as first class information.
-                      </xs:documentation>
-                    </xs:annotation>
-                    </xs:element>
-                  <xs:element name="IS_PRIMARY" type="xs:boolean" minOccurs="1" maxOccurs="1">
-                   <xs:annotation>
-                    <xs:documentation>
-                        Whether this study object is designated as the primary source of the study or project information.
-                    </xs:documentation>
-                   </xs:annotation>  
-                  </xs:element>
-                </xs:sequence>
                   <xs:sequence>
                     <xs:element name="RELATED_STUDY" maxOccurs="unbounded" minOccurs="1">
                       <xs:complexType>
@@ -224,7 +205,6 @@
                     </xs:element>
                     
                   </xs:sequence>
-                </xs:choice>
               </xs:complexType>
             </xs:element>
             

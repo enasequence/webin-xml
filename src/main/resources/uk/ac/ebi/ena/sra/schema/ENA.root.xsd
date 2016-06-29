@@ -19,7 +19,8 @@
     <xs:include schemaLocation="SRA.submission.xsd"/>
     <xs:include schemaLocation="ENA.embl.xsd"/>
     <xs:include schemaLocation="ENA.taxonomy.xsd"/>
-
+    <xs:include schemaLocation="ENA.project.xsd"/>
+     
     <xs:complexType name="EntrySetType">
         <xs:sequence minOccurs="1" maxOccurs="unbounded">
             <xs:element name="entry" type="EntryType"/>
@@ -57,6 +58,8 @@
                 <xs:element name="entry" type="EntryType"/>
                 <xs:element name="taxonSet" type="TaxonSetType"/>
                 <xs:element name="taxon" type="TaxonType"/>
+                <xs:element name="PROJECT_SET" type="ProjectSetType"/>
+                <xs:element name="PROJECT" type="ProjectType"/>
             </xs:choice>
         </xs:sequence>
         <xs:attribute name="request" type="xs:string"/>

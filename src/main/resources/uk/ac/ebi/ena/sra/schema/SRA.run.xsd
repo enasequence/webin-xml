@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- INSDC Sequence Read Archive resource Run (SRR/ERR/DRR) object XML specification -->
-<!-- $Id: SRA.run.xsd,v 1.4 2011/07/19 13:21:19 rasko Exp $ -->
+<!-- $Id: SRA.run.xsd,v 1.2 2012/03/06 10:31:10 rasko Exp $ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
     <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
@@ -35,8 +35,8 @@
                         </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element maxOccurs="1" minOccurs="0" name="GAP_DESCRIPTOR"
-                type="com:GapDescriptorType">
+            <xs:element name="GAP_DESCRIPTOR" type="com:GapDescriptorType" maxOccurs="1"
+                minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>
                         The gap descriptor can be used to define a spot tag gaps and orientation specific to the run, 
@@ -68,8 +68,22 @@
                 </xs:complexType>
             </xs:element>
 
-            <xs:sequence maxOccurs="unbounded" minOccurs="0">
-                <xs:element name="DATA_BLOCK" nillable="false">
+            <xs:element maxOccurs="1" minOccurs="0" name="RUN_TYPE">
+                <xs:annotation>
+                    <xs:documentation>The type of the run. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="REFERENCE_ALIGNMENT" type="com:ReferenceSequenceType">
+                            <xs:annotation>
+                                <xs:documentation/>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:sequence>
+                <xs:element name="DATA_BLOCK" maxOccurs="1" minOccurs="0">
                     <xs:annotation>
                         <xs:documentation>
                                  Convenience partition for processing large datasets.         
@@ -86,8 +100,8 @@
                                        </xs:documentation>
                                 </xs:annotation>
                                 <xs:complexType>
-                                    <xs:sequence maxOccurs="unbounded" minOccurs="1">
-                                        <xs:element name="FILE">
+                                    <xs:sequence maxOccurs="1" minOccurs="1">
+                                        <xs:element name="FILE" maxOccurs="unbounded">
                                             <xs:complexType>
                                                 <xs:sequence>
                                                   <xs:element name="READ_LABEL" type="xs:string"
@@ -99,97 +113,6 @@
                                                         The FILE may contain data from multiple READ_LABELs.
                                                     </xs:documentation>
                                                   </xs:annotation>
-                                                  </xs:element>
-
-                                                  <xs:element name="DATA_SERIES_LABEL" minOccurs="0"
-                                                  maxOccurs="unbounded">
-                                                  <xs:annotation>
-                                                  <xs:documentation>
-                                                        The DATA_SERIES_LABEL can associate a certain file to a certain data series (column) defined in the SPOT_DESCRIPTOR.
-                                                        The FILE may contain data from multiple DATA_SERIES_LABELs.
-                                                    </xs:documentation>
-                                                  </xs:annotation>
-                                                  <xs:simpleType>
-                                                  <xs:restriction base="xs:string">
-                                                  <xs:enumeration value="INSDC:read">
-                                                  <xs:annotation>
-                                                  <xs:documentation>
-                                                                    Base/color calls data series, one value per call.
-                                                                </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="INSDC:read_filter">
-                                                  <xs:annotation>
-                                                  <xs:documentation>
-                                                                    Read filter flags, one value per read.
-                                                                </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="INSDC:quality">
-                                                  <xs:annotation>
-                                                  <xs:documentation>
-                                                                    Quality scores, one score per base/color call.
-                                                                </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="INSDC:intensity">
-                                                  <xs:annotation>
-                                                  <xs:documentation>
-                                                                    Spot image intensity measurements, 4 values per call.
-                                                                </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="INSDC:signal">
-                                                  <xs:annotation>
-                                                  <xs:documentation>
-                                                                    Flow measurements, one value per flow.
-                                                                </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="INSDC:noise">
-                                                  <xs:annotation>
-                                                  <xs:documentation>
-                                                                    Spot image noise measurements, 4 values per call.
-                                                                </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="INSDC:position">
-                                                  <xs:annotation>
-                                                  <xs:documentation>
-                                                                    Position calls, one value per call.
-                                                                </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="INSDC:clip_quality_left">
-                                                  <xs:annotation>
-                                                  <xs:documentation>
-                                                                    Clip quality left, 1-based coordinate, inclusive.
-                                                                </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="INSDC:clip_quality_right">
-                                                  <xs:annotation>
-                                                  <xs:documentation>
-                                                                    Clip quality right, 1-based coordinate, inclusive.
-                                                                </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="INSDC:readname">
-                                                  <xs:annotation>
-                                                  <xs:documentation>
-                                                                    Name of the individual read (spot sequence).
-                                                                </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="INSDC:read_seg">
-                                                  <xs:annotation>
-                                                  <xs:documentation>
-                                                                    Vector of coordinates describing the location of a certain tag (spot sub-sequence).
-                                                                </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  </xs:restriction>
-                                                  </xs:simpleType>
                                                   </xs:element>
                                                 </xs:sequence>
                                                 <xs:attribute name="filename" type="xs:string"
@@ -232,6 +155,15 @@
                                                           </xs:documentation>
                                                   </xs:annotation>
                                                   </xs:enumeration>
+                                                  <xs:enumeration value="fasta">
+                                                  <xs:annotation>
+                                                  <xs:documentation> 
+                                                                Please see SRA File Formats Guide for definitions of these file formats, 
+                                                                and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                                Sequence and qualities are minimally required.
+                                                            </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
                                                   <xs:enumeration value="tab">
                                                   <xs:annotation>
                                                   <xs:documentation>
@@ -240,12 +172,6 @@
                                                                 data series type.
                                                                 Please see SRA File Formats Guide for definitions of the definition and restrictions on this form.
                                                             </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration
-                                                  value="_seq.txt, _prb.txt, _sig2.txt, _qhg.txt">
-                                                  <xs:annotation>
-                                                  <xs:documentation>DEPRECATED</xs:documentation>
                                                   </xs:annotation>
                                                   </xs:enumeration>
                                                   <xs:enumeration value="454_native">
@@ -389,6 +315,15 @@
                                                             </xs:documentation>
                                                   </xs:annotation>
                                                   </xs:enumeration>
+                                                  <xs:enumeration value="PacBio_HDF5">
+                                                  <xs:annotation>
+                                                  <xs:documentation>                                                              
+                                                              Please see SRA File Formats Guide for definitions of these file formats, 
+                                                              and the SRA Submission Guidelines document for data series that are appropriate for your study.
+                                                              Sequence and qualities are minimally required.
+                                                          </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
                                                   <xs:enumeration value="bam">
                                                   <xs:annotation>
                                                   <xs:documentation>
@@ -397,15 +332,6 @@
                                                                 and the SRA Submission Guidelines document for data series that are appropriate for your study.
                                                                 Sequence and qualities are minimally required.
                                                   </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="PacBio_HDF5">
-                                                  <xs:annotation>
-                                                  <xs:documentation>                                                              
-                                                              Please see SRA File Formats Guide for definitions of these file formats, 
-                                                              and the SRA Submission Guidelines document for data series that are appropriate for your study.
-                                                              Sequence and qualities are minimally required.
-                                                          </xs:documentation>
                                                   </xs:annotation>
                                                   </xs:enumeration>
                                                   <xs:enumeration value="CompleteGenomics_native">
@@ -420,7 +346,6 @@
                                                   </xs:restriction>
                                                   </xs:simpleType>
                                                 </xs:attribute>
-
                                                 <xs:attribute name="quality_scoring_system"
                                                   use="optional">
                                                   <xs:annotation>
@@ -549,92 +474,6 @@
                                 </xs:complexType>
                             </xs:element>
                         </xs:sequence>
-
-                        <xs:attribute name="name" type="xs:string" use="optional">
-                            <xs:annotation>
-                                <xs:documentation>The plate/slide/flowcell name for this data block.
-                                                                         (454) plate name
-                                                                         (Illumina) flowcell name
-                                                                         (SOLiD) slide name
-                                                                         (Helicos) flowcell
-                                    </xs:documentation>
-                            </xs:annotation>
-                        </xs:attribute>
-                        <xs:attribute name="sector" type="xs:nonNegativeInteger" use="optional">
-                            <xs:annotation>
-                                <xs:documentation>Higher level partition of run data to which this data block pertains.
-                                                                         (454) not used
-                                                                         (Illumina) Lane number
-                                                                         (SOLiD) slide
-                                                                         (Helicos) channel
-                                    </xs:documentation>
-                            </xs:annotation>
-                        </xs:attribute>
-                        <xs:attribute name="region" type="xs:nonNegativeInteger" use="optional">
-                            <xs:annotation>
-                                <xs:documentation>Lower level partition of run data to which this data block pertains,
-                                        typically the field of view for the imaging camera.
-                                        (454) 0 if whole plate is used, 1..16 for gasket partition.
-                                        (Illumina) Tile number (1..200+), or use 0 if file contains all tiles. 
-                                        (SOLiD) Panel number (1..4096), or use 0 if file contains all panels. 
-                                        (Helicos)  Field
-                                    </xs:documentation>
-                            </xs:annotation>
-                        </xs:attribute>
-                        <xs:attribute name="total_spots" type="xs:nonNegativeInteger" use="optional">
-                            <xs:annotation>
-                                <xs:documentation>DEPRECATED. The number of spots in this data block.</xs:documentation>
-                            </xs:annotation>
-                        </xs:attribute>
-                        <xs:attribute name="total_reads" type="xs:nonNegativeInteger" use="optional">
-                            <xs:annotation>
-                                <xs:documentation>DEPRECATED. The number of read records in the data block.</xs:documentation>
-                            </xs:annotation>
-                        </xs:attribute>
-                        <xs:attribute name="number_channels" type="xs:nonNegativeInteger"
-                            use="optional">
-                            <xs:annotation>
-                                <xs:documentation>DEPRECATED. The number of channels for which instrument data are provided. 
-                                        This may be different from the data the instrument actually produced during the run.
-                                        0 - no instrumentation data provided, bases only are provided.
-                                        1 - one channel of instrumentation data per spot.
-                                        4 - four channels of instrumentation data per spot.
-                                    </xs:documentation>
-                            </xs:annotation>
-                        </xs:attribute>
-                        <xs:attribute name="format_code" type="xs:int" use="optional">
-                            <xs:annotation>
-                                <xs:documentation>
-                                        DEPRECATED.  The format code determines alternate interpretations of the data.
-                                        1 - Use the default for each platform.
-                                        (454) Equivalent to published SFF flowgram format code #1.  
-                                        Bases are interpreted as is.  Peaks are delta encoded for indexing into the flow sequence.
-                                        The peak code is used to lookup the signal intensity (amplitude) for that flow to verify the decision
-                                        of the base caller in calling base runs.  The intensity measurement is expressed as a two
-                                        decimal place fixed point  integer value with maximum measured value 655.35.
-                                        Qualities are estimated phred quality scores for each
-                                        base call.  The spot name is set to the read name of the input data.  The cartesian coordinates
-                                        of the spot are derived from the read name, which has base 36 encoding of x and y in the latter
-                                        characters.  Flow sequence is factory default (TACG)*42 and the key sequence is factory default
-                                        TCAG, unless these values are overridden in the experiment descriptor.
-                                        (Illumina) 
-                                        Bases are presented masked by binary peak values.   Qualities are delivered in 4-channel integer values which
-                                        indicate probability of substitution.  Intensities are delivered in 4-channel decimal values scaled
-                                        such that the minimum base-called channel intensity is still non-negative.  Spot coordinates pertain
-                                        to x-y sites on the tile.  
-                                        (SOLiD)
-                                        Bases are presented in color space with the last base of the adapter sequence provided, which
-                                        long with the appropriate color space conversion matrix can be used to decode the sequence.
-                                    </xs:documentation>
-                            </xs:annotation>
-                        </xs:attribute>
-                        <xs:attribute name="serial" type="xs:int" use="optional">
-                            <xs:annotation>
-                                <xs:documentation>
-                                        Integer value used to order loading of DATA_BLOCKs.
-                                    </xs:documentation>
-                            </xs:annotation>
-                        </xs:attribute>
                         <xs:attribute name="member_name" type="xs:string" use="optional">
                             <xs:annotation>
                                 <xs:documentation>
@@ -652,8 +491,8 @@
                         </xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
-                    <xs:sequence minOccurs="1" maxOccurs="unbounded">
-                        <xs:element name="RUN_LINK" type="com:LinkType"/>
+                    <xs:sequence minOccurs="1" maxOccurs="1">
+                        <xs:element name="RUN_LINK" type="com:LinkType" maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -667,40 +506,15 @@
                         </xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
-                    <xs:sequence maxOccurs="unbounded" minOccurs="1">
-                        <xs:element name="RUN_ATTRIBUTE" type="com:AttributeType"/>
+                    <xs:sequence maxOccurs="1" minOccurs="1">
+                        <xs:element name="RUN_ATTRIBUTE" type="com:AttributeType"
+                            maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
 
         <xs:attributeGroup ref="com:NameGroup"/>
-
-        <xs:attribute name="instrument_model" use="optional">
-            <xs:annotation>
-                <xs:documentation>
-                            DEPRECATED (use EXPERIMENT.PLATFORM..Instrument_model).  Instrument model actually used in the run.  Normally this is inherited from
-                            the Experiment but may be overidden with the actual model.
-                        </xs:documentation>
-            </xs:annotation>
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="454 GS"/>
-                    <xs:enumeration value="454 GS 20"/>
-                    <xs:enumeration value="454 GS FLX"/>
-                    <xs:enumeration value="Solexa 1G Genome Analyzer">
-                        <xs:annotation>
-                            <xs:documentation>DEPRECATED</xs:documentation>
-                        </xs:annotation>
-                    </xs:enumeration>
-                    <xs:enumeration value="Illumina Genome Analyzer"/>
-                    <xs:enumeration value="Illumina Genome Analyzer II"/>
-                    <xs:enumeration value="AB SOLiD System"/>
-                    <xs:enumeration value="AB SOLiD System 2.0"/>
-                    <xs:enumeration value="Other"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
         <xs:attribute name="instrument_name" type="xs:string" use="optional">
             <xs:annotation>
                 <xs:documentation>
@@ -715,14 +529,6 @@
                     </xs:documentation>
             </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="run_file" use="optional" type="xs:string">
-            <xs:annotation>
-                <xs:documentation>
-                    DEPRECATED.  Name of the submission file containing the run.  This file may have
-                    included multiple runs.
-                </xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
         <xs:attribute name="run_center" use="optional" type="xs:string">
             <xs:annotation>
                 <xs:documentation>
@@ -731,18 +537,11 @@
                     </xs:documentation>
             </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="total_data_blocks" type="xs:positiveInteger" use="optional">
-            <xs:annotation>
-                <xs:documentation>
-                        DEPRECATED.  The number of data blocks to expect in this run.
-                    </xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="RunSetType">
-        <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="RUN" type="RunType"/>
+        <xs:sequence minOccurs="1" maxOccurs="1">
+            <xs:element name="RUN" type="RunType" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 

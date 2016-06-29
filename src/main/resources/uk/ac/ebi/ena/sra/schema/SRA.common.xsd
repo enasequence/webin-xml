@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- INSDC Sequence Read Archive resource Common object XML specification -->
-<!-- $Id: SRA.common.xsd,v 1.6 2011/07/19 13:21:19 rasko Exp $ -->
+<!-- $Id: SRA.common.xsd,v 1.6 2012/04/13 08:39:29 rajeshr Exp $ -->
 <xsd:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:com="SRA.common" targetNamespace="SRA.common">
 
@@ -286,7 +286,640 @@
         </xsd:choice>
     </xsd:complexType>
 
+    <xsd:complexType name="SampleDescriptorType">
+        <xsd:annotation>
+            <xsd:documentation> The SAMPLE_DESCRIPTOR specifies how to decode the individual reads
+                of interest from the monolithic spot sequence. The spot descriptor contains aspects
+                of the experimental design, platform, and processing information. There will be two
+                methods of specification: one will be an index into a table of typical decodings,
+                the other being an exact specification. </xsd:documentation>          
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="POOL" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Identifies a list of group/pool/multiplex sample members.  This implies that
+                        this sample record is a group, pool, or multiplex, but is continues to receive
+                        its own accession and can be referenced by an experiment.  By default if
+                        no match to any of the listed members can be determined, then the default
+                        sampel reference is used.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="MEMBER" minOccurs="1"
+                            maxOccurs="unbounded">
+                            <xsd:complexType>
+                                <xsd:annotation>
+                                    <xsd:documentation>
+                                        Impementation of lookup table between Sample Pool member and identified read_group_tags for a given READ_LABEL
+                                    </xsd:documentation>
+                                </xsd:annotation>
+                                <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:element name="READ_LABEL">
+                                        <xsd:complexType>
+                                            <xsd:simpleContent>
+                                                <xsd:extension base="xs:string">
+                                                    <xsd:attribute name="read_group_tag"
+                                                  type="xs:string">
+                                                        <xsd:annotation>
+                                                            <xsd:documentation>
+                                                                Assignment of read_group_tag to decoded read
+                                                            </xsd:documentation>
+                                                        </xsd:annotation>
+                                                    </xsd:attribute>
+                                                </xsd:extension>
+                                            </xsd:simpleContent>
+                                        </xsd:complexType>
+                                        
+                                    </xsd:element>
+                                    
+                                </xsd:sequence>
+                                <xsd:attributeGroup ref="com:RefNameGroup">
+                                    <xsd:annotation>
+                                        <xsd:documentation>
+                                            Reference to SRA sample
+                                        </xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:attributeGroup>
+                                
+                                <xsd:attribute name="member_name" type="xs:string" use="optional">
+                                    <xsd:annotation>
+                                        <xsd:documentation>
+                                            Label a sample within a scope of the pool 
+                                        </xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:attribute>
+                                <xsd:attribute name="proportion" type="xs:float" use="optional">
+                                    <xsd:annotation>
+                                        <xsd:documentation>
+                                            Proportion of this sample (in percent) that was included in sample pool.
+                                        </xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:attribute>
+                            </xsd:complexType>
+                            
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="com:RefNameGroup"/>
+    </xsd:complexType>
+    
+    <xsd:complexType name="LibraryDescriptorType">
+        <xsd:annotation>
+            <xsd:documentation> The LIBRARY_DESCRIPTOR specifies the origin of the material being
+                sequenced and any treatments that the material might have undergone that affect the
+                sequencing result. This specification is needed even if the platform does not
+                require a library construction step per se. </xsd:documentation>            
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="LIBRARY_NAME" type="xs:string">
+                <xsd:annotation>
+                    <xsd:documentation>
+                      The submitter's name for this library.
+                  </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="LIBRARY_STRATEGY" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>
+                      Sequencing technique intended for this library.
+                  </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:restriction base="xs:string">
+                        <xsd:enumeration value="WGS">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                              Random sequencing of the whole genome.
+                          </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="WXS">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Random sequencing of exonic regions selected from the genome.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="RNA-Seq">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Random sequencing of whole transcriptome.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="WCS">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Random sequencing of a whole chromosome or other replicon isolated from a genome.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CLONE">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Genomic clone based (hierarchical) sequencing.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="POOLCLONE">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Shotgun of pooled clones (usually BACs and Fosmids).
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="AMPLICON">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                 Sequencing of overlapping or distinct PCR or RT-PCR products.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CLONEEND">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Clone end (5', 3', or both) sequencing.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="FINISHING">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Sequencing intended to finish (close) gaps in existing coverage.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="ChIP-Seq">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Direct sequencing of chromatin immunoprecipitates.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MNase-Seq">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Direct sequencing following MNase digestion.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="DNase-Hypersensitivity">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Sequencing of hypersensitive sites, or segments of open chromatin that are more readily cleaved by DNaseI.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="Bisulfite-Seq">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Sequencing following treatment of DNA with bisulfite to convert cytosine residues to uracil depending on methylation status.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="EST">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Single pass sequencing of cDNA templates
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="FL-cDNA">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Full-length sequencing of cDNA templates
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CTS">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Concatenated Tag Sequencing
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MRE-Seq">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Methylation-Sensitive Restriction Enzyme Sequencing strategy.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MeDIP-Seq">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Methylated DNA Immunoprecipitation Sequencing strategy.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MBD-Seq">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Direct sequencing of methylated fractions sequencing strategy.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="OTHER">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Library strategy not listed.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="LIBRARY_SOURCE">
+                <xsd:annotation>
+                    <xsd:documentation>
+                      The LIBRARY_SOURCE specifies the type of source material that is being sequenced.
+                  </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:restriction base="xs:string">
+                        <xsd:enumeration value="GENOMIC">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                              Genomic DNA (includes PCR products from genomic DNA).
+                          </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="TRANSCRIPTOMIC">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Transcription products or non genomic DNA (EST, cDNA, RT-PCR, screened libraries).
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="METAGENOMIC">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Mixed material from metagenome.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="METATRANSCRIPTOMIC">
+                            <xsd:annotation>
+                                <xsd:documentation> 
+                                    Transcription products from community targets
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="NON GENOMIC">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Deprecated.  Use TRANSCRIPTOMIC or METAGENOMIC.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="SYNTHETIC">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                              Synthetic DNA.
+                          </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="VIRAL RNA">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                              Viral RNA.
+                          </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="OTHER">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                              Other, unspecified, or unknown library source material.
+                          </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="LIBRARY_SELECTION">
+                <xsd:annotation>
+                    <xsd:documentation>
+                      Whether any method was used to select for or against, enrich, or screen 
+                      the material being sequenced.     
+                  </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:restriction base="xs:string">
+                        <xsd:enumeration value="RANDOM">
+                          <xsd:annotation>
+                          <xsd:documentation>Random selection by shearing or other method.</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="PCR">
+                          <xsd:annotation>
+                          <xsd:documentation>Source material was selected by designed primers.</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="RANDOM PCR">
+                          <xsd:annotation>
+                          <xsd:documentation>Source material was selected by randomly generated primers.</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="RT-PCR">
+                          <xsd:annotation>
+                          <xsd:documentation>Source material was selected by reverse transcription PCR</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="HMPR">
+                          <xsd:annotation>
+                          <xsd:documentation>Hypo-methylated partial restriction digest</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MF">
+                          <xsd:annotation>
+                          <xsd:documentation>Methyl Filtrated</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CF-S">
+                          <xsd:annotation>
+                          <xsd:documentation>Cot-filtered single/low-copy genomic DNA</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CF-M">
+                          <xsd:annotation>
+                          <xsd:documentation>Cot-filtered moderately repetitive genomic DNA</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CF-H">
+                          <xsd:annotation>
+                          <xsd:documentation>Cot-filtered highly repetitive genomic DNA</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CF-T">
+                          <xsd:annotation>
+                          <xsd:documentation>Cot-filtered theoretical single-copy genomic DNA</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MSLL">
+                          <xsd:annotation>
+                          <xsd:documentation>Methylation Spanning Linking Library</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="cDNA">
+                          <xsd:annotation>
+                          <xsd:documentation>complementary DNA</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="ChIP">
+                          <xsd:annotation>
+                          <xsd:documentation>Chromatin immunoprecipitation</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="MNase">
+                          <xsd:annotation>
+                          <xsd:documentation>Micrococcal Nuclease (MNase) digestion</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="DNAse">
+                          <xsd:annotation>
+                          <xsd:documentation>Deoxyribonuclease (MNase) digestion</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="Hybrid Selection">
+                          <xsd:annotation>
+                          <xsd:documentation>Selection by hybridization in array or solution.</xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="Reduced Representation">
+                          <xsd:annotation>
+                          <xsd:documentation>Reproducible genomic subsets, often generated by restriction fragment size selection, 
+                                  containing a manageable number of loci to facilitate re-sampling.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="Restriction Digest">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  DNA fractionation using restriction enzymes.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="5-methylcytidine antibody">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Selection of methylated DNA fragments using an antibody raised against 5-methylcytosine or 5-methylcytidine (m5C).
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration
+                          value="MBD2 protein methyl-CpG binding domain">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Enrichment by methyl-CpG binding domain.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="CAGE">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Cap-analysis gene expression. 
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="RACE">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Rapid Amplification of cDNA Ends.  
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="size fractionation">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                  Physical selection of size appropriate targets.
+                              </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="other">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                              Other library enrichment, screening, or selection process.
+                          </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="unspecified">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                              Library enrichment, screening, or selection is not specified.
+                          </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="LIBRARY_LAYOUT">
+                <xsd:annotation>
+                    <xsd:documentation>
+                      LIBRARY_LAYOUT specifies whether to expect single, paired, or other configuration of reads.  
+                      In the case of paired reads, information about the relative distance and orientation is specified.
+                  </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:choice>
+                        <xsd:element name="SINGLE">
+                          <xsd:complexType>
+                          <xsd:annotation>
+                          <xsd:documentation>
+                            Reads are unpaired (usual case).
+                          </xsd:documentation>
+                          </xsd:annotation>
+                          </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="PAIRED">
+                          <xsd:complexType>
+                          <xsd:attribute name="ORIENTATION" type="xs:string">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                </xsd:documentation>
+                          </xsd:annotation>
+                          </xsd:attribute>
+                          <xsd:attribute name="NOMINAL_LENGTH"
+                          type="xs:nonNegativeInteger">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                </xsd:documentation>
+                          </xsd:annotation>
+                          </xsd:attribute>
+                          <xsd:attribute name="NOMINAL_SDEV" type="xs:double">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                </xsd:documentation>
+                          </xsd:annotation>
+                          </xsd:attribute>
+                          </xsd:complexType>
+                        </xsd:element>
+                    </xsd:choice>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="TARGETED_LOCI" minOccurs="0" maxOccurs="1">
+                <xsd:complexType>
+                    <xsd:annotation>
+                        <xsd:documentation>
+                          Names the gene(s) or locus(loci) or other genomic feature(s) targeted by the sequence.
+                      </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:sequence>
+                        <xsd:element name="LOCUS" maxOccurs="unbounded"
+                          minOccurs="1">
+                          <xsd:complexType>
+                          <xsd:all>
+                          <xsd:element name="PROBE_SET" type="com:XRefType">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                              Reference to an archived primer or probe set.  Example:  dbProbe
+                                          </xsd:documentation>
+                          </xsd:annotation>
+                          </xsd:element>
+                          </xsd:all>
+                          <xsd:attribute name="locus_name">
+                          <xsd:simpleType>
+                          <xsd:restriction base="xs:string">
+                          <xsd:enumeration value="16S rRNA">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                                  Bacterial ribosomal RNA hypervariable region(s).
+                                              </xsd:documentation>
+                          </xsd:annotation>
+                          </xsd:enumeration>
+                          <xsd:enumeration value="exome">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                                  All exonic regions of the genome.
+                                              </xsd:documentation>
+                          </xsd:annotation>
+                          </xsd:enumeration>
+                          <xsd:enumeration value="other">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                                                  Other locus,  please describe.
+                                              </xsd:documentation>
+                          </xsd:annotation>
+                          </xsd:enumeration>
+                          </xsd:restriction>
+                          </xsd:simpleType>
+                          </xsd:attribute>
+                          <xsd:attribute name="description" type="xs:string"
+                          />
+                          </xsd:complexType>
+                        </xsd:element>
 
+                    </xsd:sequence>
+
+
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="POOLING_STRATEGY" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                      The optional pooling strategy indicates how the library or libraries are organized if multiple samples are involved.
+                  </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:restriction base="xs:string">
+                        <xsd:enumeration value="none">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                              There is a one-to-one correspondence with sample and library (normal case).
+                          </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="simple pool">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                              The sequencing is done on a pool of identified samples which cannot be distinguished in the sequencing result.
+                          </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="multiplexed samples">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                              A library was prepared of multiplexed samples each of which can be distinguished in the sequencing result through a 
+                              molecular barcode or other indicator.
+                          </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="multiplexed libraries">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                              Multiple libraries were prepared each of which can be distinguished in the sequencing result through a 
+                              molecular barcode or other indicator.  Each library may be made from the same or different samples.
+                              This option is expected when the libraries are part of the same study.
+                          </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="spiked library">
+                          <xsd:annotation>
+                          <xsd:documentation>
+                              One library is prepared with an oligonucleotide sequence included that when sequenced can
+                              help provide quality control for the library.
+                          </xsd:documentation>
+                          </xsd:annotation>
+                        </xsd:enumeration>
+                        <xsd:enumeration value="other"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="LIBRARY_CONSTRUCTION_PROTOCOL"
+                type="xs:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                      Free form text describing the protocol by which the sequencing library was constructed.                             
+                  </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    
     <xsd:complexType name="SpotDescriptorType">
         <xsd:annotation>
             <xsd:documentation>
@@ -454,8 +1087,8 @@
                                                     </xsd:documentation>
                                             </xsd:annotation>
                                             <xsd:complexType>
-                                                <xsd:sequence minOccurs="1" maxOccurs="unbounded">
-                                                  <xsd:element name="BASECALL">
+                                                <xsd:sequence minOccurs="1" maxOccurs="1">
+                                                  <xsd:element name="BASECALL" maxOccurs="unbounded">
                                                   <xsd:annotation>
                                                   <xsd:documentation>
                                                                     Element's body contains a basecall, attribute provide description of this read meaning as well as matching rules.
@@ -568,7 +1201,7 @@
             </xsd:documentation>
         </xsd:annotation>
         <xsd:sequence>
-            <xsd:element maxOccurs="unbounded" minOccurs="1" name="GAP">
+            <xsd:element name="GAP" minOccurs="1" maxOccurs="unbounded">
                 <xsd:complexType>
                     <xsd:sequence>
                         <xsd:element name="GAP_TYPE">
@@ -589,38 +1222,40 @@
                                         </xsd:annotation>
                                         <xsd:complexType>
                                             <xsd:attribute name="orientation">
-                                                <xs:simpleType>
-                                                  <xs:restriction base="xs:string">
-                                                  <xs:enumeration value="innie">
-                                                  <xs:annotation>
-                                                  <xs:documentation> Tags are facing towards each other.</xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="outie">
-                                                  <xs:annotation>
-                                                  <xs:documentation> Tags are facing away from each other.</xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="normal">
-                                                  <xs:annotation>
-                                                  <xs:documentation> Tags are facing unidiretionally.</xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="anti-normal">
-                                                  <xs:annotation>
-                                                  <xs:documentation> Tags are facing unidirectionally on opposite strand.</xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  </xs:restriction>
-                                                </xs:simpleType>
+                                                <xsd:simpleType>
+                                                  <xsd:restriction base="xs:string">
+                                                  <xsd:enumeration value="innie">
+                                                  <xsd:annotation>
+                                                  <xsd:documentation> Tags are facing towards each other.</xsd:documentation>
+                                                  </xsd:annotation>
+                                                  </xsd:enumeration>
+                                                  <xsd:enumeration value="outie">
+                                                  <xsd:annotation>
+                                                  <xsd:documentation> Tags are facing away from each other.</xsd:documentation>
+                                                  </xsd:annotation>
+                                                  </xsd:enumeration>
+                                                  <xsd:enumeration value="normal">
+                                                  <xsd:annotation>
+                                                  <xsd:documentation> Tags are facing unidiretionally.</xsd:documentation>
+                                                  </xsd:annotation>
+                                                  </xsd:enumeration>
+                                                  <xsd:enumeration value="anti-normal">
+                                                  <xsd:annotation>
+                                                  <xsd:documentation> Tags are facing unidirectionally on opposite strand.</xsd:documentation>
+                                                  </xsd:annotation>
+                                                  </xsd:enumeration>
+                                                  </xsd:restriction>
+                                                </xsd:simpleType>
                                             </xsd:attribute>
                                         </xsd:complexType>
                                     </xsd:element>
                                     <xsd:element name="PairedEnd">
                                         <xsd:annotation>
                                             <xsd:documentation> Mated tags sequenced from two ends
-                                                of a physical extent of genomic material. </xsd:documentation>
+                                                of a physical extent of genomic material. 
+                                            </xsd:documentation>
                                         </xsd:annotation>
+                                    <xsd:complexType> </xsd:complexType>
                                     </xsd:element>
                                 </xsd:choice>
                             </xsd:complexType>
@@ -634,14 +1269,14 @@
                                                 <xsd:documentation> Specify the read label at the 5'
                                                   end of the gap, or NULL if it's the first tag. </xsd:documentation>
                                             </xsd:annotation>
-                                            <xsd:attribute name="min_length" type="xs:integer"
+                                            <xsd:attribute name="min_length" type="xsd:integer"
                                                 use="required">
                                                 <xsd:annotation>
                                                   <xsd:documentation> Minimum length in base pairs
                                                   of the interval.</xsd:documentation>
                                                 </xsd:annotation>
                                             </xsd:attribute>
-                                            <xsd:attribute name="max_length" type="xs:integer"
+                                            <xsd:attribute name="max_length" type="xsd:integer"
                                                 use="required">
                                                 <xsd:annotation>
                                                   <xsd:documentation> Minimum length in base pairs
@@ -656,14 +1291,14 @@
                                                 <xsd:documentation> Specify the read label at the 5'
                                                   end of the gap, or NULL if it's the first tag. </xsd:documentation>
                                             </xsd:annotation>
-                                            <xsd:attribute name="mean" type="xs:float"
+                                            <xsd:attribute name="mean" type="xsd:float"
                                                 use="required">
                                                 <xsd:annotation>
                                                   <xsd:documentation> Mean length in base pairs of
                                                   the interval.</xsd:documentation>
                                                 </xsd:annotation>
                                             </xsd:attribute>
-                                            <xsd:attribute name="stdev" type="xs:float"
+                                            <xsd:attribute name="stdev" type="xsd:float"
                                                 use="required">
                                                 <xsd:annotation>
                                                   <xsd:documentation> Standard deviation of length
@@ -679,20 +1314,20 @@
                                                   length values. </xsd:documentation>
                                             </xsd:annotation>
                                             <xsd:sequence>
-                                                <xsd:element maxOccurs="unbounded" minOccurs="1"
-                                                  name="bin">
+                                                <xsd:element name="bin" minOccurs="1"
+                                                  maxOccurs="unbounded">
                                                   <xsd:complexType>
                                                   <xsd:annotation>
                                                   <xsd:documentation> Length value bin </xsd:documentation>
                                                   </xsd:annotation>
                                                   <xsd:attribute name="ktile"
-                                                  type="xs:positiveInteger" use="required">
+                                                  type="xsd:positiveInteger" use="required">
                                                   <xsd:annotation>
                                                   <xsd:documentation> k-tile where k is the k-th bin </xsd:documentation>
                                                   </xsd:annotation>
                                                   </xsd:attribute>
                                                   <xsd:attribute name="value"
-                                                  type="xs:nonNegativeInteger" use="required">
+                                                  type="xsd:nonNegativeInteger" use="required">
                                                   <xsd:annotation>
                                                   <xsd:documentation> Frequency count or 0. </xsd:documentation>
                                                   </xsd:annotation>
@@ -703,13 +1338,13 @@
                                         </xsd:complexType>
                                     </xsd:element>
                                 </xsd:choice>
-                                <xsd:attribute default="NULL" name="link5" use="optional">
+                                <xsd:attribute name="link5" use="optional" default="NULL">
                                     <xsd:annotation>
                                         <xsd:documentation> Specify the read label at the 5' end of
                                             the gap, or NULL if it's the first tag. </xsd:documentation>
                                     </xsd:annotation>
                                 </xsd:attribute>
-                                <xsd:attribute default="NULL" name="link3" use="optional">
+                                <xsd:attribute name="link3" use="optional" default="NULL">
                                     <xsd:annotation>
                                         <xsd:documentation> Specify the read label at the 3' end of
                                             the gap, or NULL if it's the last tag. </xsd:documentation>
@@ -745,22 +1380,8 @@
                                     <xsd:enumeration value="454 GS 20"/>
                                     <xsd:enumeration value="454 GS FLX"/>
                                     <xsd:enumeration value="454 GS FLX Titanium"/>
+                                    <xsd:enumeration value="454 GS FLX Plus"/>
                                     <xsd:enumeration value="454 GS Junior"/>
-                                    <xsd:enumeration value="454 Titanium">
-                                        <xsd:annotation>
-                                            <xsd:documentation>DEPRECATED.  Use 454 GS FLX Titanium instead</xsd:documentation>
-                                        </xsd:annotation>
-                                    </xsd:enumeration>
-                                    <xsd:enumeration value="GS 20">
-                                        <xsd:annotation>
-                                            <xsd:documentation>DEPRECATED</xsd:documentation>
-                                        </xsd:annotation>
-                                    </xsd:enumeration>
-                                    <xsd:enumeration value="GS FLX">
-                                        <xsd:annotation>
-                                            <xsd:documentation>DEPRECATED</xsd:documentation>
-                                        </xsd:annotation>
-                                    </xsd:enumeration>
                                     <xsd:enumeration value="unspecified"/>
                                 </xsd:restriction>
                             </xsd:simpleType>
@@ -806,16 +1427,13 @@
                         <xsd:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1">
                             <xsd:simpleType>
                                 <xsd:restriction base="xsd:string">
-                                    <xsd:enumeration value="Solexa 1G Genome Analyzer">
-                                        <xsd:annotation>
-                                            <xsd:documentation>DEPRECATED</xsd:documentation>
-                                        </xsd:annotation>
-                                    </xsd:enumeration>
                                     <xsd:enumeration value="Illumina Genome Analyzer"/>
                                     <xsd:enumeration value="Illumina Genome Analyzer II"/>
                                     <xsd:enumeration value="Illumina Genome Analyzer IIx"/>
+                                    <xsd:enumeration value="Illumina HiSeq 2500"/>
                                     <xsd:enumeration value="Illumina HiSeq 2000"/>
                                     <xsd:enumeration value="Illumina HiSeq 1000"/>
+                                    <xsd:enumeration value="Illumina HiScanSQ"/>
                                     <xsd:enumeration value="Illumina MiSeq"/>
                                     <xsd:enumeration value="unspecified"/>
                                 </xsd:restriction>
@@ -899,6 +1517,7 @@
                                     <xsd:enumeration value="AB SOLiD System"/>
                                     <xsd:enumeration value="AB SOLiD System 2.0"/>
                                     <xsd:enumeration value="AB SOLiD System 3.0"/>
+                                    <xsd:enumeration value="AB SOLiD System 3 Plus"/>
                                     <xsd:enumeration value="AB SOLiD 4 System"/>
                                     <xsd:enumeration value="AB SOLiD 4hq System"/>
                                     <xsd:enumeration value="AB SOLiD PI System"/>
@@ -909,6 +1528,9 @@
                             </xsd:simpleType>
                         </xsd:element>
                         <xsd:element name="COLOR_MATRIX" minOccurs="0" maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation> DEPRECATED. </xsd:documentation>
+                            </xsd:annotation>
                             <xsd:complexType>
                                 <xsd:sequence>
                                     <xsd:element name="COLOR" minOccurs="1" maxOccurs="unbounded">
@@ -924,7 +1546,11 @@
                             </xsd:complexType>
                         </xsd:element>
                         <xsd:element name="COLOR_MATRIX_CODE" type="xs:string" minOccurs="0"
-                            maxOccurs="1"> </xsd:element>
+                            maxOccurs="1">
+                            <xsd:annotation>
+                                <xsd:documentation> DEPRECATED. </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
                         <xsd:element name="CYCLE_COUNT" type="xs:positiveInteger" minOccurs="0"
                             maxOccurs="1">
                             <xsd:annotation>
@@ -953,7 +1579,7 @@
                 </xsd:annotation>
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="0">
+                        <xsd:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1">
                             <xsd:simpleType>
                                 <xsd:restriction base="xsd:string">
                                     <xsd:enumeration value="Complete Genomics"/>
@@ -975,7 +1601,7 @@
                 </xsd:annotation>
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="0">
+                        <xsd:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1">
                             <xsd:simpleType>
                                 <xsd:restriction base="xsd:string">
                                     <xsd:enumeration value="PacBio RS"/>
@@ -993,16 +1619,17 @@
                     </xsd:documentation>
                 </xsd:annotation>
                 <xsd:complexType>
-                    <xsd:all>
+                    <xsd:sequence>
                         <xsd:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1">
                             <xsd:simpleType>
                                 <xsd:restriction base="xs:string">
                                     <xsd:enumeration value="Ion Torrent PGM"/>
+                                    <xsd:enumeration value="Ion Torrent Proton"/>
                                     <xsd:enumeration value="unspecified"/>
                                 </xsd:restriction>
                             </xsd:simpleType>
                         </xsd:element>
-                    </xsd:all>
+                    </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
         </xsd:choice>
@@ -1042,8 +1669,8 @@
 
 
     <xsd:complexType name="PipelineType">
-        <xsd:sequence minOccurs="1" maxOccurs="unbounded">
-            <xsd:element name="PIPE_SECTION" minOccurs="1" maxOccurs="1">
+        <xsd:sequence minOccurs="1" maxOccurs="1">
+            <xsd:element name="PIPE_SECTION" minOccurs="1" maxOccurs="unbounded">
                 <xsd:complexType>
                     <xsd:sequence>
                         <xsd:element name="STEP_INDEX" type="xs:string">
@@ -1090,6 +1717,121 @@
                             <xsd:documentation>
                                 Name of the processing pipeline section.
                             </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ReferenceAssemblyType">
+        <xsd:annotation>
+            <xsd:documentation>Reference assembly details.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+
+            <xsd:element name="STANDARD">
+                <xsd:annotation>
+                    <xsd:documentation>A standard genome assembly.
+                                                 </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:attribute name="refname" type="xs:string" use="optional">
+                        <xsd:annotation>
+                            <xsd:documentation>A recognized name for the
+                                                 genome assembly.</xsd:documentation>
+                        </xsd:annotation>
+
+                    </xsd:attribute>
+                    <xsd:attribute name="accession" type="xs:token">
+                        <xsd:annotation>
+                            <xsd:documentation>Identifies the genome assembly
+                                                 using an accession number and a sequence version.
+                                                 </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="CUSTOM">
+                <xsd:annotation>
+                    <xsd:documentation>Other genome
+                                                 assembly.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="1" minOccurs="0" name="DESCRIPTION" type="xs:string">
+                            <xsd:annotation>
+                                <xsd:documentation>Description of the genome
+                                                 assembly.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element maxOccurs="unbounded" name="URL_LINK">
+                            <xsd:annotation>
+                                <xsd:documentation>A link to the genome
+                                                 assembly.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType>
+                                <xsd:all>
+                                    <xsd:element maxOccurs="1" minOccurs="0" name="LABEL"
+                                        type="xs:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation> Text label to display for the
+                                                 link. </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element maxOccurs="1" minOccurs="1" name="URL"
+                                        type="xs:anyURI">
+                                        <xsd:annotation>
+                                            <xsd:documentation> The internet service link
+                                                 (file:, http:, ftp:, etc). </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:all>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="ReferenceSequenceType">
+        <xsd:annotation>
+            <xsd:documentation>Reference assembly and sequence details.                              </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="ASSEMBLY" type="com:ReferenceAssemblyType">
+                <xsd:annotation>
+                    <xsd:documentation>Reference assembly details.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element  minOccurs="0"  maxOccurs="unbounded" name="SEQUENCE">
+                <xsd:annotation>
+                    <xsd:documentation>Reference sequence details.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:attribute name="refname" type="xs:string" use="optional">
+                        <xsd:annotation>
+                            <xsd:documentation>A recognized name for the
+                                                 reference sequence.</xsd:documentation>
+                        </xsd:annotation>
+
+                    </xsd:attribute>
+                    <xsd:attribute name="accession" type="xs:token">
+                        <xsd:annotation>
+                            <xsd:documentation>  Accession.version with version being mandatory
+                                  </xsd:documentation>
+
+
+
+                        </xsd:annotation>
+                    </xsd:attribute>
+                    <xsd:attribute name="label" type="xs:string" use="optional">
+                        <xsd:annotation>
+                            <xsd:documentation> This is how Reference Sequence is labeled in submission file(s). 
+                                  It is equivalent to  SQ label in BAM. 
+                                  Optional when submitted file uses INSDC accession.version</xsd:documentation>
+
+
+
                         </xsd:annotation>
                     </xsd:attribute>
                 </xsd:complexType>

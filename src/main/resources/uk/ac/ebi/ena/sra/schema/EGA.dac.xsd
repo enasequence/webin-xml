@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- INSDC Short Read Archive resource DAC (EGA) object XML specification -->
-<!-- $Id: EGA.dac.xsd,v 1.4 2010/11/03 14:14:02 rasko Exp $ -->
+<!-- $Id: EGA.dac.xsd,v 1.1 2011/07/19 15:51:16 rasko Exp $ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
 	<xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
