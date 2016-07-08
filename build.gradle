@@ -1,0 +1,131 @@
+apply plugin: 'java'
+
+apply plugin: 'maven'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'signing'
+
+group = 'uk.ac.ebi.ena.sra'
+version = '1.5.6'
+archivesBaseName = 'sra-xml'
+
+repositories {
+    mavenLocal()
+    maven { url "http://ves-ebi-de:8081/artifactory/gradle" }
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.xmlbeans:xmlbeans:2.5.0'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+	        include '**/SRA*.xsd'
+            include '**/ENA*.xsd'
+        }
+    }
+}
+
+task classes (overwrite: true) << {
+}
+
+
+task printSources << {
+     sourceSets.main.allSource.files.each {File file ->
+        println file
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from 'build/docs/javadoc'
+}
+ 
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+
+signing {
+    sign configurations.archives
+}
+
+task compileJava (overwrite: true) {
+    doLast{
+    ant.taskdef(name:'xmlbean', classname: 'org.apache.xmlbeans.impl.tool.XMLBean', classpath: configurations.compile.asPath)
+//     ant.xmlbean(schema: sourceSets.main.resources.files, classgendir: sourceSets.main.output.classesDir, classpath: configurations.compile.asPath)
+    sourceSets.main.resources.files.each {File file ->
+        ant.xmlbean(schema: file.path, classgendir: sourceSets.main.output.classesDir, classpath: configurations.compile.asPath) {
+            fileset(dir: file.parentFile) {
+                include(name: 'sra.xsdconfig')
+            }
+        }
+
+    }
+}
+}
+
+jar.dependsOn compileJava
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2'
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'SRA XML Beans'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'XML Beans compile from the XML Schemas used to submit SRA data to the European Nucleotide Archive'
+                url 'http://www.ebi.ac.uk/ena'
+
+                scm {
+                    url 'https://github.com/enasequence/schema'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'neilg'
+                        name 'Neil Goodgame'
+                        email 'neilg@ebi.ac.uk'
+                    }
+                }
+            }
+        }
+    }
+}
