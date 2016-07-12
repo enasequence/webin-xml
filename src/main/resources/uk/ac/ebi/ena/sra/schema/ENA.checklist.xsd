@@ -216,7 +216,7 @@
                                                   <xs:complexType>
                                                   <xs:sequence>
                                                   <xs:element maxOccurs="1" minOccurs="1"
-                                                  name="ONTOLOGY_IRI" type="xs:anyURI">
+                                                  name="ONTOLOGY_ID" type="xs:string">
                                                   <xs:annotation>
                                                   <xs:documentation/>
                                                   </xs:annotation>
