@@ -26,8 +26,9 @@ sourceSets {
         }
         resources {
             srcDir 'src/main/resources'
-	        include '**/SRA*.xsd'
+	    include '**/SRA*.xsd'
             include '**/ENA*.xsd'
+	    include '**/EGA*.xsd'
         }
     }
 }
@@ -92,16 +93,16 @@ uploadArchives {
         mavenDeployer {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
                 authentication(userName: ossrhUsername, password: ossrhPassword)
             }
 
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
                 authentication(userName: ossrhUsername, password: ossrhPassword)
             }
 
             pom.project {
-                name 'SRA XML Beans'
+                name 'sra-xml'
                 packaging 'jar'
                 // optionally artifactId can be defined here
                 description 'XML Beans compile from the XML Schemas used to submit SRA data to the European Nucleotide Archive'
