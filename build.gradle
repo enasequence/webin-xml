@@ -8,6 +8,8 @@ apply plugin: 'signing'
 group = 'uk.ac.ebi.ena.sra'
 version = '1.5.6'
 archivesBaseName = 'sra-xml'
+buildDir = 'build/sra-xml'
+
 
 repositories {
     mavenLocal()
@@ -25,12 +27,15 @@ sourceSets {
         }
         resources {
             srcDir 'src/main/resources'
-	    include '**/SRA*.xsd'
+            include '**/SRA*.xsd'
             include '**/ENA*.xsd'
-	    include '**/EGA*.xsd'
+            include '**/EGA*.xsd'
+            exclude '**/ENA.embl.xsd'
+            exclude '**/ENA.root.xsd'
         }
     }
 }
+
 
 task classes (overwrite: true) << {
 }
