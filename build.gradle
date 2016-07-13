@@ -6,7 +6,7 @@ apply plugin: 'eclipse'
 apply plugin: 'signing'
 
 group = 'uk.ac.ebi.ena.sra'
-version = '1.5.6'
+version = '1.5.7'
 archivesBaseName = 'sra-xml'
 buildDir = 'build/sra-xml'
 
