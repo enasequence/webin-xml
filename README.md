@@ -1,31 +1,21 @@
 Synopsis
 
-This is the main project for the SRA core.
+This project contains the EBI ENA Read Domain XML Schemas in main/resources/uk/ac/ebi/ena/sra/schema .
 
-It supports the loading or SRA XML metadata into the database.  It is used by both the RESTful SRA loader project (era-srv) and SRA Webin (webin-sra-gwt).
+There is an associated Java API that binds Java Types to the XML.
 
-[![Build Status](http://ves-ebi-de:8080/buildStatus/icon?job=sra)](http://ves-ebi-de:8080/job/sra/)
+The Java API is built using Apache XMLBeans https://xmlbeans.apache.org.  To bind execute the following :
 
-## Build and Deployments
+gradle jar
 
-[See Confluence page](http://www.ebi.ac.uk/seqdb/confluence/display/EMBL/SRA+API+build+instructions)
+For more information please see :
 
-## Building and running the tests locally
-
-./gradlew -Penv=localtest build
-
-## Publishing to the local maven repository
-
-./gradlew -Penv=localtest install
-
-## Publishing the jar to the remote area used by the SRA flow manager jobs
-
-./gradlew -Penv=localtest deployFatJar
+http://www.ebi.ac.uk/ena/submit/read-xml-format-1-5
 
 ## Contributors
 
+Rasko Leinonen
 Neil Goodgame
-Rajesh Rallan
 
 License
 
