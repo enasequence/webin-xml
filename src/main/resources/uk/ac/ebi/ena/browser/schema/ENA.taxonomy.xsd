@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1"
+	xmlns:ebi="http://www.ebi.ac.uk/embl/schema" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:complexType name="TaxonType">
+		<xs:sequence>
+			<xs:element name="lineage" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The taxonomic lineage.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="taxon" minOccurs="1" maxOccurs="unbounded"
+							type="ParentTaxonType"> </xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="children" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A list of child taxons.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="taxon" minOccurs="1" maxOccurs="unbounded"
+							type="ChildTaxonType"> </xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="synonym" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A list of other names for the taxon.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="type" use="required">
+						<xs:annotation>
+							<xs:documentation>The name type.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="synonym"/>
+								<xs:enumeration value="common name"/>
+								<xs:enumeration value="acronym"/>
+								<xs:enumeration value="anamorph"/>
+								<xs:enumeration value="teleomorph"/>
+								<xs:enumeration value="equivalent name"/>
+								<xs:enumeration value="includes"/>
+								<xs:enumeration value="is-part"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="name" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation>The name.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="scientificName" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>The scientific name for the taxon.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="commonName" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The preferred common name for the taxon.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="taxId" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>The taxon identifier.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="parentTaxId" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>The taxonomy identifier for the parent taxon.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="rank" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The taxonomic rank.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="hidden" type="xs:boolean" default="false">
+			<xs:annotation>
+				<xs:documentation>If true then the taxon is intended to be hidden from the abbreviated lineage.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="taxonomicDivision" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>The taxonomic division.
+
+</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="geneticCode" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>The translation table for protein coding sequences.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="mitochondrialGeneticCode" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>The translation table for mitochondrial protein coding sequences.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ParentTaxonType">
+		<xs:sequence minOccurs="0" maxOccurs="1">
+			<xs:element minOccurs="0" name="children">
+				<xs:annotation>
+					<xs:documentation>A list of child taxons.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" name="taxon" type="ChildTaxonType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="scientificName" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>The scientific name for the taxon.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="commonName" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The preferred common name for the taxon.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="taxId" type="xs:integer" use="required">
+			<xs:annotation>
+				<xs:documentation>The taxon identifier.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="rank" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The taxonomic rank.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="hidden" type="xs:boolean" default="false">
+			<xs:annotation>
+				<xs:documentation>If true then the taxon is intended to be hidden from the abbreviated lineage.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ChildTaxonType">
+		<xs:sequence minOccurs="0" maxOccurs="1">
+			<xs:element minOccurs="0" name="children">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" name="taxon" type="ChildTaxonType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="scientificName" type="xs:string" use="required"/>
+		<xs:attribute name="commonName" type="xs:string" use="optional"/>
+		<xs:attribute name="taxId" type="xs:integer" use="required"/>
+		<xs:attribute name="rank" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:element name="taxonSet">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element name="taxon" type="TaxonType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="taxon" type="TaxonType"/>
+</xs:schema>
