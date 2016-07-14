@@ -1,13 +1,3 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.1"
-    }
-}
-
-apply plugin: 'io.codearte.nexus-staging'
 apply plugin: 'java'
 
 apply plugin: 'maven'
@@ -144,9 +134,5 @@ uploadArchives {
             }
         }
     }
-}
-
-nexusStaging {
-    packageGroup = "uk.ac.ebi.ena.sra"
 }
 
