@@ -1,3 +1,6 @@
 language: java
 
-gradle compileJava
+jdk:
+  - oraclejdk8
+
+script: ./gradlew jar
