@@ -7,7 +7,7 @@ apply plugin: 'signing'
 apply plugin: 'maven-publish'
 
 group = 'uk.ac.ebi.ena.sra'
-version = '1.5.7'
+version = '1.5.7-OLS'
 archivesBaseName = 'sra-xml'
 buildDir = 'build/sra-xml'
 
@@ -135,4 +135,3 @@ uploadArchives {
         }
     }
 }
-
