@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/enasequence/schema.svg?branch=master)](https://travis-ci.org/enasequence/schema)
+
 Synopsis
 
 This project contains the EBI ENA Read Domain XML Schemas in main/resources/uk/ac/ebi/ena/sra/schema .
