@@ -67,6 +67,10 @@ signing {
     sign configurations.archives
 }
 
+install {
+    configuration = configurations.runtime
+}
+
 task compileJava (overwrite: true) {
     doLast{
     ant.taskdef(name:'xmlbean', classname: 'org.apache.xmlbeans.impl.tool.XMLBean', classpath: configurations.compile.asPath)
