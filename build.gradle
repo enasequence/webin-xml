@@ -9,7 +9,6 @@ apply plugin: 'maven-publish'
 group = 'uk.ac.ebi.ena.sra'
 version = '1.5.7'
 archivesBaseName = 'sra-xml'
-buildDir = 'build/sra-xml'
 
 
 repositories {
@@ -62,8 +61,8 @@ artifacts {
     archives jar
     archives javadocJar
     archives sourcesJar
-}
 
+}
 
 signing {
     sign configurations.archives
