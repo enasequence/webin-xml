@@ -1,23 +1,14 @@
-[![Build Status](https://travis-ci.org/enasequence/schema.svg?branch=master)](https://travis-ci.org/enasequence/schema)
-
 Synopsis
 
-This project contains the EBI ENA Read Domain XML Schemas in main/resources/uk/ac/ebi/ena/sra/schema .
+This is the XML beans for the SRA XML Schemas
 
-There is an associated Java API that binds Java Types to the XML.
+https://github.com/EMBL-EBI-SUBS/subs-data
 
-The Java API is built using Apache XMLBeans https://xmlbeans.apache.org.  To bind execute the following :
+http://www.ebi.ac.uk/ena
 
-gradle jar
+## Building
 
-For more information please see :
-
-http://www.ebi.ac.uk/ena/submit/read-xml-format-1-5
-
-## Contributors
-
-Rasko Leinonen
-Neil Goodgame
+./gradlew build
 
 License
 
