@@ -5,4 +5,4 @@ jdk:
 
 install: true
 
-script: ./gradlew build
+script: ./gradlew clean test
