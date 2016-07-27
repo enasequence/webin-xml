@@ -29,6 +29,19 @@ repositories {
 
 dependencies {
     compile 'org.apache.xmlbeans:xmlbeans:2.5.0'
+    testCompile 'junit:junit:4.12'
+}
+
+
+
+idea {
+    module {
+        sourceDirs += sourceSets.main.output.classesDir
+    }
+}
+
+task printClasspath << {
+    configurations.testCompile.each { println it }
 }
 
 sourceSets {
@@ -45,6 +58,13 @@ sourceSets {
             exclude '**/ENA.root.xsd'
         }
     }
+    generated {
+        java
+        output.resourcesDir = sourceSets.main.output.resourcesDir
+        output.classesDir   = sourceSets.main.output.classesDir
+        compileClasspath += sourceSets.main.runtimeClasspath
+    }
+
 }
 
 
@@ -64,7 +84,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
  
 task sourcesJar(type: Jar) {
-    from sourceSets.main.allSource
+    from sourceSets.generated.allSource
     classifier = 'sources'
 }
 
@@ -83,22 +103,26 @@ install {
     configuration = configurations.runtime
 }
 
-task compileJava (overwrite: true) {
-    doLast{
-    ant.taskdef(name:'xmlbean', classname: 'org.apache.xmlbeans.impl.tool.XMLBean', classpath: configurations.compile.asPath)
-//     ant.xmlbean(schema: sourceSets.main.resources.files, classgendir: sourceSets.main.output.classesDir, classpath: configurations.compile.asPath)
-    sourceSets.main.resources.files.each {File file ->
-        ant.xmlbean(schema: file.path, classgendir: sourceSets.main.output.classesDir, classpath: configurations.compile.asPath) {
-            fileset(dir: file.parentFile) {
-                include(name: 'sra.xsdconfig')
-            }
-        }
 
+
+task generateXMLBeanSources (overwrite: true) {
+    doLast{
+        delete "src/generated/java"
+        ant.taskdef(name:'xmlbean', classname: 'org.apache.xmlbeans.impl.tool.XMLBean', classpath: configurations.compile.asPath)
+        sourceSets.main.resources.files.each {File file ->
+            ant.xmlbean(schema: file.path, classgendir: sourceSets.generated.output.classesDir , srcgendir: "src/generated/java", classpath: configurations.compile.asPath) {
+                fileset(dir: file.parentFile) {
+                   include(name: '*.xsdconfig')
+              }
+            }
+
+        }
     }
 }
-}
 
-jar.dependsOn compileJava
+compileGeneratedJava.dependsOn generateXMLBeanSources
+compileTestJava.dependsOn compileGeneratedJava
+jar.dependsOn compileGeneratedJava
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
