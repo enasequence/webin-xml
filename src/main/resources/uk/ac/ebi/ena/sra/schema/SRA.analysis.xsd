@@ -272,7 +272,7 @@
                             </xs:annotation>
                             <xs:complexType> </xs:complexType>
                         </xs:element>
-                        <xs:element name="REFERENCE_SEQUENCE"/>
+                        <xs:element name="REFERENCE_SEQUENCE"><xs:complexType> </xs:complexType></xs:element>
                         <xs:element name="SAMPLE_PHENOTYPE">
                             <xs:annotation>
                                 <xs:documentation/>
