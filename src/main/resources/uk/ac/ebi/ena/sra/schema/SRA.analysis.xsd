@@ -279,7 +279,7 @@
                             </xs:annotation>
                             <xs:complexType> </xs:complexType>
                         </xs:element>
-                        <xs:element name="PROCESSED_READS"/>
+                        <xs:element name="PROCESSED_READS" type="com:ReferenceSequenceType"> </xs:element>
                         <xs:element name="GENOME_MAP">
                             <xs:complexType>
                                 <xs:sequence>
