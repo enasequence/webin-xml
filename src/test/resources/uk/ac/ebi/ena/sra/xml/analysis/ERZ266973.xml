@@ -1,0 +1,71 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ANALYSIS_SET>
+    <ANALYSIS
+            alias="hipsci.rel-2016-01.rnaseq.transcripts.sc-20160209.sample_HPSI0114i-eipl_3"
+            center_name="SC" broker_name="ENA" analysis_center="SC"
+            analysis_date="2016-02-09T10:10:10.0Z" accession="ERZ266973">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERZ266973</PRIMARY_ID>
+            <SUBMITTER_ID
+                    namespace="SC">hipsci.rel-2016-01.rnaseq.transcripts.sc-20160209.sample_HPSI0114i-eipl_3</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>HipSci RNA-seq transcripts counts (sample
+            HPSI0114i-eipl_3)</TITLE>
+        <DESCRIPTION>HipSci RNA-seq abundances of transcripts estimated
+            by kallisto</DESCRIPTION>
+        <STUDY_REF accession="ERP007111" refcenter="SC"
+                   refname="HipSci___RNAseq___healthy_volunteers-sc-3302">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERP007111</PRIMARY_ID>
+                <SUBMITTER_ID
+                        namespace="SC">HipSci___RNAseq___healthy_volunteers-sc-3302</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </STUDY_REF>
+        <SAMPLE_REF accession="ERS1148779" label="HPSI0114i-eipl_3"
+                    refname="SAMEA2536405" refcenter="BioSD">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERS1148779</PRIMARY_ID>
+                <SUBMITTER_ID namespace="BioSD">SAMEA2536405</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </SAMPLE_REF>
+        <ANALYSIS_TYPE>
+            <PROCESSED_READS>
+                <ASSEMBLY>
+                    <STANDARD refname="GRCh37"
+                              accession="GCA_000001405.1"/>
+                </ASSEMBLY>
+                <SEQUENCE accession="CM000663.1" label="1"/>
+                <SEQUENCE accession="CM000672.1" label="10"/>
+                <SEQUENCE accession="CM000673.1" label="11"/>
+                <SEQUENCE accession="CM000674.1" label="12"/>
+                <SEQUENCE accession="CM000675.1" label="13"/>
+                <SEQUENCE accession="CM000676.1" label="14"/>
+                <SEQUENCE accession="CM000677.1" label="15"/>
+                <SEQUENCE accession="CM000678.1" label="16"/>
+                <SEQUENCE accession="CM000679.1" label="17"/>
+                <SEQUENCE accession="CM000680.1" label="18"/>
+                <SEQUENCE accession="CM000681.1" label="19"/>
+                <SEQUENCE accession="CM000664.1" label="2"/>
+                <SEQUENCE accession="CM000682.1" label="20"/>
+                <SEQUENCE accession="CM000683.1" label="21"/>
+                <SEQUENCE accession="CM000684.1" label="22"/>
+                <SEQUENCE accession="CM000665.1" label="3"/>
+                <SEQUENCE accession="CM000666.1" label="4"/>
+                <SEQUENCE accession="CM000667.1" label="5"/>
+                <SEQUENCE accession="CM000668.1" label="6"/>
+                <SEQUENCE accession="CM000669.1" label="7"/>
+                <SEQUENCE accession="CM000670.1" label="8"/>
+                <SEQUENCE accession="CM000671.1" label="9"/>
+                <SEQUENCE accession="J01415.2" label="MT"/>
+                <SEQUENCE accession="CM000685.1" label="X"/>
+                <SEQUENCE accession="CM000686.1" label="Y"/>
+            </PROCESSED_READS>
+        </ANALYSIS_TYPE>
+        <FILES>
+            <FILE
+                    filename="ERZ266/ERZ266973/HPSI0114i-eipl_3.GRCh37.75.cdna.kallisto.transcripts.abundance.rnaseq.20160125.tsv"
+                    filetype="other" checksum_method="MD5"
+                    checksum="3185384933bd6dd54a5b869336c751df"/>
+        </FILES>
+    </ANALYSIS>
+</ANALYSIS_SET>

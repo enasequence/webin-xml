@@ -30,6 +30,8 @@ repositories {
 dependencies {
     compile 'org.apache.xmlbeans:xmlbeans:2.5.0'
     testCompile 'junit:junit:4.12'
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.6.2'
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.2'
 }
 
 
@@ -73,7 +75,7 @@ task classes (overwrite: true) << {
 
 
 task printSources << {
-     sourceSets.main.allSource.files.each {File file ->
+    sourceSets.main.allSource.files.each {File file ->
         println file
     }
 }
@@ -82,7 +84,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from 'build/docs/javadoc'
 }
- 
+
 task sourcesJar(type: Jar) {
     from sourceSets.generated.allSource
     classifier = 'sources'
@@ -112,8 +114,8 @@ task generateXMLBeanSources (overwrite: true) {
         sourceSets.main.resources.files.each {File file ->
             ant.xmlbean(schema: file.path, classgendir: sourceSets.generated.output.classesDir , srcgendir: "src/generated/java", classpath: configurations.compile.asPath) {
                 fileset(dir: file.parentFile) {
-                   include(name: '*.xsdconfig')
-              }
+                    include(name: '*.xsdconfig')
+                }
             }
 
         }
@@ -175,7 +177,13 @@ uploadArchives {
 }
 
 nexusStaging {
-        packageGroup = "uk.ac.ebi.ena.sra"
+    packageGroup = "uk.ac.ebi.ena.sra"
 }
 
-
+test {
+    maxHeapSize = "1024m"
+    jvmArgs "-Dfile.encoding=UTF-8"
+    testLogging {
+        events "failed", "standardOut", "standardError"
+    }
+}

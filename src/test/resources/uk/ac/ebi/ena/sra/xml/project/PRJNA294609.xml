@@ -1,0 +1,44 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<PROJECT_SET>
+    <PROJECT accession="PRJNA294609" center_name="Broad Institute">
+        <IDENTIFIERS>
+            <PRIMARY_ID>PRJNA294609</PRIMARY_ID>
+        </IDENTIFIERS>
+        <NAME>Homo sapiens</NAME>
+        <TITLE>Optimized sgRNA design to maximize activity and minimize off-target effects for genetic screens with
+            CRISPR-Cas9 raw sequence reads
+        </TITLE>
+        <DESCRIPTION>CRISPR technology has proven to be a powerful means of conducting genetic screens. The ease of
+            programming the Cas9 protein with an sgRNA presents an abundance of potential target sites for each gene,
+            but the on-target activity and off-target effects of individual sgRNAs can vary. Here, we incorporated
+            recently devised sgRNA design rules to create human and mouse genome-wide libraries, performed positive and
+            negative selection screens, and observed that the use of these rules greatly enhances the consistency and
+            depth of screening results. Additionally, we profiled the off-target activity of thousands of sgRNAs and
+            developed a metric to predict off-target sites that outperforms existing metrics. We combine these findings
+            from large-scale, empirical data to improve our computational design rules and create highly-optimized sgRNA
+            libraries that maximize on-target activity and minimize off-target effects in order to enable more effective
+            and efficient genetic screens and genome engineering.
+        </DESCRIPTION>
+        <SUBMISSION_PROJECT>
+            <SEQUENCING_PROJECT/>
+            <ORGANISM>
+                <SCIENTIFIC_NAME>Homo sapiens</SCIENTIFIC_NAME>
+                <TAXON_ID>9606</TAXON_ID>
+            </ORGANISM>
+        </SUBMISSION_PROJECT>
+        <PROJECT_ATTRIBUTES>
+            <PROJECT_ATTRIBUTE>
+                <TAG>ENA-REFSEQ</TAG>
+                <VALUE>N</VALUE>
+            </PROJECT_ATTRIBUTE>
+            <PROJECT_ATTRIBUTE>
+                <TAG>PROJECT-ID</TAG>
+                <VALUE>294609</VALUE>
+            </PROJECT_ATTRIBUTE>
+            <PROJECT_ATTRIBUTE>
+                <TAG>NCBI-PROJECT-TYPE</TAG>
+                <VALUE>SUBMISSION</VALUE>
+            </PROJECT_ATTRIBUTE>
+        </PROJECT_ATTRIBUTES>
+    </PROJECT>
+</PROJECT_SET>

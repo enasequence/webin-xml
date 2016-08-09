@@ -1,0 +1,45 @@
+<SAMPLE_SET>
+    <SAMPLE center_name="HapMap" alias="NA18758" accession="SRS001433">
+        <IDENTIFIERS>
+            <PRIMARY_ID>SRS001433</PRIMARY_ID>
+            <EXTERNAL_ID namespace="BioSample">SAMN00000985</EXTERNAL_ID>
+            <SUBMITTER_ID namespace="HapMap">NA18758</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>HapMap sample from Homo sapiens</TITLE>
+        <SAMPLE_NAME>
+            <TAXON_ID>9606</TAXON_ID>
+            <SCIENTIFIC_NAME>Homo sapiens</SCIENTIFIC_NAME>
+        </SAMPLE_NAME>
+        <DESCRIPTION>Human HapMap individual NA18758</DESCRIPTION>
+        <SAMPLE_LINKS>
+            <SAMPLE_LINK>
+                <URL_LINK>
+                    <LABEL>DNA source</LABEL>
+                    <URL>http://ccr.coriell.org/Sections/Collections/NHGRI/hapmap.aspx?PgId=266</URL>
+                </URL_LINK>
+            </SAMPLE_LINK>
+        </SAMPLE_LINKS>
+        <SAMPLE_ATTRIBUTES>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>population</TAG>
+                <VALUE>CHB</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>Coriell plate</TAG>
+                <VALUE>1</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>Coriell cell culture ID</TAG>
+                <VALUE>N/A</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>HapMap sample ID</TAG>
+                <VALUE>NA18758</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>BioSampleModel</TAG>
+                <VALUE>HapMap</VALUE>
+            </SAMPLE_ATTRIBUTE>
+        </SAMPLE_ATTRIBUTES>
+    </SAMPLE>
+</SAMPLE_SET>
