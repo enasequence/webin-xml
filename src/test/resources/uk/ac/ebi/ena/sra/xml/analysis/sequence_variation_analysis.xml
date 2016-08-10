@@ -1,0 +1,40 @@
+<ANALYSIS_SET>
+    <ANALYSIS alias="E-SYBR-1:F17999" center_name="EMBL European Bioinformatics Institute" broker_name="ArrayExpress" analysis_center="EMBL European Bioinformatics Institute" analysis_date="2012-10-16T10:10:10.0Z" accession="ERZ009618">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERZ009618</PRIMARY_ID>
+            <SUBMITTER_ID namespace="EMBL European Bioinformatics Institute">E-SYBR-1:F17999</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Multiazole resistance in clinical and environmental fungal isolates</TITLE>
+        <DESCRIPTION>bowtie2 aligner was used to align fastq files to the reference genome and produced sam files. samtools mpileup was used for variant calling. We filtered bcf files as described in Fedorova, N., et al. (2011). Command line "samtools mpileup -E -ugf .fa .bam | bcftools view -bvcg - > .bcf" followed by "bcftools view .bcf | vcfutils.pl varFilter -D 500 -d 20 | ./filter.pl > .vcf"</DESCRIPTION>
+        <STUDY_REF refname="E-SYBR-1" refcenter="EMBL European Bioinformatics Institute" accession="ERP002270">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERP002270</PRIMARY_ID>
+                <SUBMITTER_ID namespace="EMBL European Bioinformatics Institute">E-SYBR-1</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </STUDY_REF>
+        <SAMPLE_REF refname="E-SYBR-1:F17999" refcenter="EMBL European Bioinformatics Institute" accession="ERS216917">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERS216917</PRIMARY_ID>
+                <SUBMITTER_ID namespace="EMBL European Bioinformatics Institute">E-SYBR-1:F17999</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </SAMPLE_REF>
+        <ANALYSIS_TYPE>
+            <SEQUENCE_VARIATION>
+                <ASSEMBLY>
+                    <STANDARD refname="ASM265v1" accession="GCA_000002655"/>
+                </ASSEMBLY>
+                <SEQUENCE accession="CM00169.1" label="I"/>
+                <SEQUENCE accession="CM00170.1" label="II"/>
+                <SEQUENCE accession="CM00171.1" label="III"/>
+                <SEQUENCE accession="CM00172.1" label="IV"/>
+                <SEQUENCE accession="CM00173.1" label="V"/>
+                <SEQUENCE accession="CM00174.1" label="VI"/>
+                <SEQUENCE accession="CM00175.1" label="VII"/>
+                <SEQUENCE accession="CM00176.1" label="VIII"/>
+            </SEQUENCE_VARIATION>
+        </ANALYSIS_TYPE>
+        <FILES>
+            <FILE filename="ERZ009/ERZ009618/C023MABXX_3_1.vcf" filetype="vcf" checksum_method="MD5" checksum="ce5b339485e8f7e8f5d9d1dc4ef67d48"/>
+        </FILES>
+    </ANALYSIS>
+</ANALYSIS_SET>

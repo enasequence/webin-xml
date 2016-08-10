@@ -39,6 +39,9 @@ public class XMLValidateTest {
     public static final String EXPERIMENT_FILE_RESOURCE_DIR = "/uk/ac/ebi/ena/sra/xml/experiment";
     public static final String RUN_FILE_RESOURCE_DIR = "/uk/ac/ebi/ena/sra/xml/run";
     public static final String ANALYSIS_FILE_RESOURCE_DIR = "/uk/ac/ebi/ena/sra/xml/analysis";
+    public static final String EGA_DATASET_FILE_RESOURCE_DIR = "/uk/ac/ebi/ena/sra/xml/ega_dataset";
+    public static final String EGA_DAC_FILE_RESOURCE_DIR = "/uk/ac/ebi/ena/sra/xml/ega_dac";
+    public static final String EGA_POLICY_FILE_RESOURCE_DIR = "/uk/ac/ebi/ena/sra/xml/ega_policy";
 
     @Before
     public void setUp() throws Exception {

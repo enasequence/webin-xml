@@ -1,0 +1,16 @@
+<ANALYSIS_SET>
+    <ANALYSIS alias="SC_Monodelphis_domestica_GCA_000002295.1" accession="ERZ009762" center_name="SC">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERZ009762</PRIMARY_ID>
+            <SUBMITTER_ID namespace="SC">SC_Monodelphis_domestica_GCA_000002295.1</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Monodelphis_domestica_GCA_000002295.1</TITLE>
+        <DESCRIPTION/>
+        <ANALYSIS_TYPE>
+            <REFERENCE_SEQUENCE/>
+        </ANALYSIS_TYPE>
+        <FILES>
+            <FILE filename="ERZ009/ERZ009762/reference_seq.fa.gz" filetype="fasta" checksum_method="MD5" checksum="c75df1902605a39abd9d94ffd62a311e"/>
+        </FILES>
+    </ANALYSIS>
+</ANALYSIS_SET>
