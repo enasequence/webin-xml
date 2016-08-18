@@ -2,8 +2,7 @@
 <!-- INSDC Sequence Read Archive resource Run (SRR/ERR/DRR) object XML specification -->
 <!-- $Id: ENA.checklist.xsd,v 1.5 2015/02/02 12:52:13 rasko Exp $ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
-    <xs:import schemaLocation="SRA.common.xsd"
-        namespace="SRA.common"/>
+    <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
     <xs:complexType name="ChecklistType">
         <xs:annotation>
@@ -217,21 +216,9 @@
                                                   <xs:complexType>
                                                   <xs:sequence>
                                                   <xs:element maxOccurs="1" minOccurs="1"
-                                                  name="LABEL" type="xs:string">
+                                                  name="ONTOLOGY_ID" type="xs:string">
                                                   <xs:annotation>
-                                                  <xs:documentation>A unique immutable label for the ontology for referencing purposes.</xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:element>
-                                                  <xs:element maxOccurs="1" minOccurs="1"
-                                                  name="NAME" type="xs:string">
-                                                  <xs:annotation>
-                                                  <xs:documentation>The name of the ontology for display purposes.</xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:element>
-                                                  <xs:element maxOccurs="1" minOccurs="0"
-                                                  name="DESCRIPTION" type="xs:string">
-                                                  <xs:annotation>
-                                                  <xs:documentation>The description of the ontology for display purposes.</xs:documentation>
+                                                  <xs:documentation/>
                                                   </xs:annotation>
                                                   </xs:element>
                                                   </xs:sequence>
