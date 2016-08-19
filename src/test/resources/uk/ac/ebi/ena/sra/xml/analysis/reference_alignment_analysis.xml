@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?><ANALYSIS_SET>
+    <ANALYSIS alias="WTCHG_MARC_Ph1b.2.2D.fail.last.bam" center_name="EBI" accession="ERZ124620">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERZ124620</PRIMARY_ID>
+            <SUBMITTER_ID namespace="EBI">WTCHG_MARC_Ph1b.2.2D.fail.last.bam</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>ENA analysis of MARC phase1</TITLE>
+        <DESCRIPTION>This analysis is part of MARC phase1 study. The files are produced by experimental ENA pipeline for processing ONT data from the submitted runs.</DESCRIPTION>
+        <STUDY_REF accession="ERP012321" refname="EBI-MARC1-ANALYSIS" refcenter="EBI">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERP012321</PRIMARY_ID>
+                <SUBMITTER_ID namespace="EBI">EBI-MARC1-ANALYSIS</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </STUDY_REF>
+        <SAMPLE_REF accession="ERS739109" refname="E. coli K12 Ph1b.2" refcenter="WTCHG">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERS739109</PRIMARY_ID>
+                <SUBMITTER_ID namespace="WTCHG">E. coli K12 Ph1b.2</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </SAMPLE_REF>
+        <RUN_REF accession="ERR968974" refname="P1b-Lab4-R2" refcenter="WTCHG">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERR968974</PRIMARY_ID>
+                <SUBMITTER_ID namespace="WTCHG">P1b-Lab4-R2</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </RUN_REF>
+        <ANALYSIS_TYPE>
+            <REFERENCE_ALIGNMENT>
+                <SEQUENCE accession="U00096.3" label="ENA|U00096|U00096.3" refname="Escherichia coli str. K-12 substr. MG1655, complete genome"/>
+                <SEQUENCE accession="V00636.1" label="ontlambdafull" refname="Enterobacteria phage lambda, complete genome"/>
+                <SEQUENCE accession="AF482758.2" label="AF482758.2" refname="Cowpox virus strain Brighton Red, complete genome"/>
+            </REFERENCE_ALIGNMENT>
+        </ANALYSIS_TYPE>
+        <FILES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <FILE filename="ERZ124/ERZ124620/WTCHG_MARC_Ph1b.2.2D.fail.last.bam" filetype="bam" checksum_method="MD5" checksum="365746c7e24291e2a8a9b12d9480c6f3"/>
+        </FILES>
+        <ANALYSIS_ATTRIBUTES>
+            <ANALYSIS_ATTRIBUTE>
+                <TAG>marc phase</TAG>
+                <VALUE>1b</VALUE>
+            </ANALYSIS_ATTRIBUTE>
+            <ANALYSIS_ATTRIBUTE>
+                <TAG>folder</TAG>
+                <VALUE>fail</VALUE>
+            </ANALYSIS_ATTRIBUTE>
+            <ANALYSIS_ATTRIBUTE>
+                <TAG>basecall</TAG>
+                <VALUE>2D</VALUE>
+            </ANALYSIS_ATTRIBUTE>
+        </ANALYSIS_ATTRIBUTES>
+    </ANALYSIS>
+</ANALYSIS_SET>

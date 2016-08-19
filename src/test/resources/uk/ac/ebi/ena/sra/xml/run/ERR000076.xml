@@ -1,0 +1,36 @@
+<RUN_SET>
+    <RUN accession="ERR000076" alias="BGI-FC304RWAAXX" run_date="2008-07-08T00:00:00.000+01:00" run_center="BGI"
+         center_name="BGI">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERR000076</PRIMARY_ID>
+            <SUBMITTER_ID namespace="BGI">BGI-FC304RWAAXX</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <EXPERIMENT_REF accession="ERX000037" refname="g1k-bgi-NA18542-HUMsgR2ACDECBPE" refcenter="BGI">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERX000037</PRIMARY_ID>
+                <SUBMITTER_ID namespace="BGI">g1k-bgi-NA18542-HUMsgR2ACDECBPE</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </EXPERIMENT_REF>
+        <DATA_BLOCK>
+            <FILES>
+                <FILE filename="ERA000/ERA000014/srf/BGI-FC304RWAAXX_5.srf" filetype="srf"
+                      checksum="3dfebb4b30211523853805439fbd7cec" checksum_method="MD5"/>
+            </FILES>
+        </DATA_BLOCK>
+        <RUN_ATTRIBUTES>
+            <RUN_ATTRIBUTE>
+                <TAG>run</TAG>
+                <VALUE>FC304RWAAXX</VALUE>
+            </RUN_ATTRIBUTE>
+            <RUN_ATTRIBUTE>
+                <TAG>actual_read_length</TAG>
+                <VALUE>102</VALUE>
+            </RUN_ATTRIBUTE>
+            <RUN_ATTRIBUTE>
+                <TAG>total_bases</TAG>
+                <VALUE>798445800</VALUE>
+                <UNITS>bp</UNITS>
+            </RUN_ATTRIBUTE>
+        </RUN_ATTRIBUTES>
+    </RUN>
+</RUN_SET>

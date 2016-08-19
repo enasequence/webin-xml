@@ -1,15 +1,25 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.3"
+    }
+}
+
+apply plugin: 'io.codearte.nexus-staging'
+
+
 apply plugin: 'java'
 
 apply plugin: 'maven'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'signing'
-apply plugin: 'maven-publish'
 
 group = 'uk.ac.ebi.ena.sra'
-version = '1.5.7-OLS'
+version = '1.5.9'
 archivesBaseName = 'sra-xml'
-buildDir = 'build/sra-xml'
 
 
 repositories {
@@ -19,6 +29,21 @@ repositories {
 
 dependencies {
     compile 'org.apache.xmlbeans:xmlbeans:2.5.0'
+    testCompile 'junit:junit:4.12'
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.6.2'
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.2'
+}
+
+
+
+idea {
+    module {
+        sourceDirs += sourceSets.main.output.classesDir
+    }
+}
+
+task printClasspath << {
+    configurations.testCompile.each { println it }
 }
 
 sourceSets {
@@ -35,6 +60,13 @@ sourceSets {
             exclude '**/ENA.root.xsd'
         }
     }
+    generated {
+        java
+        output.resourcesDir = sourceSets.main.output.resourcesDir
+        output.classesDir   = sourceSets.main.output.classesDir
+        compileClasspath += sourceSets.main.runtimeClasspath
+    }
+
 }
 
 
@@ -43,7 +75,7 @@ task classes (overwrite: true) << {
 
 
 task printSources << {
-     sourceSets.main.allSource.files.each {File file ->
+    sourceSets.main.allSource.files.each {File file ->
         println file
     }
 }
@@ -52,9 +84,9 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from 'build/docs/javadoc'
 }
- 
+
 task sourcesJar(type: Jar) {
-    from sourceSets.main.allSource
+    from sourceSets.generated.allSource
     classifier = 'sources'
 }
 
@@ -62,29 +94,37 @@ artifacts {
     archives jar
     archives javadocJar
     archives sourcesJar
-}
 
+}
 
 signing {
     sign configurations.archives
 }
 
-task compileJava (overwrite: true) {
-    doLast{
-    ant.taskdef(name:'xmlbean', classname: 'org.apache.xmlbeans.impl.tool.XMLBean', classpath: configurations.compile.asPath)
-//     ant.xmlbean(schema: sourceSets.main.resources.files, classgendir: sourceSets.main.output.classesDir, classpath: configurations.compile.asPath)
-    sourceSets.main.resources.files.each {File file ->
-        ant.xmlbean(schema: file.path, classgendir: sourceSets.main.output.classesDir, classpath: configurations.compile.asPath) {
-            fileset(dir: file.parentFile) {
-                include(name: 'sra.xsdconfig')
-            }
-        }
+install {
+    configuration = configurations.runtime
+}
 
+
+
+task generateXMLBeanSources (overwrite: true) {
+    doLast{
+        delete "src/generated/java"
+        ant.taskdef(name:'xmlbean', classname: 'org.apache.xmlbeans.impl.tool.XMLBean', classpath: configurations.compile.asPath)
+        sourceSets.main.resources.files.each {File file ->
+            ant.xmlbean(schema: file.path, classgendir: sourceSets.generated.output.classesDir , srcgendir: "src/generated/java", classpath: configurations.compile.asPath) {
+                fileset(dir: file.parentFile) {
+                    include(name: '*.xsdconfig')
+                }
+            }
+
+        }
     }
 }
-}
 
-jar.dependsOn compileJava
+compileGeneratedJava.dependsOn generateXMLBeanSources
+compileTestJava.dependsOn compileGeneratedJava
+jar.dependsOn compileGeneratedJava
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -133,5 +173,17 @@ uploadArchives {
                 }
             }
         }
+    }
+}
+
+nexusStaging {
+    packageGroup = "uk.ac.ebi.ena.sra"
+}
+
+test {
+    maxHeapSize = "1024m"
+    jvmArgs "-Dfile.encoding=UTF-8"
+    testLogging {
+        events "failed", "standardOut", "standardError"
     }
 }

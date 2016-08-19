@@ -272,14 +272,14 @@
                             </xs:annotation>
                             <xs:complexType> </xs:complexType>
                         </xs:element>
-                        <xs:element name="REFERENCE_SEQUENCE"/>
+                        <xs:element name="REFERENCE_SEQUENCE"><xs:complexType> </xs:complexType></xs:element>
                         <xs:element name="SAMPLE_PHENOTYPE">
                             <xs:annotation>
                                 <xs:documentation/>
                             </xs:annotation>
                             <xs:complexType> </xs:complexType>
                         </xs:element>
-                        <xs:element name="PROCESSED_READS"/>
+                        <xs:element name="PROCESSED_READS" type="com:ReferenceSequenceType"> </xs:element>
                         <xs:element name="GENOME_MAP">
                             <xs:complexType>
                                 <xs:sequence>

@@ -1,0 +1,35 @@
+<?xml version = '1.0' encoding = 'UTF-8'?><ANALYSIS_SET>
+    <ANALYSIS alias="Thu_Oct_08_14_13_21_BST_2015_EBI" center_name="EBI" accession="ERZ125680">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERZ125680</PRIMARY_ID>
+            <SUBMITTER_ID namespace="EBI">Thu_Oct_08_14_13_21_BST_2015_EBI</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Sequence assembly analysis test</TITLE>
+        <DESCRIPTION>Here we present a draft genome of Staphylococcus pasteuri, strain W5. The strain was isolated from a wall in small Danish Slaughterhouse. We have in a recent publication shown how this strain can be involved in synergistic biofilm formation with other bacterial species isolated from the same environment. Genome sequencing libraries were prepared using the Nextera XT kit (Illumina, USA), according to the manufacturer’s recommendations, followed by sequencing as a part of the flowcell, as 2 × 250-base paired-end reads using the Illumina MiSeq (Illumina, USA) technology. The reads were cleaned and trimmed using CLC Genomics Workbench 7 (CLC bio, Denmark). Cleaned reads were assembled using SPAdes v 3.5.0. Obtained contigs were analyzed by VecScreen, to ensure no primer, phage or transposase contamination occurred in the contigs. Contigs smaller than 500bp were discarded from the contigs list.</DESCRIPTION>
+        <STUDY_REF refname="Thu_Oct_08_14_13_21_BST_2015_EBI" accession="ERP012699" refcenter="EBI">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERP012699</PRIMARY_ID>
+                <SUBMITTER_ID namespace="EBI">Thu_Oct_08_14_13_21_BST_2015_EBI</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </STUDY_REF>
+        <SAMPLE_REF refname="Thu_Oct_08_14_13_21_BST_2015_EBI" accession="ERS902648" refcenter="EBI">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERS902648</PRIMARY_ID>
+                <SUBMITTER_ID namespace="EBI">Thu_Oct_08_14_13_21_BST_2015_EBI</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </SAMPLE_REF>
+        <ANALYSIS_TYPE>
+            <SEQUENCE_ASSEMBLY>
+                <NAME>Sequence assembly test</NAME>
+                <PARTIAL>false</PARTIAL>
+                <COVERAGE>131</COVERAGE>
+                <PROGRAM>SMRT-Analysis and iCorn</PROGRAM>
+                <PLATFORM>PacBio and Illumina</PLATFORM>
+                <MIN_GAP_LENGTH>1</MIN_GAP_LENGTH>
+            </SEQUENCE_ASSEMBLY>
+        </ANALYSIS_TYPE>
+        <FILES>
+            <FILE filename="ERZ125/ERZ125680/Thu_Oct_08_14_13_21_BST_2015_EBI_scaffold_flatfile_test.embl.gz" filetype="scaffold_flatfile" checksum_method="MD5" checksum="52d4d6cdcf52fba4e2fbbba93fa9c440"/>
+        </FILES>
+    </ANALYSIS>
+</ANALYSIS_SET>
