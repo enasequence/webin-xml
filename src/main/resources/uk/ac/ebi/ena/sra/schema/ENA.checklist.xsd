@@ -8,81 +8,82 @@
         <xs:annotation>
             <xs:documentation/>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS" type="com:IdentifierType"> </xs:element>
-            <xs:element name="DESCRIPTOR">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="1" name="LABEL" type="xs:string">
-                            <xs:annotation>
-                                <xs:documentation>A unique immutable label for the checklist used for referencing purposes.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element minOccurs="1" name="NAME" type="xs:string">
-                            <xs:annotation>
-                                <xs:documentation>The name of the checklist used for display purposes.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element minOccurs="0" name="DESCRIPTION" type="xs:string">
-                            <xs:annotation>
-                                <xs:documentation>The description of the checklist used for display purposes.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="AUTHORITY" type="xs:string" minOccurs="0">
-                            <xs:annotation>
-                                <xs:documentation>The checklist authority.</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element maxOccurs="unbounded" name="FIELD_GROUP">
-                            <xs:annotation>
-                                <xs:documentation>Checklist field group.</xs:documentation>
-                            </xs:annotation>
-                            <xs:complexType>
-                                <xs:sequence>
-                                    <xs:element maxOccurs="1" minOccurs="1" name="NAME"
-                                        type="xs:string">
-                                        <xs:annotation>
-                                            <xs:documentation>The name of the checklist group for display purposes.</xs:documentation>
-                                        </xs:annotation>
-                                    </xs:element>
-                                    <xs:element maxOccurs="1" minOccurs="0" name="DESCRIPTION"
-                                        type="xs:string">
-                                        <xs:annotation>
-                                            <xs:documentation>The description of the field group for display purposes.</xs:documentation>
-                                        </xs:annotation>
-                                    </xs:element>
-                                    <xs:element name="FIELD" maxOccurs="unbounded">
-                                        <xs:annotation>
-                                            <xs:documentation>A checklist field.</xs:documentation>
-                                        </xs:annotation>
-                                        <xs:complexType>
-                                            <xs:sequence>
-                                                <xs:element maxOccurs="1" minOccurs="1" name="LABEL"
-                                                  type="xs:string">
+        <xs:complexContent>
+            <xs:extension base="com:ObjectType">
+                <xs:sequence>
+                    <xs:element name="DESCRIPTOR">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element minOccurs="1" name="LABEL" type="xs:string">
+                                    <xs:annotation>
+                                        <xs:documentation>A unique immutable label for the checklist used for referencing purposes.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                                <xs:element minOccurs="1" name="NAME" type="xs:string">
+                                    <xs:annotation>
+                                        <xs:documentation>The name of the checklist used for display purposes.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                                <xs:element minOccurs="0" name="DESCRIPTION" type="xs:string">
+                                    <xs:annotation>
+                                        <xs:documentation>The description of the checklist used for display purposes.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                                <xs:element name="AUTHORITY" type="xs:string" minOccurs="0">
+                                    <xs:annotation>
+                                        <xs:documentation>The checklist authority.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:element>
+                                <xs:element maxOccurs="unbounded" name="FIELD_GROUP">
+                                    <xs:annotation>
+                                        <xs:documentation>Checklist field group.</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element maxOccurs="1" minOccurs="1" name="NAME"
+                                                type="xs:string">
+                                                <xs:annotation>
+                                                  <xs:documentation>The name of the checklist group for display purposes.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:element>
+                                            <xs:element maxOccurs="1" minOccurs="0"
+                                                name="DESCRIPTION" type="xs:string">
+                                                <xs:annotation>
+                                                  <xs:documentation>The description of the field group for display purposes.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:element>
+                                            <xs:element name="FIELD" maxOccurs="unbounded">
+                                                <xs:annotation>
+                                                  <xs:documentation>A checklist field.</xs:documentation>
+                                                </xs:annotation>
+                                                <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element maxOccurs="1" minOccurs="1"
+                                                  name="LABEL" type="xs:string">
                                                   <xs:annotation>
                                                   <xs:documentation>A unique immutable label for the field for referencing purposes.</xs:documentation>
                                                   </xs:annotation>
-                                                </xs:element>
-                                                <xs:element maxOccurs="unbounded" minOccurs="0"
+                                                  </xs:element>
+                                                  <xs:element maxOccurs="unbounded" minOccurs="0"
                                                   name="SYNONYM" type="xs:string">
                                                   <xs:annotation>
                                                   <xs:documentation>Synonym that will be converted to LABEL.</xs:documentation>
                                                   </xs:annotation>
-                                                </xs:element>
-                                                <xs:element maxOccurs="1" minOccurs="1" name="NAME"
-                                                  type="xs:string">
+                                                  </xs:element>
+                                                  <xs:element maxOccurs="1" minOccurs="1"
+                                                  name="NAME" type="xs:string">
                                                   <xs:annotation>
                                                   <xs:documentation>The name of the field for display purposes.</xs:documentation>
                                                   </xs:annotation>
-                                                </xs:element>
-                                                <xs:element maxOccurs="1" minOccurs="0"
+                                                  </xs:element>
+                                                  <xs:element maxOccurs="1" minOccurs="0"
                                                   name="DESCRIPTION" type="xs:string">
                                                   <xs:annotation>
                                                   <xs:documentation>The description of the field for display purposes.
                                                         </xs:documentation>
                                                   </xs:annotation>
-                                                </xs:element>
-                                                <xs:element minOccurs="0" name="UNITS">
+                                                  </xs:element>
+                                                  <xs:element minOccurs="0" name="UNITS">
                                                   <xs:annotation>
                                                   <xs:documentation>The allowed units. </xs:documentation>
                                                   </xs:annotation>
@@ -96,8 +97,8 @@
                                                   </xs:element>
                                                   </xs:sequence>
                                                   </xs:complexType>
-                                                </xs:element>
-                                                <xs:element minOccurs="0" name="FIELD_TYPE">
+                                                  </xs:element>
+                                                  <xs:element minOccurs="0" name="FIELD_TYPE">
                                                   <xs:annotation>
                                                   <xs:documentation>The field type.</xs:documentation>
                                                   </xs:annotation>
@@ -226,8 +227,8 @@
                                                   </xs:element>
                                                   </xs:choice>
                                                   </xs:complexType>
-                                                </xs:element>
-                                                <xs:element maxOccurs="1" name="MANDATORY">
+                                                  </xs:element>
+                                                  <xs:element maxOccurs="1" name="MANDATORY">
                                                   <xs:annotation>
                                                   <xs:documentation>Defines if the attribute is mandatory, recommended or optional.</xs:documentation>
                                                   </xs:annotation>
@@ -256,8 +257,8 @@
                                                   </xs:enumeration>
                                                   </xs:restriction>
                                                   </xs:simpleType>
-                                                </xs:element>
-                                                <xs:element name="MULTIPLICITY">
+                                                  </xs:element>
+                                                  <xs:element name="MULTIPLICITY">
                                                   <xs:annotation>
                                                   <xs:documentation>The attribute can appear more than once if the multiplicity value is set to multiple and at most once if the value is set to single. By default an attribute can occur no more than once.
 
@@ -269,75 +270,78 @@
                                                   <xs:enumeration value="multiple"/>
                                                   </xs:restriction>
                                                   </xs:simpleType>
-                                                </xs:element>
-                                            </xs:sequence>
-                                        </xs:complexType>
-                                    </xs:element>
-                                </xs:sequence>
-                                <xs:attribute name="restrictionType">
-                                    <xs:simpleType>
-                                        <xs:restriction base="xs:string">
-                                            <xs:enumeration value="Any number or none of the fields"/>
-                                            <xs:enumeration value="One of the fields"/>
-                                            <xs:enumeration value="At least one of the fields"/>
-                                            <xs:enumeration value="One or none of the fields"/>
-                                        </xs:restriction>
-                                    </xs:simpleType>
-                                </xs:attribute>
-                            </xs:complexType>
-                        </xs:element>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="CONDITION"
-                            nillable="false">
-                            <xs:annotation>
-                                <xs:documentation>Field condition.</xs:documentation>
-                            </xs:annotation>
-                            <xs:complexType>
-                                <xs:sequence>
-                                    <xs:element maxOccurs="1" minOccurs="1" name="LABEL"
-                                        type="xs:string">
-                                        <xs:annotation>
-                                            <xs:documentation>A unique immutable label for referencing purposes.</xs:documentation>
-                                        </xs:annotation>
-                                    </xs:element>
-                                    <xs:element maxOccurs="1" minOccurs="1" name="NAME"
-                                        type="xs:string">
-                                        <xs:annotation>
-                                            <xs:documentation>The name of the condition for display purposes.</xs:documentation>
-                                        </xs:annotation>
-                                    </xs:element>
-                                    <xs:element maxOccurs="1" minOccurs="0" name="DESCRIPTION"
-                                        type="xs:string">
-                                        <xs:annotation>
-                                            <xs:documentation>The description of the condition for display purposes.</xs:documentation>
-                                        </xs:annotation>
-                                    </xs:element>
-                                    <xs:element maxOccurs="1" minOccurs="1" name="EXPRESSION"
-                                        type="xs:string">
-                                        <xs:annotation>
-                                            <xs:documentation>The condition expression.</xs:documentation>
-                                        </xs:annotation>
-                                    </xs:element>
-                                    <xs:element maxOccurs="1" minOccurs="1" name="ERROR"
-                                        type="xs:string">
-                                        <xs:annotation>
-                                            <xs:documentation>The condition error.</xs:documentation>
-                                        </xs:annotation>
-                                    </xs:element>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-        <xs:attributeGroup ref="com:NameGroup"/>
-        <xs:attribute name="checklistType">
-            <xs:simpleType>
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="Sample"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                </xs:complexType>
+                                            </xs:element>
+                                        </xs:sequence>
+                                        <xs:attribute name="restrictionType">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:enumeration
+                                                  value="Any number or none of the fields"/>
+                                                  <xs:enumeration value="One of the fields"/>
+                                                  <xs:enumeration value="At least one of the fields"/>
+                                                  <xs:enumeration value="One or none of the fields"
+                                                  />
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:attribute>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="CONDITION"
+                                    nillable="false">
+                                    <xs:annotation>
+                                        <xs:documentation>Field condition.</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element maxOccurs="1" minOccurs="1" name="LABEL"
+                                                type="xs:string">
+                                                <xs:annotation>
+                                                  <xs:documentation>A unique immutable label for referencing purposes.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:element>
+                                            <xs:element maxOccurs="1" minOccurs="1" name="NAME"
+                                                type="xs:string">
+                                                <xs:annotation>
+                                                  <xs:documentation>The name of the condition for display purposes.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:element>
+                                            <xs:element maxOccurs="1" minOccurs="0"
+                                                name="DESCRIPTION" type="xs:string">
+                                                <xs:annotation>
+                                                  <xs:documentation>The description of the condition for display purposes.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:element>
+                                            <xs:element maxOccurs="1" minOccurs="1"
+                                                name="EXPRESSION" type="xs:string">
+                                                <xs:annotation>
+                                                  <xs:documentation>The condition expression.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:element>
+                                            <xs:element maxOccurs="1" minOccurs="1" name="ERROR"
+                                                type="xs:string">
+                                                <xs:annotation>
+                                                  <xs:documentation>The condition error.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:element>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="checklistType">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="Sample"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="ChecklistSetType">

@@ -10,81 +10,83 @@
 			<xs:documentation>Describes an object that contains data access comittee  information including contacts.
     </xs:documentation>
 		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="IDENTIFIERS" type="com:IdentifierType" maxOccurs="1" minOccurs="0">
-			</xs:element>			
-			
-			<xs:element name="TITLE" type="xs:string" minOccurs="0" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>
+		<xs:complexContent>
+			<xs:extension base="com:ObjectType">
+				<xs:sequence>
+
+					<xs:element name="TITLE" type="xs:string" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>
             Short text that can be used to call out DAC records in searches or in displays.
           </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="CONTACTS">
-				<xs:complexType>
-					<xs:sequence minOccurs="1" maxOccurs="unbounded">
-						<xs:element name="CONTACT">
-							<xs:complexType>
-								<xs:attribute name="name" type="xs:string" use="required">
-									<xs:annotation>
-										<xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CONTACTS">
+						<xs:complexType>
+							<xs:sequence minOccurs="1" maxOccurs="unbounded">
+								<xs:element name="CONTACT">
+									<xs:complexType>
+										<xs:attribute name="name" type="xs:string" use="required">
+											<xs:annotation>
+												<xs:documentation>
                       Name of contact person for this DAC.
                     </xs:documentation>
-									</xs:annotation>
-								</xs:attribute>
-								<xs:attribute name="email" type="xs:anyURI" use="required">
-									<xs:annotation>
-										<xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+										<xs:attribute name="email" type="xs:anyURI" use="required">
+											<xs:annotation>
+												<xs:documentation>
                       email of the person to contact.
                     </xs:documentation>
-									</xs:annotation>
-								</xs:attribute>
-								<xs:attribute name="telephone_number" type="xs:string"
-									use="optional">
-									<xs:annotation>
-										<xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+										<xs:attribute name="telephone_number" type="xs:string"
+											use="optional">
+											<xs:annotation>
+												<xs:documentation>
                       telephone_number of the person to contact.
                     </xs:documentation>
-									</xs:annotation>
-								</xs:attribute>
-								<xs:attribute name="organisation" type="xs:string" use="required">
-									<xs:annotation>
-										<xs:documentation>Center or institution name .</xs:documentation>
-									</xs:annotation>
-								</xs:attribute>
-								<xs:attribute name="main_contact" type="xs:boolean">
-									<xs:annotation>
-										<xs:documentation>If true then this is the main contact.</xs:documentation>
-									</xs:annotation>
-								</xs:attribute>
-							</xs:complexType>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element minOccurs="0" name="DAC_LINKS">
-				<xs:annotation>
-					<xs:documentation>Links to related resources.</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence maxOccurs="unbounded" minOccurs="1">
-						<xs:element name="DAC_LINK" type="com:LinkType"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element maxOccurs="1" minOccurs="0" name="DAC_ATTRIBUTES">
-				<xs:annotation>
-					<xs:documentation>Properties and attributes of the DAC. These can be entered as free-form tag-value pairs. Submitters may be asked to follow a community established ontology when describing the work.          </xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence maxOccurs="unbounded" minOccurs="1">
-						<xs:element name="DAC_ATTRIBUTE" type="com:AttributeType"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-		<xs:attributeGroup ref="com:NameGroup"/>
+											</xs:annotation>
+										</xs:attribute>
+										<xs:attribute name="organisation" type="xs:string"
+											use="required">
+											<xs:annotation>
+												<xs:documentation>Center or institution name .</xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+										<xs:attribute name="main_contact" type="xs:boolean">
+											<xs:annotation>
+												<xs:documentation>If true then this is the main contact.</xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element minOccurs="0" name="DAC_LINKS">
+						<xs:annotation>
+							<xs:documentation>Links to related resources.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence maxOccurs="unbounded" minOccurs="1">
+								<xs:element name="DAC_LINK" type="com:LinkType"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element maxOccurs="1" minOccurs="0" name="DAC_ATTRIBUTES">
+						<xs:annotation>
+							<xs:documentation>Properties and attributes of the DAC. These can be entered as free-form tag-value pairs. Submitters may be asked to follow a community established ontology when describing the work.          </xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence maxOccurs="unbounded" minOccurs="1">
+								<xs:element name="DAC_ATTRIBUTE" type="com:AttributeType"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 
 

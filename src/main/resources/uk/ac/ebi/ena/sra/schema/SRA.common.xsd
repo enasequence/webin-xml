@@ -4,6 +4,40 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common"
     targetNamespace="SRA.common">
 
+    <xs:complexType name="ObjectType">
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS" type="com:IdentifierType"/>
+        </xs:sequence>
+        <xs:attribute name="alias" type="xs:string" use="optional">
+            <xs:annotation>
+                <xs:documentation>
+                    Submitter designated name for the object. The name must be unique within the submission account.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="center_name" type="xs:string" use="optional">
+            <xs:annotation>
+                <xs:documentation>
+                    The center name of the submitter.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="broker_name" type="xs:string" use="optional">
+            <xs:annotation>
+                <xs:documentation>
+                    The center name of the broker.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accession" type="xs:string" use="optional">
+            <xs:annotation>
+                <xs:documentation>
+                    The object accession assigned by the archive.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
     <xs:attributeGroup name="NameGroup">
         <xs:attribute name="alias" type="xs:string" use="optional">
             <xs:annotation>

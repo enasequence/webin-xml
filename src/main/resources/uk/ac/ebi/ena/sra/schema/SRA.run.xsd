@@ -10,64 +10,66 @@
                 A run contains a group of reads generated for a particular experiment.
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-
-            <xs:element name="IDENTIFIERS" type="com:IdentifierType" maxOccurs="1" minOccurs="0"> </xs:element>
-            <xs:element name="TITLE" type="xs:string" minOccurs="0" maxOccurs="1"> 
-                <xs:annotation>
-                   <xs:documentation>
+        <xs:complexContent>
+            <xs:extension base="com:ObjectType">
+                <xs:sequence>
+                    <xs:element name="TITLE" type="xs:string" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
                         Short text that can be used to define submissions in searches or in displays.
                    </xs:documentation>
-                </xs:annotation>                    
-            </xs:element>
-            <xs:element name="EXPERIMENT_REF" nillable="false" maxOccurs="1" minOccurs="1">
-                <xs:annotation>
-                    <xs:documentation> The EXPERIMENT_REF identifies the parent experiment.
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="EXPERIMENT_REF" nillable="false" maxOccurs="1" minOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation> The EXPERIMENT_REF identifies the parent experiment.
                         Experiment describes nucleic acid prepararation from biological sample,
                         molecular strategies and selections used in preparation of libraries for
                         sequencing.
                    </xs:documentation>
-                </xs:annotation>
-                <xs:complexType>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="IDENTIFIERS" type="com:IdentifierType"
+                                    maxOccurs="1" minOccurs="0"> </xs:element>
+                            </xs:sequence>
+                            <xs:attributeGroup ref="com:RefNameGroup"/>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="SPOT_DESCRIPTOR" type="com:SpotDescriptorType" maxOccurs="1"
+                        minOccurs="0"/>
+
+                    <xs:element name="PLATFORM" type="com:PlatformType" maxOccurs="1" minOccurs="0"/>
+
+                    <xs:element name="PROCESSING" maxOccurs="1" minOccurs="0"
+                        type="com:ProcessingType"/>
+
+                    <xs:element maxOccurs="1" minOccurs="0" name="RUN_TYPE">
+                        <xs:annotation>
+                            <xs:documentation>The type of the run. </xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:choice>
+                                <xs:element name="REFERENCE_ALIGNMENT"
+                                    type="com:ReferenceSequenceType"> </xs:element>
+                            </xs:choice>
+                        </xs:complexType>
+                    </xs:element>
+
                     <xs:sequence>
-                        <xs:element name="IDENTIFIERS" type="com:IdentifierType" maxOccurs="1"
-                            minOccurs="0"> </xs:element>
-                    </xs:sequence>
-                    <xs:attributeGroup ref="com:RefNameGroup"/>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="SPOT_DESCRIPTOR" type="com:SpotDescriptorType" maxOccurs="1"  minOccurs="0"/>
+                        <xs:element name="DATA_BLOCK" maxOccurs="1" minOccurs="0">
+                            <xs:complexType>
 
-            <xs:element name="PLATFORM" type="com:PlatformType" maxOccurs="1" minOccurs="0"/>
-
-            <xs:element name="PROCESSING" maxOccurs="1" minOccurs="0" type="com:ProcessingType"/>
-
-           <xs:element maxOccurs="1" minOccurs="0" name="RUN_TYPE">
-                <xs:annotation>
-                    <xs:documentation>The type of the run. </xs:documentation>
-                </xs:annotation>
-                <xs:complexType>
-                    <xs:choice>
-                        <xs:element name="REFERENCE_ALIGNMENT" type="com:ReferenceSequenceType">
-                        </xs:element>
-                    </xs:choice>
-                </xs:complexType>
-            </xs:element> 
-
-            <xs:sequence>
-                <xs:element name="DATA_BLOCK" maxOccurs="1" minOccurs="0">
-                    <xs:complexType>
-
-                        <xs:sequence>
-                            <xs:element name="FILES">
-                                <xs:annotation>
-                                    <xs:documentation> Data files associated with the run.</xs:documentation>
-                                </xs:annotation>
-                                <xs:complexType>
-                                    <xs:sequence maxOccurs="1" minOccurs="1">
-                                        <xs:element name="FILE" maxOccurs="unbounded">
-                                            <xs:complexType>
-                                                <xs:sequence>
+                                <xs:sequence>
+                                    <xs:element name="FILES">
+                                        <xs:annotation>
+                                            <xs:documentation> Data files associated with the run.</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence maxOccurs="1" minOccurs="1">
+                                                <xs:element name="FILE" maxOccurs="unbounded">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
                                                   <xs:element name="READ_LABEL" type="xs:string"
                                                   minOccurs="0" maxOccurs="unbounded">
                                                   <xs:annotation>
@@ -76,14 +78,14 @@
                                                     </xs:documentation>
                                                   </xs:annotation>
                                                   </xs:element>
-                                                </xs:sequence>
-                                                <xs:attribute name="filename" type="xs:string"
+                                                  </xs:sequence>
+                                                  <xs:attribute name="filename" type="xs:string"
                                                   use="required">
                                                   <xs:annotation>
                                                   <xs:documentation>The name or relative pathname of a run data file.</xs:documentation>
                                                   </xs:annotation>
-                                                </xs:attribute>
-                                                <xs:attribute name="filetype" use="required">
+                                                  </xs:attribute>
+                                                  <xs:attribute name="filetype" use="required">
                                                   <xs:annotation>
                                                   <xs:documentation> The run data file model.</xs:documentation>
                                                   </xs:annotation>
@@ -309,8 +311,8 @@
                                                   </xs:enumeration>
                                                   </xs:restriction>
                                                   </xs:simpleType>
-                                                </xs:attribute>
-                                                <xs:attribute name="quality_scoring_system"
+                                                  </xs:attribute>
+                                                  <xs:attribute name="quality_scoring_system"
                                                   use="optional">
                                                   <xs:annotation>
                                                   <xs:documentation>
@@ -339,8 +341,9 @@
                                                   </xs:enumeration>
                                                   </xs:restriction>
                                                   </xs:simpleType>
-                                                </xs:attribute>
-                                                <xs:attribute name="quality_encoding" use="optional">
+                                                  </xs:attribute>
+                                                  <xs:attribute name="quality_encoding"
+                                                  use="optional">
                                                   <xs:annotation>
                                                   <xs:documentation>
                                                     Character used in representing the minimum quality value. 
@@ -372,8 +375,8 @@
                                                   </xs:enumeration>
                                                   </xs:restriction>
                                                   </xs:simpleType>
-                                                </xs:attribute>
-                                                <xs:attribute name="ascii_offset" use="optional">
+                                                  </xs:attribute>
+                                                  <xs:attribute name="ascii_offset" use="optional">
                                                   <xs:annotation>
                                                   <xs:documentation>
                                                     Character used in representing the minimum quality value.  Helps specify how to decode text rendering of quality data.
@@ -398,8 +401,9 @@
 
                                                   </xs:restriction>
                                                   </xs:simpleType>
-                                                </xs:attribute>
-                                                <xs:attribute name="checksum_method" use="required">
+                                                  </xs:attribute>
+                                                  <xs:attribute name="checksum_method"
+                                                  use="required">
                                                   <xs:annotation>
                                                   <xs:documentation>
                                                     Checksum method used.
@@ -423,85 +427,86 @@
                                                   </xs:enumeration>
                                                   </xs:restriction>
                                                   </xs:simpleType>
-                                                </xs:attribute>
-                                                <xs:attribute name="checksum" type="xs:string"
+                                                  </xs:attribute>
+                                                  <xs:attribute name="checksum" type="xs:string"
                                                   use="required">
                                                   <xs:annotation>
                                                   <xs:documentation>
                                                     Checksum of uncompressed file.
                                                 </xs:documentation>
                                                   </xs:annotation>
-                                                </xs:attribute>
-                                                <xs:attribute name="unencrypted_checksum"
+                                                  </xs:attribute>
+                                                  <xs:attribute name="unencrypted_checksum"
                                                   type="xs:string" use="optional">
                                                   <xs:annotation>
                                                   <xs:documentation>
                                                             Checksum of unenrypted file(used in conjunction with checksum of encrypted file).
                                                         </xs:documentation>
                                                   </xs:annotation>
-                                                </xs:attribute>
-                                            </xs:complexType>
-                                        </xs:element>
-                                    </xs:sequence>
-                                </xs:complexType>
-                            </xs:element>
-                        </xs:sequence>
-                        <xs:attribute name="member_name" type="xs:string" use="optional">
-                            <xs:annotation>
-                                <xs:documentation>
+                                                  </xs:attribute>
+                                                  </xs:complexType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                                <xs:attribute name="member_name" type="xs:string" use="optional">
+                                    <xs:annotation>
+                                        <xs:documentation>
                                         Allow for an individual DATA_BLOCK to be associated with a member of a sample pool.
                                     </xs:documentation>
-                            </xs:annotation>
-                        </xs:attribute>
-                    </xs:complexType>
-                </xs:element>
-            </xs:sequence>
-            <xs:element name="RUN_LINKS" minOccurs="0" maxOccurs="1">
-                <xs:annotation>
-                    <xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:element name="RUN_LINKS" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
                             Links to resources related to this RUN or RUN set (publication, datasets, online databases).
                         </xs:documentation>
-                </xs:annotation>
-                <xs:complexType>
-                    <xs:sequence minOccurs="1" maxOccurs="1">
-                        <xs:element name="RUN_LINK" type="com:LinkType" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence minOccurs="1" maxOccurs="1">
+                                <xs:element name="RUN_LINK" type="com:LinkType"
+                                    maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
 
-            <xs:element name="RUN_ATTRIBUTES" minOccurs="0" maxOccurs="1">
-                <xs:annotation>
-                    <xs:documentation>
+                    <xs:element name="RUN_ATTRIBUTES" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
                             Properties and attributes of a RUN.  These can be entered as free-form 
                             tag-value pairs. For certain studies, submitters may be asked to follow a
                             community established ontology when describing the work.
                         </xs:documentation>
-                </xs:annotation>
-                <xs:complexType>
-                    <xs:sequence maxOccurs="1" minOccurs="1">
-                        <xs:element name="RUN_ATTRIBUTE" type="com:AttributeType"
-                            maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-
-        <xs:attributeGroup ref="com:NameGroup"/>
-        <xs:attribute name="run_date" use="optional" type="xs:dateTime">
-            <xs:annotation>
-                <xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence maxOccurs="1" minOccurs="1">
+                                <xs:element name="RUN_ATTRIBUTE" type="com:AttributeType"
+                                    maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="run_date" use="optional" type="xs:dateTime">
+                    <xs:annotation>
+                        <xs:documentation>
                         ISO date when the run took place.  
                     </xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
-        <xs:attribute name="run_center" use="optional" type="xs:string">
-            <xs:annotation>
-                <xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="run_center" use="optional" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>
                         If applicable, the name of the contract sequencing center that executed the run.
                         Example: 454MSC.
                     </xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="RunSetType">

@@ -472,7 +472,7 @@
                   been partitioned among the pool members (no leftovers). </xs:documentation>
               </xs:annotation>
             </xs:element>
-            <xs:element name="MEMBER" type="PoolMemberType" minOccurs="1" maxOccurs="unbounded" >
+            <xs:element name="MEMBER" type="PoolMemberType" minOccurs="1" maxOccurs="unbounded">
               <xs:annotation>
                 <xs:documentation> Reference to the sample as determined from barcode/MID resolution or read partition. </xs:documentation>
               </xs:annotation>
@@ -626,8 +626,7 @@
           <xs:restriction base="xs:string"> </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="LIBRARY_CONSTRUCTION_PROTOCOL" type="xs:string" minOccurs="0"
-                  maxOccurs="1">
+      <xs:element name="LIBRARY_CONSTRUCTION_PROTOCOL" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>
             Free form text describing the protocol by which the sequencing library was constructed.
@@ -672,6 +671,7 @@
     </xs:sequence>
 
   </xs:complexType>
+
   <xs:complexType name="ExperimentType">
 
     <xs:annotation>
@@ -682,91 +682,86 @@
       </xs:documentation>
     </xs:annotation>
 
-    <xs:sequence>
-
-      <xs:element name="IDENTIFIERS" type="com:IdentifierType" maxOccurs="1" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>List of primary and alternate identifiers including those records replacing or replaced by this record.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="TITLE" type="xs:string" minOccurs="0" maxOccurs="1">
-        <xs:annotation>
-          <xs:documentation>
+    <xs:complexContent>
+      <xs:extension base="com:ObjectType">
+        <xs:sequence>
+          <xs:element name="TITLE" type="xs:string" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation>
             Short text that can be used to call out experiment records in searches or in displays.
             This element is technically optional but should be used for all new records.
           </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="STUDY_REF" minOccurs="1" maxOccurs="1">
-        <xs:annotation>
-          <xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="STUDY_REF" minOccurs="1" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation>
             The STUDY_REF descriptor establishes the relationship of the experiment to the parent
             study.  This can either be the accession of an existing archived study record, or
             a reference to a new study record in the same submission (which does not yet have an
             accession).
           </xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="IDENTIFIERS" type="com:IdentifierType" minOccurs="0" maxOccurs="1">
-              <xs:annotation>
-                <xs:documentation> Set of reference IDs to parent study record. This block is intended to replace the use of the less
+            </xs:annotation>
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="IDENTIFIERS" type="com:IdentifierType" minOccurs="0" maxOccurs="1">
+                  <xs:annotation>
+                    <xs:documentation> Set of reference IDs to parent study record. This block is intended to replace the use of the less
                   structured RefNameGroup identifiers. </xs:documentation>
-              </xs:annotation>
-            </xs:element>
+                  </xs:annotation>
+                </xs:element>
 
-          </xs:sequence>
-          <xs:attributeGroup ref="com:RefNameGroup"/>
+              </xs:sequence>
+              <xs:attributeGroup ref="com:RefNameGroup"/>
 
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="DESIGN" type="LibraryType" maxOccurs="1" minOccurs="1">
-        <xs:annotation>
-          <xs:documentation> The library design including library properties, layout, protocol, targeting information, and spot and gap
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="DESIGN" type="LibraryType" maxOccurs="1" minOccurs="1">
+            <xs:annotation>
+              <xs:documentation> The library design including library properties, layout, protocol, targeting information, and spot and gap
             descriptors. </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="PLATFORM" type="com:PlatformType" maxOccurs="1" minOccurs="1">
-        <xs:annotation>
-          <xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="PLATFORM" type="com:PlatformType" maxOccurs="1" minOccurs="1">
+            <xs:annotation>
+              <xs:documentation>
             The PLATFORM record selects which sequencing platform and platform-specific runtime parameters.
             This will be determined by the Center.
           </xs:documentation>
-        </xs:annotation>
-      </xs:element>
+            </xs:annotation>
+          </xs:element>
 
-      <xs:element name="PROCESSING" type="com:ProcessingType" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="PROCESSING" type="com:ProcessingType" minOccurs="0" maxOccurs="1"/>
 
-      <xs:element name="EXPERIMENT_LINKS" minOccurs="0" maxOccurs="1">
-        <xs:annotation>
-          <xs:documentation>
+          <xs:element name="EXPERIMENT_LINKS" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation>
             Links to resources related to this experiment or experiment set (publication, datasets, online databases).
           </xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-          <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="EXPERIMENT_LINK" type="com:LinkType"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="EXPERIMENT_LINK" type="com:LinkType"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
 
-      <xs:element name="EXPERIMENT_ATTRIBUTES" minOccurs="0" maxOccurs="1">
-        <xs:annotation>
-          <xs:documentation>
+          <xs:element name="EXPERIMENT_ATTRIBUTES" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+              <xs:documentation>
             Properties and attributes of the experiment.  These can be entered as free-form
             tag-value pairs.
           </xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-          <xs:sequence maxOccurs="unbounded" minOccurs="1">
-            <xs:element name="EXPERIMENT_ATTRIBUTE" type="com:AttributeType"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-    <xs:attributeGroup ref="com:NameGroup"/>
-
+            </xs:annotation>
+            <xs:complexType>
+              <xs:sequence maxOccurs="unbounded" minOccurs="1">
+                <xs:element name="EXPERIMENT_ATTRIBUTE" type="com:AttributeType"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="ExperimentSetType">

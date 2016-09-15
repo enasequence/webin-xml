@@ -18,173 +18,180 @@
         <xs:annotation>
             <xs:documentation/>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS" type="com:IdentifierType"> </xs:element>
-            <xs:element maxOccurs="1" minOccurs="1" name="TITLE" type="xs:string">
-                <xs:annotation>
-                    <xs:documentation/>
-                </xs:annotation>
-            </xs:element>
-            <xs:element maxOccurs="1" minOccurs="0" name="DESCRIPTION" type="xs:string">
-                <xs:annotation>
-                    <xs:documentation/>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="NAME" type="xs:string"/>
-            <xs:element name="ASSEMBLY_LEVEL">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="complete genome"/>
-                        <xs:enumeration value="chromosome"/>
-                        <xs:enumeration value="scaffold"/>
-                        <xs:enumeration value="contig"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="GENOME_REPRESENTATION">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="full"/>
-                        <xs:enumeration value="partial"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="TAXON">
-                <xs:complexType>
-                    <xs:all minOccurs="1">
-                        <xs:element maxOccurs="1" minOccurs="1" name="TAXON_ID" type="xs:int">
-                            <xs:annotation>
-                                <xs:documentation/>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element maxOccurs="1" minOccurs="0" name="SCIENTIFIC_NAME"
-                            type="xs:string">
-                            <xs:annotation>
-                                <xs:documentation/>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element maxOccurs="1" minOccurs="0" name="COMMON_NAME" type="xs:string">
-                            <xs:annotation>
-                                <xs:documentation/>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element maxOccurs="1" minOccurs="0" name="STRAIN" type="xs:string">
-                            <xs:annotation>
-                                <xs:documentation/>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:all>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="SAMPLE_REF" minOccurs="0">
-                <xs:annotation>
-                    <xs:documentation/>
-                </xs:annotation>
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
-                            type="com:IdentifierType"> </xs:element>
-                    </xs:sequence>
-                    <xs:attributeGroup ref="com:RefNameGroup"/>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="STUDY_REF">
-                <xs:annotation>
-                    <xs:documentation/>
-                </xs:annotation>
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
-                            type="com:IdentifierType"> </xs:element>
-                    </xs:sequence>
-                    <xs:attributeGroup ref="com:RefNameGroup"/>
-                </xs:complexType>
-            </xs:element>
-            <xs:element maxOccurs="unbounded" minOccurs="0" name="WGS_SET">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="PREFIX" type="xs:string"/>
-                        <xs:element name="VERSION" type="xs:integer"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element minOccurs="0" name="CHROMOSOMES">
-                <xs:annotation>
-                    <xs:documentation/>
-                </xs:annotation>
-                <xs:complexType>
-                    <xs:sequence maxOccurs="unbounded" minOccurs="1">
-                        <xs:element name="CHROMOSOME">
-                            <xs:complexType>
-                                <xs:all>
-                                    <xs:element minOccurs="0" name="NAME" type="xs:string">
-                                        <xs:annotation>
-                                            <xs:documentation/>
-                                        </xs:annotation>
-                                    </xs:element>
-                                    <xs:element minOccurs="0" name="TYPE">
-                                        <xs:annotation>
-                                            <xs:documentation/>
-                                        </xs:annotation>
-                                        <xs:simpleType>
-                                            <xs:restriction base="xs:token">
-                                                <xs:enumeration value="Plastid"/>
-                                                <xs:enumeration value="Kinetoplast"/>
-                                                <xs:enumeration value="Segment"/>
-                                                <xs:enumeration value="Apicoplast"/>
-                                                <xs:enumeration value="Virus"/>
-                                                <xs:enumeration value="Mitochondrial Miscellaneous"/>
-                                                <xs:enumeration value="Plasmid"/>
-                                                <xs:enumeration value="Nucleomorph"/>
-                                                <xs:enumeration value="Macronucleus"/>
-                                                <xs:enumeration value="Chloroplast"/>
-                                                <xs:enumeration value="Mitochondrion"/>
-                                                <xs:enumeration value="Virus Chromosome"/>
-                                                <xs:enumeration value="Extrachromosomal Element"/>
-                                                <xs:enumeration value="Miscellaneous"/>
-                                                <xs:enumeration value="Provirus"/>
-                                                <xs:enumeration value="Chromosome"/>
-                                                <xs:enumeration value="Non-nuclear Miscellaneous"/>
-                                                <xs:enumeration value="Chromatophore"/>
-                                                <xs:enumeration value="Provirus Chromosome"/>
-                                                <xs:enumeration value="Mitochondrial Plasmid"/>
-                                                <xs:enumeration value="Linkage Group"/>
-                                                <xs:enumeration value="Cyanelle"/>
-                                            </xs:restriction>
-                                        </xs:simpleType>
-                                    </xs:element>
-                                </xs:all>
-                                <xs:attribute name="accession" type="xs:string" use="required">
+        <xs:complexContent>
+            <xs:extension base="com:ObjectType">
+                <xs:sequence>
+                    <xs:element maxOccurs="1" minOccurs="1" name="TITLE" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation/>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element maxOccurs="1" minOccurs="0" name="DESCRIPTION" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation/>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="NAME" type="xs:string"/>
+                    <xs:element name="ASSEMBLY_LEVEL">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="complete genome"/>
+                                <xs:enumeration value="chromosome"/>
+                                <xs:enumeration value="scaffold"/>
+                                <xs:enumeration value="contig"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="GENOME_REPRESENTATION">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="full"/>
+                                <xs:enumeration value="partial"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="TAXON">
+                        <xs:complexType>
+                            <xs:all minOccurs="1">
+                                <xs:element maxOccurs="1" minOccurs="1" name="TAXON_ID"
+                                    type="xs:int">
                                     <xs:annotation>
                                         <xs:documentation/>
                                     </xs:annotation>
-                                </xs:attribute>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element maxOccurs="1" minOccurs="0" name="ASSEMBLY_LINKS">
-                <xs:annotation>
-                    <xs:documentation/>
-                </xs:annotation>
-                <xs:complexType>
-                    <xs:sequence maxOccurs="unbounded" minOccurs="1">
-                        <xs:element name="ASSEMBLY_LINK" type="com:LinkType"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element maxOccurs="1" minOccurs="0" name="ASSEMBLY_ATTRIBUTES">
-                <xs:annotation>
-                    <xs:documentation/>
-                </xs:annotation>
-                <xs:complexType>
-                    <xs:sequence maxOccurs="unbounded" minOccurs="1">
-                        <xs:element name="ASSEMBLY_ATTRIBUTE" type="com:AttributeType"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-        <xs:attributeGroup ref="com:NameGroup"/>
+                                </xs:element>
+                                <xs:element maxOccurs="1" minOccurs="0" name="SCIENTIFIC_NAME"
+                                    type="xs:string">
+                                    <xs:annotation>
+                                        <xs:documentation/>
+                                    </xs:annotation>
+                                </xs:element>
+                                <xs:element maxOccurs="1" minOccurs="0" name="COMMON_NAME"
+                                    type="xs:string">
+                                    <xs:annotation>
+                                        <xs:documentation/>
+                                    </xs:annotation>
+                                </xs:element>
+                                <xs:element maxOccurs="1" minOccurs="0" name="STRAIN"
+                                    type="xs:string">
+                                    <xs:annotation>
+                                        <xs:documentation/>
+                                    </xs:annotation>
+                                </xs:element>
+                            </xs:all>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="SAMPLE_REF" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation/>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
+                                    type="com:IdentifierType"> </xs:element>
+                            </xs:sequence>
+                            <xs:attributeGroup ref="com:RefNameGroup"/>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="STUDY_REF">
+                        <xs:annotation>
+                            <xs:documentation/>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
+                                    type="com:IdentifierType"> </xs:element>
+                            </xs:sequence>
+                            <xs:attributeGroup ref="com:RefNameGroup"/>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="WGS_SET">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="PREFIX" type="xs:string"/>
+                                <xs:element name="VERSION" type="xs:integer"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="CHROMOSOMES">
+                        <xs:annotation>
+                            <xs:documentation/>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence maxOccurs="unbounded" minOccurs="1">
+                                <xs:element name="CHROMOSOME">
+                                    <xs:complexType>
+                                        <xs:all>
+                                            <xs:element minOccurs="0" name="NAME" type="xs:string">
+                                                <xs:annotation>
+                                                  <xs:documentation/>
+                                                </xs:annotation>
+                                            </xs:element>
+                                            <xs:element minOccurs="0" name="TYPE">
+                                                <xs:annotation>
+                                                  <xs:documentation/>
+                                                </xs:annotation>
+                                                <xs:simpleType>
+                                                  <xs:restriction base="xs:token">
+                                                  <xs:enumeration value="Plastid"/>
+                                                  <xs:enumeration value="Kinetoplast"/>
+                                                  <xs:enumeration value="Segment"/>
+                                                  <xs:enumeration value="Apicoplast"/>
+                                                  <xs:enumeration value="Virus"/>
+                                                  <xs:enumeration
+                                                  value="Mitochondrial Miscellaneous"/>
+                                                  <xs:enumeration value="Plasmid"/>
+                                                  <xs:enumeration value="Nucleomorph"/>
+                                                  <xs:enumeration value="Macronucleus"/>
+                                                  <xs:enumeration value="Chloroplast"/>
+                                                  <xs:enumeration value="Mitochondrion"/>
+                                                  <xs:enumeration value="Virus Chromosome"/>
+                                                  <xs:enumeration value="Extrachromosomal Element"/>
+                                                  <xs:enumeration value="Miscellaneous"/>
+                                                  <xs:enumeration value="Provirus"/>
+                                                  <xs:enumeration value="Chromosome"/>
+                                                  <xs:enumeration value="Non-nuclear Miscellaneous"/>
+                                                  <xs:enumeration value="Chromatophore"/>
+                                                  <xs:enumeration value="Provirus Chromosome"/>
+                                                  <xs:enumeration value="Mitochondrial Plasmid"/>
+                                                  <xs:enumeration value="Linkage Group"/>
+                                                  <xs:enumeration value="Cyanelle"/>
+                                                  </xs:restriction>
+                                                </xs:simpleType>
+                                            </xs:element>
+                                        </xs:all>
+                                        <xs:attribute name="accession" type="xs:string"
+                                            use="required">
+                                            <xs:annotation>
+                                                <xs:documentation/>
+                                            </xs:annotation>
+                                        </xs:attribute>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element maxOccurs="1" minOccurs="0" name="ASSEMBLY_LINKS">
+                        <xs:annotation>
+                            <xs:documentation/>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence maxOccurs="unbounded" minOccurs="1">
+                                <xs:element name="ASSEMBLY_LINK" type="com:LinkType"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element maxOccurs="1" minOccurs="0" name="ASSEMBLY_ATTRIBUTES">
+                        <xs:annotation>
+                            <xs:documentation/>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:sequence maxOccurs="unbounded" minOccurs="1">
+                                <xs:element name="ASSEMBLY_ATTRIBUTE" type="com:AttributeType"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 </xs:schema>

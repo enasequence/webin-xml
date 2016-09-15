@@ -10,60 +10,62 @@
 		<xs:annotation>
 			<xs:documentation>Describes an object that contains data access policy information.</xs:documentation>
 		</xs:annotation>
-		<xs:sequence>
-			<xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS" type="com:IdentifierType"> </xs:element>
-			<xs:element name="TITLE" type="xs:string">
-				<xs:annotation>
-					<xs:documentation>Short text that can be used to call out data access policies in searches or in displays.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element maxOccurs="1" minOccurs="1" name="DAC_REF" nillable="false">
-				<xs:annotation>
-					<xs:documentation>The DAC_REF identifies the data access committee to which this policy pertains.
+		<xs:complexContent>
+			<xs:extension base="com:ObjectType">
+				<xs:sequence>
+					<xs:element name="TITLE" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Short text that can be used to call out data access policies in searches or in displays.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element maxOccurs="1" minOccurs="1" name="DAC_REF" nillable="false">
+						<xs:annotation>
+							<xs:documentation>The DAC_REF identifies the data access committee to which this policy pertains.
                         </xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
-							type="com:IdentifierType"> </xs:element>
-					</xs:sequence>
-					<xs:attributeGroup ref="com:RefNameGroup"/>
-				</xs:complexType>
-			</xs:element>
-			<xs:choice minOccurs="1" maxOccurs="1">
-				<xs:element name="POLICY_TEXT" type="xs:string">
-					<xs:annotation>
-						<xs:documentation>Text containing the policy.</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="POLICY_FILE" type="xs:string">
-					<xs:annotation>
-						<xs:documentation>File containing the policy text.</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-			</xs:choice>
-			<xs:element name="POLICY_LINKS" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Links to related resources.</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence minOccurs="1" maxOccurs="unbounded">
-						<xs:element name="POLICY_LINK" type="com:LinkType"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element maxOccurs="1" minOccurs="0" name="POLICY_ATTRIBUTES">
-				<xs:annotation>
-					<xs:documentation>Properties and attributes of the policy. These can be entered as free-form tag-value pairs. Submitters may be asked to follow a community established ontology when describing the work.          </xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence maxOccurs="unbounded" minOccurs="1">
-						<xs:element name="POLICY_ATTRIBUTE" type="com:AttributeType"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-		<xs:attributeGroup ref="com:NameGroup"/>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
+									type="com:IdentifierType"> </xs:element>
+							</xs:sequence>
+							<xs:attributeGroup ref="com:RefNameGroup"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:choice minOccurs="1" maxOccurs="1">
+						<xs:element name="POLICY_TEXT" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Text containing the policy.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="POLICY_FILE" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>File containing the policy text.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+					<xs:element name="POLICY_LINKS" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Links to related resources.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence minOccurs="1" maxOccurs="unbounded">
+								<xs:element name="POLICY_LINK" type="com:LinkType"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element maxOccurs="1" minOccurs="0" name="POLICY_ATTRIBUTES">
+						<xs:annotation>
+							<xs:documentation>Properties and attributes of the policy. These can be entered as free-form tag-value pairs. Submitters may be asked to follow a community established ontology when describing the work.          </xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence maxOccurs="unbounded" minOccurs="1">
+								<xs:element name="POLICY_ATTRIBUTE" type="com:AttributeType"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 
 
