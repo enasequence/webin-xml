@@ -300,7 +300,6 @@
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
-                                <xs:element name="OTHER" type="xs:string"/>
                             </xs:choice>
                         </xs:complexType>
                     </xs:element>
