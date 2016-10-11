@@ -46,6 +46,7 @@
                     <xs:enumeration value="gff"/>
                     <xs:enumeration value="fasta"/>
                     <xs:enumeration value="fastq"/>
+                    <xs:enumeration value="flatfile"/>
                     <xs:enumeration value="contig_fasta"/>
                     <xs:enumeration value="contig_flatfile"/>
                     <xs:enumeration value="scaffold_fasta"/>
@@ -60,10 +61,7 @@
                     <xs:enumeration value="sample_list"/>
                     <xs:enumeration value="readme_file"/>
                     <xs:enumeration value="phenotype_file"/>
-                    <xs:enumeration value="bnx"/>
-                    <xs:enumeration value="cmap"/>
-                    <xs:enumeration value="vis_cmap"/>
-                    <xs:enumeration value="vis_xmap"/>
+                    <xs:enumeration value="BioNano_native"/>
                     <xs:enumeration value="other"/>
                 </xs:restriction>
             </xs:simpleType>
@@ -268,6 +266,7 @@
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
+                                <xs:element name="SEQUENCE_FLATFILE"/>
                                 <xs:element name="SEQUENCE_ANNOTATION">
                                     <xs:annotation>
                                         <xs:documentation/>
