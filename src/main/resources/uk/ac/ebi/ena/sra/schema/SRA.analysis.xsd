@@ -16,27 +16,11 @@
             </xs:annotation>
             <xs:simpleType>
                 <xs:restriction base="xs:string">
-                    <xs:enumeration value="tab">
-                        <xs:annotation>
-                            <xs:documentation> A tab delimited text file that can be viewed as a
-                                spreadsheet. The first line should contain column headers.
-                            </xs:documentation>
-                        </xs:annotation>
-                    </xs:enumeration>
-                    <xs:enumeration value="bam">
-                        <xs:annotation>
-                            <xs:documentation> Binary form of the Sequence alignment/map format
-                                for read placements, from the SAM tools project. See
-                                http://sourceforge.net/projects/samtools/ </xs:documentation>
-                        </xs:annotation>
-                    </xs:enumeration>
-                    <xs:enumeration value="bai">
-                        <xs:annotation>
-                            <xs:documentation> Index sorted alignment for fast random  access.See
-                                http://sourceforge.net/projects/samtools/ </xs:documentation>
-                        </xs:annotation>
-                    </xs:enumeration>
+                    <xs:enumeration value="tab"/>
+                    <xs:enumeration value="bam"/>
+                    <xs:enumeration value="bai"/>
                     <xs:enumeration value="cram"/>
+                    <xs:enumeration value="crai"/>
                     <xs:enumeration value="vcf"/>
                     <xs:enumeration value="vcf_aggregate"/>
                     <xs:enumeration value="bcf"/>
