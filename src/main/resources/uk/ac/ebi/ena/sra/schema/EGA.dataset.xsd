@@ -53,43 +53,40 @@
 					<xs:element maxOccurs="unbounded" minOccurs="0" name="RUN_REF" nillable="false">
 						<xs:annotation>
 							<xs:documentation>
-						The RUN_REF descriptor identifies the runs which are part of this dataset.
+						Identifies the runs which are part of this dataset.
 					</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
-							<xs:sequence>
-								<xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
-									type="com:IdentifierType"> </xs:element>
-							</xs:sequence>
-							<xs:attributeGroup ref="com:RefNameGroup"/>
+							<xs:complexContent>
+								<xs:extension base="com:RefObjectType">
+								</xs:extension>
+							</xs:complexContent>
 						</xs:complexType>
 					</xs:element>
 					<xs:element maxOccurs="unbounded" minOccurs="0" name="ANALYSIS_REF"
 						nillable="false">
 						<xs:annotation>
 							<xs:documentation>
-						The ANALYSIS_REF descriptor identifies the analyses which are part of this dataset.
+						Identifies the analyses which are part of this dataset.
 					</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
-							<xs:sequence>
-								<xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
-									type="com:IdentifierType"> </xs:element>
-							</xs:sequence>
-							<xs:attributeGroup ref="com:RefNameGroup"/>
+							<xs:complexContent>
+								<xs:extension base="com:RefObjectType">
+								</xs:extension>
+							</xs:complexContent>
 						</xs:complexType>
 					</xs:element>
 					<xs:element maxOccurs="1" minOccurs="1" name="POLICY_REF" nillable="false">
 						<xs:annotation>
-							<xs:documentation>The POLICY_REF identifies the data access policy controlling this data set.
+							<xs:documentation>Identifies the data access policy controlling this data set.
 					</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
-							<xs:sequence>
-								<xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
-									type="com:IdentifierType"> </xs:element>
-							</xs:sequence>
-							<xs:attributeGroup ref="com:RefNameGroup"/>
+							<xs:complexContent>
+								<xs:extension base="com:RefObjectType">
+								</xs:extension>
+							</xs:complexContent>
 						</xs:complexType>
 					</xs:element>
 					<xs:element minOccurs="0" name="DATASET_LINKS">

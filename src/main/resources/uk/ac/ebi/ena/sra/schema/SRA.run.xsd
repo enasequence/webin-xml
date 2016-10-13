@@ -22,18 +22,14 @@
                     </xs:element>
                     <xs:element name="EXPERIMENT_REF" nillable="false" maxOccurs="1" minOccurs="1">
                         <xs:annotation>
-                            <xs:documentation> The EXPERIMENT_REF identifies the parent experiment.
-                        Experiment describes nucleic acid prepararation from biological sample,
-                        molecular strategies and selections used in preparation of libraries for
-                        sequencing.
+                            <xs:documentation>Identifies the parent experiment.
                    </xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="IDENTIFIERS" type="com:IdentifierType"
-                                    maxOccurs="1" minOccurs="0"> </xs:element>
-                            </xs:sequence>
-                            <xs:attributeGroup ref="com:RefNameGroup"/>
+                            <xs:complexContent>
+                                <xs:extension base="com:RefObjectType">
+                                </xs:extension>
+                            </xs:complexContent>
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="SPOT_DESCRIPTOR" type="com:SpotDescriptorType" maxOccurs="1"

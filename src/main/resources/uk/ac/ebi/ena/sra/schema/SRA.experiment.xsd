@@ -696,24 +696,14 @@
           <xs:element name="STUDY_REF" minOccurs="1" maxOccurs="1">
             <xs:annotation>
               <xs:documentation>
-            The STUDY_REF descriptor establishes the relationship of the experiment to the parent
-            study.  This can either be the accession of an existing archived study record, or
-            a reference to a new study record in the same submission (which does not yet have an
-            accession).
+            Identifies the parent study.
           </xs:documentation>
             </xs:annotation>
             <xs:complexType>
-              <xs:sequence>
-                <xs:element name="IDENTIFIERS" type="com:IdentifierType" minOccurs="0" maxOccurs="1">
-                  <xs:annotation>
-                    <xs:documentation> Set of reference IDs to parent study record. This block is intended to replace the use of the less
-                  structured RefNameGroup identifiers. </xs:documentation>
-                  </xs:annotation>
-                </xs:element>
-
-              </xs:sequence>
-              <xs:attributeGroup ref="com:RefNameGroup"/>
-
+              <xs:complexContent>
+                <xs:extension base="com:RefObjectType">
+                </xs:extension>
+              </xs:complexContent>
             </xs:complexType>
           </xs:element>
           <xs:element name="DESIGN" type="LibraryType" maxOccurs="1" minOccurs="1">

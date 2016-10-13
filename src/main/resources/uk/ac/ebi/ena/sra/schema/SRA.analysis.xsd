@@ -103,8 +103,8 @@
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" name="TITLE" type="xs:string">
                         <xs:annotation>
-                            <xs:documentation>Title of the analyis object which will be displayed in
-                        database search results. </xs:documentation>
+                            <xs:documentation>Title of the analysis object which will be displayed in
+                        search results. </xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element maxOccurs="1" minOccurs="0" name="DESCRIPTION" type="xs:string">
@@ -114,15 +114,13 @@
                     </xs:element>
                     <xs:element name="STUDY_REF" minOccurs="0">
                         <xs:annotation>
-                            <xs:documentation>Establishes a relationship between the analysis and the
-                        parent study.</xs:documentation>
+                            <xs:documentation>Identifies the parent study.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
-                            <xs:sequence>
-                                <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
-                                    type="com:IdentifierType"> </xs:element>
-                            </xs:sequence>
-                            <xs:attributeGroup ref="com:RefNameGroup"/>
+                            <xs:complexContent>
+                            <xs:extension base="com:RefObjectType">
+                            </xs:extension>
+                            </xs:complexContent>
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="SAMPLE_REF" maxOccurs="unbounded" minOccurs="0">
@@ -131,25 +129,23 @@
                         analysis.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
-                            <xs:sequence>
-                                <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
-                                    type="com:IdentifierType"> </xs:element>
-                            </xs:sequence>
-                            <xs:attributeGroup ref="com:RefNameGroup"/>
-                            <xs:attribute name="label" type="xs:string">
-                                <xs:annotation>
-                                    <xs:documentation>A label associating the sample with BAM (@RG/ID or @RG/SM) or VCF file samples.</xs:documentation>
-                                </xs:annotation>
-                            </xs:attribute>
+                            <xs:complexContent>
+                                <xs:extension base="com:RefObjectType">
+                                    <xs:attribute name="label" type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>A label associating the sample with sample references in data files.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:extension>
+                            </xs:complexContent>
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="EXPERIMENT_REF" maxOccurs="unbounded" minOccurs="0">
                         <xs:complexType>
-                            <xs:sequence>
-                                <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
-                                    type="com:IdentifierType"> </xs:element>
-                            </xs:sequence>
-                            <xs:attributeGroup ref="com:RefNameGroup"/>
+                            <xs:complexContent>
+                                <xs:extension base="com:RefObjectType">
+                                </xs:extension>
+                            </xs:complexContent>
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="RUN_REF" maxOccurs="unbounded" minOccurs="0">
@@ -158,16 +154,15 @@
                         analysis.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
-                            <xs:sequence>
-                                <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
-                                    type="com:IdentifierType"> </xs:element>
-                            </xs:sequence>
-                            <xs:attributeGroup ref="com:RefNameGroup"/>
-                            <xs:attribute name="label" type="xs:string">
-                                <xs:annotation>
-                                    <xs:documentation>A label associating the run with BAM (@RG/ID).</xs:documentation>
-                                </xs:annotation>
-                            </xs:attribute>
+                            <xs:complexContent>
+                                <xs:extension base="com:RefObjectType">
+                                    <xs:attribute name="label" type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>A label associating the run with run references in data files.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:extension>
+                            </xs:complexContent>
                         </xs:complexType>
                     </xs:element>
                     <xs:element name="ANALYSIS_REF" maxOccurs="unbounded" minOccurs="0">
@@ -176,16 +171,15 @@
                         analysis.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
-                            <xs:sequence>
-                                <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
-                                    type="com:IdentifierType"> </xs:element>
-                            </xs:sequence>
-                            <xs:attributeGroup ref="com:RefNameGroup"/>
-                            <xs:attribute name="label" type="xs:string">
-                                <xs:annotation>
-                                    <xs:documentation>A label associating the run with BAM (@RG/ID).</xs:documentation>
-                                </xs:annotation>
-                            </xs:attribute>
+                            <xs:complexContent>
+                                <xs:extension base="com:RefObjectType">
+                                    <xs:attribute name="label" type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>A label associating the analysis with analysis references in data files.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:extension>
+                            </xs:complexContent>
                         </xs:complexType>
                     </xs:element>
                     <xs:element maxOccurs="1" minOccurs="1" name="ANALYSIS_TYPE">

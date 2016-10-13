@@ -20,15 +20,14 @@
 					</xs:element>
 					<xs:element maxOccurs="1" minOccurs="1" name="DAC_REF" nillable="false">
 						<xs:annotation>
-							<xs:documentation>The DAC_REF identifies the data access committee to which this policy pertains.
+							<xs:documentation>Identifies the data access committee to which this policy pertains.
                         </xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
-							<xs:sequence>
-								<xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS"
-									type="com:IdentifierType"> </xs:element>
-							</xs:sequence>
-							<xs:attributeGroup ref="com:RefNameGroup"/>
+							<xs:complexContent>
+								<xs:extension base="com:RefObjectType">
+								</xs:extension>
+							</xs:complexContent>
 						</xs:complexType>
 					</xs:element>
 					<xs:choice minOccurs="1" maxOccurs="1">

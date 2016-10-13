@@ -38,6 +38,33 @@
         </xs:attribute>
     </xs:complexType>
 
+    <xs:complexType name="RefObjectType">
+        <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="0" name="IDENTIFIERS" type="com:IdentifierType"/>
+        </xs:sequence>
+        <xs:attribute name="refname" type="xs:string" use="optional">
+            <xs:annotation>
+                <xs:documentation>
+                    Identifies an object by name within the namespace defined by attribute "refcenter".
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="refcenter" type="xs:string" use="optional">
+            <xs:annotation>
+                <xs:documentation>
+                    The namespace of the attribute "refname".
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="accession" type="xs:string" use="optional">
+            <xs:annotation>
+                <xs:documentation>
+                    Identifies a record by its accession.  The scope of resolution is the entire Archive.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
     <xs:attributeGroup name="NameGroup">
         <xs:attribute name="alias" type="xs:string" use="optional">
             <xs:annotation>
