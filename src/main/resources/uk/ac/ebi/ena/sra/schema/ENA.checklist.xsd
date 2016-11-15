@@ -333,13 +333,7 @@
                         </xs:complexType>
                     </xs:element>
                 </xs:sequence>
-                <xs:attribute name="checklistType">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:enumeration value="Sample"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
+                <xs:attribute name="checklistType" type="xs:string"> </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
