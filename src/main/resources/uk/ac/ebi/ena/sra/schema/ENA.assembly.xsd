@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ENA genome assembly (GCA) object XML specification -->
-<!-- $Id: ENA.assembly.xsd, v 1.0 2016/01/07 $ -->
 <xs:schema xmlns:com="SRA.common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:import namespace="SRA.common" schemaLocation="SRA.common.xsd"/>
     <xs:complexType name="AssemblySetType">

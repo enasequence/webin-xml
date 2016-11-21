@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- INSDC Sequence Read Archive resource Analysis (SRZ/ERZ/DRZ) object XML specification -->
-<!-- $Id: SRA.analysis.xsd,v 1.8 2015/02/20 13:17:34 neilg Exp $ -->
 <xs:schema xmlns:com="SRA.common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:import namespace="SRA.common" schemaLocation="SRA.common.xsd"/>
 
@@ -118,8 +116,7 @@
                         </xs:annotation>
                         <xs:complexType>
                             <xs:complexContent>
-                            <xs:extension base="com:RefObjectType">
-                            </xs:extension>
+                                <xs:extension base="com:RefObjectType"> </xs:extension>
                             </xs:complexContent>
                         </xs:complexType>
                     </xs:element>
@@ -143,8 +140,7 @@
                     <xs:element name="EXPERIMENT_REF" maxOccurs="unbounded" minOccurs="0">
                         <xs:complexType>
                             <xs:complexContent>
-                                <xs:extension base="com:RefObjectType">
-                                </xs:extension>
+                                <xs:extension base="com:RefObjectType"> </xs:extension>
                             </xs:complexContent>
                         </xs:complexType>
                     </xs:element>
@@ -277,6 +273,8 @@
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
+                                <xs:element name="AMR_ANTIBIOGRAM"/>
+                                <xs:element name="PATHOGEN_ANALYSIS"/>
                             </xs:choice>
                         </xs:complexType>
                     </xs:element>
@@ -303,8 +301,9 @@
                     </xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
-                            <xs:sequence maxOccurs="unbounded" minOccurs="1">
-                                <xs:element name="ANALYSIS_LINK" type="com:LinkType"/>
+                            <xs:sequence minOccurs="1">
+                                <xs:element name="ANALYSIS_LINK" type="com:LinkType"
+                                    maxOccurs="unbounded"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
@@ -314,8 +313,9 @@
                         entered as free-form tag-value pairs.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
-                            <xs:sequence maxOccurs="unbounded" minOccurs="1">
-                                <xs:element name="ANALYSIS_ATTRIBUTE" type="com:AttributeType"/>
+                            <xs:sequence minOccurs="1">
+                                <xs:element name="ANALYSIS_ATTRIBUTE" type="com:AttributeType"
+                                    maxOccurs="unbounded"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>

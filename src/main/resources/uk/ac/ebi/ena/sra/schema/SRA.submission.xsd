@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- INSDC Sequence Read Archive resource Submission (SRA/ERA/DRA) object XML specification -->
-<!-- $Id: SRA.submission.xsd,v 1.2 2013/02/22 12:02:05 rajeshr Exp $ -->
-
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
   <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 

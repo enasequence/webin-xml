@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- INSDC Short Read Archive resource Submission (SRA) object XML specification 
-     European Genome-Phenome Archive (EGA : www.ebi.ac.uk/ega) resource
-     Dataset object XML specification by European Nucleotide Archive (ENA : www.ebi.ac.uk/ena) --> 
-<!-- $Id: EGA.dataset.xsd,v 1.8 2014/08/07 13:24:21 rajeshr Exp $ --> 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
 	<xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 

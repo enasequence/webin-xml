@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- INSDC Sequence Read Archive resource Common object XML specification -->
-<!-- $Id: SRA.common.xsd,v 1.4 2014/08/06 10:59:49 rajeshr Exp $ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common"
     targetNamespace="SRA.common">
 

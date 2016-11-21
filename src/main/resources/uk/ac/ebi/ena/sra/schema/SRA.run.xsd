@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- INSDC Sequence Read Archive resource Run (SRR/ERR/DRR) object XML specification -->
-<!-- $Id: SRA.run.xsd,v 1.3 2014/11/19 11:18:38 rajeshr Exp $ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
     <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
