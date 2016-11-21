@@ -18,7 +18,7 @@ apply plugin: 'eclipse'
 apply plugin: 'signing'
 
 group = 'uk.ac.ebi.ena.sra'
-version = '1.5.12'
+version = '1.5.20'
 archivesBaseName = 'sra-xml'
 
 
@@ -132,6 +132,14 @@ targetCompatibility = 1.6
 task wrapper(type: Wrapper) {
     gradleVersion = '2.2'
 }
+
+
+task updateVersionInSchema{
+    ant.replaceregexp(match:'<!--\\s*version\\s*:[^->]*-->', replace:'<!-- version:' + version + ' -->' , flags:'g', byline:true) {
+        fileset(dir: project.projectDir, includes: '/src/**/sra/schema/*.xsd')
+    }
+}
+tasks.build.dependsOn(updateVersionInSchema)
 
 uploadArchives {
     repositories {
