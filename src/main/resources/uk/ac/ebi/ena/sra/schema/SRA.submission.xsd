@@ -65,12 +65,12 @@
                           <xs:documentation>Add an object to the archive.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
-                          <xs:attribute name="source" type="xs:string" use="required">
+                          <xs:attribute name="source" type="xs:string">
                             <xs:annotation>
                               <xs:documentation>Filename or relative path to the XML file being submitted.</xs:documentation>
                             </xs:annotation>
                           </xs:attribute>
-                          <xs:attribute name="schema" use="required">
+                          <xs:attribute name="schema">
                             <xs:annotation>
                               <xs:documentation>The type of the XML file being submitted.</xs:documentation>
                             </xs:annotation>
@@ -97,12 +97,12 @@
                           <xs:documentation>Modify an object in the archive.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
-                          <xs:attribute name="source" type="xs:string" use="required">
+                          <xs:attribute name="source" type="xs:string">
                             <xs:annotation>
                               <xs:documentation>Filename or relative path to the XML file being updated.</xs:documentation>
                             </xs:annotation>
                           </xs:attribute>
-                          <xs:attribute name="schema" use="required">
+                          <xs:attribute name="schema">
                             <xs:annotation>
                               <xs:documentation>The type of the XML file being updated.</xs:documentation>
                             </xs:annotation>
@@ -202,12 +202,12 @@
                           <xs:documentation>Validates the submitted XMLs without actually submitting them.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
-                          <xs:attribute name="source" type="xs:string" use="required">
+                          <xs:attribute name="source" type="xs:string">
                             <xs:annotation>
                               <xs:documentation>Filename or relative path to the XML file being validated.</xs:documentation>
                             </xs:annotation>
                           </xs:attribute>
-                          <xs:attribute name="schema" use="required">
+                          <xs:attribute name="schema">
                             <xs:annotation>
                               <xs:documentation>The type of the XML file being validated.</xs:documentation>
                             </xs:annotation>
