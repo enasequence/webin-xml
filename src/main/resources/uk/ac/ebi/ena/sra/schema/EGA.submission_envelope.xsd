@@ -6,7 +6,10 @@
     <xs:include schemaLocation="SRA.experiment.xsd"/>
     <xs:include schemaLocation="SRA.run.xsd"/>
     <xs:include schemaLocation="SRA.analysis.xsd"/>
-    <xs:complexType name="SubmissionEnvelopeType">
+    <xs:include schemaLocation="EGA.dac.xsd"/>
+    <xs:include schemaLocation="EGA.dataset.xsd"/>
+    <xs:include schemaLocation="EGA.policy.xsd"/>
+    <xs:complexType name="EGASubmissionEnvelopeType">
         <xs:annotation>
             <xs:documentation>
                 A wrapper for a submission
@@ -50,10 +53,31 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
+            <xs:element name="DAC_SET">
+                <xs:complexType>
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                        <xs:element name="DAC" type="DacType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DATASETS">
+                <xs:complexType>
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                        <xs:element name="DATASET" type="DatasetType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="POLICY_SET">
+                <xs:complexType>
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                        <xs:element name="POLICY" type="PolicyType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
 
-    <xs:element name="SUBMISSION_ENVELOPE" type="SubmissionEnvelopeType">
+    <xs:element name="EGA_SUBMISSION_ENVELOPE" type="EGASubmissionEnvelopeType">
 
     </xs:element>
 </xs:schema>
