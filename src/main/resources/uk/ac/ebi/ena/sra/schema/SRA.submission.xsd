@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- version:1.5.21 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common" targetNamespace="SRA.submission" xmlns="SRA.submission">
   <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
   <xs:complexType name="SubmissionType">
