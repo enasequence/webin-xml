@@ -1,6 +1,6 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <SUBMISSION_SET>
-    <SUBMISSION alias="Thu_Oct_08_14_06_52_BST_2015_EBI" center_name="EBI"
+    <SUBMISSION xmlns="" alias="Thu_Oct_08_14_06_52_BST_2015_EBI" center_name="EBI"
                 submission_date="2015-10-08T14:07:03.337+01:00" accession="ERA521986">
         <IDENTIFIERS>
             <PRIMARY_ID>ERA521986</PRIMARY_ID>

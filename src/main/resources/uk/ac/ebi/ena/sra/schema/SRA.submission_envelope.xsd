@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- version:1.5.20 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:com="SRA.common"
-           xmlns:submission="SRA.submission"
-           xmlns:study="SRA.study"
-           xmlns:sample="SRA.sample"
-           xmlns:experiment="SRA.experiment"
-           xmlns:run="SRA.run"
-           xmlns:analysis="SRA.analysis">
-    <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
-    <!--
-<xs:import schemaLocation="SRA.submission.xsd" namespace="SRA.submission"/>
-
-<xs:import schemaLocation="SRA.study.xsd" namespace="SRA.study"/>
-<xs:import schemaLocation="SRA.sample.xsd" namespace="SRA.sample"/>
-
-<xs:import schemaLocation="SRA.experiment.xsd" namespace="SRA.experiment"/>
-<xs:import schemaLocation="SRA.run.xsd" namespace="SRA.run"/>
--->
-
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="SRA.submission.xsd"/>
+    <xs:include schemaLocation="SRA.study.xsd"/>
+    <xs:include schemaLocation="SRA.sample.xsd"/>
+    <xs:include schemaLocation="SRA.experiment.xsd"/>
+    <xs:include schemaLocation="SRA.run.xsd"/>
+    <xs:include schemaLocation="SRA.analysis.xsd"/>
     <xs:complexType name="SubmissionEnvelopeType">
         <xs:annotation>
             <xs:documentation>
@@ -26,20 +13,18 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <!--
-            <xs:element name="Submission" type="submission:SubmissionType"></xs:element>
-
+            <xs:element name="Submission" type="SubmissionType"></xs:element>
             <xs:element name="StudySet">
                 <xs:complexType>
                     <xs:sequence minOccurs="0" maxOccurs="unbounded">
-                        <xs:element name="Study" type="study:StudyType"/>
+                        <xs:element name="Study" type="StudyType"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
             <xs:element name="SampleSet">
                 <xs:complexType>
                     <xs:sequence minOccurs="0" maxOccurs="unbounded">
-                        <xs:element name="Sample" type="sample:SampleType"/>
+                        <xs:element name="Sample" type="SampleType"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -47,24 +32,29 @@
             <xs:element name="ExperimentSet">
                 <xs:complexType>
                     <xs:sequence minOccurs="0" maxOccurs="unbounded">
-                        <xs:element name="Sample" type="experiment:ExperimentType"/>
+                        <xs:element name="Sample" type="ExperimentType"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
             <xs:element name="RunSet">
                 <xs:complexType>
                     <xs:sequence minOccurs="0" maxOccurs="unbounded">
-                        <xs:element name="Sample" type="run:RunType"/>
+                        <xs:element name="Sample" type="RunType"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
             <xs:element name="AnalysisSet">
                 <xs:complexType>
                     <xs:sequence minOccurs="0" maxOccurs="unbounded">
-                        <xs:element name="Sample" type="analysis:AnalysisType"/>
+                        <xs:element name="Sample" type="AnalysisType"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
+            <!--
+
+
+
+
             -->
         </xs:sequence>
     </xs:complexType>
