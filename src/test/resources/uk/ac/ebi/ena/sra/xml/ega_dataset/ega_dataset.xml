@@ -1,0 +1,21 @@
+<DATASETS>
+    <DATASET alias="EGAS000000001-sc-20110919" center_name="SC" broker_name="EGA" accession="EGAD00001000039">
+        <IDENTIFIERS>
+            <PRIMARY_ID>EGAD00001000039</PRIMARY_ID>
+            <SUBMITTER_ID namespace="SC">EGAS000000001-sc-20110919</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Platelet collagen defect</TITLE>
+        <RUN_REF accession="EGAR0000000001" refname="RUN_1" refcenter="EBI">
+            <IDENTIFIERS>
+                <PRIMARY_ID>EGAR0000000001</PRIMARY_ID>
+                <SUBMITTER_ID namespace="EBI">RUN_1</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </RUN_REF>
+        <POLICY_REF accession="EGAP00000001" refname="Policy_-2011-08-17T15:05:39Z-1888" refcenter="EBI">
+            <IDENTIFIERS>
+                <PRIMARY_ID>EGAP00001000024</PRIMARY_ID>
+                <SUBMITTER_ID namespace="EBI">Policy_-2011-08-17T15:05:39Z-1888</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </POLICY_REF>
+    </DATASET>
+</DATASETS>

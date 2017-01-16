@@ -1,0 +1,12 @@
+<?xml version = '1.0' encoding = 'UTF-8'?><DAC_SET>
+    <DAC alias="DAC-2011-08-11T11:45:28Z-1873" accession="EGAC00000000001" center_name="EBI" broker_name="EGA">
+        <IDENTIFIERS>
+            <PRIMARY_ID>EGAC00000000001</PRIMARY_ID>
+            <SUBMITTER_ID namespace="EBI">DAC-2011-08-11T11:45:28Z-1873</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>EGA DAC TITLE</TITLE>
+        <CONTACTS>
+            <CONTACT name="Joe Bloggs" email="joe@noname.com" organisation="EBI"/>
+        </CONTACTS>
+    </DAC>
+</DAC_SET>

@@ -86,6 +86,21 @@ public class XMLValidateTest {
         testXMLFiles(ANALYSIS_FILE_RESOURCE_DIR);
     }
 
+    @Test
+    public void testEGADACXMLFiles () throws URISyntaxException, IOException, XmlException {
+        testXMLFiles(EGA_DAC_FILE_RESOURCE_DIR);
+    }
+
+    @Test
+    public void testEGAPolicyXMLFiles () throws URISyntaxException, IOException, XmlException {
+        testXMLFiles(EGA_POLICY_FILE_RESOURCE_DIR);
+    }
+
+    @Test
+    public void testEGADatasetXMLFiles () throws URISyntaxException, IOException, XmlException {
+        testXMLFiles(EGA_DATASET_FILE_RESOURCE_DIR);
+    }
+
     public void testXMLFiles (String resourceDir) throws URISyntaxException, IOException, XmlException {
         final List<File> fileListInResourceDir = getFileListInResourceDir(resourceDir);
         for (File file : fileListInResourceDir) {

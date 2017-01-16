@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?><POLICY_SET>
+    <POLICY center_name="EBI" alias="Policy-2011-08-26T12:23:53Z-1868" accession="EGAP00001000001" broker_name="EBI">
+        <IDENTIFIERS>
+            <PRIMARY_ID>EGAP00001000001</PRIMARY_ID>
+            <SUBMITTER_ID namespace="SC">Policy-2011-08-26T12:23:53Z-1868</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE/>
+        <DAC_REF accession="EGAP00001000001" refname="DAC_-2011-08-26T12:23:49Z-1868" refcenter="EBI">
+            <IDENTIFIERS>
+                <PRIMARY_ID>EGAC00001000001</PRIMARY_ID>
+                <SUBMITTER_ID namespace="EBI">DAC_-2011-08-26T12:23:49Z-1868</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </DAC_REF>
+        <POLICY_TEXT>https://www.sanger.ac.uk/datasharing/</POLICY_TEXT>
+    </POLICY>
+</POLICY_SET>
