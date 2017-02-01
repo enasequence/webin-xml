@@ -9,7 +9,7 @@
     <xs:complexType name="SubmissionEnvelopeType">
         <xs:annotation>
             <xs:documentation>
-                A wrapper for a submission
+                A wrapper for an entire ENA submission
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>

@@ -1,8 +1,11 @@
 language: java
-
 jdk:
-  - oraclejdk8
-
+- oraclejdk8
 install: true
-
 script: ./gradlew clean test
+before_install:
+- openssl aes-256-cbc -K $encrypted_adc22b0acab9_key -iv $encrypted_adc22b0acab9_iv
+  -in gradle.properties.enc -out gradle.properties -d
+- openssl aes-256-cbc -K $encrypted_adc22b0acab9_key -iv $encrypted_adc22b0acab9_iv
+  -in secring.gpg.enc -out secring.gpg -d
+after_success: ./gradlew uploadArchives
