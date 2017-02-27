@@ -49,23 +49,8 @@
                 </xs:documentation>
                   </xs:annotation>
                 </xs:element>
-                <xs:element name="ANONYMIZED_NAME" minOccurs="0" maxOccurs="1" type="xs:string">
-                  <xs:annotation>
-                    <xs:documentation>
-                  Anonymous public name of the sample.   For example, HapMap human isolate NA12878.
-                </xs:documentation>
-                  </xs:annotation>
-                </xs:element>
-                <xs:element name="INDIVIDUAL_NAME" minOccurs="0" maxOccurs="1" type="xs:string">
-                  <xs:annotation>
-                    <xs:documentation>
-                  Individual name of the sample.  This field can be used to identify the individual identity of
-                  a sample where appropriate (this is usually NOT appropriate for human subjects).  Example:
-                  "Glennie" the platypus.  
-                </xs:documentation>
-                  </xs:annotation>
-                </xs:element>
               </xs:all>
+              <xs:attribute name="display_name" type="xs:string"/>
             </xs:complexType>
           </xs:element>
           <xs:element name="DESCRIPTION" type="xs:string" minOccurs="0" maxOccurs="1">
