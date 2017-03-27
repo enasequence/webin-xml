@@ -135,7 +135,7 @@ task wrapper(type: Wrapper) {
 
 
 task updateVersionInSchema{
-    ant.replaceregexp(match:'<!--\\s*version\\s*:[^->]*-->', replace:'<!-- version:' + version + ' -->' , flags:'g', byline:true) {
+    ant.replaceregexp(match:'<!--\\s*version\\s*:[^>]*-->', replace:'<!-- version:' + version + ' -->' , flags:'g', byline:true) {
         fileset(dir: project.projectDir, includes: '/src/**/sra/schema/*.xsd')
     }
 }
