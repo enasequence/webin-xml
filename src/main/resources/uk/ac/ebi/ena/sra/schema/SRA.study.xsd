@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- version:1.5.31 -->
+<!-- version:1.5.32 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
   <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
@@ -122,6 +122,11 @@
                               <xs:documentation>
                             The study is sequencing clone pools (BACs, fosmids, other constructs).
                           </xs:documentation>
+                            </xs:annotation>
+                          </xs:enumeration>
+                          <xs:enumeration value="Transcriptome Sequencing">
+                            <xs:annotation>
+                              <xs:documentation> Sequencing of transcription elements. </xs:documentation>
                             </xs:annotation>
                           </xs:enumeration>
                           <xs:enumeration value="Other">
