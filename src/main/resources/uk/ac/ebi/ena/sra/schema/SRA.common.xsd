@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- version:1.5.32 -->
+<!-- version:1.5.33 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common"
     targetNamespace="SRA.common">
 
@@ -966,6 +966,8 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="Ion Torrent PGM"/>
             <xs:enumeration value="Ion Torrent Proton"/>
+            <xs:enumeration value="Ion Torrent S5"/>
+            <xs:enumeration value="Ion Torrent S5 XL"/>
             <xs:enumeration value="unspecified"/>
         </xs:restriction>
     </xs:simpleType>
@@ -987,6 +989,7 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="MinION"/>
             <xs:enumeration value="GridION"/>
+            <xs:enumeration value="PromethION"/>
             <xs:enumeration value="unspecified"/>
         </xs:restriction>
     </xs:simpleType>
