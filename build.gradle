@@ -18,7 +18,7 @@ apply plugin: 'eclipse'
 apply plugin: 'signing'
 
 group = 'uk.ac.ebi.ena.sra'
-version = '1.5.33'
+version = '1.5.33_ADD_AGP_UNLOCALISED_LIST_SNAPSHOT'
 archivesBaseName = 'sra-xml'
 
 

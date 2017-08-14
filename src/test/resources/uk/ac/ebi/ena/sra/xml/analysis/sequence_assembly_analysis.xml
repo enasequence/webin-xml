@@ -29,7 +29,7 @@
             </SEQUENCE_ASSEMBLY>
         </ANALYSIS_TYPE>
         <FILES>
-            <FILE filename="ERZ125/ERZ125680/Thu_Oct_08_14_13_21_BST_2015_EBI_scaffold_flatfile_test.embl.gz" filetype="scaffold_flatfile" checksum_method="MD5" checksum="52d4d6cdcf52fba4e2fbbba93fa9c440"/>
+            <FILE filename="ERZ125/ERZ125680/Thu_Oct_08_14_13_21_BST_2015_EBI_flatfile_test.embl.gz" filetype="flatfile" checksum_method="MD5" checksum="52d4d6cdcf52fba4e2fbbba93fa9c440"/>
         </FILES>
     </ANALYSIS>
 </ANALYSIS_SET>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- version:1.5.33 -->
+<!-- version:1.5.33_ADD_AGP_UNLOCALISED_LIST_SNAPSHOT -->
 <xs:schema xmlns:com="SRA.common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:import namespace="SRA.common" schemaLocation="SRA.common.xsd"/>
 
@@ -30,22 +30,14 @@
                     <xs:enumeration value="fasta"/>
                     <xs:enumeration value="fastq"/>
                     <xs:enumeration value="flatfile"/>
-                    <xs:enumeration value="contig_fasta"/>
-                    <xs:enumeration value="contig_flatfile"/>
-                    <xs:enumeration value="scaffold_fasta"/>
-                    <xs:enumeration value="scaffold_flatfile"/>
-                    <xs:enumeration value="scaffold_agp"/>
-                    <xs:enumeration value="chromosome_fasta"/>
-                    <xs:enumeration value="chromosome_flatfile"/>
-                    <xs:enumeration value="chromosome_agp"/>
                     <xs:enumeration value="chromosome_list"/>
-                    <xs:enumeration value="unlocalised_contig_list"/>
-                    <xs:enumeration value="unlocalised_scaffold_list"/>
                     <xs:enumeration value="sample_list"/>
                     <xs:enumeration value="readme_file"/>
                     <xs:enumeration value="phenotype_file"/>
                     <xs:enumeration value="BioNano_native"/>
                     <xs:enumeration value="Kallisto_native"/>
+                    <xs:enumeration value="agp"/>
+                    <xs:enumeration value="unlocalised_list"/>
                     <xs:enumeration value="other"/>
                 </xs:restriction>
             </xs:simpleType>
