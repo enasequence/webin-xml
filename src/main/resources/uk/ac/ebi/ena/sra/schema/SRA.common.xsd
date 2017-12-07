@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- version:1.5.38 -->
+<!-- version:1.5.39 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common"
     targetNamespace="SRA.common">
 
@@ -894,21 +894,22 @@
 
     <xs:simpleType name="typeIlluminaModel">
         <xs:restriction base="xs:string">
+            <xs:enumeration value="HiSeq X Five"/>
+            <xs:enumeration value="HiSeq X Ten"/>
             <xs:enumeration value="Illumina Genome Analyzer"/>
             <xs:enumeration value="Illumina Genome Analyzer II"/>
-            <xs:enumeration value="Illumina Genome Analyzer IIx"/>
-            <xs:enumeration value="Illumina HiSeq 2500"/>
-            <xs:enumeration value="Illumina HiSeq 2000"/>
-            <xs:enumeration value="Illumina HiSeq 1500"/>
-            <xs:enumeration value="Illumina HiSeq 1000"/>
-            <xs:enumeration value="Illumina MiSeq"/>
-            <xs:enumeration value="Illumina MiniSeq"/>
+            <xs:enumeration value="Illumina Genome Analyzer IIx"/>  
             <xs:enumeration value="Illumina HiScanSQ"/>
-            <xs:enumeration value="HiSeq X Ten"/>
-            <xs:enumeration value="NextSeq 500"/>
-            <xs:enumeration value="HiSeq X Five"/>
+            <xs:enumeration value="Illumina HiSeq 1000"/>
+            <xs:enumeration value="Illumina HiSeq 1500"/>
+            <xs:enumeration value="Illumina HiSeq 2000"/>
+            <xs:enumeration value="Illumina HiSeq 2500"/>
             <xs:enumeration value="Illumina HiSeq 3000"/>
             <xs:enumeration value="Illumina HiSeq 4000"/>
+            <xs:enumeration value="Illumina MiSeq"/>
+            <xs:enumeration value="Illumina MiniSeq"/>
+            <xs:enumeration value="Illumina NovaSeq 6000"/>          
+            <xs:enumeration value="NextSeq 500"/>  
             <xs:enumeration value="NextSeq 550"/>
             <xs:enumeration value="unspecified"/>
         </xs:restriction>

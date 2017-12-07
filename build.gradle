@@ -18,7 +18,7 @@ apply plugin: 'eclipse'
 apply plugin: 'signing'
 
 group = 'uk.ac.ebi.ena.sra'
-version = '1.5.38'
+version = '1.5.39'
 archivesBaseName = 'sra-xml'
 
 
@@ -174,9 +174,9 @@ uploadArchives {
 
                 developers {
                     developer {
-                        id 'neilg'
-                        name 'Neil Goodgame'
-                        email 'neilg@ebi.ac.uk'
+                        id 'Josue'
+                        name 'Josue Martinez'
+                        email 'josue@ebi.ac.uk'
                     }
                 }
             }
