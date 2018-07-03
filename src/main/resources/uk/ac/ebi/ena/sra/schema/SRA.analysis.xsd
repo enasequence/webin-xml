@@ -273,7 +273,17 @@
                                 </xs:element>
                                 <xs:element name="AMR_ANTIBIOGRAM"/>
                                 <xs:element name="PATHOGEN_ANALYSIS"/>
-                                <xs:element name="TRANSCRIPTOME_ASSEMBLY"/>
+                                <xs:element name="TRANSCRIPTOME_ASSEMBLY">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="NAME" type="xs:string" minOccurs="0"/>
+                                            <xs:element name="PROGRAM" type="xs:string"
+                                                minOccurs="0"/>
+                                            <xs:element name="PLATFORM" type="xs:string"
+                                                minOccurs="0"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
                             </xs:choice>
                         </xs:complexType>
                     </xs:element>
