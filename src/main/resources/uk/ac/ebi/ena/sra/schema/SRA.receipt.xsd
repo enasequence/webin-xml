@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="https://wwwdev.ebi.ac.uk/ena/submit/drop-box/submit/receipt.xsl"?>
-<!-- version:1.5.43 -->
+<!-- version:1.5.44 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:complexType name="ID">
         <xs:sequence>
