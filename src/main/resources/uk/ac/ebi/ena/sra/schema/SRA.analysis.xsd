@@ -219,6 +219,44 @@
                                     <xs:complexType>
                                         <xs:sequence>
                                             <xs:element name="NAME" type="xs:string"/>
+                                            <xs:element minOccurs="0" name="TYPE">
+                                                <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:enumeration value="clone or isolate">
+                                                  <xs:annotation>
+                                                  <xs:documentation>An assembly of reads from an isolated cultured organism, tissues, cells or a cell line.
+                                                  </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="primary metagenome">
+                                                  <xs:annotation>
+                                                  <xs:documentation>An assembly from a sampled biome or collection of sampled biomes without attempt to separate taxa
+                                                  </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration value="binned metagenome">
+                                                  <xs:annotation>
+                                                  <xs:documentation>A set of contigs drawn from primary or unbinned metagenomes grouped into a single-taxon set
+                                                  </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration
+                                                  value="Metagenome-Assembled Genome (MAG)">
+                                                  <xs:annotation>
+                                                  <xs:documentation>A single-taxon assembly based on a binned metagenome asserted to represent a novel isolate
+                                                  </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration
+                                                  value="Environmental Single-Cell Amplified Genome (SAG)">
+                                                  <xs:annotation>
+                                                  <xs:documentation>A genome assembly from amplified environmental sampled single-cell DNA
+                                                  </xs:documentation>
+                                                  </xs:annotation>                                     
+                                                  </xs:enumeration>                                                      
+                                                  </xs:restriction>
+                                                </xs:simpleType>
+                                            </xs:element>
                                             <xs:element name="PARTIAL" type="xs:boolean"> </xs:element>
                                             <xs:element name="COVERAGE" type="xs:string"/>
                                             <xs:element name="PROGRAM" type="xs:string"/>
