@@ -14,6 +14,30 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
 	<xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
+	<xs:complexType name="DuoType">
+		<xs:attribute name="code" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>
+					Data Use Ontology code
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="version" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>
+					Data Use Ontology code version
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="modifiers" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					Data Use Ontology code modifiers. For example, if data is restricted to use on a specific disease, please accompany it with an appropriate ontology.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
 	<xs:complexType name="PolicyType">
 		<xs:annotation>
 			<xs:documentation>Describes an object that contains data access policy information.</xs:documentation>
@@ -57,6 +81,16 @@
 						<xs:complexType>
 							<xs:sequence minOccurs="1" maxOccurs="unbounded">
 								<xs:element name="POLICY_LINK" type="com:LinkType"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="DATA_USES" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Data use ontologies (DUO) related to the policy</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence minOccurs="1" maxOccurs="unbounded">
+								<xs:element name="DATA_USE" type="DuoType"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
