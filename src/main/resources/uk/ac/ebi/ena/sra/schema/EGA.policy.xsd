@@ -84,13 +84,13 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
-					<xs:element name="DATA_USE_ONTOLOGIES" minOccurs="1" maxOccurs="1">
+					<xs:element name="DATA_USES" minOccurs="1" maxOccurs="1">
 						<xs:annotation>
 							<xs:documentation>Data use ontologies (DUO) related to the policy</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence minOccurs="1" maxOccurs="unbounded">
-								<xs:element name="DATA_USE_ONTOLOGY" type="DuoType"/>
+								<xs:element name="DATA_USE" type="DuoType"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
