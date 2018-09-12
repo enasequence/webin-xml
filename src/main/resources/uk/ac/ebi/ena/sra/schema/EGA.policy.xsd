@@ -14,11 +14,34 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
 	<xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
-	<xs:complexType name="DuoType">
+	<xs:complexType name="DataUseType">
+		<xs:sequence>
+			<xs:element name="MODIFIER" type="com:XRefType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						Describes modifiers to the Data Use Restriction
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URL" type="xs:anyURI" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Link to URL describing the Data Use
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="ontology" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>
+					Ontology abbreviation, e.g. DUO for Data Use Ontology
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 		<xs:attribute name="code" type="xs:string" use="required">
 			<xs:annotation>
 				<xs:documentation>
-					Data Use Ontology code
+					Code for the ontology
 				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
@@ -26,13 +49,6 @@
 			<xs:annotation>
 				<xs:documentation>
 					Data Use Ontology code version
-				</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="modifiers" type="xs:string" use="optional">
-			<xs:annotation>
-				<xs:documentation>
-					Data Use Ontology code modifiers. For example, if data is restricted to use on a specific disease, please accompany it with an appropriate ontology.
 				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
@@ -84,13 +100,13 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
-					<xs:element name="DATA_USES" minOccurs="1" maxOccurs="1">
+					<xs:element name="DATA_USES" minOccurs="0" maxOccurs="1">
 						<xs:annotation>
 							<xs:documentation>Data use ontologies (DUO) related to the policy</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence minOccurs="1" maxOccurs="unbounded">
-								<xs:element name="DATA_USE" type="DuoType"/>
+								<xs:element name="DATA_USE" type="DataUseType"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
