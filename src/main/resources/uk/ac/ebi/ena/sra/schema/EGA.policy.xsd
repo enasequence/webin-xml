@@ -90,16 +90,6 @@
 							</xs:annotation>
 						</xs:element>
 					</xs:choice>
-					<xs:element name="POLICY_LINKS" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>Links to related resources.</xs:documentation>
-						</xs:annotation>
-						<xs:complexType>
-							<xs:sequence minOccurs="1" maxOccurs="unbounded">
-								<xs:element name="POLICY_LINK" type="com:LinkType"/>
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
 					<xs:element name="DATA_USES" minOccurs="0" maxOccurs="1">
 						<xs:annotation>
 							<xs:documentation>Data use ontologies (DUO) related to the policy</xs:documentation>
@@ -107,6 +97,16 @@
 						<xs:complexType>
 							<xs:sequence minOccurs="1" maxOccurs="unbounded">
 								<xs:element name="DATA_USE" type="DataUseType"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="POLICY_LINKS" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Links to related resources.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence minOccurs="1" maxOccurs="unbounded">
+								<xs:element name="POLICY_LINK" type="com:LinkType"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
