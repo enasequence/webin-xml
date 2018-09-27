@@ -10,7 +10,7 @@
   ~ specific language governing permissions and limitations under the License.
   -->
 
-<!-- version:1.5.48 -->
+<!-- version:1.5.49 -->
 <xs:schema xmlns:com="SRA.common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:import namespace="SRA.common" schemaLocation="SRA.common.xsd"/>
 
@@ -205,13 +205,14 @@
                                                   <xs:element name="EXPERIMENT_TYPE" minOccurs="0"
                                                   maxOccurs="unbounded">
                                                   <xs:simpleType>
-                                                  <xs:restriction base="xs:string">
-                                                  <xs:enumeration value="Whole genome sequencing"/>
-                                                  <xs:enumeration value="Exome sequencing"/>
-                                                  <xs:enumeration value="Genotyping by array"/>
-                                                  <xs:enumeration value="transcriptomics"/>
-                                                  <xs:enumeration value="Curation"/>
-                                                  <xs:enumeration value="Genotyping by sequencing"/>
+                                                      <xs:restriction base="xs:string">
+                                                          <xs:enumeration value="Whole genome sequencing"/>
+                                                          <xs:enumeration value="Whole transcriptome sequencing"/>
+                                                          <xs:enumeration value="Exome sequencing"/>
+                                                          <xs:enumeration value="Genotyping by array"/>
+                                                          <xs:enumeration value="transcriptomics"/>
+                                                          <xs:enumeration value="Curation"/>
+                                                          <xs:enumeration value="Genotyping by sequencing"/>
                                                   </xs:restriction>
                                                   </xs:simpleType>
                                                   </xs:element>
