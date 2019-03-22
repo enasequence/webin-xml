@@ -170,7 +170,7 @@
                     </xs:element>
                     <xs:element name="ANALYSIS_REF" maxOccurs="unbounded" minOccurs="0">
                         <xs:annotation>
-                            <xs:documentation>One or more runs associated with the
+                            <xs:documentation>One or more analyses associated with the
                         analysis.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
