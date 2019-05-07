@@ -10,7 +10,7 @@
   ~ specific language governing permissions and limitations under the License.
   -->
 
-<!-- version:1.5.51 -->
+<!-- version:1.5.52 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common"
     targetNamespace="SRA.common">
 
@@ -917,6 +917,7 @@
             <xs:enumeration value="Illumina HiSeq 2500"/>
             <xs:enumeration value="Illumina HiSeq 3000"/>
             <xs:enumeration value="Illumina HiSeq 4000"/>
+            <xs:enumeration value="Illumina iSeq 100"/>
             <xs:enumeration value="Illumina MiSeq"/>
             <xs:enumeration value="Illumina MiniSeq"/>
             <xs:enumeration value="Illumina NovaSeq 6000"/>          
