@@ -10,7 +10,7 @@
   ~ specific language governing permissions and limitations under the License.
   -->
 
-<!-- version:1.5.53 -->
+<!-- version:1.5.54 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
   <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
@@ -564,6 +564,12 @@
                           <xs:documentation> Eukaryotic small subunit ribosomal RNA, a locus used for
                             phylogenetic studies of eukaryotes and as a target for random target PCR in
                             environmental biodiversity screening. </xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value="28S rRNA">
+                        <xs:annotation>
+                          <xs:documentation>Structural ribosomal RNA for the large component, or large
+                            subunit (LSU) of eukaryotic cytoplasmic ribosomes.. </xs:documentation>
                         </xs:annotation>
                       </xs:enumeration>
                       <xs:enumeration value="RBCL">
