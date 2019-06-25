@@ -1,5 +1,0 @@
-<xb:config  xmlns:xb="http://www.bea.com/2002/09/xbean/config">
-    <xb:namespace uri="##any">
-        <xb:package>uk.ac.ebi.ena.sra.xml</xb:package>
-    </xb:namespace>
-</xb:config>
