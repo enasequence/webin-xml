@@ -18,7 +18,7 @@ apply plugin: 'eclipse'
 apply plugin: 'signing'
 
 group = 'uk.ac.ebi.ena.sra'
-version = '1.5.54'
+version = '1.5.55-SNAPSHOT'
 archivesBaseName = 'sra-xml'
 
 
