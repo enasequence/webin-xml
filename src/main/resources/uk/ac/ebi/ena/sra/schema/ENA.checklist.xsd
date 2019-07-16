@@ -10,7 +10,7 @@
   ~ specific language governing permissions and limitations under the License.
   -->
 
-<!-- version:1.5.55 -->
+<!-- version:1.5.56 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
     <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
@@ -334,28 +334,6 @@
                                                 type="xs:string">
                                                 <xs:annotation>
                                                   <xs:documentation>The condition error.</xs:documentation>
-                                                </xs:annotation>
-                                            </xs:element>
-                                        </xs:sequence>
-                                    </xs:complexType>
-                                </xs:element>
-                                <xs:element maxOccurs="unbounded" minOccurs="0"
-                                    name="CHECKLIST_GROUP" nillable="false">
-                                    <xs:annotation>
-                                        <xs:documentation>The groups in which the checklist belongs to.</xs:documentation>
-                                    </xs:annotation>
-                                    <xs:complexType>
-                                        <xs:sequence>
-                                            <xs:element maxOccurs="1" minOccurs="1" name="NAME"
-                                                type="xs:string">
-                                                <xs:annotation>
-                                                  <xs:documentation>The name of the checklist group.</xs:documentation>
-                                                </xs:annotation>
-                                            </xs:element>
-                                            <xs:element maxOccurs="1" name="DESCRIPTION"
-                                                type="xs:string">
-                                                <xs:annotation>
-                                                  <xs:documentation>The description of the checklist group.</xs:documentation>
                                                 </xs:annotation>
                                             </xs:element>
                                         </xs:sequence>
