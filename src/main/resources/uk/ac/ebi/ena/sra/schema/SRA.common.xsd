@@ -10,7 +10,7 @@
   ~ specific language governing permissions and limitations under the License.
   -->
 
-<!-- version:1.5.56 -->
+<!-- version:1.5.57 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common"
     targetNamespace="SRA.common">
 
@@ -972,6 +972,7 @@
             <xs:enumeration value="PacBio RS"/>
             <xs:enumeration value="PacBio RS II"/>
             <xs:enumeration value="Sequel"/>
+            <xs:enumeration value="Sequel II"/>
             <xs:enumeration value="unspecified"/>
         </xs:restriction>
     </xs:simpleType>
