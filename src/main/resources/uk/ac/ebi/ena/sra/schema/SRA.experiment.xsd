@@ -458,10 +458,10 @@
             <xs:annotation>
               <xs:documentation>
             Identifies a list of group/pool/multiplex sample members.  This implies that
-            this sample record is a group, pool, or multiplex, but is continues to receive
+            this sample record is a group, pool, or multiplex, but it continues to receive
             its own accession and can be referenced by an experiment.  By default if
             no match to any of the listed members can be determined, then the default
-            sampel reference is used.
+            sample reference is used.
           </xs:documentation>
             </xs:annotation>
             <xs:complexType>
