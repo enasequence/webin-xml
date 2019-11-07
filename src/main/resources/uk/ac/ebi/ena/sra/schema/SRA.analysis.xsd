@@ -10,7 +10,7 @@
   ~ specific language governing permissions and limitations under the License.
   -->
 
-<!-- version:1.5.57 -->
+<!-- version:1.5.58 -->
 <xs:schema xmlns:com="SRA.common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:import namespace="SRA.common" schemaLocation="SRA.common.xsd"/>
 
@@ -287,16 +287,20 @@
                                                 </xs:simpleType>
                                             </xs:element>
                                             <xs:element minOccurs="0" name="TPA" type="xs:boolean"/>
-                                            <xs:element minOccurs="0" name="AUTHORS" type="xs:string"/>
-                                            <xs:element minOccurs="0" name="ADDRESS" type="xs:string"/>
+                                            <xs:element minOccurs="0" name="AUTHORS"
+                                                type="xs:string"/>
+                                            <xs:element minOccurs="0" name="ADDRESS"
+                                                type="xs:string"/>
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
                                 <xs:element name="SEQUENCE_FLATFILE">
                                     <xs:complexType>
                                         <xs:sequence>
-                                            <xs:element minOccurs="0" name="AUTHORS" type="xs:string"/>
-                                            <xs:element minOccurs="0" name="ADDRESS" type="xs:string"/>
+                                            <xs:element minOccurs="0" name="AUTHORS"
+                                                type="xs:string"/>
+                                            <xs:element minOccurs="0" name="ADDRESS"
+                                                type="xs:string"/>
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
@@ -341,8 +345,10 @@
                                             <xs:element name="PROGRAM" type="xs:string"/>
                                             <xs:element name="PLATFORM" type="xs:string"/>
                                             <xs:element minOccurs="0" name="TPA" type="xs:boolean"/>
-                                            <xs:element minOccurs="0" name="AUTHORS" type="xs:string"/>
-                                            <xs:element minOccurs="0" name="ADDRESS" type="xs:string"/>
+                                            <xs:element minOccurs="0" name="AUTHORS"
+                                                type="xs:string"/>
+                                            <xs:element minOccurs="0" name="ADDRESS"
+                                                type="xs:string"/>
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
@@ -350,9 +356,23 @@
                                     <xs:complexType>
                                         <xs:sequence>
                                             <xs:element name="NAME" type="xs:string"/>
-                                            <xs:element name="LOCAL_TAXONOMY" type="xs:string"/>
-                                            <xs:element minOccurs="0" name="LOCAL_TAXONOMY_VERSION"
+                                            <xs:element name="TAXONOMY_SYSTEM" type="xs:string"/>
+                                            <xs:element minOccurs="0" name="TAXONOMY_SYSTEM_VERSION"
                                                 type="xs:string"/>
+                                            <xs:element minOccurs="0" name="CUSTOM_FIELDS">
+                                                <xs:complexType>
+                                                  <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                                                  <xs:element name="FIELD">
+                                                      <xs:complexType>
+                                                          <xs:sequence>
+                                                          <xs:element name="NAME"/>
+                                                          <xs:element name="DESCRIPTION"/>
+                                                          </xs:sequence>
+                                                      </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                </xs:complexType>
+                                            </xs:element>
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
