@@ -10,7 +10,7 @@
   ~ specific language governing permissions and limitations under the License.
   -->
 
-<!-- version:1.5.59 -->
+<!-- version:1.5.60-snapshot -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
   <xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
@@ -202,6 +202,16 @@
       <xs:enumeration value="NOMe-Seq">
         <xs:annotation>
           <xs:documentation>Nucleosome Occupancy and Methylome sequencing.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ChM-Seq">
+        <xs:annotation>
+          <xs:documentation>ChIPmentation combines chromatin immunoprecipitation with sequencing library preparation by Tn5 transposase (see pubmed 26280331 for details)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GBS">
+        <xs:annotation>
+          <xs:documentation>Genotyping by sequencing is a method to discover single nucleotide polymorphisms for genotyping studies.</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="OTHER">
