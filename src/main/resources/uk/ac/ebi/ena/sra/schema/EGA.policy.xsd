@@ -1,16 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright 2018 EMBL - European Bioinformatics Institute
-  ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
-  ~ file except in compliance with the License. You may obtain a copy of the License at
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~ Unless required by applicable law or agreed to in writing, software distributed under the
-  ~ License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-  ~ CONDITIONS OF ANY KIND, either express or implied. See the License for the
-  ~ specific language governing permissions and limitations under the License.
-  -->
-
-<!-- version:1.5.60-snapshot -->
+<!-- version:1.5.59 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common">
 	<xs:import schemaLocation="SRA.common.xsd" namespace="SRA.common"/>
 
@@ -90,9 +78,9 @@
 							</xs:annotation>
 						</xs:element>
 					</xs:choice>
-					<xs:element name="DATA_USES" minOccurs="0" maxOccurs="1">
+					<xs:element name="DATA_USES" minOccurs="1" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>Data use ontologies (DUO) related to the policy</xs:documentation>
+							<xs:documentation>Data use ontologies (DUO) related to the policy. More information on the Ontology is available from: https://github.com/EBISPOT/DUO and https://www.ebi.ac.uk/ols/ontologies/mondo</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence minOccurs="1" maxOccurs="unbounded">
