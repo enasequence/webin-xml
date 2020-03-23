@@ -330,6 +330,26 @@
           </xs:annotation>
         </xs:attribute>
 
+        <xs:attribute name="ena_manifest_file"  use="optional">
+          <xs:annotation>
+            <xs:documentation>
+              Webin-CLI submission manifest file content.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:whiteSpace value="preserve"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="ena_manifest_file_md5" type="xs:string" use="optional">
+          <xs:annotation>
+            <xs:documentation>
+              Webin-CLI submission manifest file MD5.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
