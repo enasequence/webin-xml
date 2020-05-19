@@ -38,11 +38,11 @@ dependencies {
 
 idea {
     module {
-        sourceDirs += sourceSets.main.output.classesDir
+        sourceDirs += sourceSets.main.output.classesDirs
     }
 }
 
-task printClasspath << {
+task printClasspath  {
     configurations.testCompile.each { println it }
 }
 
@@ -63,31 +63,30 @@ sourceSets {
     generated {
         java
         output.resourcesDir = sourceSets.main.output.resourcesDir
-        output.classesDir   = sourceSets.main.output.classesDir
         compileClasspath += sourceSets.main.runtimeClasspath
     }
 
 }
 
 
-task classes (overwrite: true) << {
+task classes (overwrite: true)  {
 }
 
 
-task printSources << {
+task printSources  {
     sourceSets.main.allSource.files.each {File file ->
         println file
     }
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    archiveClassifier  = 'javadoc'
     from 'build/docs/javadoc'
 }
 
 task sourcesJar(type: Jar) {
     from sourceSets.generated.allSource
-    classifier = 'sources'
+    archiveClassifier  = 'sources'
 }
 
 artifacts {
@@ -112,7 +111,7 @@ task generateXMLBeanSources (overwrite: true) {
         delete "src/generated/java"
         ant.taskdef(name:'xmlbean', classname: 'org.apache.xmlbeans.impl.tool.XMLBean', classpath: configurations.compile.asPath)
         sourceSets.main.resources.files.each {File file ->
-            ant.xmlbean(schema: file.path, classgendir: sourceSets.generated.output.classesDir , srcgendir: "src/generated/java", classpath: configurations.compile.asPath) {
+            ant.xmlbean(schema: file.path, classgendir: "build/classes/java/main" , srcgendir: "src/generated/java", classpath: configurations.compile.asPath) {
                 fileset(dir: file.parentFile) {
                     include(name: '*.xsdconfig')
                 }
@@ -129,13 +128,13 @@ jar.dependsOn compileGeneratedJava
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.2'
+wrapper{
+    gradleVersion = '5.6.4'
 }
 
 
 task updateVersionInSchema{
-    ant.replaceregexp(match:'<!--\\s*version\\s*:[^>]*-->', replace:'<!-- version:' + version + ' -->' , flags:'g', byline:true) {
+    ant.replaceregexp(match:'<!--\\s*version\\s*:[^->]*-->', replace:'<!-- version:' + version + ' -->' , flags:'g', byline:true) {
         fileset(dir: project.projectDir, includes: '/src/**/sra/schema/*.xsd')
     }
 }
