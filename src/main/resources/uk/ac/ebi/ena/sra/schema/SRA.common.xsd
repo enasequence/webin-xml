@@ -665,6 +665,17 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
+            <xs:element name="DNBSEQ">
+                <xs:annotation>
+                    <xs:documentation> Sequencers based on DNBSEQ by MGI Tech. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1"
+                                    type="com:typeDnbSeqModel"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:choice>
 
     </xs:complexType>
@@ -996,6 +1007,16 @@
             <xs:enumeration value="AB 3130xL Genetic Analyzer"/>
             <xs:enumeration value="AB 3130 Genetic Analyzer"/>
             <xs:enumeration value="AB 310 Genetic Analyzer"/>
+            <xs:enumeration value="unspecified"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="typeDnbSeqModel">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DNBSEQ-T7"/>
+            <xs:enumeration value="DNBSEQ-G400"/>
+            <xs:enumeration value="DNBSEQ-G50"/>
+            <xs:enumeration value="DNBSEQ-G400 FAST"/>
             <xs:enumeration value="unspecified"/>
         </xs:restriction>
     </xs:simpleType>
