@@ -355,6 +355,24 @@
                                                 type="xs:string"/>
                                             <xs:element minOccurs="0" name="ADDRESS"
                                                 type="xs:string"/>
+                                            <xs:element minOccurs="0" name="TYPE">
+                                                <xs:simpleType>
+                                                    <xs:restriction base="xs:string">
+                                                        <xs:enumeration value="isolate">
+                                                            <xs:annotation>
+                                                                <xs:documentation>An assembly of reads from an isolated cultured organism, tissues, cells or a cell line.
+                                                                </xs:documentation>
+                                                            </xs:annotation>
+                                                        </xs:enumeration>
+                                                        <xs:enumeration value="metatranscriptome">
+                                                            <xs:annotation>
+                                                                <xs:documentation>An original metatranscriptome assembly from a sampled biome or collection of sampled biomes without attempt to separate taxa.
+                                                                </xs:documentation>
+                                                            </xs:annotation>
+                                                        </xs:enumeration>
+                                                    </xs:restriction>
+                                                </xs:simpleType>
+                                            </xs:element>
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
