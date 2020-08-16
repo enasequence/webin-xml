@@ -28,4 +28,4 @@ http://www.ebi.ac.uk/ena
 [Detailed information about setup, build and deployment](https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?spaceKey=EMBL&title=SRA+XML+Schema+Build+and+Deployment) <br/>
 [For more information about release gradle tasks](https://github.com/Codearte/gradle-nexus-staging-plugin#tasks)<br/>
 [For verification of the artifact release status and drop/close/release using UI](https://oss.sonatype.org/#stagingRepositories)<br/>
-[To verify published version in mavenCentral](https://search.maven.org/#search%7Cga%7C1%7Csra-xml)(Note: It will take sometime to see the latest artifact in MavenCentral after closeAndRelease)<br/>
+[To verify published version in mavenCentral](**https://search.maven.org/#search%7Cga%7C1%7Csra-xml**)(Note: It will take sometime to see the latest artifact in MavenCentral after closeAndRelease)<br/>

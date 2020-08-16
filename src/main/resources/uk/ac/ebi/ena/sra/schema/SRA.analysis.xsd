@@ -51,6 +51,8 @@
                     <xs:enumeration value="unlocalised_list"/>
                     <xs:enumeration value="info"/>
                     <xs:enumeration value="manifest"/>
+                    <xs:enumeration value="csi"/>
+                    <xs:enumeration value="bcf_aggregate"/>
                     <xs:enumeration value="other"/>
                 </xs:restriction>
             </xs:simpleType>
