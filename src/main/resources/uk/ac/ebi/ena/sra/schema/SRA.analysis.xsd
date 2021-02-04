@@ -270,13 +270,20 @@
                                                                 </xs:documentation>
                                                   </xs:annotation>
                                                   </xs:enumeration>
-                                                      <xs:enumeration
-                                                              value="COVID-19 outbreak">
-                                                          <xs:annotation>
-                                                              <xs:documentation>A genome assembly specific to COVID-19 outbreak.
-                                                              </xs:documentation>
-                                                          </xs:annotation>
-                                                      </xs:enumeration>
+                                                  <xs:enumeration
+                                                          value="COVID-19 outbreak">
+                                                      <xs:annotation>
+                                                          <xs:documentation>A genome assembly specific to COVID-19 outbreak.
+                                                          </xs:documentation>
+                                                      </xs:annotation>
+                                                  </xs:enumeration>
+                                                  <xs:enumeration
+                                                          value="clinical isolate assembly">
+                                                      <xs:annotation>
+                                                          <xs:documentation>A bacterial pathogen genome assembly.
+                                                          </xs:documentation>
+                                                      </xs:annotation>
+                                                  </xs:enumeration>
                                                   </xs:restriction>
                                                 </xs:simpleType>
                                             </xs:element>
