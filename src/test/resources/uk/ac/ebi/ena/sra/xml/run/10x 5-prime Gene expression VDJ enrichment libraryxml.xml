@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RUN_SET>
+  <RUN alias="alias-001">
+    <TITLE>title-001</TITLE>
+    <EXPERIMENT_REF refname="exp-ref-001" />
+    <DATA_BLOCK>
+      <FILES>
+        <FILE filename="442536_28_S12_L002_I1_001.fastq.gz" filetype="fastq" checksum_method="MD5" checksum="d8ca81a13acdaa9dbe62cb10c67b2b8b">
+          <READ_TYPE>sample_barcode</READ_TYPE>
+        </FILE>
+        <FILE filename="442536_28_S12_L002_R1_001.fastq.gz" filetype="fastq" checksum_method="MD5" checksum="d8ca81a13acdaa9dbe62cb10c67b2b8b">
+          <READ_TYPE>cell_barcode</READ_TYPE>
+          <READ_TYPE>umi_barcode</READ_TYPE>
+        </FILE>
+        <FILE filename="442536_28_S12_L002_R2_001.fastq.gz" filetype="fastq" checksum_method="MD5" checksum="d8ca81a13acdaa9dbe62cb10c67b2b8b">
+          <READ_TYPE>single</READ_TYPE>
+        </FILE>
+      </FILES>
+    </DATA_BLOCK>
+  </RUN>
+</RUN_SET>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RUN_SET>
+  <RUN alias="alias-001">
+    <TITLE>title-001</TITLE>
+    <EXPERIMENT_REF refname="exp-ref-001" />
+    <DATA_BLOCK>
+      <FILES>
+        <FILE filename="WSSS_END8738160_S1_L001_I1_001.fastq.gz" filetype="fastq" checksum_method="MD5" checksum="d8ca81a13acdaa9dbe62cb10c67b2b8b">
+          <READ_TYPE>sample_barcode</READ_TYPE>
+        </FILE>
+        <FILE filename="WSSS_END8738160_S1_L001_R1_001.fastq.gz" filetype="fastq" checksum_method="MD5" checksum="d8ca81a13acdaa9dbe62cb10c67b2b8b">
+          <READ_TYPE>paired</READ_TYPE>
+        </FILE>
+        <FILE filename="WSSS_END8738160_S1_L001_R2_001.fastq.gz" filetype="fastq" checksum_method="MD5" checksum="d8ca81a13acdaa9dbe62cb10c67b2b8b">
+          <READ_TYPE>cell_barcode</READ_TYPE>
+        </FILE>
+        <FILE filename="WSSS_END8738160_S1_L001_R3_001.fastq.gz" filetype="fastq" checksum_method="MD5" checksum="d8ca81a13acdaa9dbe62cb10c67b2b8b">
+          <READ_TYPE>paired</READ_TYPE>
+        </FILE>
+      </FILES>
+    </DATA_BLOCK>
+  </RUN>
+</RUN_SET>
