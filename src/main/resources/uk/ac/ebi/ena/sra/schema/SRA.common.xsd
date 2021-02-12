@@ -676,6 +676,17 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
+           <xs:element name="DNBSEQ">
+                <xs:annotation>
+                    <xs:documentation> Sequencers based on DNBSEQ by MGI Tech. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="INSTRUMENT_MODEL" maxOccurs="1" minOccurs="1"
+                                    type="com:typeDnbSeqModel"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:choice>
 
     </xs:complexType>
@@ -934,6 +945,8 @@
             <xs:enumeration value="Illumina NovaSeq 6000"/>          
             <xs:enumeration value="NextSeq 500"/>  
             <xs:enumeration value="NextSeq 550"/>
+            <xs:enumeration value="NextSeq 1000"/>
+            <xs:enumeration value="NextSeq 2000"/>
             <xs:enumeration value="unspecified"/>
         </xs:restriction>
     </xs:simpleType>
