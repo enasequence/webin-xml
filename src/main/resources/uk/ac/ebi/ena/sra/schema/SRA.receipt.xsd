@@ -58,10 +58,14 @@
         <xs:attribute name="status" use="optional">
             <xs:simpleType>
                 <xs:restriction base="xs:string">
+                    <xs:enumeration value="DRAFT"/>
                     <xs:enumeration value="PRIVATE"/>
+                    <xs:enumeration value="CANCELLED"/>
                     <xs:enumeration value="PUBLIC"/>
-                    <xs:enumeration value="KILLED"/>
                     <xs:enumeration value="SUPPRESSED"/>
+                    <xs:enumeration value="KILLED"/>
+                    <xs:enumeration value="TEMPORARY_SUPPRESSED"/>
+                    <xs:enumeration value="TEMPORARY_KILLED"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>

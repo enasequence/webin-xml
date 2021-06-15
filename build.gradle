@@ -1,29 +1,39 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.3"
-    }
+plugins {
+    id 'java'
+    id 'maven'
+    id 'idea'
+    id 'eclipse'
+    id 'maven-publish'
 }
 
-apply plugin: 'io.codearte.nexus-staging'
-
-
-apply plugin: 'java'
-
-apply plugin: 'maven'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-apply plugin: 'signing'
-
 group = 'uk.ac.ebi.ena.sra'
-version = '1.8.0'
 archivesBaseName = 'sra-xml'
+version = '1.9.0'
 
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+ext.gitlab_project_id = '3209'
+
+wrapper{
+    gradleVersion = '5.6.4'
+}
 
 repositories {
     mavenLocal()
+
+    maven {
+        // Group level (enasequence) maven artifactory.
+        url "https://gitlab.ebi.ac.uk/api/v4/groups/enasequence/-/packages/maven"
+
+        credentials(HttpHeaderCredentials) {
+            name = "Private-Token"
+            value = project.ext.properties.gitlab_private_token
+        }
+        authentication {
+            header(HttpHeaderAuthentication)
+        }
+    }
+
     mavenCentral()
 }
 
@@ -33,8 +43,6 @@ dependencies {
     testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.6.2'
     testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.2'
 }
-
-
 
 idea {
     module {
@@ -65,13 +73,10 @@ sourceSets {
         output.resourcesDir = sourceSets.main.output.resourcesDir
         compileClasspath += sourceSets.main.runtimeClasspath
     }
-
 }
-
 
 task classes (overwrite: true)  {
 }
-
 
 task printSources  {
     sourceSets.main.allSource.files.each {File file ->
@@ -93,18 +98,11 @@ artifacts {
     archives jar
     archives javadocJar
     archives sourcesJar
-
-}
-
-signing {
-    sign configurations.archives
 }
 
 install {
     configuration = configurations.runtime
 }
-
-
 
 task generateXMLBeanSources (overwrite: true) {
     doLast{
@@ -116,7 +114,6 @@ task generateXMLBeanSources (overwrite: true) {
                     include(name: '*.xsdconfig')
                 }
             }
-
         }
     }
 }
@@ -125,14 +122,6 @@ compileGeneratedJava.dependsOn generateXMLBeanSources
 compileTestJava.dependsOn compileGeneratedJava
 jar.dependsOn compileGeneratedJava
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
-
-wrapper{
-    gradleVersion = '5.6.4'
-}
-
-
 task updateVersionInSchema{
     ant.replaceregexp(match:'<!--\\s*version\\s*:[^->]*-->', replace:'<!-- version:' + version + ' -->' , flags:'g', byline:true) {
         fileset(dir: project.projectDir, includes: '/src/**/sra/schema/*.xsd')
@@ -140,51 +129,27 @@ task updateVersionInSchema{
 }
 tasks.build.dependsOn(updateVersionInSchema)
 
-uploadArchives {
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+        }
+    }
     repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
+        maven {
+            // Project specific maven repository in Gitlab.
+            url "https://gitlab.ebi.ac.uk/api/v4/projects/${gitlab_project_id}/packages/maven"
+            // Developer token in Gitlab.
+            credentials(HttpHeaderCredentials) {
+                name = "Private-Token"
+                value = project.ext.properties.gitlab_private_token
             }
-
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            pom.project {
-                name 'sra-xml'
-                packaging 'jar'
-                // optionally artifactId can be defined here
-                description 'XML Beans compile from the XML Schemas used to submit SRA data to the European Nucleotide Archive'
-                url 'http://www.ebi.ac.uk/ena'
-
-                scm {
-                    url 'https://github.com/enasequence/schema'
-                }
-
-                licenses {
-                    license {
-                        name 'The Apache License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id 'Josue'
-                        name 'Josue Martinez'
-                        email 'josue@ebi.ac.uk'
-                    }
-                }
+            authentication {
+                header(HttpHeaderAuthentication)
             }
         }
     }
-}
-
-nexusStaging {
-    packageGroup = "uk.ac.ebi.ena.sra"
 }
 
 test {
@@ -194,3 +159,5 @@ test {
         events "failed", "standardOut", "standardError"
     }
 }
+
+publish.dependsOn build

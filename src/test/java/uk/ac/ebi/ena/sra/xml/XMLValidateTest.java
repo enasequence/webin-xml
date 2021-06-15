@@ -42,6 +42,7 @@ public class XMLValidateTest {
     public static final String EGA_DATASET_FILE_RESOURCE_DIR = "/uk/ac/ebi/ena/sra/xml/ega_dataset";
     public static final String EGA_DAC_FILE_RESOURCE_DIR = "/uk/ac/ebi/ena/sra/xml/ega_dac";
     public static final String EGA_POLICY_FILE_RESOURCE_DIR = "/uk/ac/ebi/ena/sra/xml/ega_policy";
+    public static final String RECEIPT_FILE_RESOURCE_DIR = "/uk/ac/ebi/ena/sra/xml/receipt";
 
     @Before
     public void setUp() throws Exception {
@@ -84,6 +85,11 @@ public class XMLValidateTest {
     @Test
     public void testAnalysisXMLFiles () throws URISyntaxException, IOException, XmlException {
         testXMLFiles(ANALYSIS_FILE_RESOURCE_DIR);
+    }
+
+    @Test
+    public void testReceiptXMLFiles () throws URISyntaxException, IOException, XmlException {
+        testXMLFiles(RECEIPT_FILE_RESOURCE_DIR);
     }
 
     public void testXMLFiles (String resourceDir) throws URISyntaxException, IOException, XmlException {
