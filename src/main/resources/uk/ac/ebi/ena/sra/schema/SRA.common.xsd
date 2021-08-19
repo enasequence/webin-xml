@@ -10,7 +10,7 @@
   ~ specific language governing permissions and limitations under the License.
   -->
 
-<!-- version:1.8.0 -->
+<!-- version:1.9.1 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="SRA.common"
     targetNamespace="SRA.common">
 
@@ -928,6 +928,7 @@
             <xs:enumeration value="Illumina HiSeq 2500"/>
             <xs:enumeration value="Illumina HiSeq 3000"/>
             <xs:enumeration value="Illumina HiSeq 4000"/>
+            <xs:enumeration value="Illumina HiSeq X"/>
             <xs:enumeration value="Illumina iSeq 100"/>
             <xs:enumeration value="Illumina MiSeq"/>
             <xs:enumeration value="Illumina MiniSeq"/>
@@ -996,6 +997,8 @@
             <xs:enumeration value="Ion Torrent Proton"/>
             <xs:enumeration value="Ion Torrent S5"/>
             <xs:enumeration value="Ion Torrent S5 XL"/>
+            <xs:enumeration value="Ion GeneStudio S5 Prime"/>
+            <xs:enumeration value="Ion GeneStudio S5 Plus"/>
             <xs:enumeration value="unspecified"/>
         </xs:restriction>
     </xs:simpleType>
