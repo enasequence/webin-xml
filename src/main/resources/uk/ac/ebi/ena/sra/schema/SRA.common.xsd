@@ -978,6 +978,7 @@
     <xs:simpleType name="typeBGISEQModel">
         <xs:restriction base="xs:string">
             <xs:enumeration value="BGISEQ-500"/>
+            <xs:enumeration value="MGISEQ-2000RS"/>
         </xs:restriction>
     </xs:simpleType>
 
