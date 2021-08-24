@@ -349,6 +349,8 @@
                                 </xs:element>
                                 <xs:element name="AMR_ANTIBIOGRAM"/>
                                 <xs:element name="PATHOGEN_ANALYSIS"/>
+                                <xs:element name="COVID19_CONSENSUS"/>
+                                <xs:element name="COVID19_FILTERED_VCF"/>
                                 <xs:element name="TRANSCRIPTOME_ASSEMBLY">
                                     <xs:complexType>
                                         <xs:sequence>
