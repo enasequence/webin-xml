@@ -998,6 +998,7 @@
             <xs:enumeration value="Ion Torrent Proton"/>
             <xs:enumeration value="Ion Torrent S5"/>
             <xs:enumeration value="Ion Torrent S5 XL"/>
+            <xs:enumeration value="Ion Torrent Genexus"/>
             <xs:enumeration value="Ion GeneStudio S5 Prime"/>
             <xs:enumeration value="Ion GeneStudio S5 Plus"/>
             <xs:enumeration value="unspecified"/>

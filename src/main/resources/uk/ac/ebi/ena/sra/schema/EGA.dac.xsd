@@ -23,7 +23,7 @@
 			<xs:extension base="com:ObjectType">
 				<xs:sequence>
 
-					<xs:element name="TITLE" type="xs:string" minOccurs="0" maxOccurs="1">
+					<xs:element name="TITLE" type="xs:string" minOccurs="1" maxOccurs="1">
 						<xs:annotation>
 							<xs:documentation>
             Short text that can be used to call out DAC records in searches or in displays.
