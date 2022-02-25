@@ -50,6 +50,11 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="snRNA-seq">
+        <xs:annotation>
+          <xs:documentation>Single nucleus RNA sequencing is a method for profiling gene expression in cells which are difficult to isolate.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="miRNA-Seq">
         <xs:annotation>
           <xs:documentation> Micro RNA sequencing strategy designed to capture post-transcriptional RNA elements and include non-coding
