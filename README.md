@@ -21,7 +21,7 @@ http://www.ebi.ac.uk/ena
 
 ## Copying files to FTP directory:
 
-* Copy all XSD files in the directory **main/resources/uk/ac/ebi/ena/sra** to:
+* Copy all XSD files in the directory **main/resources/uk/ac/ebi/ena/sra/schema** to:
   * ```datalib@noah-login:/nfs/ftp/pub/databases/ena/doc/xsd/sra_1_5```
 * There are many **sra_1_X** directories inside ```datalib@noah-login:/nfs/ftp/pub/databases/ena/doc/xsd```. The files,
   however, are always copied into **sra_1_5** directory unless explicitly stated otherwise.
