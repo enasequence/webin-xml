@@ -122,13 +122,6 @@ compileGeneratedJava.dependsOn generateXMLBeanSources
 compileTestJava.dependsOn compileGeneratedJava
 jar.dependsOn compileGeneratedJava
 
-task updateVersionInSchema{
-    ant.replaceregexp(match:'<!--\\s*version\\s*:[^->]*-->', replace:'<!-- version:' + version + ' -->' , flags:'g', byline:true) {
-        fileset(dir: project.projectDir, includes: '/src/**/sra/schema/*.xsd')
-    }
-}
-tasks.build.dependsOn(updateVersionInSchema)
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
