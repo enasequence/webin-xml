@@ -10,7 +10,7 @@
   ~ specific language governing permissions and limitations under the License.
   -->
 
-<!-- version:1.12.0 -->
+<!-- version:1.13.0 -->
 <xs:schema xmlns:com="SRA.common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:import namespace="SRA.common" schemaLocation="SRA.common.xsd"/>
 
@@ -38,6 +38,7 @@
                     <xs:enumeration value="wig"/>
                     <xs:enumeration value="bed"/>
                     <xs:enumeration value="gff"/>
+                    <xs:enumeration value="gfa"/>
                     <xs:enumeration value="fasta"/>
                     <xs:enumeration value="fastq"/>
                     <xs:enumeration value="flatfile"/>
@@ -351,6 +352,24 @@
                                 <xs:element name="PATHOGEN_ANALYSIS"/>
                                 <xs:element name="COVID19_CONSENSUS"/>
                                 <xs:element name="COVID19_FILTERED_VCF"/>
+                                <xs:element name="PHYLOGENY_ANALYSIS"/>
+                                <xs:element name="ASSEMBLY_GRAPH">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element maxOccurs="unbounded" name="ASSEMBLY">
+                                                <xs:complexType>
+                                                    <xs:sequence>
+                                                        <xs:element name="STANDARD">
+                                                            <xs:complexType>
+                                                                <xs:attribute name="accession" type="xs:string" use="required" />
+                                                            </xs:complexType>
+                                                        </xs:element>
+                                                    </xs:sequence>
+                                                </xs:complexType>
+                                            </xs:element>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
                                 <xs:element name="TRANSCRIPTOME_ASSEMBLY">
                                     <xs:complexType>
                                         <xs:sequence>
