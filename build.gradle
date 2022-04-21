@@ -8,7 +8,7 @@ plugins {
 
 group = 'uk.ac.ebi.ena.sra'
 archivesBaseName = 'sra-xml'
-version = '1.12.0'
+version = '1.13.0'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -121,13 +121,6 @@ task generateXMLBeanSources (overwrite: true) {
 compileGeneratedJava.dependsOn generateXMLBeanSources
 compileTestJava.dependsOn compileGeneratedJava
 jar.dependsOn compileGeneratedJava
-
-task updateVersionInSchema{
-    ant.replaceregexp(match:'<!--\\s*version\\s*:[^->]*-->', replace:'<!-- version:' + version + ' -->' , flags:'g', byline:true) {
-        fileset(dir: project.projectDir, includes: '/src/**/sra/schema/*.xsd')
-    }
-}
-tasks.build.dependsOn(updateVersionInSchema)
 
 publishing {
     publications {
