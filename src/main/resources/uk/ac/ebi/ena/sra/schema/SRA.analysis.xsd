@@ -417,6 +417,8 @@
                                     </xs:complexType>
                                 </xs:element>
                                 <xs:element name="ASSEMBLY_ANNOTATION" type="com:ReferenceSequenceType"></xs:element>
+                                <xs:element name="SEQUENCE_CONSENSUS"/>
+                                <xs:element name="FILTERED_VARIATION"/>
                             </xs:choice>
                         </xs:complexType>
                     </xs:element>
