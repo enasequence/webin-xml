@@ -220,7 +220,7 @@
       </xs:enumeration>
       <xs:enumeration value="Ribo-Seq">
         <xs:annotation>
-          <xs:documentation>Ribosome profiling is a method based on deep sequencing of ribosome-protected mRNA fragments. Ribo-Seq, provides a “snapshot” of all the ribosomes active in a cell at a specific time point.</xs:documentation>
+          <xs:documentation>Ribosome profiling is a method based on deep sequencing of ribosome-protected mRNA fragments. Ribo-Seq, provides a snapshot of all the ribosomes active in a cell at a specific time point.</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="OTHER">
