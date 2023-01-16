@@ -1,0 +1,62 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<EXPERIMENT_SET>
+    <EXPERIMENT accession="ERX000119" alias="NA18504.3" center_name="MPIMG">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERX000119</PRIMARY_ID>
+            <SUBMITTER_ID namespace="MPIMG">NA18504.3</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <STUDY_REF accession="SRP000031" refname="1000Genomes Project Pilot 1" refcenter="NCBI">
+            <IDENTIFIERS>
+                <PRIMARY_ID>SRP000031</PRIMARY_ID>
+                <SUBMITTER_ID namespace="NCBI">1000Genomes Project Pilot 1</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </STUDY_REF>
+        <DESIGN>
+            <DESIGN_DESCRIPTION>SOLiD sequencing of Human HapMap individual NA18504</DESIGN_DESCRIPTION>
+            <SAMPLE_DESCRIPTOR accession="SRS000099" refname="NA18504" refcenter="NCBI">
+                <IDENTIFIERS>
+                    <PRIMARY_ID>SRS000099</PRIMARY_ID>
+                    <SUBMITTER_ID namespace="NCBI">NA18504</SUBMITTER_ID>
+                </IDENTIFIERS>
+            </SAMPLE_DESCRIPTOR>
+            <LIBRARY_DESCRIPTOR>
+                <LIBRARY_NAME>NA18504.3</LIBRARY_NAME>
+                <LIBRARY_STRATEGY>WGS</LIBRARY_STRATEGY>
+                <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+                <LIBRARY_SELECTION>RANDOM</LIBRARY_SELECTION>
+                <LIBRARY_LAYOUT>
+                    <SINGLE/>
+                </LIBRARY_LAYOUT>
+                <LIBRARY_CONSTRUCTION_PROTOCOL>Standard SOLiD protocol</LIBRARY_CONSTRUCTION_PROTOCOL>
+            </LIBRARY_DESCRIPTOR>
+            <SPOT_DESCRIPTOR>
+                <SPOT_DECODE_SPEC>
+                    <SPOT_LENGTH>35</SPOT_LENGTH>
+                    <READ_SPEC>
+                        <READ_INDEX>0</READ_INDEX>
+                        <READ_CLASS>Application Read</READ_CLASS>
+                        <READ_TYPE>Forward</READ_TYPE>
+                        <BASE_COORD>1</BASE_COORD>
+                    </READ_SPEC>
+                </SPOT_DECODE_SPEC>
+            </SPOT_DESCRIPTOR>
+        </DESIGN>
+        <PLATFORM>
+            <ELEMENT>
+                <INSTRUMENT_MODEL>Element AVITI</INSTRUMENT_MODEL>
+            </ELEMENT>
+        </PLATFORM>
+        <PROCESSING/>
+        <EXPERIMENT_ATTRIBUTES>
+            <EXPERIMENT_ATTRIBUTE>
+                <TAG>center_name</TAG>
+                <VALUE>mpimg</VALUE>
+            </EXPERIMENT_ATTRIBUTE>
+            <EXPERIMENT_ATTRIBUTE>
+                <TAG>expected_number_bases</TAG>
+                <VALUE>4300</VALUE>
+                <UNITS>MB</UNITS>
+            </EXPERIMENT_ATTRIBUTE>
+        </EXPERIMENT_ATTRIBUTES>
+    </EXPERIMENT>
+</EXPERIMENT_SET>
