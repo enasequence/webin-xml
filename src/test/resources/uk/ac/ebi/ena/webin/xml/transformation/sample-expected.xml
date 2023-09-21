@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SAMPLE_SET>
+   <SAMPLE accession="ERS167305" alias="SJMB040_G" broker_name="EGA" center_name="PCGP">
+      <IDENTIFIERS>
+         <PRIMARY_ID>ERS167305</PRIMARY_ID>
+         <SUBMITTER_ID namespace="PCGP">SJMB040_G</SUBMITTER_ID>
+      </IDENTIFIERS>
+      <TITLE>SJMB040_G</TITLE>
+      <SAMPLE_NAME>
+         <TAXON_ID>9606</TAXON_ID>
+         <SCIENTIFIC_NAME>Homo sapiens</SCIENTIFIC_NAME>
+         <COMMON_NAME>human</COMMON_NAME>
+      </SAMPLE_NAME>
+      <DESCRIPTION>SJMB040_G</DESCRIPTION>
+      <SAMPLE_ATTRIBUTES>
+         <SAMPLE_ATTRIBUTE>
+            <TAG>ENA-SUBMISSION-TOOL</TAG>
+            <VALUE>SRA-Webin</VALUE>
+         </SAMPLE_ATTRIBUTE>
+      </SAMPLE_ATTRIBUTES>
+   </SAMPLE>
+</SAMPLE_SET>

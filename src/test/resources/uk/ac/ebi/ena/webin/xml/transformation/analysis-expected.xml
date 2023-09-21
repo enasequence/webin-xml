@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ANALYSIS_SET>
+   <ANALYSIS accession="ERZ1701154" alias="Input_Sesamoid_A_ProcessedReads"
+             center_name="UNIVERSITY OF CALIFORNIA - DAVIS">
+      <IDENTIFIERS>
+         <PRIMARY_ID>ERZ1701154</PRIMARY_ID>
+         <SUBMITTER_ID namespace="UNIVERSITY OF CALIFORNIA - DAVIS">Input_Sesamoid_A_ProcessedReads</SUBMITTER_ID>
+      </IDENTIFIERS>
+      <TITLE>“Adopt-a-Tissue” Initiative Advances Efforts to Identify Tissue- Specific Histone Marks in the Mare</TITLE>
+      <DESCRIPTION>We used Chromatin Immunoprecipitation sequencing (ChIP-Seq) to map four histone modifications (H3K4me1, H3K4me3, H3K27ac, and H3K27me3) in four “Adopted” tissues collected for the Equine Biobank from two Thoroughbred mares. To ensure that we obtained sufficient IP and successful peak-calling, data and peak-calls were assessed using multiple quality metrics and comparisons. These data are released under Fort Lauderdale principles, as confirmed in the Toronto Statement (Toronto International Data Release Workshop. Birney et al. 2009. Pre-publication data sharing. Nature 461:168-170). Any use of this dataset must abide by the FAANG data sharing principles. Data producers reserve the right to make the first publication of a global analysis of this data. If you are unsure if you are allowed to publish on this dataset, please contact rbellone@ucdavis.edu, cjfinno@ucdavis.edu, and jessica.petersen@unl.edu to inquire. The full guidelines can be found at http://www.faang.org/data-share-principle</DESCRIPTION>
+      <STUDY_REF accession="ERP126153">
+         <IDENTIFIERS>
+            <PRIMARY_ID>ERP126153</PRIMARY_ID>
+            <SECONDARY_ID>PRJEB42315</SECONDARY_ID>
+         </IDENTIFIERS>
+      </STUDY_REF>
+      <SAMPLE_REF accession="ERS3583620">
+         <IDENTIFIERS>
+            <PRIMARY_ID>ERS3583620</PRIMARY_ID>
+         </IDENTIFIERS>
+      </SAMPLE_REF>
+      <EXPERIMENT_REF accession="ERX4842366">
+         <IDENTIFIERS>
+            <PRIMARY_ID>ERX4842366</PRIMARY_ID>
+         </IDENTIFIERS>
+      </EXPERIMENT_REF>
+      <RUN_REF accession="ERR5036018">
+         <IDENTIFIERS>
+            <PRIMARY_ID>ERR5036018</PRIMARY_ID>
+         </IDENTIFIERS>
+      </RUN_REF>
+      <ANALYSIS_TYPE>
+         <PROCESSED_READS/>
+      </ANALYSIS_TYPE>
+      <FILES>
+         <FILE checksum="49708749b1b09e46daef8a8000e902b2" checksum_method="MD5"
+               filename="ERZ170/ERZ1701154/Input_Sesamoid_A.duplicate-removed.bam"
+               filetype="bam"/>
+      </FILES>
+      <ANALYSIS_ATTRIBUTES>
+         <ANALYSIS_ATTRIBUTE>
+            <TAG>Project</TAG>
+            <VALUE>FAANG</VALUE>
+         </ANALYSIS_ATTRIBUTE>
+         <ANALYSIS_ATTRIBUTE>
+            <TAG>Assay Type</TAG>
+            <VALUE>ChIP-seq</VALUE>
+         </ANALYSIS_ATTRIBUTE>
+         <ANALYSIS_ATTRIBUTE>
+            <TAG>Analysis Protocol</TAG>
+            <VALUE>ftp://ftp.faang.ebi.ac.uk/faang/ftp/protocols/analysis/UCD_SOP_processing_and_analyzing_equine_ChIP_data_20191030.pdf</VALUE>
+         </ANALYSIS_ATTRIBUTE>
+         <ANALYSIS_ATTRIBUTE>
+            <TAG>Reference genome</TAG>
+            <VALUE>EquCab3.0</VALUE>
+         </ANALYSIS_ATTRIBUTE>
+         <ANALYSIS_ATTRIBUTE>
+            <TAG>Analysis center</TAG>
+            <VALUE>University of California - Davis</VALUE>
+         </ANALYSIS_ATTRIBUTE>
+         <ANALYSIS_ATTRIBUTE>
+            <TAG>Analysis date</TAG>
+            <VALUE>2020-07-15</VALUE>
+            <UNITS>YYYY-MM-DD</UNITS>
+         </ANALYSIS_ATTRIBUTE>
+      </ANALYSIS_ATTRIBUTES>
+   </ANALYSIS>
+</ANALYSIS_SET>

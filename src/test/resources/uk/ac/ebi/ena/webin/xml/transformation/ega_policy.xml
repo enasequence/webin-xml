@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<POLICY_SET>
+    <POLICY alias="Policy_for_study___PTP_and_Vel_Exome_Sequencing____678-sc-2011-06-02T13:34:38Z-678" accession="EGAP00001000013" center_name="SC" broker_name="EGA">
+        <IDENTIFIERS>
+            <PRIMARY_ID>EGAP00001000013</PRIMARY_ID>
+            <SUBMITTER_ID namespace="SC">Policy_for_study___PTP_and_Vel_Exome_Sequencing____678-sc-2011-06-02T13:34:38Z-678</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE/>
+        <DAC_REF accession="EGAC00001000013" refname="DAC_for_study___PTP_and_Vel_Exome_Sequencing____678-sc-2011-06-02T13:34:34Z-678" refcenter="SC">
+            <IDENTIFIERS>
+                <PRIMARY_ID>EGAC00001000013</PRIMARY_ID>
+                <SUBMITTER_ID namespace="SC">DAC_for_study___PTP_and_Vel_Exome_Sequencing____678-sc-2011-06-02T13:34:34Z-678</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </DAC_REF>
+        <POLICY_TEXT>http://www.sanger.ac.uk/datasharing/</POLICY_TEXT>
+    </POLICY>
+</POLICY_SET>

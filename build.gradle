@@ -8,10 +8,10 @@ plugins {
 
 group = 'uk.ac.ebi.ena.sra'
 archivesBaseName = 'sra-xml'
-version = '1.19.0'
+version = '2.0.0'
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 ext.gitlab_project_id = '3209'
 
 wrapper{
@@ -38,32 +38,35 @@ repositories {
 }
 
 dependencies {
+    implementation(group: 'uk.ac.ebi.ena.sequence', name: 'sequencetools', version: '2.14')
+
     compile 'org.apache.xmlbeans:xmlbeans:2.5.0'
-    testCompile 'junit:junit:4.12'
-    testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.6.2'
-    testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.2'
-}
 
-idea {
-    module {
-        sourceDirs += sourceSets.main.output.classesDirs
-    }
-}
+    implementation(group: 'commons-io', name: 'commons-io', version: '1.3.2')
 
-task printClasspath  {
-    configurations.testCompile.each { println it }
+    // Without this, a default JDK class is used for compiling xslts that throws
+    // javax.xml.transform.TransformerConfigurationException for some reason.
+    runtimeOnly 'net.sf.saxon:saxon:8.7' //9.0, 9.7
+    // To fix a Null pointer exception thrown when a transformation is applied on an object.
+    runtimeOnly 'net.sf.saxon:saxon-dom:8.7' //9.0, 9.7
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.6.2'
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.2'
 }
 
 sourceSets {
     main {
         java {
             srcDir 'src/main/java'
+            srcDir 'src/generated/java'
         }
         resources {
             srcDir 'src/main/resources'
             include '**/SRA*.xsd'
             include '**/ENA*.xsd'
             include '**/EGA*.xsd'
+            include '**/*.xslt'
             exclude '**/ENA.embl.xsd'
             exclude '**/ENA.root.xsd'
         }
@@ -72,6 +75,12 @@ sourceSets {
         java
         output.resourcesDir = sourceSets.main.output.resourcesDir
         compileClasspath += sourceSets.main.runtimeClasspath
+    }
+}
+
+idea {
+    module {
+        sourceDirs += sourceSets.main.output.classesDirs
     }
 }
 

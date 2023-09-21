@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DAC_SET>
+   <DAC accession="EGAC00001000015" alias="ICGC Cancer Genome Projects"
+        broker_name="EGA"
+        center_name="CNG">
+      <IDENTIFIERS>
+         <PRIMARY_ID>EGAC00001000015</PRIMARY_ID>
+         <SUBMITTER_ID namespace="CNG">ICGC Cancer Genome Projects</SUBMITTER_ID>
+      </IDENTIFIERS>
+      <TITLE>ICGC Data Access Compliance Office</TITLE>
+      <CONTACTS>
+         <CONTACT email="info@icgc.org" name="helpdesk" organisation="ICGC" telephone_number=""/>
+      </CONTACTS>
+   </DAC>
+</DAC_SET>
