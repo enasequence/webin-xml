@@ -16,80 +16,103 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.net.URISyntaxException;
 
 public class WebinXmlTransformationTest {
 
     private static final String BASE_RESOURCE_PATH = "/uk/ac/ebi/ena/webin/xml/transformation/";
+    private static final String INPUT_FILE_SUFFIX = ".xml";
+    private static final String EXPECTED_FILE_SUFFIX = "-expected.xml";
 
     private static final DocumentBuilder DOCUMENT_BUILDER = createDocumentBuilder();
 
     @Test
     public void testStudyTransformation() throws IOException, SAXException, TransformerException {
-        testFor("study", "STUDY", "STUDY_SET", WebinXmlTransformation.createStudyTransformer());
+        testForDir("study", "STUDY", "STUDY_SET", WebinXmlTransformation.createStudyTransformer());
     }
 
     @Test
     public void testProjectTransformation() throws IOException, SAXException, TransformerException {
-        testFor("project", "PROJECT", "PROJECT_SET", WebinXmlTransformation.createProjectTransformer());
+        testForDir("project", "PROJECT", "PROJECT_SET", WebinXmlTransformation.createProjectTransformer());
     }
 
     @Test
     public void testSampleTransformation() throws IOException, SAXException, TransformerException {
-        testFor("sample", "SAMPLE", "SAMPLE_SET", WebinXmlTransformation.createSampleTransformer());
+        testForDir("sample", "SAMPLE", "SAMPLE_SET", WebinXmlTransformation.createSampleTransformer());
     }
 
     @Test
     public void testExperimentTransformation() throws IOException, SAXException, TransformerException {
-        testFor("experiment", "EXPERIMENT", "EXPERIMENT_SET", WebinXmlTransformation.createExperimentTransformer());
+        testForDir("experiment", "EXPERIMENT", "EXPERIMENT_SET", WebinXmlTransformation.createExperimentTransformer());
     }
 
     @Test
     public void testRunTransformation() throws IOException, SAXException, TransformerException {
-        testFor("run", "RUN", "RUN_SET", WebinXmlTransformation.createRunTransformer());
+        testForDir("run", "RUN", "RUN_SET", WebinXmlTransformation.createRunTransformer());
     }
 
     @Test
     public void testAnalysisTransformation() throws IOException, SAXException, TransformerException {
-        testFor("analysis", "ANALYSIS", "ANALYSIS_SET", WebinXmlTransformation.createAnalysisTransformer());
+        testForDir("analysis", "ANALYSIS", "ANALYSIS_SET", WebinXmlTransformation.createAnalysisTransformer());
     }
 
     @Test
     public void testEGADacTransformation() throws IOException, SAXException, TransformerException {
-        testFor("ega_dac", "DAC", "DAC_SET", WebinXmlTransformation.createEGADacTransformer());
+        testForDir("ega-dac", "DAC", "DAC_SET", WebinXmlTransformation.createEGADacTransformer());
     }
 
     @Test
     public void testEGAPolicyTransformation() throws IOException, SAXException, TransformerException {
-        testFor("ega_policy", "POLICY", "POLICY_SET", WebinXmlTransformation.createEGAPolicyTransformer());
+        testForDir("ega-policy", "POLICY", "POLICY_SET", WebinXmlTransformation.createEGAPolicyTransformer());
     }
 
     @Test
     public void testEGADatasetTransformation() throws IOException, SAXException, TransformerException {
-        testFor("ega_dataset", "DATASET", "DATASETS", WebinXmlTransformation.createEGADatasetTransformer());
+        testForDir("ega-dataset", "DATASET", "DATASETS", WebinXmlTransformation.createEGADatasetTransformer());
     }
 
     @Test
     public void testSubmissionTransformation() throws IOException, SAXException, TransformerException {
-        testFor("submission", "SUBMISSION", "SUBMISSION_SET", WebinXmlTransformation.createSubmissionTransformer());
+        testForDir("submission", "SUBMISSION", "SUBMISSION_SET", WebinXmlTransformation.createSubmissionTransformer());
     }
 
-    private void testFor(String filePrefix, String rootElementName, String rootElementSetName, Transformer transformer) throws IOException, SAXException, TransformerException {
-        String inputFile = filePrefix + ".xml";
-        String expectedFile = filePrefix + "-expected.xml";
+    private void testForDir(String dir, String rootElementName, String rootElementSetName, Transformer transformer) throws IOException, SAXException, TransformerException {
+        File testDir = getResourceFile(dir);
+        if (!testDir.isDirectory()) {
+            throw new RuntimeException("Invalid resource directory: " + dir);
+        }
+        File[] files = testDir.listFiles();
+        if (files == null) {
+            throw new RuntimeException("No test files in directory: " + dir);
+        }
+
+        for (File file : files) {
+            String name = file.getName();
+            if (name.endsWith(INPUT_FILE_SUFFIX) &&
+                    !name.endsWith(EXPECTED_FILE_SUFFIX)) {
+                String filePrefix = name.replaceAll("\\.xml$", "");
+                testForFile(dir + File.separator + filePrefix, rootElementName, rootElementSetName, transformer);
+            } else if (!name.endsWith(EXPECTED_FILE_SUFFIX)) {
+                throw new RuntimeException("Invalid test file name: " + name);
+            }
+        }
+    }
+
+    private void testForFile(String filePrefix, String rootElementName, String rootElementSetName, Transformer transformer) throws IOException, SAXException, TransformerException {
+        String inputFile = filePrefix + INPUT_FILE_SUFFIX;
+        String expectedFile = filePrefix + EXPECTED_FILE_SUFFIX;
+
+        System.out.println("Testing input file: " + inputFile);
 
         Document document = parseXmlFromInputStream(getResourceInputStream(inputFile));
-
         addSetRootElementIfMissing(document, rootElementName, rootElementSetName);
-
         document = transformer.transform(document);
-
         String actual = toString(document);
-
         String expected = getResourceContent(expectedFile);
-
         Assert.assertEquals(expected, actual);
     }
 
@@ -106,7 +129,15 @@ public class WebinXmlTransformationTest {
     }
 
     private InputStream getResourceInputStream(String resourcePath) {
-        return WebinXmlTransformationTest.class.getResourceAsStream(BASE_RESOURCE_PATH + resourcePath);
+        return this.getClass().getResourceAsStream(BASE_RESOURCE_PATH + resourcePath);
+    }
+
+    private File getResourceFile(String resourcePath) {
+        try {
+            return new File(this.getClass().getResource(BASE_RESOURCE_PATH + resourcePath).toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private Document parseXmlFromInputStream(InputStream is) throws IOException, SAXException {

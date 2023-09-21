@@ -6,11 +6,13 @@
     <xsl:include href="filter.xslt"/>
 
     <!-- NCBI XML mirroring fixes -->
-
-    <xsl:template match="/STUDY_SET/STUDY/DESCRIPTOR/STUDY_TYPE/@existing_study_type">
+    <xsl:template match="/STUDY_SET/STUDY/DESCRIPTOR/STUDY_TYPE/@existing_study_type" priority="0.25">
         <xsl:attribute name="existing_study_type">
             <xsl:value-of select="normalize-space()" />
         </xsl:attribute>
+    </xsl:template>
+    <xsl:template match="/STUDY_SET/STUDY/DESCRIPTOR/STUDY_TYPE/@existing_study_type[normalize-space(.) = 'Transcriptome Sequencing']">
+        <xsl:attribute name="existing_study_type">Transcriptome Analysis</xsl:attribute>
     </xsl:template>
 
     <!-- filter links -->

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<STUDY_SET>
+   <STUDY accession="SRP301193" alias="PRJNA685328" center_name="BioProject">
+      <IDENTIFIERS>
+         <PRIMARY_ID>SRP301193</PRIMARY_ID>
+         <EXTERNAL_ID label="primary" namespace="BioProject">PRJNA685328</EXTERNAL_ID>
+         <SUBMITTER_ID namespace="BioProject">PRJNA685328</SUBMITTER_ID>
+      </IDENTIFIERS>
+      <DESCRIPTOR>
+         <STUDY_TITLE>RNA-seq analyses of livers from DEN/CCl4-treated Nod2f/f and Nod2 -KO mice</STUDY_TITLE>
+         <STUDY_TYPE existing_study_type="Whole Genome Sequencing"/>
+      </DESCRIPTOR>
+   </STUDY>
+   <STUDY accession="SRP301193" alias="PRJNA685328" center_name="BioProject">
+      <IDENTIFIERS>
+         <PRIMARY_ID>SRP301193</PRIMARY_ID>
+         <EXTERNAL_ID label="primary" namespace="BioProject">PRJNA685328</EXTERNAL_ID>
+         <SUBMITTER_ID namespace="BioProject">PRJNA685328</SUBMITTER_ID>
+      </IDENTIFIERS>
+      <DESCRIPTOR>
+         <STUDY_TITLE>RNA-seq analyses of livers from DEN/CCl4-treated Nod2f/f and Nod2 -KO mice</STUDY_TITLE>
+         <STUDY_TYPE existing_study_type="Transcriptome Analysis"/>
+      </DESCRIPTOR>
+   </STUDY>
+</STUDY_SET>
