@@ -12,10 +12,18 @@
          <COMMON_NAME>human</COMMON_NAME>
       </SAMPLE_NAME>
       <DESCRIPTION>SJMB040_G</DESCRIPTION>
+      <SAMPLE_LINKS>
+         <SAMPLE_LINK>
+            <XREF_LINK>
+               <DB>DB</DB>
+               <ID>ID</ID>
+            </XREF_LINK>
+         </SAMPLE_LINK>
+      </SAMPLE_LINKS>
       <SAMPLE_ATTRIBUTES>
          <SAMPLE_ATTRIBUTE>
-            <TAG>ENA-SUBMISSION-TOOL</TAG>
-            <VALUE>SRA-Webin</VALUE>
+            <TAG>TAG</TAG>
+            <VALUE>VALUE</VALUE>
          </SAMPLE_ATTRIBUTE>
       </SAMPLE_ATTRIBUTES>
    </SAMPLE>

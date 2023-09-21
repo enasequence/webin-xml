@@ -13,4 +13,18 @@
          <CENTER_PROJECT_NAME>Mus musculus</CENTER_PROJECT_NAME>
       </DESCRIPTOR>
    </STUDY>
+   <STUDY_LINKS>
+      <STUDY_LINK>
+         <XREF_LINK>
+            <DB>DB</DB>
+            <ID>ID</ID>
+         </XREF_LINK>
+      </STUDY_LINK>
+   </STUDY_LINKS>
+   <STUDY_ATTRIBUTES>
+      <STUDY_ATTRIBUTE>
+         <TAG>TAG</TAG>
+         <VALUE>VALUE</VALUE>
+      </STUDY_ATTRIBUTE>
+   </STUDY_ATTRIBUTES>
 </STUDY_SET>
