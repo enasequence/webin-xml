@@ -21,7 +21,7 @@ public class ProjectTransformer extends AbstractTransformer {
         try {
             document = applyTemplateTransformation(document);
 
-            convertPublicationLinksToProjectLinksRemovePublication(document);
+            convertPublicationLinksToProjectLinksAndRemovePublication(document);
 
             return document;
         } catch (TransformerException e) {
@@ -36,10 +36,11 @@ public class ProjectTransformer extends AbstractTransformer {
         return null;
     }
 
-    private void convertPublicationLinksToProjectLinksRemovePublication(Document doc) {
-        List<Node> projects = getProjectNodes(doc);
+    private void convertPublicationLinksToProjectLinksAndRemovePublication(Document doc) {
+        List<Node> projects =  getXmlNodes(doc, "/PROJECT_SET/PROJECT");
         for (Node project : projects) {
-            List<Node> xrefPublicationLinks = getXrefPublicationLinks(project);
+            List<Node> xrefPublicationLinks = getXmlNodes(project,
+                    "./PUBLICATIONS/PUBLICATION/PUBLICATION_LINKS/PUBLICATION_LINK/XREF_LINK");
             if (!xrefPublicationLinks.isEmpty()) {
                 Node projectLinks = getProjectLinksCreateIfNotExist(doc, project);
                 for (Node xrefPublicationLink : xrefPublicationLinks) {
@@ -53,24 +54,18 @@ public class ProjectTransformer extends AbstractTransformer {
         }
     }
 
-    private List<Node> getProjectNodes(Document doc) {
-        return getXmlNodes(doc, "/PROJECT_SET/PROJECT");
-    }
-
-    private List<Node> getXrefPublicationLinks(Node project) {
-        return getXmlNodes(
-            project, "./PUBLICATIONS/PUBLICATION/PUBLICATION_LINKS/PUBLICATION_LINK/XREF_LINK");
-    }
-
     private Node getProjectLinksCreateIfNotExist(Document doc, Node project) {
-        Node prj = getXmlNode(project, "./PROJECT_LINKS");
-        Node projectLinks = null;
-        Node projectAttributes = getXmlNode(project, "./PROJECT_ATTRIBUTES");
-        if (prj == null) {
+        Node projectLinks = getXmlNode(project, "./PROJECT_LINKS");
+        if (projectLinks == null) {
             projectLinks = doc.createElement("PROJECT_LINKS");
-            if (projectAttributes != null) project.insertBefore(projectLinks, projectAttributes);
-            else project.appendChild(projectLinks);
+            Node projectAttributes = getXmlNode(project, "./PROJECT_ATTRIBUTES");
+            if (projectAttributes != null) {
+                project.insertBefore(projectLinks, projectAttributes);
+            }
+            else {
+                project.appendChild(projectLinks);
+            }
         }
-        return prj != null ? prj : projectLinks;
+        return projectLinks;
     }
 }

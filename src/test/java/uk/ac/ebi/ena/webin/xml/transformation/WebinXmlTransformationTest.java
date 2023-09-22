@@ -1,10 +1,7 @@
 package uk.ac.ebi.ena.webin.xml.transformation;
 
-import difflib.DiffRow;
-import difflib.DiffRowGenerator;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.text.StringEscapeUtils;
-import org.junit.Assert;
+import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -24,12 +21,9 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
+import java.io.*;
 import java.net.URISyntaxException;
-import java.util.Arrays;
+import java.nio.charset.StandardCharsets;
 
 public class WebinXmlTransformationTest {
 
@@ -112,17 +106,18 @@ public class WebinXmlTransformationTest {
     }
 
     private void testForFile(String filePrefix, String rootElementName, String rootElementSetName, Transformer transformer) throws IOException, SAXException, TransformerException {
-        String inputFile = filePrefix + INPUT_FILE_SUFFIX;
-        String expectedFile = filePrefix + EXPECTED_FILE_SUFFIX;
+        String inputResourcePath = filePrefix + INPUT_FILE_SUFFIX;
+        String expectedResourcePath = filePrefix + EXPECTED_FILE_SUFFIX;
 
-        System.out.println("Testing input file: " + inputFile);
+        System.out.println("----------------------------------------");
+        System.out.println("Input file: " + inputResourcePath);
 
-        Document document = parseXmlFromInputStream(getResourceInputStream(inputFile));
-        addSetRootElementIfMissing(document, rootElementName, rootElementSetName);
-        document = transformer.transform(document);
+        Document inputDocument = parseXmlFromInputStream(getResourceInputStream(inputResourcePath));
+        addSetRootElementIfMissing(inputDocument, rootElementName, rootElementSetName);
+        Document actualDocument = transformer.transform(inputDocument);
 
-        String actual = toString(document);
-        String expected = getResourceContent(expectedFile);
+        String actual = writeXmlToString(actualDocument);
+        String expected = getResourceContent(expectedResourcePath);
 
         Diff diff = DiffBuilder.compare(Input.fromString(expected))
                 .withTest(Input.fromString(actual))
@@ -131,35 +126,21 @@ public class WebinXmlTransformationTest {
              .withDifferenceEvaluator(DifferenceEvaluators.Default)
                 .build();
 
-        int differenceCount = 0;
-        for (Difference difference :  diff.getDifferences()) {
-            if (++differenceCount > MAX_XML_DIFFERENCE_COUNT) {
-                break;
-            }
-            System.out.println("Difference: " + difference.toString());
-        }
-
         if (diff.hasDifferences()) {
-            DiffRowGenerator generator =
-                    (new DiffRowGenerator.Builder())
-                            .ignoreWhiteSpaces(true)
-                            .ignoreBlankLines(true)
-                            .showInlineDiffs(true)
-                            .columnWidth(Integer.MAX_VALUE)
-                            .build();
-
-            for (DiffRow diffRow : generator.generateDiffRows(
-                    Arrays.asList(expected.split("\n")),
-                    Arrays.asList(actual.split("\n")))) {
-                if (diffRow.getTag() != DiffRow.Tag.EQUAL) {
-                    System.out.println("Difference: " + diffRow.getTag());
-                    System.out.println("Expected: '" + StringEscapeUtils.unescapeHtml4(diffRow.getOldLine()) + "'");
-                    System.out.println("Actual: '" + StringEscapeUtils.unescapeHtml4(diffRow.getNewLine()) + "'");
+            System.out.println("First " + MAX_XML_DIFFERENCE_COUNT + " differences:");
+            int differenceCount = 0;
+            for (Difference difference :  diff.getDifferences()) {
+                if (++differenceCount > MAX_XML_DIFFERENCE_COUNT) {
+                    break;
                 }
+                System.out.println("    " + difference.toString());
             }
-        }
 
-        Assert.assertFalse(diff.hasDifferences());
+            // Normalise xmls and report comparison failure.
+            throw new ComparisonFailure("XMLs are different",
+                writeXmlToString(parseXmlFromString(expected)),
+                writeXmlToString(actualDocument));
+        }
     }
 
     private static DocumentBuilder createDocumentBuilder() {
@@ -186,6 +167,10 @@ public class WebinXmlTransformationTest {
         }
     }
 
+    private Document parseXmlFromString(String str) throws IOException, SAXException {
+        return parseXmlFromInputStream(new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8)));
+    }
+
     private Document parseXmlFromInputStream(InputStream is) throws IOException, SAXException {
         return DOCUMENT_BUILDER.parse(is);
     }
@@ -202,7 +187,7 @@ public class WebinXmlTransformationTest {
         return doc;
     }
 
-    public static String toString(Document document) throws TransformerException {
+    public static String writeXmlToString(Document document) throws TransformerException {
         // Create a TransformerFactory
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
 
