@@ -1,11 +1,19 @@
 package uk.ac.ebi.ena.webin.xml.transformation;
 
+import difflib.DiffRow;
+import difflib.DiffRowGenerator;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.builder.Input;
+import org.xmlunit.diff.Diff;
+import org.xmlunit.diff.Difference;
+import org.xmlunit.diff.DifferenceEvaluators;
 import uk.ac.ebi.ena.webin.xml.transformation.transformers.Transformer;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -21,14 +29,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 
 public class WebinXmlTransformationTest {
 
     private static final String BASE_RESOURCE_PATH = "/uk/ac/ebi/ena/webin/xml/transformation/";
     private static final String INPUT_FILE_SUFFIX = ".xml";
     private static final String EXPECTED_FILE_SUFFIX = "-expected.xml";
-
     private static final DocumentBuilder DOCUMENT_BUILDER = createDocumentBuilder();
+    private static final int MAX_XML_DIFFERENCE_COUNT = 5;
 
     @Test
     public void testStudyTransformation() throws IOException, SAXException, TransformerException {
@@ -111,9 +120,46 @@ public class WebinXmlTransformationTest {
         Document document = parseXmlFromInputStream(getResourceInputStream(inputFile));
         addSetRootElementIfMissing(document, rootElementName, rootElementSetName);
         document = transformer.transform(document);
+
         String actual = toString(document);
         String expected = getResourceContent(expectedFile);
-        Assert.assertEquals(expected, actual);
+
+        Diff diff = DiffBuilder.compare(Input.fromString(expected))
+                .withTest(Input.fromString(actual))
+                .ignoreComments()
+                .ignoreWhitespace()
+             .withDifferenceEvaluator(DifferenceEvaluators.Default)
+                .build();
+
+        int differenceCount = 0;
+        for (Difference difference :  diff.getDifferences()) {
+            if (++differenceCount > MAX_XML_DIFFERENCE_COUNT) {
+                break;
+            }
+            System.out.println("Difference: " + difference.toString());
+        }
+
+        if (diff.hasDifferences()) {
+            DiffRowGenerator generator =
+                    (new DiffRowGenerator.Builder())
+                            .ignoreWhiteSpaces(true)
+                            .ignoreBlankLines(true)
+                            .showInlineDiffs(true)
+                            .columnWidth(Integer.MAX_VALUE)
+                            .build();
+
+            for (DiffRow diffRow : generator.generateDiffRows(
+                    Arrays.asList(expected.split("\n")),
+                    Arrays.asList(actual.split("\n")))) {
+                if (diffRow.getTag() != DiffRow.Tag.EQUAL) {
+                    System.out.println("Difference: " + diffRow.getTag());
+                    System.out.println("Expected: '" + StringEscapeUtils.unescapeHtml4(diffRow.getOldLine()) + "'");
+                    System.out.println("Actual: '" + StringEscapeUtils.unescapeHtml4(diffRow.getNewLine()) + "'");
+                }
+            }
+        }
+
+        Assert.assertFalse(diff.hasDifferences());
     }
 
     private static DocumentBuilder createDocumentBuilder() {
