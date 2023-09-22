@@ -8,20 +8,26 @@
         </IDENTIFIERS>
         <DESCRIPTOR>
             <STUDY_TITLE>RNA-seq analyses of livers from DEN/CCl4-treated Nod2f/f and Nod2 -KO mice</STUDY_TITLE>
-            <STUDY_TYPE existing_study_type="Whole Genome Sequencing"/>
+            <!-- normalize whitespace -->
+            <STUDY_TYPE existing_study_type="  Whole  Genome  Sequencing  "/>
             <STUDY_ABSTRACT>Chronic inflammatory response, DNA damage and subsequent genomic instability are hallmarks of carcinogens-induced HCC . We performed RNA-seq analyses of livers from DEN/CCl4-treated Nod2f/f and Nod2-KO malemice. We collectively demonstrate that hepatic NOD2 knockout attenuates the inflammatory response and DNA damage in DEN/CCl4-induced HCC model.</STUDY_ABSTRACT>
             <CENTER_PROJECT_NAME>Mus musculus</CENTER_PROJECT_NAME>
+            <!-- filter deprecated element -->
             <PROJECT_ID/>
+            <!-- filter deprecated element -->
             <CENTER_NAME/>
         </DESCRIPTOR>
     </STUDY>
     <STUDY_LINKS>
+        <!-- filter empty element -->
         <STUDY_LINK>
+            <!-- filter empty element -->
             <XREF_LINK>
                 <DB></DB>
                 <ID></ID>
             </XREF_LINK>
         </STUDY_LINK>
+        <!-- filter empty element -->
         <STUDY_LINK/>
         <STUDY_LINK>
             <XREF_LINK>
@@ -31,12 +37,15 @@
         </STUDY_LINK>
     </STUDY_LINKS>
     <STUDY_ATTRIBUTES>
+        <!-- filter empty element -->
         <STUDY_ATTRIBUTE>
         </STUDY_ATTRIBUTE>
+        <!-- filter attribute without tag -->
         <STUDY_ATTRIBUTE>
             <TAG></TAG>
             <VALUE>VALUE</VALUE>
         </STUDY_ATTRIBUTE>
+        <!-- filter empty element -->
         <STUDY_ATTRIBUTE>
             <TAG></TAG>
         </STUDY_ATTRIBUTE>

@@ -8,19 +8,26 @@
         <TITLE>SJMB040_G</TITLE>
         <SAMPLE_NAME>
             <TAXON_ID>9606</TAXON_ID>
+            <!-- normalize whitespace -->
             <SCIENTIFIC_NAME>   Homo sapiens   </SCIENTIFIC_NAME>
+            <!-- normalize whitespace -->
             <COMMON_NAME>   human   </COMMON_NAME>
+            <!-- filter deprecated element -->
             <ANONYMIZED_NAME/>
+            <!-- filter deprecated element -->
             <INDIVIDUAL_NAME/>
         </SAMPLE_NAME>
         <DESCRIPTION>SJMB040_G</DESCRIPTION>
         <SAMPLE_LINKS>
+            <!-- filter empty element -->
             <SAMPLE_LINK>
+                <!-- filter empty element -->
                 <XREF_LINK>
                     <DB></DB>
                     <ID></ID>
                 </XREF_LINK>
             </SAMPLE_LINK>
+            <!-- filter empty element -->
             <SAMPLE_LINK/>
             <SAMPLE_LINK>
                 <XREF_LINK>
@@ -30,12 +37,15 @@
             </SAMPLE_LINK>
         </SAMPLE_LINKS>
         <SAMPLE_ATTRIBUTES>
+            <!-- filter empty element -->
             <SAMPLE_ATTRIBUTE>
             </SAMPLE_ATTRIBUTE>
+            <!-- filter attribute without tag -->
             <SAMPLE_ATTRIBUTE>
                 <TAG></TAG>
                 <VALUE>VALUE</VALUE>
             </SAMPLE_ATTRIBUTE>
+            <!-- filter empty element -->
             <SAMPLE_ATTRIBUTE>
                 <TAG></TAG>
             </SAMPLE_ATTRIBUTE>
