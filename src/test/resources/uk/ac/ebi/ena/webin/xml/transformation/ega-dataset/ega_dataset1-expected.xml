@@ -15,5 +15,19 @@
             <SUBMITTER_ID namespace="AMC">AMC Neuroblastoma Study</SUBMITTER_ID>
          </IDENTIFIERS>
       </POLICY_REF>
+      <DATASET_LINKS>
+         <DATASET_LINK>
+            <XREF_LINK>
+               <DB>DB</DB>
+               <ID>ID</ID>
+            </XREF_LINK>
+         </DATASET_LINK>
+      </DATASET_LINKS>
+      <DATASET_ATTRIBUTES>
+         <DATASET_ATTRIBUTE>
+            <TAG>TAG</TAG>
+            <VALUE>VALUE</VALUE>
+         </DATASET_ATTRIBUTE>
+      </DATASET_ATTRIBUTES>
    </DATASET>
 </DATASETS>

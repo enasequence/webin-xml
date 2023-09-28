@@ -1,0 +1,24 @@
+<RUN_SET>
+    <RUN alias="">
+        <EXPERIMENT_REF refname="" />
+        <PLATFORM>
+            <ILLUMINA>
+                <!-- replace 'Solexa 1G Genome Analyzer' by 'Illumina Genome Analyzer' -->
+                <INSTRUMENT_MODEL>Solexa 1G Genome Analyzer</INSTRUMENT_MODEL>
+                <!-- filter ILLUMINA/SEQUENCE_LENGTH -->
+                <!-- filter ILLUMINA/CYCLE_COUNT -->
+                <!-- filter ILLUMINA/CYCLE_SEQUENCE -->
+                <SEQUENCE_LENGTH/>
+                <CYCLE_COUNT/>
+                <CYCLE_SEQUENCE/>
+            </ILLUMINA>
+        </PLATFORM>
+        <DATA_BLOCK>
+            <FILES>
+                <FILE filename="test_forward.fastq.gz" filetype="fastq" checksum="5aeca824118be49da0982bef9b57e689" checksum_method="MD5">
+                    <READ_LABEL>F</READ_LABEL>
+                </FILE>
+            </FILES>
+        </DATA_BLOCK>
+    </RUN>
+</RUN_SET>

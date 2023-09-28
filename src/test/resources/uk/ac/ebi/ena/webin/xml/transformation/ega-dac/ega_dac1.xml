@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DAC_SET>
+    <DAC alias="ICGC Cancer Genome Projects" center_name="CNG" broker_name="EGA" accession="EGAC00001000015">
+        <IDENTIFIERS>
+            <PRIMARY_ID>EGAC00001000015</PRIMARY_ID>
+            <SUBMITTER_ID namespace="CNG">ICGC Cancer Genome Projects</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>   ICGC Data Access Compliance Office   </TITLE>
+        <CONTACTS>
+            <CONTACT name="helpdesk" email="info@icgc.org" organisation="ICGC" telephone_number=""/>
+        </CONTACTS>
+        <DAC_LINKS>
+            <!-- filter empty element -->
+            <DAC_LINK>
+                <!-- filter empty element -->
+                <XREF_LINK>
+                    <DB></DB>
+                    <ID></ID>
+                </XREF_LINK>
+            </DAC_LINK>
+            <!-- filter empty element -->
+            <DAC_LINK/>
+            <DAC_LINK>
+                <XREF_LINK>
+                    <DB>DB</DB>
+                    <ID>ID</ID>
+                </XREF_LINK>
+            </DAC_LINK>
+        </DAC_LINKS>
+        <DAC_ATTRIBUTES>
+            <!-- filter empty element -->
+            <DAC_ATTRIBUTE>
+            </DAC_ATTRIBUTE>
+            <!-- filter attribute without tag -->
+            <DAC_ATTRIBUTE>
+                <TAG></TAG>
+                <VALUE>VALUE</VALUE>
+            </DAC_ATTRIBUTE>
+            <!-- filter empty element -->
+            <DAC_ATTRIBUTE>
+                <TAG></TAG>
+            </DAC_ATTRIBUTE>
+            <DAC_ATTRIBUTE>
+                <TAG>TAG</TAG>
+                <VALUE>VALUE</VALUE>
+            </DAC_ATTRIBUTE>
+        </DAC_ATTRIBUTES>
+    </DAC>
+</DAC_SET>

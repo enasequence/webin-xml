@@ -1,0 +1,56 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<EXPERIMENT_SET>
+    <EXPERIMENT alias="">
+        <IDENTIFIERS>
+            <SUBMITTER_ID namespace="">testSubmitterId</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <STUDY_REF refname="">
+            <IDENTIFIERS>
+                <SUBMITTER_ID namespace="">testSubmitterId</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </STUDY_REF>
+        <DESIGN>
+            <DESIGN_DESCRIPTION>Test description</DESIGN_DESCRIPTION>
+            <SAMPLE_DESCRIPTOR>
+                <IDENTIFIERS>
+                    <PRIMARY_ID>testPrimaryId</PRIMARY_ID>
+                </IDENTIFIERS>
+            </SAMPLE_DESCRIPTOR>
+            <LIBRARY_DESCRIPTOR>
+                <LIBRARY_NAME>Test library</LIBRARY_NAME>
+                <LIBRARY_STRATEGY>WGS</LIBRARY_STRATEGY>
+                <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+                <LIBRARY_SELECTION>PCR</LIBRARY_SELECTION>
+                <LIBRARY_LAYOUT>
+                    <PAIRED NOMINAL_LENGTH="150"/>
+                </LIBRARY_LAYOUT>
+            </LIBRARY_DESCRIPTOR>
+  			<SPOT_DESCRIPTOR>
+		        <SPOT_DECODE_SPEC>
+		          <READ_SPEC>
+		            <READ_INDEX>50</READ_INDEX>
+		            <READ_CLASS>Application Read</READ_CLASS>
+		            <READ_TYPE>Forward</READ_TYPE>
+		            <BASE_COORD>0</BASE_COORD>
+		          </READ_SPEC>
+		        </SPOT_DECODE_SPEC>
+			</SPOT_DESCRIPTOR>
+        </DESIGN>
+        <PLATFORM>
+            <DNBSEQ>
+                <INSTRUMENT_MODEL>DNBSEQ-G400</INSTRUMENT_MODEL>
+            </DNBSEQ>
+        </PLATFORM>
+        <PROCESSING/>
+        <EXPERIMENT_ATTRIBUTES>
+            <EXPERIMENT_ATTRIBUTE>
+                <TAG>A</TAG>
+            </EXPERIMENT_ATTRIBUTE>
+            <EXPERIMENT_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </EXPERIMENT_ATTRIBUTE>
+        </EXPERIMENT_ATTRIBUTES>
+    </EXPERIMENT>
+</EXPERIMENT_SET>

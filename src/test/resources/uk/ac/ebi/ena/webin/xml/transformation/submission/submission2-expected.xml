@@ -1,0 +1,29 @@
+<SUBMISSION_SET>
+    <SUBMISSION alias="">
+        <IDENTIFIERS>
+            <SUBMITTER_ID namespace="">testSubmitterId</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <ACTIONS>
+            <ACTION>
+                <ADD source="" schema="sample" />
+            </ACTION>
+            <ACTION>
+                <HOLD/>
+            </ACTION>
+            <ACTION>
+                <RELEASE/>
+            </ACTION>
+        </ACTIONS>
+        <SUBMISSION_ATTRIBUTES>
+            <SUBMISSION_ATTRIBUTE>
+                <TAG>A</TAG>
+            </SUBMISSION_ATTRIBUTE>
+            <SUBMISSION_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </SUBMISSION_ATTRIBUTE>
+            <!-- filter TAG 'ENA-FIRST-PUBLIC' -->
+        </SUBMISSION_ATTRIBUTES>
+    </SUBMISSION>
+</SUBMISSION_SET>

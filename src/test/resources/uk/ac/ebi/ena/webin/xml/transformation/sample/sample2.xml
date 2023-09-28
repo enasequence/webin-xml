@@ -1,0 +1,33 @@
+<SAMPLE_SET>
+    <SAMPLE alias="">
+        <TITLE>Test Sample</TITLE>
+        <SAMPLE_NAME>
+            <TAXON_ID>9606</TAXON_ID>
+            <SCIENTIFIC_NAME>    scientific  name    </SCIENTIFIC_NAME>
+            <COMMON_NAME>  common  name</COMMON_NAME>
+            <ANONYMIZED_NAME>20090606_bulkDNA</ANONYMIZED_NAME>
+            <INDIVIDUAL_NAME>marine metagenome</INDIVIDUAL_NAME>
+        </SAMPLE_NAME>
+        <SAMPLE_LINKS/>
+        <SAMPLE_ATTRIBUTES>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>A</TAG>
+                <!-- filter VALUE when empty -->
+                <!-- filter UNITS when empty -->
+                <VALUE></VALUE>
+                <UNITS></UNITS>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </SAMPLE_ATTRIBUTE>
+            <!-- filter TAG 'ENA-FIRST-PUBLIC' -->
+            <SAMPLE_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </SAMPLE_ATTRIBUTE>
+        </SAMPLE_ATTRIBUTES>
+    </SAMPLE>
+</SAMPLE_SET>

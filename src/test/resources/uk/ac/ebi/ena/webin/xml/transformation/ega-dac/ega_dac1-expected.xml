@@ -11,5 +11,19 @@
       <CONTACTS>
          <CONTACT email="info@icgc.org" name="helpdesk" organisation="ICGC" telephone_number=""/>
       </CONTACTS>
+      <DAC_LINKS>
+         <DAC_LINK>
+            <XREF_LINK>
+               <DB>DB</DB>
+               <ID>ID</ID>
+            </XREF_LINK>
+         </DAC_LINK>
+      </DAC_LINKS>
+      <DAC_ATTRIBUTES>
+         <DAC_ATTRIBUTE>
+            <TAG>TAG</TAG>
+            <VALUE>VALUE</VALUE>
+         </DAC_ATTRIBUTE>
+      </DAC_ATTRIBUTES>
    </DAC>
 </DAC_SET>

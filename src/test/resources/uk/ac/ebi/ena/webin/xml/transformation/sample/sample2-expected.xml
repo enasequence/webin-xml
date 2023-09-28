@@ -1,0 +1,20 @@
+<SAMPLE_SET>
+    <SAMPLE alias="">
+        <TITLE>Test Sample</TITLE>
+        <SAMPLE_NAME>
+            <TAXON_ID>9606</TAXON_ID>
+            <SCIENTIFIC_NAME>scientific  name</SCIENTIFIC_NAME>
+            <COMMON_NAME>  common  name</COMMON_NAME>
+        </SAMPLE_NAME>
+        <SAMPLE_ATTRIBUTES>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>A</TAG>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </SAMPLE_ATTRIBUTE>
+        </SAMPLE_ATTRIBUTES>
+    </SAMPLE>
+</SAMPLE_SET>

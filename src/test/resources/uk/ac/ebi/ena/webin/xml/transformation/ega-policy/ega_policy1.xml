@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<POLICY_SET>
+    <POLICY alias="Policy_for_study___PTP_and_Vel_Exome_Sequencing____678-sc-2011-06-02T13:34:38Z-678" accession="EGAP00001000013" center_name="SC" broker_name="EGA">
+        <IDENTIFIERS>
+            <PRIMARY_ID>   EGAP00001000013</PRIMARY_ID>
+            <SUBMITTER_ID namespace="SC">Policy_for_study___PTP_and_Vel_Exome_Sequencing____678-sc-2011-06-02T13:34:38Z-678</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE/>
+        <DAC_REF accession="EGAC00001000013" refname="DAC_for_study___PTP_and_Vel_Exome_Sequencing____678-sc-2011-06-02T13:34:34Z-678" refcenter="SC">
+            <IDENTIFIERS>
+                <PRIMARY_ID>EGAC00001000013   </PRIMARY_ID>
+                <SUBMITTER_ID namespace="SC">DAC_for_study___PTP_and_Vel_Exome_Sequencing____678-sc-2011-06-02T13:34:34Z-678</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </DAC_REF>
+        <POLICY_TEXT>http://www.sanger.ac.uk/datasharing/</POLICY_TEXT>
+        <POLICY_LINKS>
+            <!-- filter empty element -->
+            <POLICY_LINK>
+                <!-- filter empty element -->
+                <XREF_LINK>
+                    <DB></DB>
+                    <ID></ID>
+                </XREF_LINK>
+            </POLICY_LINK>
+            <!-- filter empty element -->
+            <POLICY_LINK/>
+            <POLICY_LINK>
+                <XREF_LINK>
+                    <DB>DB</DB>
+                    <ID>ID</ID>
+                </XREF_LINK>
+            </POLICY_LINK>
+        </POLICY_LINKS>
+        <POLICY_ATTRIBUTES>
+            <!-- filter empty element -->
+            <POLICY_ATTRIBUTE>
+            </POLICY_ATTRIBUTE>
+            <!-- filter attribute without tag -->
+            <POLICY_ATTRIBUTE>
+                <TAG></TAG>
+                <VALUE>VALUE</VALUE>
+            </POLICY_ATTRIBUTE>
+            <!-- filter empty element -->
+            <POLICY_ATTRIBUTE>
+                <TAG></TAG>
+            </POLICY_ATTRIBUTE>
+            <POLICY_ATTRIBUTE>
+                <TAG>TAG</TAG>
+                <VALUE>VALUE</VALUE>
+            </POLICY_ATTRIBUTE>
+        </POLICY_ATTRIBUTES>
+    </POLICY>
+</POLICY_SET>

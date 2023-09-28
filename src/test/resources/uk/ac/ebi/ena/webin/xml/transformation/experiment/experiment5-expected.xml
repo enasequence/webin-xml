@@ -1,0 +1,103 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<EXPERIMENT_SET>
+    <EXPERIMENT>
+        <STUDY_REF refname=""/>
+        <DESIGN>
+            <DESIGN_DESCRIPTION>Test description</DESIGN_DESCRIPTION>
+            <SAMPLE_DESCRIPTOR>
+                <IDENTIFIERS>
+                    <PRIMARY_ID>testPrimaryId</PRIMARY_ID>
+                </IDENTIFIERS>
+            </SAMPLE_DESCRIPTOR>
+            <LIBRARY_DESCRIPTOR>
+                <LIBRARY_NAME>Test library</LIBRARY_NAME>
+                <LIBRARY_STRATEGY>OTHER</LIBRARY_STRATEGY>
+                <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+                <LIBRARY_SELECTION>DNase</LIBRARY_SELECTION>
+                <LIBRARY_LAYOUT>
+                    <PAIRED NOMINAL_LENGTH="150"/>
+                </LIBRARY_LAYOUT>
+            </LIBRARY_DESCRIPTOR>
+        </DESIGN>
+        <PLATFORM>
+            <ION_TORRENT>
+                <INSTRUMENT_MODEL>Ion Torrent S5</INSTRUMENT_MODEL>
+            </ION_TORRENT>
+        </PLATFORM>
+    </EXPERIMENT>
+    <EXPERIMENT>
+        <STUDY_REF refname=""/>
+        <DESIGN>
+            <DESIGN_DESCRIPTION>Test description</DESIGN_DESCRIPTION>
+            <SAMPLE_DESCRIPTOR>
+                <IDENTIFIERS>
+                    <PRIMARY_ID>testPrimaryId</PRIMARY_ID>
+                </IDENTIFIERS>
+            </SAMPLE_DESCRIPTOR>
+            <LIBRARY_DESCRIPTOR>
+                <LIBRARY_NAME>Test library</LIBRARY_NAME>
+                <LIBRARY_STRATEGY>OTHER</LIBRARY_STRATEGY>
+                <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+                <LIBRARY_SELECTION>DNase</LIBRARY_SELECTION>
+                <LIBRARY_LAYOUT>
+                    <PAIRED NOMINAL_LENGTH="150"/>
+                </LIBRARY_LAYOUT>
+            </LIBRARY_DESCRIPTOR>
+        </DESIGN>
+        <PLATFORM>
+            <ION_TORRENT>
+                <INSTRUMENT_MODEL>Ion Torrent S5 XL</INSTRUMENT_MODEL>
+            </ION_TORRENT>
+        </PLATFORM>
+    </EXPERIMENT>
+    <EXPERIMENT>
+        <STUDY_REF refname=""/>
+        <DESIGN>
+            <DESIGN_DESCRIPTION>Test description</DESIGN_DESCRIPTION>
+            <SAMPLE_DESCRIPTOR>
+                <IDENTIFIERS>
+                    <PRIMARY_ID>testPrimaryId</PRIMARY_ID>
+                </IDENTIFIERS>
+            </SAMPLE_DESCRIPTOR>
+            <LIBRARY_DESCRIPTOR>
+                <LIBRARY_NAME>Test library</LIBRARY_NAME>
+                <LIBRARY_STRATEGY>OTHER</LIBRARY_STRATEGY>
+                <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+                <LIBRARY_SELECTION>DNase</LIBRARY_SELECTION>
+                <LIBRARY_LAYOUT>
+                    <PAIRED NOMINAL_LENGTH="150"/>
+                </LIBRARY_LAYOUT>
+            </LIBRARY_DESCRIPTOR>
+        </DESIGN>
+        <PLATFORM>
+            <ILLUMINA>
+                <INSTRUMENT_MODEL>Illumina HiSeq 2000</INSTRUMENT_MODEL>
+            </ILLUMINA>
+        </PLATFORM>
+    </EXPERIMENT>
+    <EXPERIMENT>
+        <STUDY_REF refname=""/>
+        <DESIGN>
+            <DESIGN_DESCRIPTION>Test description</DESIGN_DESCRIPTION>
+            <SAMPLE_DESCRIPTOR>
+                <IDENTIFIERS>
+                    <PRIMARY_ID>testPrimaryId</PRIMARY_ID>
+                </IDENTIFIERS>
+            </SAMPLE_DESCRIPTOR>
+            <LIBRARY_DESCRIPTOR>
+                <LIBRARY_NAME>Test library</LIBRARY_NAME>
+                <LIBRARY_STRATEGY>OTHER</LIBRARY_STRATEGY>
+                <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+                <LIBRARY_SELECTION>DNase</LIBRARY_SELECTION>
+                <LIBRARY_LAYOUT>
+                    <PAIRED NOMINAL_LENGTH="150"/>
+                </LIBRARY_LAYOUT>
+            </LIBRARY_DESCRIPTOR>
+        </DESIGN>
+        <PLATFORM>
+            <ILLUMINA>
+                <INSTRUMENT_MODEL>HiSeq X Ten</INSTRUMENT_MODEL>
+            </ILLUMINA>
+        </PLATFORM>
+    </EXPERIMENT>
+</EXPERIMENT_SET>

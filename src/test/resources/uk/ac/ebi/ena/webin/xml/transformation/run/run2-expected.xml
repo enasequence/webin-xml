@@ -1,0 +1,40 @@
+<RUN_SET>
+    <RUN alias="">
+        <EXPERIMENT_REF refname="" />
+        <SPOT_DESCRIPTOR>
+            <SPOT_DECODE_SPEC>
+                <READ_SPEC>
+                    <READ_INDEX>50</READ_INDEX>
+                    <READ_CLASS>Application Read</READ_CLASS>
+                    <READ_TYPE>Forward</READ_TYPE>
+                    <BASE_COORD>0</BASE_COORD>
+                </READ_SPEC>
+            </SPOT_DECODE_SPEC>
+        </SPOT_DESCRIPTOR>
+        <PLATFORM>
+            <ABI_SOLID>
+                <INSTRUMENT_MODEL>AB SOLiD System</INSTRUMENT_MODEL>
+            </ABI_SOLID>
+        </PLATFORM>
+        <DATA_BLOCK>
+            <FILES>
+                <FILE filename="test_forward.fastq.gz" filetype="fastq" checksum="5aeca824118be49da0982bef9b57e689" checksum_method="MD5">
+                    <READ_LABEL>F</READ_LABEL>
+                </FILE>
+                <FILE filename="test_reverse.fastq.gz" filetype="fastq" checksum="216e1803c0f22825caa58aa3622a0be5" checksum_method="MD5">
+                    <READ_LABEL>R</READ_LABEL>
+                </FILE>
+            </FILES>
+        </DATA_BLOCK>
+        <RUN_ATTRIBUTES>
+            <RUN_ATTRIBUTE>
+                <TAG>A</TAG>
+            </RUN_ATTRIBUTE>
+            <RUN_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </RUN_ATTRIBUTE>
+        </RUN_ATTRIBUTES>
+    </RUN>
+</RUN_SET>

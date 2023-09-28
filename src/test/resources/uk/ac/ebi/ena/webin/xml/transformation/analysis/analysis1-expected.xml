@@ -63,6 +63,18 @@
             <VALUE>2020-07-15</VALUE>
             <UNITS>YYYY-MM-DD</UNITS>
          </ANALYSIS_ATTRIBUTE>
+         <ANALYSIS_ATTRIBUTE>
+            <TAG>TAG</TAG>
+            <VALUE>VALUE</VALUE>
+         </ANALYSIS_ATTRIBUTE>
       </ANALYSIS_ATTRIBUTES>
+      <ANALYSIS_LINKS>
+         <ANALYSIS_LINK>
+            <XREF_LINK>
+               <DB>DB</DB>
+               <ID>ID</ID>
+            </XREF_LINK>
+         </ANALYSIS_LINK>
+      </ANALYSIS_LINKS>
    </ANALYSIS>
 </ANALYSIS_SET>

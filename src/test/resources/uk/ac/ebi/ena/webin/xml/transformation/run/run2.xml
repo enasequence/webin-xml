@@ -1,0 +1,88 @@
+<RUN_SET>
+    <!-- filter RUN/@instrument_model -->
+    <!-- filter RUN/@run_file -->
+    <!-- filter RUN/@total_data_blocks -->
+    <!-- filter RUN/@instrument_model -->
+    <!-- filter RUN/@instrument_name -->
+    <RUN alias="" run_file="" total_data_blocks="" instrument_model = "" instrument_name = "">
+        <!-- filter RUN/GAP_DESCRIPTOR -->
+        <GAP_DESCRIPTOR/>
+        <EXPERIMENT_REF refname="" />
+        <SPOT_DESCRIPTOR>
+            <!-- filter SPOT_DECODE_METHOD -->
+            <SPOT_DECODE_METHOD/>
+            <SPOT_DECODE_SPEC>
+                <!-- filter NUMBER_OF_READS_PER_SPOT -->
+                <NUMBER_OF_READS_PER_SPOT/>
+                <!-- filter ADAPTER_SPEC -->
+                <ADAPTER_SPEC/>
+                <READ_SPEC>
+                    <!-- filter CYCLE_COORD -->
+                    <CYCLE_COORD/>
+                    <!-- filter EXPECTED_BASECALL -->
+                    <EXPECTED_BASECALL/>
+                    <READ_INDEX>50</READ_INDEX>
+                    <READ_CLASS>Application Read</READ_CLASS>
+                    <READ_TYPE>Forward</READ_TYPE>
+                    <BASE_COORD>0</BASE_COORD>
+                </READ_SPEC>
+            </SPOT_DECODE_SPEC>
+        </SPOT_DESCRIPTOR>
+        <PLATFORM>
+            <!-- filter SEQUENCE_LENGTH -->
+            <!-- filter COLOR_MATRIX -->
+            <!-- filter COLOR_MATRIX_CODE -->
+            <!-- filter CYCLE_COUNT -->
+            <ABI_SOLID>
+                <INSTRUMENT_MODEL>AB SOLiD System</INSTRUMENT_MODEL>
+                <SEQUENCE_LENGTH/>
+                <COLOR_MATRIX/>
+                <COLOR_MATRIX_CODE/>
+                <CYCLE_COUNT/>
+            </ABI_SOLID>
+        </PLATFORM>
+        <!-- filter DATA_BLOCK/@name" -->
+        <!-- filter DATA_BLOCK/@sector" -->
+        <!-- filter DATA_BLOCK/@region" -->
+        <!-- filter DATA_BLOCK/@total_spots" -->
+        <!-- filter DATA_BLOCK/@total_reads" -->
+        <!-- filter DATA_BLOCK/@number_channels" -->
+        <!-- filter DATA_BLOCK/@format_code" -->
+        <!-- filter DATA_BLOCK/@serial" -->
+        <!-- replace FILE/@filetype 'Illumina_native_fastq' with 'fastq' -->
+        <DATA_BLOCK name="" sector="" region="" total_spots="" total_reads="" number_channels="" format_code="" serial="">
+            <FILES>
+                <FILE filename="test_forward.fastq.gz" filetype="Illumina_native_fastq" checksum="5aeca824118be49da0982bef9b57e689" checksum_method="MD5">
+                    <READ_LABEL>F</READ_LABEL>
+                    <!-- filter FILE/DATA_SERIES_LABEL" -->
+                    <DATA_SERIES_LABEL/>
+                </FILE>
+                <FILE filename="  test_reverse.fastq.gz " filetype="ILLUMINA_native_fastq" checksum="216e1803c0f22825caa58aa3622a0be5" checksum_method="MD5">
+                    <READ_LABEL>R</READ_LABEL>
+                </FILE>
+            </FILES>
+        </DATA_BLOCK>
+        <!-- filter RUN_LINKS when empty -->
+        <RUN_LINKS/>
+        <RUN_ATTRIBUTES>
+            <RUN_ATTRIBUTE>
+                <TAG>A</TAG>
+                <!-- filter VALUE when empty -->
+                <!-- filter UNITS when empty -->
+                <VALUE></VALUE>
+                <UNITS></UNITS>
+            </RUN_ATTRIBUTE>
+            <RUN_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </RUN_ATTRIBUTE>
+            <!-- filter TAG 'ENA-FIRST-PUBLIC' -->
+            <RUN_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </RUN_ATTRIBUTE>
+        </RUN_ATTRIBUTES>
+    </RUN>
+</RUN_SET>

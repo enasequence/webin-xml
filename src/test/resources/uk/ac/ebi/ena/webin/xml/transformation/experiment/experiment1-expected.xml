@@ -35,5 +35,19 @@
             <INSTRUMENT_MODEL>Illumina MiSeq</INSTRUMENT_MODEL>
          </ILLUMINA>
       </PLATFORM>
+      <EXPERIMENT_LINKS>
+         <EXPERIMENT_LINK>
+            <XREF_LINK>
+               <DB>DB</DB>
+               <ID>ID</ID>
+            </XREF_LINK>
+         </EXPERIMENT_LINK>
+      </EXPERIMENT_LINKS>
+      <EXPERIMENT_ATTRIBUTES>
+         <EXPERIMENT_ATTRIBUTE>
+            <TAG>TAG</TAG>
+            <VALUE>VALUE</VALUE>
+         </EXPERIMENT_ATTRIBUTE>
+      </EXPERIMENT_ATTRIBUTES>
    </EXPERIMENT>
 </EXPERIMENT_SET>

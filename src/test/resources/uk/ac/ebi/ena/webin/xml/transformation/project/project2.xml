@@ -1,0 +1,197 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<PROJECT_SET>
+    <PROJECT alias="">
+        <!-- filter PRIMARY_ID/@label when empty -->
+        <!-- filter SECONDARY_ID/@label when empty -->
+        <!-- filter EXTERNAL_ID/@label when empty -->
+        <!-- filter SUBMITTER_ID/@label when empty -->
+        <!-- add SUBMITTER_ID/@namespace when missing -->
+        <!-- filter UUID -->
+        <IDENTIFIERS>
+            <PRIMARY_ID label="">testPrimaryId</PRIMARY_ID>
+            <SECONDARY_ID label="">testSecondaryId</SECONDARY_ID>
+            <EXTERNAL_ID namespace="" label="">testExternalId</EXTERNAL_ID>
+            <SUBMITTER_ID label="">testSubmitterId</SUBMITTER_ID>
+            <UUID></UUID>
+        </IDENTIFIERS>
+        <TITLE>Title</TITLE>
+        <!-- filter SUBMISSION_PROJECT/@scope -->
+        <PUBLICATIONS>
+            <PUBLICATION>
+                <UNSTRUCTURED_CITATION>unstructured citatio text</UNSTRUCTURED_CITATION>
+                <STRUCTURED_CITATION>
+                    <TITLE>A reference human genome dataset of the BGISEQ-500 sequencer.</TITLE>
+                    <JOURNAL>Gigascience</JOURNAL>
+                    <YEAR>2017</YEAR>
+                    <VOLUME>6</VOLUME>
+                    <ISSUE>5</ISSUE>
+                    <FIRST_PAGE>1</FIRST_PAGE>
+                    <LAST_PAGE>9</LAST_PAGE>
+                    <AUTHORS>
+                        <AUTHOR>Jie Huang</AUTHOR>
+                        <AUTHOR>Xinming Liang</AUTHOR>
+                        <CONSORTIUM>National Institutes for food and drug Control (NIFDC)</CONSORTIUM>
+                        <CONSORTIUM>BGI-Shenzhen</CONSORTIUM>
+                    </AUTHORS>
+                </STRUCTURED_CITATION>
+                <PUBLICATION_LINKS>
+                    <PUBLICATION_LINK>
+                        <XREF_LINK>
+                            <DB>Pubmed 1</DB>
+                            <ID>28028455 1</ID>
+                        </XREF_LINK>
+                    </PUBLICATION_LINK>
+                    <PUBLICATION_LINK>
+                        <XREF_LINK>
+                            <DB>Pubmed 2</DB>
+                            <ID>28028455 2</ID>
+                        </XREF_LINK>
+                    </PUBLICATION_LINK>
+                </PUBLICATION_LINKS>
+            </PUBLICATION>
+        </PUBLICATIONS>
+
+        <!-- filter SUBMISSION_PROJECT/@scope -->
+        <!-- filter SUBMISSION_PROJECT/@selection -->
+        <!-- filter SUBMISSION_PROJECT/@material -->
+        <SUBMISSION_PROJECT scope="unknown" selection="unknown" material="unknown">
+            <SEQUENCING_PROJECT/>
+            <ORGANISM>
+                <TAXON_ID>1</TAXON_ID>
+                <SCIENTIFIC_NAME>ScientificName</SCIENTIFIC_NAME>
+                <!-- rename ISOLATENAME to ISOLATE -->
+                <ISOLATENAME>Isolate</ISOLATENAME>
+            </ORGANISM>
+        </SUBMISSION_PROJECT>
+        <!-- filter RELATED_CHROMOSOMES -->
+        <RELATED_CHROMOSOMES/>
+        <!-- filter PROJECT_LINKS when empty -->
+        <PROJECT_LINKS>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>a</DB>
+                    <ID>b</ID>
+                    <LABEL>cd</LABEL>
+                </XREF_LINK>
+            </PROJECT_LINK>
+        </PROJECT_LINKS>
+        <PROJECT_ATTRIBUTES>
+            <PROJECT_ATTRIBUTE>
+                <TAG>A</TAG>
+                <!-- filter VALUE when empty -->
+                <!-- filter UNITS when empty -->
+                <VALUE></VALUE>
+                <UNITS></UNITS>
+            </PROJECT_ATTRIBUTE>
+            <PROJECT_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </PROJECT_ATTRIBUTE>
+            <!-- filter TAG 'ENA-FIRST-PUBLIC' -->
+            <PROJECT_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </PROJECT_ATTRIBUTE>
+        </PROJECT_ATTRIBUTES>
+        <!-- filter PROJECT_ATTRIBUTES when empty (test in project2.xml) -->
+        <!-- <PROJECT_ATTRIBUTES/> -->
+    </PROJECT>
+    <PROJECT alias="prj2">
+        <!-- filter PRIMARY_ID/@label when empty -->
+        <!-- filter SECONDARY_ID/@label when empty -->
+        <!-- filter EXTERNAL_ID/@label when empty -->
+        <!-- filter SUBMITTER_ID/@label when empty -->
+        <!-- add SUBMITTER_ID/@namespace when missing -->
+        <!-- filter UUID -->
+        <IDENTIFIERS>
+            <PRIMARY_ID label="">testPrimaryId</PRIMARY_ID>
+            <SECONDARY_ID label="">testSecondaryId</SECONDARY_ID>
+            <EXTERNAL_ID namespace="" label="">testExternalId</EXTERNAL_ID>
+            <SUBMITTER_ID label="">testSubmitterId</SUBMITTER_ID>
+            <UUID></UUID>
+        </IDENTIFIERS>
+        <TITLE>Title</TITLE>
+        <!-- filter SUBMISSION_PROJECT/@scope -->
+        <PUBLICATIONS>
+            <PUBLICATION>
+                <UNSTRUCTURED_CITATION>unstructured citatio text 2</UNSTRUCTURED_CITATION>
+                <STRUCTURED_CITATION>
+                    <TITLE>A reference human genome dataset of the BGISEQ-500 sequencer. 22</TITLE>
+                    <JOURNAL>Gigascience</JOURNAL>
+                    <YEAR>2017</YEAR>
+                    <VOLUME>6</VOLUME>
+                    <ISSUE>5</ISSUE>
+                    <FIRST_PAGE>1</FIRST_PAGE>
+                    <LAST_PAGE>9</LAST_PAGE>
+                    <AUTHORS>
+                        <AUTHOR>Jie Huang</AUTHOR>
+                        <AUTHOR>Xinming Liang</AUTHOR>
+                        <CONSORTIUM>National Institutes for food and drug Control (NIFDC)</CONSORTIUM>
+                        <CONSORTIUM>BGI-Shenzhen</CONSORTIUM>
+                    </AUTHORS>
+                </STRUCTURED_CITATION>
+                <PUBLICATION_LINKS>
+                    <PUBLICATION_LINK>
+                        <XREF_LINK>
+                            <DB>Pubmed 3</DB>
+                            <ID>2802845 3</ID>
+                        </XREF_LINK>
+                    </PUBLICATION_LINK>
+                </PUBLICATION_LINKS>
+            </PUBLICATION>
+        </PUBLICATIONS>
+
+        <!-- filter SUBMISSION_PROJECT/@scope -->
+        <!-- filter SUBMISSION_PROJECT/@selection -->
+        <!-- filter SUBMISSION_PROJECT/@material -->
+        <SUBMISSION_PROJECT scope="unknown" selection="unknown" material="unknown">
+            <SEQUENCING_PROJECT/>
+            <ORGANISM>
+                <TAXON_ID>1</TAXON_ID>
+                <SCIENTIFIC_NAME>ScientificName</SCIENTIFIC_NAME>
+                <!-- rename ISOLATENAME to ISOLATE -->
+                <ISOLATENAME>Isolate</ISOLATENAME>
+            </ORGANISM>
+        </SUBMISSION_PROJECT>
+        <!-- filter RELATED_CHROMOSOMES -->
+        <RELATED_CHROMOSOMES/>
+        <!-- filter PROJECT_LINKS when empty -->
+        <PROJECT_LINKS/>
+        <!-- filter XREF_LINK/LABEL when empty (test in project2.xml) -->
+        <!--
+        <PROJECT_LINKS>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>a</DB>
+                    <ID>b</ID>
+                    <LABEL/>
+                </XREF_LINK>
+            </PROJECT_LINK>
+        </PROJECT_LINKS>
+        -->
+        <PROJECT_ATTRIBUTES>
+            <PROJECT_ATTRIBUTE>
+                <TAG>A</TAG>
+                <!-- filter VALUE when empty -->
+                <!-- filter UNITS when empty -->
+                <VALUE></VALUE>
+                <UNITS></UNITS>
+            </PROJECT_ATTRIBUTE>
+            <PROJECT_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </PROJECT_ATTRIBUTE>
+            <!-- filter TAG 'ENA-FIRST-PUBLIC' -->
+            <PROJECT_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </PROJECT_ATTRIBUTE>
+        </PROJECT_ATTRIBUTES>
+        <!-- filter PROJECT_ATTRIBUTES when empty (test in project2.xml) -->
+        <!-- <PROJECT_ATTRIBUTES/> -->
+    </PROJECT>
+</PROJECT_SET>

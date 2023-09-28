@@ -23,7 +23,7 @@
         </SPOT_DESCRIPTOR>
         <PLATFORM>
             <ILLUMINA>
-                <INSTRUMENT_MODEL>Illumina MiSeq</INSTRUMENT_MODEL>
+                <INSTRUMENT_MODEL>   Illumina MiSeq   </INSTRUMENT_MODEL>
             </ILLUMINA>
         </PLATFORM>
         <DATA_BLOCK>
@@ -31,5 +31,41 @@
                 <FILE checksum="66D2AF73857D6085D9ABA2B91F62B9EA" checksum_method="MD5" filename="run/ERR506/ERR5060344/VitisC_16S_1_8_L001_R1_001.fastq.gz" filetype="fastq" quality_scoring_system="phred"/>
             </FILES>
         </DATA_BLOCK>
+        <RUN_LINKS>
+            <!-- filter empty element -->
+            <RUN_LINK>
+                <!-- filter empty element -->
+                <XREF_LINK>
+                    <DB></DB>
+                    <ID></ID>
+                </XREF_LINK>
+            </RUN_LINK>
+            <!-- filter empty element -->
+            <RUN_LINK/>
+            <RUN_LINK>
+                <XREF_LINK>
+                    <DB>DB</DB>
+                    <ID>ID</ID>
+                </XREF_LINK>
+            </RUN_LINK>
+        </RUN_LINKS>
+        <RUN_ATTRIBUTES>
+            <!-- filter empty element -->
+            <RUN_ATTRIBUTE>
+            </RUN_ATTRIBUTE>
+            <!-- filter attribute without tag -->
+            <RUN_ATTRIBUTE>
+                <TAG></TAG>
+                <VALUE>VALUE</VALUE>
+            </RUN_ATTRIBUTE>
+            <!-- filter empty element -->
+            <RUN_ATTRIBUTE>
+                <TAG></TAG>
+            </RUN_ATTRIBUTE>
+            <RUN_ATTRIBUTE>
+                <TAG>TAG</TAG>
+                <VALUE>VALUE</VALUE>
+            </RUN_ATTRIBUTE>
+        </RUN_ATTRIBUTES>
     </RUN>
 </RUN_SET>

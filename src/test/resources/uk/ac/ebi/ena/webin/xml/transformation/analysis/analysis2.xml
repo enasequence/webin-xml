@@ -1,0 +1,49 @@
+<ANALYSIS_SET>
+    <ANALYSIS alias="">
+        <TITLE>Title</TITLE>
+        <DESCRIPTION>Description</DESCRIPTION>
+        <ANALYSIS_TYPE>
+            <SEQUENCE_ANNOTATION/>
+        </ANALYSIS_TYPE>
+        <FILES>
+            <FILE filename="a.vcf.gz" filetype="vcf" checksum_method="MD5" checksum="9840f585055afc37de353706fd31a377"/>
+
+            <FILE filename="sequence_flatfile.tsv.gz" filetype="contig_fasta" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
+            <FILE filename="sequence_flatfile.tsv.gz" filetype="scaffold_fasta" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
+            <FILE filename="sequence_flatfile.tsv.gz" filetype="chromosome_fasta" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
+
+            <FILE filename="sequence_flatfile.tsv.gz" filetype="chromosome_flatfile" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
+            <FILE filename="sequence_flatfile.tsv.gz" filetype="contig_flatfile" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
+            <FILE filename="sequence_flatfile.tsv.gz" filetype="scaffold_flatfile" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
+
+            <FILE filename="sequence_flatfile.tsv.gz" filetype="scaffold_agp" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
+            <FILE filename="sequence_flatfile.tsv.gz" filetype="chromosome_agp" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
+
+            <FILE filename="sequence_flatfile.tsv.gz" filetype="unlocalised_contig_list" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
+            <FILE filename=" sequence_flatfile.tsv.gz " filetype="unlocalised_contig_list" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
+        </FILES>
+        <!-- filter ANALYSIS_LINKS when empty -->
+        <ANALYSIS_LINKS/>
+        <ANALYSIS_ATTRIBUTES>
+            <ANALYSIS_ATTRIBUTE>
+                <TAG>A</TAG>
+                <!-- filter VALUE when empty -->
+                <!-- filter UNITS when empty -->
+                <VALUE></VALUE>
+                <UNITS></UNITS>
+            </ANALYSIS_ATTRIBUTE>
+            <ANALYSIS_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </ANALYSIS_ATTRIBUTE>
+            <!-- filter TAG 'ENA-FIRST-PUBLIC' -->
+            <ANALYSIS_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </ANALYSIS_ATTRIBUTE>
+        </ANALYSIS_ATTRIBUTES>
+    </ANALYSIS>
+</ANALYSIS_SET>
+

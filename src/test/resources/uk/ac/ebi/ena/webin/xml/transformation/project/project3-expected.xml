@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<PROJECT_SET>
+    <PROJECT alias="">
+        <TITLE>Title</TITLE>
+        <SUBMISSION_PROJECT>
+            <SEQUENCING_PROJECT/>
+        </SUBMISSION_PROJECT>
+        <PROJECT_LINKS>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>a</DB>
+                    <ID>b</ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+        </PROJECT_LINKS>
+    </PROJECT>
+</PROJECT_SET>

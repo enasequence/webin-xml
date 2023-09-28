@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<POLICY_SET>
+    <POLICY>
+        <TITLE>Neuromics consortium general access policy</TITLE>
+        <DAC_REF refname=""/>
+        <POLICY_TEXT>policyText</POLICY_TEXT>
+        <!-- filter empty POLICY_LINKS -->
+        <POLICY_LINKS/>
+        <POLICY_ATTRIBUTES>
+            <POLICY_ATTRIBUTE>
+                <TAG>A</TAG>
+                <!-- filter VALUE when empty -->
+                <!-- filter UNITS when empty -->
+                <VALUE></VALUE>
+                <UNITS></UNITS>
+            </POLICY_ATTRIBUTE>
+            <POLICY_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </POLICY_ATTRIBUTE>
+            <!-- filter TAG 'ENA-FIRST-PUBLIC' -->
+            <POLICY_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </POLICY_ATTRIBUTE>
+        </POLICY_ATTRIBUTES>
+    </POLICY>
+</POLICY_SET>

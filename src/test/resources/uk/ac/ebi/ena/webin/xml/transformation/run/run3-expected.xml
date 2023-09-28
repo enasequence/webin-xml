@@ -1,0 +1,22 @@
+<RUN_SET>
+    <RUN alias="">
+        <EXPERIMENT_REF refname="" />
+        <PLATFORM>
+            <LS454>
+                <INSTRUMENT_MODEL>454 GS FLX+</INSTRUMENT_MODEL>
+            </LS454>
+        </PLATFORM>
+        <!-- merge data blocks -->
+        <DATA_BLOCK>
+            <FILES>
+                <FILE filename="test_forward.fastq.gz" filetype="fastq" checksum="5aeca824118be49da0982bef9b57e689" checksum_method="MD5">
+                    <READ_LABEL>F</READ_LABEL>
+                </FILE>
+                <FILE filename="test_reverse.fastq.gz" filetype="fastq" checksum="216e1803c0f22825caa58aa3622a0be5" checksum_method="MD5">
+                    <READ_LABEL>R</READ_LABEL>
+                </FILE>
+                <FILE filename="test_other.fastq.gz" filetype="fastq" checksum="216e1803c0f22825caa58aa3622a0be5" checksum_method="MD5"/>
+            </FILES>
+        </DATA_BLOCK>
+    </RUN>
+</RUN_SET>

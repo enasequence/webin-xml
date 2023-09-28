@@ -1,0 +1,17 @@
+<DATASETS>
+    <DATASET alias="">
+        <TITLE>Recurrent Somatic Mutations in CLL</TITLE>
+        <RUN_REF refname=""/>
+        <POLICY_REF refname=""/>
+        <DATASET_ATTRIBUTES>
+            <DATASET_ATTRIBUTE>
+                <TAG>A</TAG>
+            </DATASET_ATTRIBUTE>
+            <DATASET_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </DATASET_ATTRIBUTE>
+        </DATASET_ATTRIBUTES>
+    </DATASET>
+</DATASETS>

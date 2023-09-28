@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<POLICY_SET>
+    <POLICY>
+        <TITLE>Neuromics consortium general access policy</TITLE>
+        <DAC_REF refname=""/>
+        <POLICY_TEXT>policyText</POLICY_TEXT>
+        <POLICY_ATTRIBUTES>
+            <POLICY_ATTRIBUTE>
+                <TAG>A</TAG>
+            </POLICY_ATTRIBUTE>
+            <POLICY_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </POLICY_ATTRIBUTE>
+        </POLICY_ATTRIBUTES>
+    </POLICY>
+</POLICY_SET>

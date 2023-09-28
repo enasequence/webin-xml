@@ -12,5 +12,19 @@
             <ADD/>
          </ACTION>
       </ACTIONS>
+      <SUBMISSION_LINKS>
+         <SUBMISSION_LINK>
+            <XREF_LINK>
+               <DB>DB</DB>
+               <ID>ID</ID>
+            </XREF_LINK>
+         </SUBMISSION_LINK>
+      </SUBMISSION_LINKS>
+      <SUBMISSION_ATTRIBUTES>
+         <SUBMISSION_ATTRIBUTE>
+            <TAG>TAG</TAG>
+            <VALUE>VALUE</VALUE>
+         </SUBMISSION_ATTRIBUTE>
+      </SUBMISSION_ATTRIBUTES>
    </SUBMISSION>
 </SUBMISSION_SET>

@@ -30,8 +30,44 @@
         </DESIGN>
         <PLATFORM>
             <ILLUMINA>
-                <INSTRUMENT_MODEL>Illumina MiSeq</INSTRUMENT_MODEL>
+                <INSTRUMENT_MODEL>   Illumina MiSeq   </INSTRUMENT_MODEL>
             </ILLUMINA>
         </PLATFORM>
+        <EXPERIMENT_LINKS>
+            <!-- filter empty element -->
+            <EXPERIMENT_LINK>
+                <!-- filter empty element -->
+                <XREF_LINK>
+                    <DB></DB>
+                    <ID></ID>
+                </XREF_LINK>
+            </EXPERIMENT_LINK>
+            <!-- filter empty element -->
+            <EXPERIMENT_LINK/>
+            <EXPERIMENT_LINK>
+                <XREF_LINK>
+                    <DB>DB</DB>
+                    <ID>ID</ID>
+                </XREF_LINK>
+            </EXPERIMENT_LINK>
+        </EXPERIMENT_LINKS>
+        <EXPERIMENT_ATTRIBUTES>
+            <!-- filter empty element -->
+            <EXPERIMENT_ATTRIBUTE>
+            </EXPERIMENT_ATTRIBUTE>
+            <!-- filter attribute without tag -->
+            <EXPERIMENT_ATTRIBUTE>
+                <TAG></TAG>
+                <VALUE>VALUE</VALUE>
+            </EXPERIMENT_ATTRIBUTE>
+            <!-- filter empty element -->
+            <EXPERIMENT_ATTRIBUTE>
+                <TAG></TAG>
+            </EXPERIMENT_ATTRIBUTE>
+            <EXPERIMENT_ATTRIBUTE>
+                <TAG>TAG</TAG>
+                <VALUE>VALUE</VALUE>
+            </EXPERIMENT_ATTRIBUTE>
+        </EXPERIMENT_ATTRIBUTES>
     </EXPERIMENT>
 </EXPERIMENT_SET>

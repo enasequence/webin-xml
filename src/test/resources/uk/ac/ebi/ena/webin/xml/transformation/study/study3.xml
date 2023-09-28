@@ -1,0 +1,9 @@
+<STUDY_SET>
+    <STUDY alias="">
+        <DESCRIPTOR>
+            <STUDY_TITLE>Test Study</STUDY_TITLE>
+            <!-- change to Transcriptome Analysis -->
+            <STUDY_TYPE existing_study_type="Transcriptome Sequencing"/>
+        </DESCRIPTOR>
+    </STUDY>
+</STUDY_SET>

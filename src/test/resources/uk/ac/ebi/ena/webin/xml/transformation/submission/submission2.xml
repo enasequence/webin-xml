@@ -1,0 +1,48 @@
+<SUBMISSION_SET>
+    <!-- filter SUBMISSION/@submission_id -->
+    <!-- filter SUBMISSION/@handle -->
+    <SUBMISSION alias="" submission_id = "" handle = "">
+        <!-- remove all but first SUBMITTER_ID -->
+        <IDENTIFIERS>
+            <SUBMITTER_ID>testSubmitterId</SUBMITTER_ID>
+            <SUBMITTER_ID>testSubmitterSecondId</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <!-- filter SUBMISSION/FILES -->
+        <FILES/>
+        <ACTIONS>
+            <ACTION>
+                <!-- filter ADD/@notes -->
+                <ADD source="" schema="sample" notes="note"/>
+            </ACTION>
+            <ACTION>
+                <!-- filter HOLD/@notes -->
+                <HOLD notes="note"/>
+            </ACTION>
+            <ACTION>
+                <!-- filter RELEASE/@notes -->
+                <RELEASE notes="note"/>
+            </ACTION>
+        </ACTIONS>
+        <SUBMISSION_LINKS/>
+        <SUBMISSION_ATTRIBUTES>
+            <SUBMISSION_ATTRIBUTE>
+                <TAG>A</TAG>
+                <!-- filter VALUE when empty -->
+                <!-- filter UNITS when empty -->
+                <VALUE></VALUE>
+                <UNITS></UNITS>
+            </SUBMISSION_ATTRIBUTE>
+            <SUBMISSION_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </SUBMISSION_ATTRIBUTE>
+            <!-- filter TAG 'ENA-FIRST-PUBLIC' -->
+            <SUBMISSION_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </SUBMISSION_ATTRIBUTE>
+        </SUBMISSION_ATTRIBUTES>
+    </SUBMISSION>
+</SUBMISSION_SET>

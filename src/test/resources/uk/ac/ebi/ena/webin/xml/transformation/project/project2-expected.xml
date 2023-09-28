@@ -1,0 +1,87 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<PROJECT_SET>
+    <PROJECT alias="">
+        <IDENTIFIERS>
+            <PRIMARY_ID>testPrimaryId</PRIMARY_ID>
+            <SECONDARY_ID>testSecondaryId</SECONDARY_ID>
+            <EXTERNAL_ID namespace="">testExternalId</EXTERNAL_ID>
+            <SUBMITTER_ID namespace="">testSubmitterId</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Title</TITLE>
+        <SUBMISSION_PROJECT>
+            <SEQUENCING_PROJECT/>
+            <ORGANISM>
+                <TAXON_ID>1</TAXON_ID>
+                <SCIENTIFIC_NAME>ScientificName</SCIENTIFIC_NAME>
+                <ISOLATE>Isolate</ISOLATE>
+            </ORGANISM>
+        </SUBMISSION_PROJECT>
+
+        <PROJECT_LINKS>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>a</DB>
+                    <ID>b</ID>
+                    <LABEL>cd</LABEL>
+                </XREF_LINK>
+            </PROJECT_LINK>
+            <PROJECT_LINK><XREF_LINK>
+                <DB>Pubmed 1</DB>
+                <ID>28028455 1</ID>
+            </XREF_LINK></PROJECT_LINK>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>Pubmed 2</DB>
+                    <ID>28028455 2</ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+        </PROJECT_LINKS>
+        <PROJECT_ATTRIBUTES>
+            <PROJECT_ATTRIBUTE>
+                <TAG>A</TAG>
+            </PROJECT_ATTRIBUTE>
+            <PROJECT_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </PROJECT_ATTRIBUTE>
+        </PROJECT_ATTRIBUTES>
+    </PROJECT>
+
+    <PROJECT alias="prj2">
+        <IDENTIFIERS>
+            <PRIMARY_ID>testPrimaryId</PRIMARY_ID>
+            <SECONDARY_ID>testSecondaryId</SECONDARY_ID>
+            <EXTERNAL_ID namespace="">testExternalId</EXTERNAL_ID>
+            <SUBMITTER_ID namespace="">testSubmitterId</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Title</TITLE>
+        <SUBMISSION_PROJECT>
+            <SEQUENCING_PROJECT/>
+            <ORGANISM>
+                <TAXON_ID>1</TAXON_ID>
+                <SCIENTIFIC_NAME>ScientificName</SCIENTIFIC_NAME>
+                <ISOLATE>Isolate</ISOLATE>
+            </ORGANISM>
+        </SUBMISSION_PROJECT>
+
+        <PROJECT_LINKS>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>Pubmed 3</DB>
+                    <ID>2802845 3</ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+        </PROJECT_LINKS>
+        <PROJECT_ATTRIBUTES>
+            <PROJECT_ATTRIBUTE>
+                <TAG>A</TAG>
+            </PROJECT_ATTRIBUTE>
+            <PROJECT_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </PROJECT_ATTRIBUTE>
+        </PROJECT_ATTRIBUTES>
+    </PROJECT>
+</PROJECT_SET>

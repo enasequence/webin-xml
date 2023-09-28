@@ -1,0 +1,28 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<EXPERIMENT_SET>
+    <EXPERIMENT>
+        <STUDY_REF refname=""/>
+        <DESIGN>
+            <DESIGN_DESCRIPTION>Test description</DESIGN_DESCRIPTION>
+            <SAMPLE_DESCRIPTOR>
+                <POOL>
+                    <MEMBER></MEMBER>
+                </POOL>
+            </SAMPLE_DESCRIPTOR>
+            <LIBRARY_DESCRIPTOR>
+                <LIBRARY_NAME>Test library</LIBRARY_NAME>
+                <LIBRARY_STRATEGY>OTHER</LIBRARY_STRATEGY>
+                <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+                <LIBRARY_SELECTION>PCR</LIBRARY_SELECTION>
+                <LIBRARY_LAYOUT>
+                    <PAIRED NOMINAL_LENGTH="150"/>
+                </LIBRARY_LAYOUT>
+            </LIBRARY_DESCRIPTOR>
+        </DESIGN>
+        <PLATFORM>
+            <LS454>
+                <INSTRUMENT_MODEL>454 GS</INSTRUMENT_MODEL>
+            </LS454>
+        </PLATFORM>
+    </EXPERIMENT>
+</EXPERIMENT_SET>

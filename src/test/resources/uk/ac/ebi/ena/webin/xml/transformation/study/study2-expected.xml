@@ -1,0 +1,18 @@
+<STUDY_SET>
+    <STUDY alias="">
+        <DESCRIPTOR>
+            <STUDY_TITLE>Test Study</STUDY_TITLE>
+            <STUDY_TYPE existing_study_type="Whole Genome Sequencing"/>
+        </DESCRIPTOR>
+        <STUDY_ATTRIBUTES>
+            <STUDY_ATTRIBUTE>
+                <TAG>A</TAG>
+            </STUDY_ATTRIBUTE>
+            <STUDY_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </STUDY_ATTRIBUTE>
+        </STUDY_ATTRIBUTES>
+    </STUDY>
+</STUDY_SET>

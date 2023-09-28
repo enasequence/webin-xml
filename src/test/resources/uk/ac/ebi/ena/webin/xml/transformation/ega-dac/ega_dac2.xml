@@ -1,0 +1,31 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<DAC_SET>
+    <DAC>
+        <TITLE>Test EGA DAC</TITLE>
+        <CONTACTS>
+            <CONTACT name="Jeff Almeida-King" email="jeff@ebi.ac.uk" organisation="EMBL-EBI"/>
+        </CONTACTS>
+        <!-- filter empty DAC_LINKS -->
+        <DAC_LINKS/>
+        <DAC_ATTRIBUTES>
+            <DAC_ATTRIBUTE>
+                <TAG>A</TAG>
+                <!-- filter VALUE when empty -->
+                <!-- filter UNITS when empty -->
+                <VALUE></VALUE>
+                <UNITS></UNITS>
+            </DAC_ATTRIBUTE>
+            <DAC_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </DAC_ATTRIBUTE>
+            <!-- filter TAG 'ENA-FIRST-PUBLIC' -->
+            <DAC_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </DAC_ATTRIBUTE>
+        </DAC_ATTRIBUTES>
+    </DAC>
+</DAC_SET>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SUBMISSION_SET>
+    <SUBMISSION alias="ena-SUBMISSION-SSI-11-01-2021-14:27:35:627-1" center_name="SSI" submission_date="2021-01-11T14:28:34.059Z" accession="ERA3206932">
+        <IDENTIFIERS>
+            <PRIMARY_ID>   ERA3206932</PRIMARY_ID>
+            <SUBMITTER_ID namespace="SSI">ena-SUBMISSION-SSI-11-01-2021-14:27:35:627-1   </SUBMITTER_ID>
+        </IDENTIFIERS>
+        <ACTIONS>
+            <ACTION>
+                <ADD/>
+            </ACTION>
+        </ACTIONS>
+        <SUBMISSION_LINKS>
+            <!-- filter empty element -->
+            <SUBMISSION_LINK>
+                <!-- filter empty element -->
+                <XREF_LINK>
+                    <DB></DB>
+                    <ID></ID>
+                </XREF_LINK>
+            </SUBMISSION_LINK>
+            <!-- filter empty element -->
+            <SUBMISSION_LINK/>
+            <SUBMISSION_LINK>
+                <XREF_LINK>
+                    <DB>DB</DB>
+                    <ID>ID</ID>
+                </XREF_LINK>
+            </SUBMISSION_LINK>
+        </SUBMISSION_LINKS>
+        <SUBMISSION_ATTRIBUTES>
+            <!-- filter empty element -->
+            <SUBMISSION_ATTRIBUTE>
+            </SUBMISSION_ATTRIBUTE>
+            <!-- filter attribute without tag -->
+            <SUBMISSION_ATTRIBUTE>
+                <TAG></TAG>
+                <VALUE>VALUE</VALUE>
+            </SUBMISSION_ATTRIBUTE>
+            <!-- filter empty element -->
+            <SUBMISSION_ATTRIBUTE>
+                <TAG></TAG>
+            </SUBMISSION_ATTRIBUTE>
+            <SUBMISSION_ATTRIBUTE>
+                <TAG>TAG</TAG>
+                <VALUE>VALUE</VALUE>
+            </SUBMISSION_ATTRIBUTE>
+        </SUBMISSION_ATTRIBUTES>
+    </SUBMISSION>
+</SUBMISSION_SET>

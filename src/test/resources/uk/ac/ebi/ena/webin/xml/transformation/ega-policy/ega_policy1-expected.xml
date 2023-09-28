@@ -17,5 +17,19 @@
          </IDENTIFIERS>
       </DAC_REF>
       <POLICY_TEXT>http://www.sanger.ac.uk/datasharing/</POLICY_TEXT>
+      <POLICY_LINKS>
+         <POLICY_LINK>
+            <XREF_LINK>
+               <DB>DB</DB>
+               <ID>ID</ID>
+            </XREF_LINK>
+         </POLICY_LINK>
+      </POLICY_LINKS>
+      <POLICY_ATTRIBUTES>
+         <POLICY_ATTRIBUTE>
+            <TAG>TAG</TAG>
+            <VALUE>VALUE</VALUE>
+         </POLICY_ATTRIBUTE>
+      </POLICY_ATTRIBUTES>
    </POLICY>
 </POLICY_SET>

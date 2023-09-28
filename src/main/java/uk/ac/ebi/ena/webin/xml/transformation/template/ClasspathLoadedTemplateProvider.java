@@ -1,6 +1,5 @@
 package uk.ac.ebi.ena.webin.xml.transformation.template;
 
-import uk.ac.ebi.ena.webin.xml.transformation.WebinXmlTransformation;
 import uk.ac.ebi.ena.webin.xml.transformation.WebinXmlTransformationException;
 
 import javax.xml.transform.Templates;
@@ -102,13 +101,13 @@ public class ClasspathLoadedTemplateProvider implements TemplateProvider {
             String local = new File(path).getParent().replaceAll("[\\\\]+", "/");
 
             return href.startsWith("/")
-                ? new StreamSource(WebinXmlTransformation.class.getResourceAsStream(href))
-                : new StreamSource(WebinXmlTransformation.class.getResourceAsStream(local + "/" + href));
+                ? new StreamSource(ClasspathLoadedTemplateProvider.class.getResourceAsStream(href))
+                : new StreamSource(ClasspathLoadedTemplateProvider.class.getResourceAsStream(local + "/" + href));
         });
 
         try {
             return transformerFactory.newTemplates(new StreamSource(
-                WebinXmlTransformation.class.getResourceAsStream(path)));
+                ClasspathLoadedTemplateProvider.class.getResourceAsStream(path)));
         } catch (TransformerConfigurationException e) {
             throw new WebinXmlTransformationException("Error loading transformation template from classpath : " + path, e);
         }

@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<DAC_SET>
+    <DAC>
+        <TITLE>Test EGA DAC</TITLE>
+        <CONTACTS>
+            <CONTACT name="Jeff Almeida-King" email="jeff@ebi.ac.uk" organisation="EMBL-EBI"/>
+        </CONTACTS>
+        <DAC_ATTRIBUTES>
+            <DAC_ATTRIBUTE>
+                <TAG>A</TAG>
+            </DAC_ATTRIBUTE>
+            <DAC_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </DAC_ATTRIBUTE>
+        </DAC_ATTRIBUTES>
+    </DAC>
+</DAC_SET>

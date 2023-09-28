@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<PROJECT_SET>
+    <PROJECT alias="">
+        <TITLE>Title</TITLE>
+        <SUBMISSION_PROJECT>
+            <SEQUENCING_PROJECT/>
+        </SUBMISSION_PROJECT>
+        <!-- filter XREF_LINK/LABEL when empty -->
+        <PROJECT_LINKS>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>a</DB>
+                    <ID>b</ID>
+                    <LABEL/>
+                </XREF_LINK>
+            </PROJECT_LINK>
+        </PROJECT_LINKS>
+        <!-- filter PROJECT_ATTRIBUTES when empty -->
+        <PROJECT_ATTRIBUTES/>
+    </PROJECT>
+</PROJECT_SET>

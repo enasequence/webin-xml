@@ -1,0 +1,123 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<EXPERIMENT_SET>
+    <!-- filter EXPERIMENT/@expected_number_runs -->
+    <!-- filter EXPERIMENT/@expected_number_spots -->
+    <!-- filter EXPERIMENT/@expected_number_reads -->
+    <EXPERIMENT alias="" expected_number_runs="0" expected_number_spots="0" expected_number_reads="0">
+        <!-- add SUBMITTER_ID/@namespace when missing -->
+        <!-- remove all but first SUBMITTER_ID -->
+        <IDENTIFIERS>
+            <SUBMITTER_ID>testSubmitterId</SUBMITTER_ID>
+            <SUBMITTER_ID>testSubmitterSecondId</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <STUDY_REF refname="">
+            <!-- add SUBMITTER_ID/@namespace when missing -->
+            <IDENTIFIERS>
+                <SUBMITTER_ID>testSubmitterId</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </STUDY_REF>
+        <DESIGN>
+            <DESIGN_DESCRIPTION>Test description</DESIGN_DESCRIPTION>
+            <SAMPLE_DESCRIPTOR>
+                <IDENTIFIERS>
+                    <!-- filter SUBMITTER_ID if empty -->
+                    <PRIMARY_ID>testPrimaryId</PRIMARY_ID>
+                    <SUBMITTER_ID></SUBMITTER_ID>
+                </IDENTIFIERS>
+                <!-- filter IDENTIFIERS when POOL (experiment2.xml) -->
+                <!--
+                <POOL>
+                    <MEMBER></MEMBER>
+                </POOL>
+                -->
+            </SAMPLE_DESCRIPTOR>
+            <LIBRARY_DESCRIPTOR>
+                <LIBRARY_NAME>Test library</LIBRARY_NAME>
+                <LIBRARY_STRATEGY>WGS</LIBRARY_STRATEGY>
+                <!-- add LIBRARY_STRATEGY other if no LIBRARY_STRATEGY (experiment2.xml)-->
+                <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+                <LIBRARY_SELECTION>PCR</LIBRARY_SELECTION>
+                <LIBRARY_LAYOUT>
+                    <!-- filter ORIENTATION -->
+                    <PAIRED NOMINAL_LENGTH="150" ORIENTATION=""/>
+                </LIBRARY_LAYOUT>
+            </LIBRARY_DESCRIPTOR>
+            <SPOT_DESCRIPTOR>
+                <!-- filter SPOT_DECODE_METHOD -->
+                <SPOT_DECODE_METHOD/>
+                <SPOT_DECODE_SPEC>
+                    <!-- filter NUMBER_OF_READS_PER_SPOT -->
+                    <NUMBER_OF_READS_PER_SPOT/>
+                    <!-- filter ADAPTER_SPEC -->
+                    <ADAPTER_SPEC/>
+                    <READ_SPEC>
+                        <!-- filter CYCLE_COORD -->
+                        <CYCLE_COORD/>
+                        <!-- filter EXPECTED_BASECALL -->
+                        <EXPECTED_BASECALL/>
+                        <READ_INDEX>50</READ_INDEX>
+                        <READ_CLASS>Application Read</READ_CLASS>
+                        <READ_TYPE>Forward</READ_TYPE>
+                        <BASE_COORD>0</BASE_COORD>
+                    </READ_SPEC>
+                </SPOT_DECODE_SPEC>
+            </SPOT_DESCRIPTOR>
+            <!-- filter GAP_DESCRIPTOR -->
+            <GAP_DESCRIPTOR/>
+        </DESIGN>
+        <PLATFORM>
+            <!-- filter SEQUENCE_LENGTH -->
+            <!-- filter COLOR_MATRIX -->
+            <!-- filter COLOR_MATRIX_CODE -->
+            <!-- filter CYCLE_COUNT -->
+            <ABI_SOLID>
+                <INSTRUMENT_MODEL>DNBSEQ-G400</INSTRUMENT_MODEL>
+                <SEQUENCE_LENGTH/>
+                <COLOR_MATRIX/>
+                <COLOR_MATRIX_CODE/>
+                <CYCLE_COUNT/>
+            </ABI_SOLID>
+            <!-- filter KEY_SEQUENCE -->
+            <!-- filter FLOW_SEQUENCE -->
+            <!-- filter FLOW_COUNT -->
+            <!--
+            <LS454>
+                <INSTRUMENT_MODEL>454 GS</INSTRUMENT_MODEL>
+                <KEY_SEQUENCE/>
+                <FLOW_SEQUENCE/>
+                <FLOW_COUNT/>
+            </LS454>
+            -->
+            <!--
+            <ILLUMINA>
+                <INSTRUMENT_MODEL>Illumina Genome Analyzer II</INSTRUMENT_MODEL>
+            </ILLUMINA>
+            -->
+        </PLATFORM>
+        <PROCESSING>
+            <!-- filter BASE_CALLS -->
+            <BASE_CALLS/>
+            <!-- filter QUALITY_SCORES -->
+            <QUALITY_SCORES/>
+        </PROCESSING>
+        <EXPERIMENT_LINKS/> <!-- filter when empty -->
+        <EXPERIMENT_ATTRIBUTES>
+            <EXPERIMENT_ATTRIBUTE>
+                <TAG>A</TAG>
+                <VALUE></VALUE> <!-- filter when empty -->
+                <UNITS></UNITS> <!-- filter when empty -->
+            </EXPERIMENT_ATTRIBUTE>
+            <EXPERIMENT_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </EXPERIMENT_ATTRIBUTE>
+            <!-- always filter ENA-FIRST-PUBLIC -->
+            <EXPERIMENT_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </EXPERIMENT_ATTRIBUTE>
+        </EXPERIMENT_ATTRIBUTES>
+    </EXPERIMENT>
+</EXPERIMENT_SET>

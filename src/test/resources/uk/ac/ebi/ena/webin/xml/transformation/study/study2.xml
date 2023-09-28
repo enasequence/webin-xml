@@ -1,0 +1,30 @@
+<STUDY_SET>
+    <STUDY alias="">
+        <DESCRIPTOR>
+            <STUDY_TITLE>Test Study</STUDY_TITLE>
+            <STUDY_TYPE existing_study_type="Whole Genome Sequencing"/>
+        </DESCRIPTOR>
+        <!-- filter STUDY_LINKS when empty -->
+        <STUDY_LINKS/>
+        <STUDY_ATTRIBUTES>
+            <STUDY_ATTRIBUTE>
+                <TAG>A</TAG>
+                <!-- filter VALUE when empty -->
+                <!-- filter UNITS when empty -->
+                <VALUE></VALUE>
+                <UNITS></UNITS>
+            </STUDY_ATTRIBUTE>
+            <STUDY_ATTRIBUTE>
+                <TAG>B</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </STUDY_ATTRIBUTE>
+            <!-- filter TAG 'ENA-FIRST-PUBLIC' -->
+            <STUDY_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </STUDY_ATTRIBUTE>
+        </STUDY_ATTRIBUTES>
+    </STUDY>
+</STUDY_SET>

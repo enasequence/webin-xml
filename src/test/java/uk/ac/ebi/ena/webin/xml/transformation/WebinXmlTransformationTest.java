@@ -59,7 +59,7 @@ public class WebinXmlTransformationTest {
     }
 
     @Test
-    public void testAnalysisTransformation() throws IOException, SAXException, TransformerException {
+    public void testAnalsysisTransformation() throws IOException, SAXException, TransformerException {
         testForDir("analysis", "ANALYSIS", "ANALYSIS_SET", WebinXmlTransformation.createAnalysisTransformer());
     }
 
@@ -137,7 +137,7 @@ public class WebinXmlTransformationTest {
             }
 
             // Normalise xmls and report comparison failure.
-            throw new ComparisonFailure("XMLs are different",
+            throw new ComparisonFailure("XMLs are different. InputFile : " + inputResourcePath + ", ExpectedFile : " + expectedResourcePath,
                 writeXmlToString(parseXmlFromString(expected)),
                 writeXmlToString(actualDocument));
         }

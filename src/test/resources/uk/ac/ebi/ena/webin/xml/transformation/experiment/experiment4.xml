@@ -1,0 +1,36 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<EXPERIMENT_SET>
+    <EXPERIMENT>
+        <STUDY_REF refname=""/>
+        <DESIGN>
+            <DESIGN_DESCRIPTION>Test description</DESIGN_DESCRIPTION>
+            <SAMPLE_DESCRIPTOR>
+                <IDENTIFIERS>
+                    <PRIMARY_ID>testPrimaryId</PRIMARY_ID>
+                </IDENTIFIERS>
+            </SAMPLE_DESCRIPTOR>
+            <LIBRARY_DESCRIPTOR>
+                <LIBRARY_NAME>Test library</LIBRARY_NAME>
+                <!-- replace library strategy 'NON GENOMIC' with 'OTHER' -->
+                <LIBRARY_STRATEGY>NON GENOMIC</LIBRARY_STRATEGY>
+                <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+                <!-- replace library selection 'DNAse' with 'DNase' -->
+                <LIBRARY_SELECTION>DNAse</LIBRARY_SELECTION>
+                <LIBRARY_LAYOUT>
+                    <PAIRED NOMINAL_LENGTH="150"/>
+                </LIBRARY_LAYOUT>
+            </LIBRARY_DESCRIPTOR>
+        </DESIGN>
+        <PLATFORM>
+            <ILLUMINA>
+                <INSTRUMENT_MODEL>Illumina HiSeq 1000</INSTRUMENT_MODEL>
+                <!-- filter ILLUMINA/SEQUENCE_LENGTH -->
+                <!-- filter ILLUMINA/CYCLE_COUNT -->
+                <!-- filter ILLUMINA/CYCLE_SEQUENCE -->
+                <SEQUENCE_LENGTH/>
+                <CYCLE_COUNT/>
+                <CYCLE_SEQUENCE/>
+            </ILLUMINA>
+        </PLATFORM>
+    </EXPERIMENT>
+</EXPERIMENT_SET>

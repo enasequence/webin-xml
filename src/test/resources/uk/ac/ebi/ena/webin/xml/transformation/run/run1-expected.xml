@@ -36,5 +36,19 @@
                   quality_scoring_system="phred"/>
          </FILES>
       </DATA_BLOCK>
+      <RUN_LINKS>
+         <RUN_LINK>
+            <XREF_LINK>
+               <DB>DB</DB>
+               <ID>ID</ID>
+            </XREF_LINK>
+         </RUN_LINK>
+      </RUN_LINKS>
+      <RUN_ATTRIBUTES>
+         <RUN_ATTRIBUTE>
+            <TAG>TAG</TAG>
+            <VALUE>VALUE</VALUE>
+         </RUN_ATTRIBUTE>
+      </RUN_ATTRIBUTES>
    </RUN>
 </RUN_SET>
