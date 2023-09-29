@@ -11,5 +11,8 @@ public class PlatformEnumFixerTest {
     public void test() {
         Assert.assertEquals("LS454", platformEnumFixer.fixValue("454 GS"));
         Assert.assertEquals("LS454", platformEnumFixer.getValue("454 GS"));
+
+        Assert.assertEquals("LS454", platformEnumFixer.fixValue("454 gs"));
+        Assert.assertEquals("LS454", platformEnumFixer.getValue("454 gs"));
     }
 }

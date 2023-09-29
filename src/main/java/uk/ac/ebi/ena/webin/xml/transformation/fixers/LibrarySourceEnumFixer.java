@@ -10,9 +10,11 @@
  */
 package uk.ac.ebi.ena.webin.xml.transformation.fixers;
 
+import uk.ac.ebi.ena.sra.xml.TypeLibrarySource;
+
 public class LibrarySourceEnumFixer extends EnumValueFixer {
 
   public LibrarySourceEnumFixer() {
-    // No fixes available.
+    add(TypeLibrarySource.Factory.newInstance().schemaType().getStringEnumEntries());
   }
 }

@@ -17,11 +17,13 @@ import uk.ac.ebi.ena.sra.xml.TypeBGISEQModel;
 import uk.ac.ebi.ena.sra.xml.TypeCGModel;
 import uk.ac.ebi.ena.sra.xml.TypeCapillaryModel;
 import uk.ac.ebi.ena.sra.xml.TypeDnbSeqModel;
+import uk.ac.ebi.ena.sra.xml.TypeElementModel;
 import uk.ac.ebi.ena.sra.xml.TypeHelicosModel;
 import uk.ac.ebi.ena.sra.xml.TypeIlluminaModel;
 import uk.ac.ebi.ena.sra.xml.TypeIontorrentModel;
 import uk.ac.ebi.ena.sra.xml.TypeOxfordNanoporeModel;
 import uk.ac.ebi.ena.sra.xml.TypePacBioModel;
+import uk.ac.ebi.ena.sra.xml.TypeUltimaModel;
 
 public class PlatformEnumFixer extends EnumValueFixer {
   public PlatformEnumFixer() {
@@ -38,17 +40,19 @@ public class PlatformEnumFixer extends EnumValueFixer {
     addValueList(
         TypeBGISEQModel.Factory.newInstance().schemaType().getStringEnumEntries(), "BGISEQ");
     addValueList(
-        TypeOxfordNanoporeModel.Factory.newInstance().schemaType().getStringEnumEntries(),
-        "OXFORD_NANOPORE");
-    addValueList(
         TypePacBioModel.Factory.newInstance().schemaType().getStringEnumEntries(), "PACBIO_SMRT");
     addValueList(
-        TypeIontorrentModel.Factory.newInstance().schemaType().getStringEnumEntries(),
-        "ION_TORRENT");
+        TypeIontorrentModel.Factory.newInstance().schemaType().getStringEnumEntries(), "ION_TORRENT");
     addValueList(
         TypeCapillaryModel.Factory.newInstance().schemaType().getStringEnumEntries(), "CAPILLARY");
     addValueList(
         TypeDnbSeqModel.Factory.newInstance().schemaType().getStringEnumEntries(), "DNBSEQ");
+    addValueList(
+        TypeOxfordNanoporeModel.Factory.newInstance().schemaType().getStringEnumEntries(), "OXFORD_NANOPORE");
+    addValueList(
+        TypeElementModel.Factory.newInstance().schemaType().getStringEnumEntries(), "ELEMENT");
+    addValueList(
+        TypeUltimaModel.Factory.newInstance().schemaType().getStringEnumEntries(), "ULTIMA");
   }
 
   private void addValueList(SchemaStringEnumEntry[] keys, String value) {

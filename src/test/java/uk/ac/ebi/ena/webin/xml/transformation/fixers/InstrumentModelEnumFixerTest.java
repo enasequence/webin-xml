@@ -9,17 +9,27 @@ public class InstrumentModelEnumFixerTest {
 
     @Test
     public void test() {
-        String instrumentModelWithoutFix = "HiSeq X Five";
+        String withoutExplicitFix = "HiSeq X Five";
+        String withoutExplicitFixWrongCase = "hIsEQ x fIVE";
 
         // The fix of a value that does not have an explicit fix defined for it is the value itself.
-        Assert.assertEquals(instrumentModelWithoutFix,
-            instrumentModelEnumFixer.fixValue(instrumentModelWithoutFix));
-        Assert.assertNull(instrumentModelEnumFixer.getValue(instrumentModelWithoutFix));
+        String fixedValue = withoutExplicitFix;
 
-        String instrumentModelWithFix = "AB SOLiD 5500xl";
-        String fixedValue = "AB 5500xl Genetic Analyzer";
+        Assert.assertEquals(fixedValue, instrumentModelEnumFixer.fixValue(withoutExplicitFix));
+        Assert.assertEquals(fixedValue, instrumentModelEnumFixer.getValue(withoutExplicitFix));
 
-        Assert.assertEquals(fixedValue, instrumentModelEnumFixer.fixValue(instrumentModelWithFix));
-        Assert.assertEquals(fixedValue, instrumentModelEnumFixer.getValue(instrumentModelWithFix));
+        Assert.assertEquals(fixedValue, instrumentModelEnumFixer.fixValue(withoutExplicitFixWrongCase));
+        Assert.assertEquals(fixedValue, instrumentModelEnumFixer.getValue(withoutExplicitFixWrongCase));
+
+        String withExplicitFix = "AB SOLiD 5500xl";
+        String withExplicitFixWrongCase = "ab solId 5500XL";
+
+        fixedValue = "AB 5500xl Genetic Analyzer";
+
+        Assert.assertEquals(fixedValue, instrumentModelEnumFixer.fixValue(withExplicitFix));
+        Assert.assertEquals(fixedValue, instrumentModelEnumFixer.getValue(withExplicitFix));
+
+        Assert.assertEquals(fixedValue, instrumentModelEnumFixer.fixValue(withExplicitFixWrongCase));
+        Assert.assertEquals(fixedValue, instrumentModelEnumFixer.getValue(withExplicitFixWrongCase));
     }
 }

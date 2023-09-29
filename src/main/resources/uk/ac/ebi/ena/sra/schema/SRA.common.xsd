@@ -915,6 +915,9 @@
     </xs:complexType>
 
     <!-- STRING ENUMERATIONS BEGIN -->
+
+    <!-- Update InstrumentModelEnumFixer and PlatformEnumFixer classes whenever a model is added or removed. -->
+
     <xs:simpleType name="type454Model">
         <xs:restriction base="xs:string">
             <xs:enumeration value="454 GS"/>

@@ -10,6 +10,9 @@ public class LibrarySourceFixerTest {
     @Test
     public void test() {
         Assert.assertEquals("GENOMIC", librarySourceEnumFixer.fixValue("GENOMIC"));
-        Assert.assertNull(librarySourceEnumFixer.getValue("GENOMIC"));
+        Assert.assertEquals("GENOMIC", librarySourceEnumFixer.getValue("GENOMIC"));
+
+        Assert.assertEquals("GENOMIC", librarySourceEnumFixer.fixValue("genomic"));
+        Assert.assertEquals("GENOMIC", librarySourceEnumFixer.getValue("genomic"));
     }
 }

@@ -10,9 +10,37 @@
  */
 package uk.ac.ebi.ena.webin.xml.transformation.fixers;
 
+import uk.ac.ebi.ena.sra.xml.Type454Model;
+import uk.ac.ebi.ena.sra.xml.TypeAbiSolidModel;
+import uk.ac.ebi.ena.sra.xml.TypeBGISEQModel;
+import uk.ac.ebi.ena.sra.xml.TypeCGModel;
+import uk.ac.ebi.ena.sra.xml.TypeCapillaryModel;
+import uk.ac.ebi.ena.sra.xml.TypeDnbSeqModel;
+import uk.ac.ebi.ena.sra.xml.TypeElementModel;
+import uk.ac.ebi.ena.sra.xml.TypeHelicosModel;
+import uk.ac.ebi.ena.sra.xml.TypeIlluminaModel;
+import uk.ac.ebi.ena.sra.xml.TypeIontorrentModel;
+import uk.ac.ebi.ena.sra.xml.TypeOxfordNanoporeModel;
+import uk.ac.ebi.ena.sra.xml.TypePacBioModel;
+import uk.ac.ebi.ena.sra.xml.TypeUltimaModel;
+
 public class InstrumentModelEnumFixer extends EnumValueFixer {
 
   public InstrumentModelEnumFixer() {
+    add(Type454Model.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeIlluminaModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeHelicosModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeAbiSolidModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeCGModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeBGISEQModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypePacBioModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeIontorrentModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeCapillaryModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeDnbSeqModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeOxfordNanoporeModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeElementModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeUltimaModel.Factory.newInstance().schemaType().getStringEnumEntries());
+
     add("none", "unspecified");
     add("AB SOLiD System 3 Plus", "AB SOLiD 3 Plus System");
     add("AB SOLiD 5500xl", "AB 5500xl Genetic Analyzer");
