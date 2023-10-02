@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 EMBL - European Bioinformatics Institute
+ * Copyright 2023 EMBL - European Bioinformatics Institute
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -42,13 +42,15 @@ public class PlatformEnumFixer extends EnumValueFixer {
     addValueList(
         TypePacBioModel.Factory.newInstance().schemaType().getStringEnumEntries(), "PACBIO_SMRT");
     addValueList(
-        TypeIontorrentModel.Factory.newInstance().schemaType().getStringEnumEntries(), "ION_TORRENT");
+        TypeIontorrentModel.Factory.newInstance().schemaType().getStringEnumEntries(),
+        "ION_TORRENT");
     addValueList(
         TypeCapillaryModel.Factory.newInstance().schemaType().getStringEnumEntries(), "CAPILLARY");
     addValueList(
         TypeDnbSeqModel.Factory.newInstance().schemaType().getStringEnumEntries(), "DNBSEQ");
     addValueList(
-        TypeOxfordNanoporeModel.Factory.newInstance().schemaType().getStringEnumEntries(), "OXFORD_NANOPORE");
+        TypeOxfordNanoporeModel.Factory.newInstance().schemaType().getStringEnumEntries(),
+        "OXFORD_NANOPORE");
     addValueList(
         TypeElementModel.Factory.newInstance().schemaType().getStringEnumEntries(), "ELEMENT");
     addValueList(

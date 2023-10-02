@@ -1,36 +1,48 @@
+/*
+ * Copyright 2023 EMBL - European Bioinformatics Institute
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+ * file except in compliance with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
 package uk.ac.ebi.ena.webin.xml.transformation.transformers;
 
+import javax.xml.transform.Templates;
+import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
 import uk.ac.ebi.ena.sra.xml.STUDYSETDocument;
 import uk.ac.ebi.ena.webin.xml.transformation.WebinXmlTransformationException;
 
-import javax.xml.transform.Templates;
-import javax.xml.transform.TransformerException;
-
 public class AnalysisTransformer extends AbstractTransformer {
 
-    public AnalysisTransformer(Templates transformationTemplate) {
-        super(transformationTemplate);
+  public AnalysisTransformer(Templates transformationTemplate) {
+    super(transformationTemplate);
+  }
+
+  @Override
+  public Document transform(Document document) throws WebinXmlTransformationException {
+    try {
+      document = applyTemplateTransformation(document);
+
+      return document;
+    } catch (TransformerException e) {
+      throw new WebinXmlTransformationException("Error applying analysis transformation.", e);
+    } catch (Exception e) {
+      throw new WebinXmlTransformationException(
+          "Unexpected error while transforming analysis xml.", e);
     }
+  }
 
-    @Override
-    public Document transform(Document document) throws WebinXmlTransformationException {
-        try {
-            document = applyTemplateTransformation(document);
+  @Override
+  public STUDYSETDocument transformForPresentation(Document document)
+      throws WebinXmlTransformationException {
+    // SRAAnalysisParser.modifySubmittedXml() should go here as these modifications are performed on
+    // the
+    // parsed XmlObject and not the Document.
 
-            return document;
-        } catch (TransformerException e) {
-            throw new WebinXmlTransformationException("Error applying analysis transformation.", e);
-        } catch (Exception e) {
-            throw new WebinXmlTransformationException("Unexpected error while transforming analysis xml.", e);
-        }
-    }
-
-    @Override
-    public STUDYSETDocument transformForPresentation(Document document) throws WebinXmlTransformationException {
-        // SRAAnalysisParser.modifySubmittedXml() should go here as these modifications are performed on the
-        // parsed XmlObject and not the Document.
-
-        return null;
-    }
+    return null;
+  }
 }

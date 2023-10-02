@@ -3,14 +3,44 @@ plugins {
     id 'maven'
     id 'maven-publish'
     id 'idea'
+    id "com.diffplug.spotless" version "5.14.3"
 }
 
 group = 'uk.ac.ebi.ena.sra'
-archivesBaseName = 'sra-xml'
+archivesBaseName = 'webin-xml'
 version = '2.0.0'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            srcDir 'src/generated/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+            include '**/SRA*.xsd'
+            include '**/ENA*.xsd'
+            include '**/EGA*.xsd'
+            include '**/*.xslt'
+            exclude '**/ENA.embl.xsd'
+            exclude '**/ENA.root.xsd'
+        }
+    }
+    generated {
+        java
+        output.resourcesDir = sourceSets.main.output.resourcesDir
+        compileClasspath += sourceSets.main.runtimeClasspath
+    }
+}
+
+idea {
+    module {
+        sourceDirs += sourceSets.main.output.classesDirs
+    }
+}
 
 repositories {
     mavenLocal()
@@ -49,60 +79,6 @@ dependencies {
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.2'
 }
 
-sourceSets {
-    main {
-        java {
-            srcDir 'src/main/java'
-            srcDir 'src/generated/java'
-        }
-        resources {
-            srcDir 'src/main/resources'
-            include '**/SRA*.xsd'
-            include '**/ENA*.xsd'
-            include '**/EGA*.xsd'
-            include '**/*.xslt'
-            exclude '**/ENA.embl.xsd'
-            exclude '**/ENA.root.xsd'
-        }
-    }
-    generated {
-        java
-        output.resourcesDir = sourceSets.main.output.resourcesDir
-        compileClasspath += sourceSets.main.runtimeClasspath
-    }
-}
-
-idea {
-    module {
-        sourceDirs += sourceSets.main.output.classesDirs
-    }
-}
-
-task classes (overwrite: true)  {
-}
-
-task printSources  {
-    sourceSets.main.allSource.files.each {File file ->
-        println file
-    }
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    archiveClassifier  = 'javadoc'
-    from 'build/docs/javadoc'
-}
-
-task sourcesJar(type: Jar) {
-    from sourceSets.generated.allSource
-    archiveClassifier  = 'sources'
-}
-
-artifacts {
-    archives jar
-    archives javadocJar
-    archives sourcesJar
-}
-
 task generateXMLBeanSources () {
     doLast{
         delete "src/generated/java"
@@ -121,6 +97,55 @@ compileGeneratedJava.dependsOn generateXMLBeanSources
 compileTestJava.dependsOn compileGeneratedJava
 jar.dependsOn compileGeneratedJava
 publish.dependsOn build
+
+task classes (overwrite: true)  {
+}
+
+test {
+    maxHeapSize = "1024m"
+    jvmArgs "-Dfile.encoding=UTF-8"
+    testLogging {
+        events "failed", "standardOut", "standardError"
+    }
+}
+
+spotless {
+    encoding 'UTF-8'
+    lineEndings 'UNIX'
+    java {
+        targetExclude 'src/generated/**'
+        importOrder('java', 'javax', 'org', 'com', '', 'uk')
+        removeUnusedImports()
+        googleJavaFormat()
+        licenseHeader '''/*
+ * Copyright 2023 EMBL - European Bioinformatics Institute
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+ * file except in compliance with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
+'''
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier  = 'javadoc'
+    from 'build/docs/javadoc'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.generated.allSource
+    archiveClassifier  = 'sources'
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
 
 publishing {
     publications {
@@ -145,10 +170,8 @@ publishing {
     }
 }
 
-test {
-    maxHeapSize = "1024m"
-    jvmArgs "-Dfile.encoding=UTF-8"
-    testLogging {
-        events "failed", "standardOut", "standardError"
+task printSources  {
+    sourceSets.main.allSource.files.each {File file ->
+        println file
     }
 }
