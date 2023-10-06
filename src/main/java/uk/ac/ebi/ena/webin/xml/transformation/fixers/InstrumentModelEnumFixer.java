@@ -17,16 +17,21 @@ import uk.ac.ebi.ena.sra.xml.TypeCGModel;
 import uk.ac.ebi.ena.sra.xml.TypeCapillaryModel;
 import uk.ac.ebi.ena.sra.xml.TypeDnbSeqModel;
 import uk.ac.ebi.ena.sra.xml.TypeElementModel;
+import uk.ac.ebi.ena.sra.xml.TypeGenapsysModel;
+import uk.ac.ebi.ena.sra.xml.TypeGeneMindModel;
 import uk.ac.ebi.ena.sra.xml.TypeHelicosModel;
 import uk.ac.ebi.ena.sra.xml.TypeIlluminaModel;
 import uk.ac.ebi.ena.sra.xml.TypeIontorrentModel;
 import uk.ac.ebi.ena.sra.xml.TypeOxfordNanoporeModel;
 import uk.ac.ebi.ena.sra.xml.TypePacBioModel;
+import uk.ac.ebi.ena.sra.xml.TypeTapestriModel;
 import uk.ac.ebi.ena.sra.xml.TypeUltimaModel;
+import uk.ac.ebi.ena.sra.xml.TypeVelaDiagnosticsModel;
 
 public class InstrumentModelEnumFixer extends EnumValueFixer {
 
   public InstrumentModelEnumFixer() {
+    /** Any addition or removal of models in SRA.common.xsd should be reflected here. */
     add(Type454Model.Factory.newInstance().schemaType().getStringEnumEntries());
     add(TypeIlluminaModel.Factory.newInstance().schemaType().getStringEnumEntries());
     add(TypeHelicosModel.Factory.newInstance().schemaType().getStringEnumEntries());
@@ -40,6 +45,10 @@ public class InstrumentModelEnumFixer extends EnumValueFixer {
     add(TypeOxfordNanoporeModel.Factory.newInstance().schemaType().getStringEnumEntries());
     add(TypeElementModel.Factory.newInstance().schemaType().getStringEnumEntries());
     add(TypeUltimaModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeVelaDiagnosticsModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeGenapsysModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeGeneMindModel.Factory.newInstance().schemaType().getStringEnumEntries());
+    add(TypeTapestriModel.Factory.newInstance().schemaType().getStringEnumEntries());
 
     add("none", "unspecified");
     add("AB SOLiD System 3 Plus", "AB SOLiD 3 Plus System");

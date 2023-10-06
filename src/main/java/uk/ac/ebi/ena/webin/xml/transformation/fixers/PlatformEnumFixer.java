@@ -18,16 +18,20 @@ import uk.ac.ebi.ena.sra.xml.TypeCGModel;
 import uk.ac.ebi.ena.sra.xml.TypeCapillaryModel;
 import uk.ac.ebi.ena.sra.xml.TypeDnbSeqModel;
 import uk.ac.ebi.ena.sra.xml.TypeElementModel;
+import uk.ac.ebi.ena.sra.xml.TypeGenapsysModel;
+import uk.ac.ebi.ena.sra.xml.TypeGeneMindModel;
 import uk.ac.ebi.ena.sra.xml.TypeHelicosModel;
 import uk.ac.ebi.ena.sra.xml.TypeIlluminaModel;
 import uk.ac.ebi.ena.sra.xml.TypeIontorrentModel;
 import uk.ac.ebi.ena.sra.xml.TypeOxfordNanoporeModel;
 import uk.ac.ebi.ena.sra.xml.TypePacBioModel;
+import uk.ac.ebi.ena.sra.xml.TypeTapestriModel;
 import uk.ac.ebi.ena.sra.xml.TypeUltimaModel;
+import uk.ac.ebi.ena.sra.xml.TypeVelaDiagnosticsModel;
 
 public class PlatformEnumFixer extends EnumValueFixer {
   public PlatformEnumFixer() {
-
+    /** Any addition or removal of models in SRA.common.xsd should be reflected here. */
     addValueList(Type454Model.Factory.newInstance().schemaType().getStringEnumEntries(), "LS454");
     addValueList(
         TypeIlluminaModel.Factory.newInstance().schemaType().getStringEnumEntries(), "ILLUMINA");
@@ -55,6 +59,15 @@ public class PlatformEnumFixer extends EnumValueFixer {
         TypeElementModel.Factory.newInstance().schemaType().getStringEnumEntries(), "ELEMENT");
     addValueList(
         TypeUltimaModel.Factory.newInstance().schemaType().getStringEnumEntries(), "ULTIMA");
+    addValueList(
+        TypeVelaDiagnosticsModel.Factory.newInstance().schemaType().getStringEnumEntries(),
+        "VELA_DIAGNOSTICS");
+    addValueList(
+        TypeGenapsysModel.Factory.newInstance().schemaType().getStringEnumEntries(), "GENAPSYS");
+    addValueList(
+        TypeGeneMindModel.Factory.newInstance().schemaType().getStringEnumEntries(), "GENEMIND");
+    addValueList(
+        TypeTapestriModel.Factory.newInstance().schemaType().getStringEnumEntries(), "TAPESTRI");
   }
 
   private void addValueList(SchemaStringEnumEntry[] keys, String value) {
