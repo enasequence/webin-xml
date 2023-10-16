@@ -21,8 +21,12 @@ http://www.ebi.ac.uk/ena
 
 ## Copying files to FTP directory:
 
-* Copy all XSD files in the directory **main/resources/uk/ac/ebi/ena/sra/schema** to:
-  * ```datalib@noah-login:/nfs/ftp/pub/databases/ena/doc/xsd/sra_1_5```
-* There are many **sra_1_X** directories inside ```datalib@noah-login:/nfs/ftp/pub/databases/ena/doc/xsd```. The files,
-  however, are always copied into **sra_1_5** directory unless explicitly stated otherwise.
-
+* Copy all XSD files in the directory **main/resources/uk/ac/ebi/ena/sra/schema** to `/nfs/ftp/pub/databases/ena/doc/xsd/sra_1_5`
+* This directory can be accessed :
+  * `$ ssh codon-login`
+  * `$ bsub -Is -q datamover bash`
+  * `$ become datalib`
+  * `$ cd /nfs/ftp/pub/databases/ena/doc/xsd/sra_1_5`
+ 
+NOTE : There are multiple **sra_1_X** directories inside parent directory `/nfs/ftp/pub/databases/ena/doc/xsd`. The files,
+  however, are always copied into **sra_1_5** unless explicitly stated otherwise.
