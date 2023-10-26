@@ -18,7 +18,7 @@ public class InstrumentModelEnumFixerTest {
   private InstrumentModelEnumFixer instrumentModelEnumFixer = new InstrumentModelEnumFixer();
 
   @Test
-  public void test() {
+  public void testFixCase() {
     String withoutExplicitFix = "HiSeq X Five";
     String withoutExplicitFixWrongCase = "hIsEQ x fIVE";
 
@@ -30,16 +30,40 @@ public class InstrumentModelEnumFixerTest {
 
     Assert.assertEquals(fixedValue, instrumentModelEnumFixer.fixValue(withoutExplicitFixWrongCase));
     Assert.assertEquals(fixedValue, instrumentModelEnumFixer.getValue(withoutExplicitFixWrongCase));
+  }
 
-    String withExplicitFix = "AB SOLiD 5500xl";
-    String withExplicitFixWrongCase = "ab solId 5500XL";
+  @Test
+  public void testFixModel() {
+    assertFixedValue("none", "unspecified");
+    assertFixedValue("AB SOLiD System 3 Plus", "AB SOLiD 3 Plus System");
+    assertFixedValue("AB SOLiD 5500xl", "AB 5500xl Genetic Analyzer");
+    assertFixedValue("AB SOLiD 5500", "AB 5500 Genetic Analyzer");
+    assertFixedValue("GS FLX", "454 GS FLX");
+    assertFixedValue("GS 20", "454 GS 20");
+    assertFixedValue("454 Titanium", "454 GS FLX Titanium");
+    assertFixedValue("454 GS FLX Plus", "454 GS FLX+");
+    assertFixedValue("Solexa 1G Genome Analyzer", "Illumina Genome Analyzer");
+    assertFixedValue("Illumina NextSeq 500", "NextSeq 500");
+    assertFixedValue("Illumina NextSeq 550", "NextSeq 550");
+    assertFixedValue("Illumina HiSeq X Ten", "HiSeq X Ten");
+    assertFixedValue("Illumina HiSeq X Five", "NextSeq Five");
+    assertFixedValue("Ion S5", "Ion Torrent S5");
+    assertFixedValue("Ion S5 XL", "Ion Torrent S5 XL");
+    assertFixedValue("Ion S5", "Ion Torrent S5");
+    assertFixedValue("PacBio Sequel", "Sequel");
+    assertFixedValue("PacBio Sequel II", "Sequel II");
+  }
 
-    fixedValue = "AB 5500xl Genetic Analyzer";
-
-    Assert.assertEquals(fixedValue, instrumentModelEnumFixer.fixValue(withExplicitFix));
-    Assert.assertEquals(fixedValue, instrumentModelEnumFixer.getValue(withExplicitFix));
-
-    Assert.assertEquals(fixedValue, instrumentModelEnumFixer.fixValue(withExplicitFixWrongCase));
-    Assert.assertEquals(fixedValue, instrumentModelEnumFixer.getValue(withExplicitFixWrongCase));
+  public void assertFixedValue(String actualValue, String expectedValue) {
+    Assert.assertEquals(expectedValue, instrumentModelEnumFixer.fixValue(actualValue));
+    Assert.assertEquals(expectedValue, instrumentModelEnumFixer.getValue(actualValue));
+    Assert.assertEquals(
+        expectedValue, instrumentModelEnumFixer.fixValue(actualValue.toUpperCase()));
+    Assert.assertEquals(
+        expectedValue, instrumentModelEnumFixer.getValue(actualValue.toUpperCase()));
+    Assert.assertEquals(
+        expectedValue, instrumentModelEnumFixer.fixValue(actualValue.toLowerCase()));
+    Assert.assertEquals(
+        expectedValue, instrumentModelEnumFixer.getValue(actualValue.toUpperCase()));
   }
 }
