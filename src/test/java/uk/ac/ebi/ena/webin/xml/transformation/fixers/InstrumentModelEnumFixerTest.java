@@ -46,7 +46,7 @@ public class InstrumentModelEnumFixerTest {
     assertFixedValue("Illumina NextSeq 500", "NextSeq 500");
     assertFixedValue("Illumina NextSeq 550", "NextSeq 550");
     assertFixedValue("Illumina HiSeq X Ten", "HiSeq X Ten");
-    assertFixedValue("Illumina HiSeq X Five", "NextSeq Five");
+    assertFixedValue("Illumina HiSeq X Five", "HiSeq X Five");
     assertFixedValue("Ion S5", "Ion Torrent S5");
     assertFixedValue("Ion S5 XL", "Ion Torrent S5 XL");
     assertFixedValue("Ion S5", "Ion Torrent S5");
