@@ -1,0 +1,49 @@
+<RUN_SET>
+    <RUN accession="ERR4659819" alias="COG-UK/MILK-9E05B3/SANG:200930_A00948_0190_AHNFKGDRXX/1t241" center_name="Wellcome Sanger Institute">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERR4659819</PRIMARY_ID>
+            <SUBMITTER_ID namespace="Wellcome Sanger Institute">COG-UK/MILK-9E05B3/SANG:200930_A00948_0190_AHNFKGDRXX/1t241</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Illumina NovaSeq 6000 paired end sequencing; COG-UK/MILK-9E05B3/SANG:200930_A00948_0190_AHNFKGDRXX/1t241</TITLE>
+        <EXPERIMENT_REF accession="ERX4582626">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERX4582626</PRIMARY_ID>
+            </IDENTIFIERS>
+        </EXPERIMENT_REF>
+        <DATA_BLOCK>
+            <FILES>
+                <FILE checksum="b7120904a3273f07b2d383bddb29c28a" checksum_method="MD5" filename="run/ERR465/ERR4659819/MILK-9E05B3.200930_A00948_0190_AHNFKGDRXX.1t241.cram" filetype="cram"/>
+            </FILES>
+        </DATA_BLOCK>
+        <RUN_LINKS>
+            <RUN_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMISSION</DB>
+                    <ID>ERA2939496</ID>
+                </XREF_LINK>
+            </RUN_LINK>
+            <RUN_LINK>
+                <XREF_LINK>
+                    <DB>ENA-FASTQ-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERR4659819&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+                </XREF_LINK>
+            </RUN_LINK>
+            <RUN_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMITTED-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERR4659819&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+                </XREF_LINK>
+            </RUN_LINK>
+        </RUN_LINKS>
+        <RUN_ATTRIBUTES>
+            <RUN_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>2020-10-07</VALUE>
+            </RUN_ATTRIBUTE>
+            <RUN_ATTRIBUTE>
+                <TAG>ENA-LAST-UPDATE</TAG>
+                <VALUE>2020-10-06</VALUE>
+            </RUN_ATTRIBUTE>
+        </RUN_ATTRIBUTES>
+    </RUN>
+</RUN_SET>

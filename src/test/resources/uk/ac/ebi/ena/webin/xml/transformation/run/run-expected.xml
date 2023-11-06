@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RUN_SET>
+    <RUN accession="ERR5060344" alias="ena-RUN-Graz University of Technical-11-01-2021-14:17:33:318-1" center_name="Graz University of Technical">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERR5060344</PRIMARY_ID>
+            <SUBMITTER_ID namespace="Graz University of Technical">ena-RUN-Graz University of Technical-11-01-2021-14:17:33:318-1</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Illumina MiSeq sequencing</TITLE>
+        <EXPERIMENT_REF accession="ERX4866413">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERX4866413</PRIMARY_ID>
+            </IDENTIFIERS>
+        </EXPERIMENT_REF>
+        <SPOT_DESCRIPTOR>
+            <SPOT_DECODE_SPEC>
+                <READ_SPEC>
+                    <READ_INDEX>0</READ_INDEX>
+                    <READ_LABEL>F1</READ_LABEL>
+                    <READ_CLASS>Application Read</READ_CLASS>
+                    <READ_TYPE>Forward</READ_TYPE>
+                    <BASE_COORD>1</BASE_COORD>
+                </READ_SPEC>
+            </SPOT_DECODE_SPEC>
+        </SPOT_DESCRIPTOR>
+        <PLATFORM>
+            <ILLUMINA>
+                <INSTRUMENT_MODEL>Illumina MiSeq</INSTRUMENT_MODEL>
+            </ILLUMINA>
+        </PLATFORM>
+        <DATA_BLOCK>
+            <FILES>
+                <FILE checksum="66D2AF73857D6085D9ABA2B91F62B9EA" checksum_method="MD5" filename="run/ERR506/ERR5060344/VitisC_16S_1_8_L001_R1_001.fastq.gz" filetype="fastq" quality_scoring_system="phred"/>
+            </FILES>
+        </DATA_BLOCK>
+        <RUN_LINKS>
+            <RUN_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMISSION</DB>
+                    <ID>ERA3206930</ID>
+                </XREF_LINK>
+            </RUN_LINK>
+            <RUN_LINK>
+                <XREF_LINK>
+                    <DB>ENA-FASTQ-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERR5060344&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+                </XREF_LINK>
+            </RUN_LINK>
+            <RUN_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMITTED-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERR5060344&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+                </XREF_LINK>
+            </RUN_LINK>
+        </RUN_LINKS>
+        <RUN_ATTRIBUTES>
+            <RUN_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>2021-01-11</VALUE>
+            </RUN_ATTRIBUTE>
+            <RUN_ATTRIBUTE>
+                <TAG>ENA-LAST-UPDATE</TAG>
+                <VALUE>2021-01-11</VALUE>
+            </RUN_ATTRIBUTE>
+        </RUN_ATTRIBUTES>
+    </RUN>
+</RUN_SET>

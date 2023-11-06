@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SUBMISSION_SET>
+    <SUBMISSION accession="ERA000024" alias="g1k-sc-20080812-2" submission_date="2008-08-12T16:42:01.000+01:00" center_name="SC" lab_name="SC" submission_comment="ftp submission prepared by dmc@sanger.ac.uk using sraFilesToXml.pl">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERA000024</PRIMARY_ID>
+            <SUBMITTER_ID namespace="SC">g1k-sc-20080812-2</SUBMITTER_ID>
+        </IDENTIFIERS>
+    </SUBMISSION>
+</SUBMISSION_SET>

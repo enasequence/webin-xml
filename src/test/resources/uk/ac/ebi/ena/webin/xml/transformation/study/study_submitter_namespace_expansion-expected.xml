@@ -1,0 +1,47 @@
+<STUDY_SET>
+    <STUDY accession="ERP006120" alias="Metagenomic_analysis_to_assess_anaerobic_culturability_of_human_faecal_samples-sc-3188" center_name="Wellcome Sanger Institute">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERP006120</PRIMARY_ID>
+            <SECONDARY_ID>PRJEB6572</SECONDARY_ID>
+            <SUBMITTER_ID namespace="Wellcome Sanger Institute">Metagenomic_analysis_to_assess_anaerobic_culturability_of_human_faecal_samples-sc-3188</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <DESCRIPTOR>
+            <STUDY_TITLE>Metagenomic_analysis_to_assess_anaerobic_culturability_of_human_faecal_samples</STUDY_TITLE>
+            <STUDY_DESCRIPTION>http://www.sanger.ac.uk/resources/downloads/bacteria/
+                These data are part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http://www.sanger.ac.uk/datasharing/</STUDY_DESCRIPTION>
+            <CENTER_PROJECT_NAME>Metagenomic_analysis_to_assess_anaerobic_culturability_of_human_faecal_samples</CENTER_PROJECT_NAME>
+            <STUDY_ABSTRACT>http://www.sanger.ac.uk/resources/downloads/bacteria/</STUDY_ABSTRACT>
+            <STUDY_TYPE existing_study_type="Metagenomics"/>
+        </DESCRIPTOR>
+        <STUDY_LINKS>
+            <STUDY_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMISSION</DB>
+                    <ID>ERA319850</ID>
+                </XREF_LINK>
+            </STUDY_LINK>
+            <STUDY_LINK>
+                <XREF_LINK>
+                    <DB>ENA-FASTQ-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERP006120&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+                </XREF_LINK>
+            </STUDY_LINK>
+            <STUDY_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMITTED-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERP006120&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+                </XREF_LINK>
+            </STUDY_LINK>
+        </STUDY_LINKS>
+        <STUDY_ATTRIBUTES>
+            <STUDY_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>2014-11-26</VALUE>
+            </STUDY_ATTRIBUTE>
+            <STUDY_ATTRIBUTE>
+                <TAG>ENA-LAST-UPDATE</TAG>
+                <VALUE>2014-06-20</VALUE>
+            </STUDY_ATTRIBUTE>
+        </STUDY_ATTRIBUTES>
+    </STUDY>
+</STUDY_SET>

@@ -274,25 +274,8 @@
             </xs:documentation>
         </xs:annotation>
         <xs:choice>
-            <xs:element name="URL_LINK">
-                <xs:complexType>
-                    <xs:all>
-                        <xs:element name="LABEL" type="xs:string" minOccurs="1" maxOccurs="1">
-                            <xs:annotation>
-                                <xs:documentation>
-                                    Text label to display for the link.
-                                </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="URL" minOccurs="1" maxOccurs="1" type="xs:anyURI">
-                            <xs:annotation>
-                                <xs:documentation> The internet service link (file:, http:, ftp: etc). </xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:all>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="XREF_LINK" type="com:XRefType"/>
+            <xs:element name="URL_LINK" type="com:URLType" />
+            <xs:element name="XREF_LINK" type="com:XRefType" />
 
             <xs:element name="ENTREZ_LINK">
                 <xs:complexType>

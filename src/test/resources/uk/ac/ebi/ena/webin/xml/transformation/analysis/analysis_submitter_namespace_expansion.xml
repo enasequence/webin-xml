@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ANALYSIS_SET>
+    <ANALYSIS alias="SC_120T1-Dog.bam" accession="ERZ296129" center_name="SC">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERZ296129</PRIMARY_ID>
+            <SUBMITTER_ID namespace="SC">SC_120T1-Dog.bam</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Canine Transmissible Venereal Tumour (CTVT) mitochondria</TITLE>
+        <DESCRIPTION>Low coverage whole genome sequencing of 447 CTVT tumours and 338 matched hosts</DESCRIPTION>
+        <STUDY_REF accession="ERP014691">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERP014691</PRIMARY_ID>
+            </IDENTIFIERS>
+        </STUDY_REF>
+        <SAMPLE_REF accession="ERS1094210" label="120T1-Dog">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERS1094210</PRIMARY_ID>
+            </IDENTIFIERS>
+        </SAMPLE_REF>
+        <ANALYSIS_TYPE>
+            <REFERENCE_ALIGNMENT/>
+        </ANALYSIS_TYPE>
+        <FILES>
+            <FILE filename="ERZ296/ERZ296129/120T1-Dog.bam" filetype="bam" checksum_method="MD5" checksum="53ec2a5953e87a7fb68fbf22cf588de7"/>
+        </FILES>
+    </ANALYSIS>
+</ANALYSIS_SET>

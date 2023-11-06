@@ -1,0 +1,45 @@
+<ANALYSIS_SET>
+    <ANALYSIS accession="ERZ296129" alias="SC_120T1-Dog.bam" center_name="Wellcome Sanger Institute">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERZ296129</PRIMARY_ID>
+            <SUBMITTER_ID namespace="Wellcome Sanger Institute">SC_120T1-Dog.bam</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Canine Transmissible Venereal Tumour (CTVT) mitochondria</TITLE>
+        <DESCRIPTION>Low coverage whole genome sequencing of 447 CTVT tumours and 338 matched hosts</DESCRIPTION>
+        <STUDY_REF accession="ERP014691">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERP014691</PRIMARY_ID>
+            </IDENTIFIERS>
+        </STUDY_REF>
+        <SAMPLE_REF accession="ERS1094210" label="120T1-Dog">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERS1094210</PRIMARY_ID>
+                <EXTERNAL_ID namespace="BioSample">SAMEA3907076</EXTERNAL_ID>
+            </IDENTIFIERS>
+        </SAMPLE_REF>
+        <ANALYSIS_TYPE>
+            <REFERENCE_ALIGNMENT/>
+        </ANALYSIS_TYPE>
+        <FILES>
+            <FILE checksum="53ec2a5953e87a7fb68fbf22cf588de7" checksum_method="MD5" filename="ERZ296/ERZ296129/120T1-Dog.bam" filetype="bam"/>
+        </FILES>
+        <ANALYSIS_LINKS>
+            <ANALYSIS_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMISSION</DB>
+                    <ID>ERA610683</ID>
+                </XREF_LINK>
+            </ANALYSIS_LINK>
+        </ANALYSIS_LINKS>
+        <ANALYSIS_ATTRIBUTES>
+            <ANALYSIS_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>2016-05-16</VALUE>
+            </ANALYSIS_ATTRIBUTE>
+            <ANALYSIS_ATTRIBUTE>
+                <TAG>ENA-LAST-UPDATE</TAG>
+                <VALUE>2016-06-17</VALUE>
+            </ANALYSIS_ATTRIBUTE>
+        </ANALYSIS_ATTRIBUTES>
+    </ANALYSIS>
+</ANALYSIS_SET>

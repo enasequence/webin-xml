@@ -11,9 +11,20 @@
 package uk.ac.ebi.ena.webin.xml.transformation.transformers;
 
 import java.util.AbstractList;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.RandomAccess;
+import java.util.Set;
+import java.util.function.Supplier;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMResult;
@@ -23,14 +34,33 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import org.apache.xmlbeans.XmlOptions;
+import org.apache.xmlbeans.CDataBookmark;
+import org.apache.xmlbeans.XmlCursor;
+import org.apache.xmlbeans.XmlObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import uk.ac.ebi.ena.sra.xml.AttributeType;
+import uk.ac.ebi.ena.sra.xml.IdentifierType;
+import uk.ac.ebi.ena.sra.xml.LinkType;
+import uk.ac.ebi.ena.sra.xml.ObjectType;
+import uk.ac.ebi.ena.sra.xml.QualifiedNameType;
+import uk.ac.ebi.ena.sra.xml.XRefType;
+import uk.ac.ebi.ena.webin.xml.transformation.transformers.dtos.PresentationTransformationDTO;
 
-public abstract class AbstractTransformer implements Transformer {
+public abstract class AbstractTransformer {
 
-  protected static final XmlOptions XML_OPTIONS = createXmlOptions();
+  public static final String ACCESSION_MASK = "#";
+
+  public static final String ENA_FASTQ_FILES_TAG = "ENA-FASTQ-FILES";
+
+  public static final String ENA_SUBMITTED_FILES_TAG = "ENA-SUBMITTED-FILES";
+
+  public static final String ENA_FASTQ_FILES_URL_PREFORMAT =
+      "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=%1$s&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes";
+
+  public static final String ENA_SUBMITTED_FILES_URL_PREFORMAT =
+      "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=%1$s&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format";
 
   protected final Templates transformationTemplate;
 
@@ -81,14 +111,6 @@ public abstract class AbstractTransformer implements Transformer {
     return n.getLength() == 0 ? Collections.emptyList() : new NodeListWrapper(n);
   }
 
-  private static XmlOptions createXmlOptions() {
-    XmlOptions xmlOptions = new XmlOptions();
-    xmlOptions.setLoadLineNumbers(XmlOptions.LOAD_LINE_NUMBERS);
-    xmlOptions.setCharacterEncoding("UTF-8");
-    xmlOptions.setLoadStripComments();
-    return xmlOptions;
-  }
-
   protected static final class NodeListWrapper extends AbstractList<Node> implements RandomAccess {
     private final NodeList n;
 
@@ -103,5 +125,244 @@ public abstract class AbstractTransformer implements Transformer {
     public int size() {
       return n.getLength();
     }
+  }
+
+  // Following is related to presentation
+
+  protected <T extends PresentationTransformationDTO, U extends ObjectType> void transformCommon(
+      T dto, String sraObjId, U objectType) {
+    // RASKO: Optimally we would retrofit the database so that we don't need to expand center name
+    // or broker name. - X
+    if (dto.getCenterName() != null) {
+      objectType.setCenterName(dto.getCenterName());
+    }
+    if (dto.getBrokerName() != null) {
+      objectType.setBrokerName(dto.getBrokerName());
+    }
+
+    // RASKO: we should set NCBI/DDBJ broker name the same way for all objects using first two
+    // accession letters,
+    // including submission that does not do this - X
+    // EMD-6683
+    setNcbiDdbjBrokerNamesIfApplicable(objectType, sraObjId);
+
+    // RASKO: Removes empty broker name I think. If we do this we should do this for all object
+    // types. - X
+    unsetBrokerNameIfBlank(objectType);
+  }
+
+  private <T extends ObjectType> void setNcbiDdbjBrokerNamesIfApplicable(
+      T enaObject, String objectId) {
+    if (enaObject.getBrokerName() == null || enaObject.getBrokerName().isEmpty()) {
+      if (objectId.startsWith("SRP")) {
+        enaObject.setBrokerName("NCBI");
+      } else if (objectId.startsWith("DRP")) {
+        enaObject.setBrokerName("DDBJ");
+      }
+    }
+  }
+
+  private <T extends ObjectType> void unsetBrokerNameIfBlank(T enaObject) {
+    if (enaObject.isSetBrokerName()
+        && (null == enaObject.getBrokerName() || enaObject.getBrokerName().isEmpty()))
+      enaObject.unsetBrokerName();
+  }
+
+  protected <T extends ObjectType> void unsetIdentifiersSubmitterIdIfBlankAlias(T enaObject) {
+    if (null == enaObject.getAlias() || enaObject.getAlias().isEmpty()) {
+      if (enaObject.getIDENTIFIERS().isSetSUBMITTERID()) {
+        enaObject.getIDENTIFIERS().unsetSUBMITTERID();
+      }
+    }
+  }
+
+  protected void injectSecondaries(IdentifierType identifiers, Set<String> secondary_set) {
+    if (null != identifiers) {
+      for (String secondaryId : secondary_set)
+        identifiers.addNewSECONDARYID().setStringValue(secondaryId);
+    }
+  }
+
+  protected void fixIdentifiers(ObjectType objectType) {
+    IdentifierType identifierType = objectType.getIDENTIFIERS();
+    if (identifierType != null) {
+      QualifiedNameType submitterIdNameType = identifierType.getSUBMITTERID();
+      if (submitterIdNameType != null && objectType.isSetCenterName()) {
+        submitterIdNameType.setNamespace(objectType.getCenterName());
+      }
+    }
+  }
+
+  /** EMD-1967: Removing LINKS(except XREF pubmed) */
+  protected <T extends XmlObject> void retainOnlyPubmedAndURLLinks(T linkObj, LinkType[] links) {
+    if (links != null && links.length > 0) {
+      for (LinkType link : links) {
+        Node nodeLINK = link.getDomNode();
+        if (link.isSetURLLINK()) {
+          // commenting EMD-4854
+          // link.unsetURLLINK();
+          // linkObj.getDomNode().removeChild(nodeLINK);
+        } else if (link.isSetXREFLINK()) {
+          if (link.getXREFLINK() != null
+              && link.getXREFLINK().getDB() != null
+              && link.getXREFLINK().getDB().toLowerCase().matches("pubmed")) {
+            continue;
+          } else {
+            link.unsetXREFLINK();
+            linkObj.getDomNode().removeChild(nodeLINK);
+          }
+        }
+      }
+    }
+  }
+
+  /** EMD-1967: Removing LINKS(except XREF pubmed) */
+  protected <T extends XmlObject> void retainOnlyPubmedLinks(T linkObj, LinkType[] links) {
+    if (links != null && links.length > 0) {
+      for (LinkType link : links) {
+        Node nodeLINK = link.getDomNode();
+        if (link.isSetURLLINK()) {
+          link.unsetURLLINK();
+          linkObj.getDomNode().removeChild(nodeLINK);
+
+        } else if (link.isSetXREFLINK()) {
+          if (link.getXREFLINK() != null
+              && link.getXREFLINK().getDB() != null
+              && link.getXREFLINK().getDB().toLowerCase().matches("pubmed")) {
+            continue;
+          } else {
+            link.unsetXREFLINK();
+            linkObj.getDomNode().removeChild(nodeLINK);
+          }
+        }
+      }
+    }
+  }
+
+  protected void appendArrayExpressLink(String alias, Supplier<XRefType> xreflinkSupplier) {
+    String aeAlias = extractAE(alias);
+    if (alias != null && !alias.equals(aeAlias)) {
+      appendLink(xreflinkSupplier.get(), "ARRAYEXPRESS", aeAlias, false);
+    }
+  }
+
+  protected void appendLink(XRefType xreflink, String db, String id, boolean cdata) {
+    xreflink.setDB(db);
+    xreflink.setID(id);
+
+    if (!cdata) {
+      return;
+    }
+
+    // add CDATA tag
+    XmlCursor cursor = xreflink.xgetID().newCursor();
+    cursor.toFirstContentToken();
+    cursor.setBookmark(CDataBookmark.CDATA_BOOKMARK);
+    cursor.dispose();
+  }
+
+  protected <T extends PresentationTransformationDTO> void addFirstPublicLastUpdateAttributes(
+      T inpObj, Supplier<AttributeType> attributeTypeSupplier) {
+    if (inpObj.getFirstPublic() != null)
+      appendAttribute(attributeTypeSupplier, "ENA-FIRST-PUBLIC", inpObj.getFirstPublic());
+
+    if (inpObj.getLastUpdated() != null)
+      appendAttribute(attributeTypeSupplier, "ENA-LAST-UPDATE", inpObj.getLastUpdated());
+  }
+
+  protected void appendAttribute(
+      Supplier<AttributeType> attributeTypeSupplier, String tag, String value) {
+    if (tag == null || tag.replaceAll(" ", "").isEmpty()) {
+      return;
+    }
+
+    AttributeType attributeType = attributeTypeSupplier.get();
+    attributeType.setTAG(tag);
+    attributeType.setVALUE(value);
+  }
+
+  protected List<String> getRangeList(Collection<String> accession_list) {
+    return getRanges(accession_list).entrySet().stream()
+        .sorted((e1, e2) -> e1.getKey().toString().compareTo(e2.getKey().toString()))
+        .map(Map.Entry::getValue)
+        .flatMap(List::stream)
+        .collect(Collectors.toList());
+  }
+
+  private String extractAE(String alias) {
+    if (null != alias) {
+      Matcher m =
+          Pattern.compile("GEO\\s*(Series\\s*accession)?\\s*:\\s*(GSE\\d+).*").matcher(alias);
+      if (m.find()) {
+        return m.group(2).replace("GSE", "E-GEOD-");
+      }
+    }
+
+    return alias;
+  }
+
+  private Map<Map.Entry<String, String>, List<String>> getRanges(
+      Collection<String> accession_list) {
+    return accession_list.stream()
+        .collect(
+            Collectors.groupingBy(
+                e ->
+                    new AbstractMap.SimpleEntry<>(
+                        matchSplit(e)[0],
+                        Stream.generate(() -> ACCESSION_MASK)
+                            .limit(e.length())
+                            .collect(Collectors.joining())),
+                Collectors.mapping(e -> matchSplit(e)[1], Collectors.toList())))
+        .entrySet()
+        .stream()
+        .map(
+            (e) ->
+                new AbstractMap.SimpleEntry<Map.Entry<String, String>, List<String>>(
+                    e.getKey(),
+                    e.getValue().stream()
+                        .sorted(
+                            (o1, o2) ->
+                                Integer.compare(Integer.parseInt(o1, 10), Integer.parseInt(o2, 10)))
+                        .map(i -> Arrays.asList(new AbstractMap.SimpleEntry<>(i, i)))
+                        .reduce(new ArrayList<>(), AbstractTransformer::entryReduce)
+                        .stream()
+                        .map(
+                            i ->
+                                i.getKey() == i.getValue()
+                                    ? e.getKey().getKey() + i.getKey()
+                                    : e.getKey().getKey()
+                                        + i.getKey()
+                                        + '-'
+                                        + e.getKey().getKey()
+                                        + i.getValue())
+                        .collect(Collectors.toList())))
+        .collect(
+            Collectors.toMap(
+                AbstractMap.SimpleEntry::getKey,
+                AbstractMap.SimpleEntry::getValue,
+                (v1, v2) -> {
+                  v1.addAll(v2);
+                  return v1.stream().sorted().collect(Collectors.toList());
+                }));
+  }
+
+  private String[] matchSplit(String s) {
+    Matcher m = null;
+    if ((m = Pattern.compile("(\\D+)(\\d+)").matcher(s)).find() && 2 == m.groupCount())
+      return new String[] {m.group(1), m.group(2)};
+
+    throw new RuntimeException("Unable to split accession: " + s);
+  }
+
+  private static List<AbstractMap.SimpleEntry<String, String>> entryReduce(
+      List<AbstractMap.SimpleEntry<String, String>> a,
+      List<AbstractMap.SimpleEntry<String, String>> e) {
+    if (!a.isEmpty()
+        && 1
+            >= -Integer.parseInt(a.get(a.size() - 1).getValue(), 10)
+                + Integer.parseInt(e.get(0).getValue(), 10))
+      a.get(a.size() - 1).setValue(e.get(0).getValue());
+    else a.addAll(e);
+    return a;
   }
 }

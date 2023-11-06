@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RUN_SET>
+    <RUN alias="COG-UK/MILK-9E05B3/SANG:200930_A00948_0190_AHNFKGDRXX/1t241" center_name="SC" accession="ERR4659819" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERR4659819</PRIMARY_ID>
+            <SUBMITTER_ID namespace="SC">COG-UK/MILK-9E05B3/SANG:200930_A00948_0190_AHNFKGDRXX/1t241</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Illumina NovaSeq 6000 paired end sequencing; COG-UK/MILK-9E05B3/SANG:200930_A00948_0190_AHNFKGDRXX/1t241</TITLE>
+        <EXPERIMENT_REF accession="ERX4582626">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERX4582626</PRIMARY_ID>
+            </IDENTIFIERS>
+        </EXPERIMENT_REF>
+        <DATA_BLOCK>
+            <FILES>
+                <FILE checksum="b7120904a3273f07b2d383bddb29c28a" checksum_method="MD5" filename="run/ERR465/ERR4659819/MILK-9E05B3.200930_A00948_0190_AHNFKGDRXX.1t241.cram" filetype="cram"/>
+            </FILES>
+        </DATA_BLOCK>
+    </RUN>
+</RUN_SET>

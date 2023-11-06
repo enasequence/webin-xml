@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<STUDY_SET>
+    <STUDY alias="Metagenomic_analysis_to_assess_anaerobic_culturability_of_human_faecal_samples-sc-3188" accession="ERP006120" center_name="SC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERP006120</PRIMARY_ID>
+            <SUBMITTER_ID namespace="SC">Metagenomic_analysis_to_assess_anaerobic_culturability_of_human_faecal_samples-sc-3188</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <DESCRIPTOR>
+            <STUDY_TITLE>Metagenomic_analysis_to_assess_anaerobic_culturability_of_human_faecal_samples</STUDY_TITLE>
+            <STUDY_DESCRIPTION>http://www.sanger.ac.uk/resources/downloads/bacteria/
+                These data are part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http://www.sanger.ac.uk/datasharing/</STUDY_DESCRIPTION>
+            <CENTER_PROJECT_NAME>Metagenomic_analysis_to_assess_anaerobic_culturability_of_human_faecal_samples</CENTER_PROJECT_NAME>
+            <STUDY_ABSTRACT>http://www.sanger.ac.uk/resources/downloads/bacteria/</STUDY_ABSTRACT>
+            <STUDY_TYPE existing_study_type="Metagenomics"/>
+            <RELATED_STUDIES>
+                <RELATED_STUDY>
+                    <RELATED_LINK>
+                        <DB>PROJECT</DB>
+                        <ID>3188</ID>
+                    </RELATED_LINK>
+                    <IS_PRIMARY>false</IS_PRIMARY>
+                </RELATED_STUDY>
+            </RELATED_STUDIES>
+        </DESCRIPTOR>
+    </STUDY>
+</STUDY_SET>

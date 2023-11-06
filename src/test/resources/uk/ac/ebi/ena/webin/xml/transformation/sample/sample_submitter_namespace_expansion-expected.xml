@@ -1,0 +1,49 @@
+<SAMPLE_SET>
+    <SAMPLE accession="ERS000004" alias="Solexa sequencing of Saccharomyces paradoxus strain Q31.4 random 200 bp library" center_name="Wellcome Sanger Institute">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERS000004</PRIMARY_ID>
+            <EXTERNAL_ID namespace="BioSample">SAMEA749875</EXTERNAL_ID>
+            <SUBMITTER_ID namespace="Wellcome Sanger Institute">Solexa sequencing of Saccharomyces paradoxus strain Q31.4 random 200 bp library</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Saccharomyces paradoxus Q31.4</TITLE>
+        <SAMPLE_NAME>
+            <TAXON_ID>580237</TAXON_ID>
+            <SCIENTIFIC_NAME>Saccharomyces paradoxus Q31.4</SCIENTIFIC_NAME>
+        </SAMPLE_NAME>
+        <DESCRIPTION>Solexa sequencing of Saccharomyces paradoxus strain Q31.4 random 200 bp library</DESCRIPTION>
+        <SAMPLE_LINKS>
+            <SAMPLE_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMISSION</DB>
+                    <ID>ERA000011</ID>
+                </XREF_LINK>
+            </SAMPLE_LINK>
+            <SAMPLE_LINK>
+                <XREF_LINK>
+                    <DB>ENA-FASTQ-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERS000004&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+                </XREF_LINK>
+            </SAMPLE_LINK>
+            <SAMPLE_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMITTED-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERS000004&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+                </XREF_LINK>
+            </SAMPLE_LINK>
+        </SAMPLE_LINKS>
+        <SAMPLE_ATTRIBUTES>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>strain</TAG>
+                <VALUE>Q31.4</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>2010-02-26</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>ENA-LAST-UPDATE</TAG>
+                <VALUE>2018-03-09</VALUE>
+            </SAMPLE_ATTRIBUTE>
+        </SAMPLE_ATTRIBUTES>
+    </SAMPLE>
+</SAMPLE_SET>

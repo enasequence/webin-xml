@@ -8,17 +8,26 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package uk.ac.ebi.ena.webin.xml.transformation.transformers;
+package uk.ac.ebi.ena.webin.xml.transformation.transformers.dtos;
 
-import org.apache.xmlbeans.XmlObject;
-import org.w3c.dom.Document;
-import uk.ac.ebi.ena.webin.xml.transformation.WebinXmlTransformationException;
-import uk.ac.ebi.ena.webin.xml.transformation.transformers.dtos.PresentationTransformationDTO;
+public class SubmissionTransformationDTO extends PresentationTransformationDTO {
 
-public interface Transformer<T extends PresentationTransformationDTO, U extends XmlObject> {
+  private String submissionDate;
+  private String submissionAlias;
 
-  Document transform(Document document) throws WebinXmlTransformationException;
+  public String getSubmissionDate() {
+    return submissionDate;
+  }
 
-  U transformForPresentation(T transformationDTO, U objDocument)
-      throws WebinXmlTransformationException;
+  public void setSubmissionDate(String submissionDate) {
+    this.submissionDate = submissionDate;
+  }
+
+  public String getSubmissionAlias() {
+    return submissionAlias;
+  }
+
+  public void setSubmissionAlias(String submissionAlias) {
+    this.submissionAlias = submissionAlias;
+  }
 }

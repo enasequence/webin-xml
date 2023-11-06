@@ -11,18 +11,29 @@
 package uk.ac.ebi.ena.webin.xml.transformation.transformers;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import uk.ac.ebi.ena.sra.xml.STUDYSETDocument;
+import uk.ac.ebi.ena.sra.xml.AttributeType;
+import uk.ac.ebi.ena.sra.xml.EXPERIMENTSETDocument;
+import uk.ac.ebi.ena.sra.xml.ExperimentType;
+import uk.ac.ebi.ena.sra.xml.IdentifierType;
+import uk.ac.ebi.ena.sra.xml.PoolMemberType;
+import uk.ac.ebi.ena.sra.xml.QualifiedNameType;
+import uk.ac.ebi.ena.sra.xml.SampleDescriptorType;
+import uk.ac.ebi.ena.sra.xml.XRefType;
 import uk.ac.ebi.ena.webin.xml.transformation.WebinXmlTransformationException;
 import uk.ac.ebi.ena.webin.xml.transformation.fixers.InstrumentModelEnumFixer;
 import uk.ac.ebi.ena.webin.xml.transformation.fixers.LibrarySourceEnumFixer;
 import uk.ac.ebi.ena.webin.xml.transformation.fixers.PlatformEnumFixer;
+import uk.ac.ebi.ena.webin.xml.transformation.transformers.dtos.ExperimentTransformationDTO;
 
-public class ExperimentTransformer extends AbstractTransformer {
+public class ExperimentTransformer extends AbstractTransformer
+    implements Transformer<ExperimentTransformationDTO, EXPERIMENTSETDocument> {
 
   private final InstrumentModelEnumFixer instrumentModelEnumFixer = new InstrumentModelEnumFixer();
   private final PlatformEnumFixer platformEnumFixer = new PlatformEnumFixer();
@@ -90,9 +101,29 @@ public class ExperimentTransformer extends AbstractTransformer {
   }
 
   @Override
-  public STUDYSETDocument transformForPresentation(Document document)
+  public EXPERIMENTSETDocument transformForPresentation(
+      ExperimentTransformationDTO experimentDto, EXPERIMENTSETDocument experimentSetDocument)
       throws WebinXmlTransformationException {
-    return null;
+
+    ExperimentType experimentType =
+        experimentSetDocument.getEXPERIMENTSET().getEXPERIMENTArray()[0];
+
+    transformCommon(experimentDto, experimentDto.getExperimentId(), experimentType);
+
+    transformIdentifiers(experimentDto, experimentType);
+
+    // RASKO: not fully clear what is happening here but we need to refer to samples. - X keep it
+    if (experimentDto.getExperimentId().startsWith("ERX"))
+      expandSamples(experimentType, experimentDto.getSampleAccessions());
+
+    // Generated Title
+    updateTitle(
+        experimentType,
+        null == experimentDto.getInstrumentModel() ? "" : experimentDto.getInstrumentModel());
+
+    transformLinks(experimentDto, experimentType);
+
+    return experimentSetDocument;
   }
 
   private void fixInstrumentModel(Node doc, String platformPath) {
@@ -124,5 +155,128 @@ public class ExperimentTransformer extends AbstractTransformer {
         librarySourceEnumFixer.fixNodeValue(librarySource);
       }
     }
+  }
+
+  private void transformIdentifiers(
+      ExperimentTransformationDTO experimentDto, ExperimentType experimentType) {
+    if (experimentDto.getExperimentId().startsWith("ERX"))
+      injectSecondaries(experimentType.getIDENTIFIERS(), experimentDto.getSecondary());
+
+    // RASKO: we should do IDENTIFIERS fixed the same way for all objects. - X
+    fixIdentifiers(experimentType);
+  }
+
+  private void expandSamples(ExperimentType experimentType, Map<String, String> sample_list) {
+    if (experimentType != null
+        && experimentType.getDESIGN() != null
+        && experimentType.getDESIGN().getSAMPLEDESCRIPTOR() != null
+        && experimentType.getDESIGN().getSAMPLEDESCRIPTOR().getIDENTIFIERS() != null) {
+      IdentifierType identifierType =
+          experimentType.getDESIGN().getSAMPLEDESCRIPTOR().getIDENTIFIERS();
+      if (identifierType != null
+          && sample_list.containsKey(identifierType.getPRIMARYID().getStringValue())) {
+        QualifiedNameType qualifiedNameType = identifierType.addNewEXTERNALID();
+        qualifiedNameType.setNamespace("BioSample");
+        qualifiedNameType.setStringValue(
+            sample_list.get(identifierType.getPRIMARYID().getStringValue()));
+      }
+
+      if (experimentType.getDESIGN().getSAMPLEDESCRIPTOR().getPOOL() != null) {
+        SampleDescriptorType.POOL pool = experimentType.getDESIGN().getSAMPLEDESCRIPTOR().getPOOL();
+        PoolMemberType[] memberArray = pool.getMEMBERArray();
+        for (int i = 0; i < memberArray.length; i++) {
+          IdentifierType identifiers1 = memberArray[i].getIDENTIFIERS();
+          if (identifiers1 != null) {
+            QualifiedNameType qualifiedNameType = identifierType.addNewEXTERNALID();
+            if (sample_list.containsKey(identifiers1.getPRIMARYID().getStringValue())) {
+              qualifiedNameType.setNamespace("BioSample");
+              qualifiedNameType.setStringValue(
+                  sample_list.get(identifierType.getPRIMARYID().getStringValue()));
+            }
+          }
+        }
+      }
+    }
+  }
+
+  private void updateTitle(ExperimentType experimentType, String generatedTitle) {
+    if (experimentType.getDESIGN() != null
+        && experimentType.getDESIGN().getLIBRARYDESCRIPTOR() != null
+        && experimentType.getDESIGN().getLIBRARYDESCRIPTOR().getLIBRARYLAYOUT() != null) {
+      if (experimentType.getDESIGN().getLIBRARYDESCRIPTOR().getLIBRARYLAYOUT().getPAIRED() != null)
+        generatedTitle = generatedTitle + " paired end";
+    }
+
+    generatedTitle = generatedTitle + " sequencing";
+
+    String xmlTitle = experimentType.getTITLE();
+    if (xmlTitle == null || xmlTitle.replaceAll(" ", "").isEmpty()) {
+      if (generatedTitle != null) {
+        experimentType.setTITLE(generatedTitle);
+      }
+    }
+  }
+
+  private void transformLinks(
+      ExperimentTransformationDTO experimentDto, ExperimentType experimentType) {
+    // RASKO: share code with other objects. - X
+    retainOnlyPubmedLinks(
+        experimentType.getEXPERIMENTLINKS(),
+        experimentType.getEXPERIMENTLINKS() != null
+            ? experimentType.getEXPERIMENTLINKS().getEXPERIMENTLINKArray()
+            : null);
+
+    if (!experimentDto.getSamples().isEmpty())
+      appendExperimentLink(
+          experimentType,
+          "ENA-SAMPLE",
+          getRangeList(experimentDto.getSamples()).stream().collect(Collectors.joining(",")));
+
+    if (null != experimentDto.getSubmissionId())
+      appendExperimentLink(experimentType, "ENA-SUBMISSION", experimentDto.getSubmissionId());
+
+    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
+    // FASTQ files
+    appendExperimentLink(
+        experimentType,
+        ENA_FASTQ_FILES_TAG,
+        String.format(ENA_FASTQ_FILES_URL_PREFORMAT, experimentDto.getExperimentId()),
+        true);
+
+    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
+    // Submitted files
+    appendExperimentLink(
+        experimentType,
+        ENA_SUBMITTED_FILES_TAG,
+        String.format(ENA_SUBMITTED_FILES_URL_PREFORMAT, experimentDto.getExperimentId()),
+        true);
+
+    // RASKO: share code with other objects. - X
+    appendArrayExpressLink(experimentDto.getStudyAlias(), () -> createNewLinkXRef(experimentType));
+  }
+
+  private void appendExperimentLink(ExperimentType experimentType, String db, String id) {
+    appendExperimentLink(experimentType, db, id, false);
+  }
+
+  private void appendExperimentLink(
+      ExperimentType experimentType, String db, String id, boolean cdata) {
+    appendLink(createNewLinkXRef(experimentType), db, id, cdata);
+  }
+
+  private XRefType createNewLinkXRef(ExperimentType experimentType) {
+    ExperimentType.EXPERIMENTLINKS links = experimentType.getEXPERIMENTLINKS();
+    links = links == null ? experimentType.addNewEXPERIMENTLINKS() : links;
+
+    return links.addNewEXPERIMENTLINK().addNewXREFLINK();
+  }
+
+  private AttributeType createNewAttribute(ExperimentType experimentType) {
+    ExperimentType.EXPERIMENTATTRIBUTES attributes = experimentType.getEXPERIMENTATTRIBUTES();
+    if (attributes == null) {
+      attributes = experimentType.addNewEXPERIMENTATTRIBUTES();
+    }
+
+    return attributes.addNewEXPERIMENTATTRIBUTE();
   }
 }

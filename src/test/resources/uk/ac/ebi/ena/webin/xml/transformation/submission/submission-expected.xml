@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SUBMISSION_SET>
+    <SUBMISSION accession="ERA3206932" alias="ena-SUBMISSION-SSI-11-01-2021-14:27:35:627-1" center_name="Statens Serum Institut" submission_date="2021-01-11T14:28:34.059Z">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERA3206932</PRIMARY_ID>
+            <SUBMITTER_ID namespace="Statens Serum Institut">ena-SUBMISSION-SSI-11-01-2021-14:27:35:627-1</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Submitted by Statens Serum Institut on 11-JAN-2021</TITLE>
+        <SUBMISSION_LINKS>
+            <SUBMISSION_LINK>
+                <XREF_LINK>
+                    <DB>ENA-FASTQ-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERA3206932&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+                </XREF_LINK>
+            </SUBMISSION_LINK>
+            <SUBMISSION_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMITTED-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERA3206932&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+                </XREF_LINK>
+            </SUBMISSION_LINK>
+        </SUBMISSION_LINKS>
+    </SUBMISSION>
+</SUBMISSION_SET>

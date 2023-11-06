@@ -1,0 +1,23 @@
+<SUBMISSION_SET>
+    <SUBMISSION accession="ERA000024" alias="g1k-sc-20080812-2" center_name="Wellcome Sanger Institute" lab_name="SC" submission_date="2008-08-12T16:42:01.000+01:00">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERA000024</PRIMARY_ID>
+            <SUBMITTER_ID namespace="Wellcome Sanger Institute">g1k-sc-20080812-2</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Submitted by Wellcome Sanger Institute on 12-AUG-2008</TITLE>
+        <SUBMISSION_LINKS>
+            <SUBMISSION_LINK>
+                <XREF_LINK>
+                    <DB>ENA-FASTQ-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERA000024&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+                </XREF_LINK>
+            </SUBMISSION_LINK>
+            <SUBMISSION_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMITTED-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERA000024&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+                </XREF_LINK>
+            </SUBMISSION_LINK>
+        </SUBMISSION_LINKS>
+    </SUBMISSION>
+</SUBMISSION_SET>

@@ -16,10 +16,15 @@ import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import uk.ac.ebi.ena.sra.xml.STUDYSETDocument;
+import uk.ac.ebi.ena.sra.xml.AttributeType;
+import uk.ac.ebi.ena.sra.xml.PROJECTSETDocument;
+import uk.ac.ebi.ena.sra.xml.ProjectType;
+import uk.ac.ebi.ena.sra.xml.XRefType;
 import uk.ac.ebi.ena.webin.xml.transformation.WebinXmlTransformationException;
+import uk.ac.ebi.ena.webin.xml.transformation.transformers.dtos.ProjectTransformationDTO;
 
-public class ProjectTransformer extends AbstractTransformer {
+public class ProjectTransformer extends AbstractTransformer
+    implements Transformer<ProjectTransformationDTO, PROJECTSETDocument> {
 
   public ProjectTransformer(Templates transformationTemplate) {
     super(transformationTemplate);
@@ -42,9 +47,53 @@ public class ProjectTransformer extends AbstractTransformer {
   }
 
   @Override
-  public STUDYSETDocument transformForPresentation(Document document)
+  public PROJECTSETDocument transformForPresentation(
+      ProjectTransformationDTO projectDto, PROJECTSETDocument document)
       throws WebinXmlTransformationException {
-    return null;
+
+    ProjectType projectType = document.getPROJECTSET().getPROJECTArray()[0];
+
+    transformCommon(projectDto, projectDto.getProjectId(), projectType);
+
+    transformIdentifiers(projectDto, projectType);
+
+    if (projectType.isSetFirstPublic()) {
+      projectType.unsetFirstPublic();
+    }
+
+    transformLinks(projectDto, projectType);
+
+    if (!projectDto.getChildren().isEmpty()) {
+      if (null == projectType.getRELATEDPROJECTS()) projectType.addNewRELATEDPROJECTS();
+
+      projectDto
+          .getChildren()
+          .forEach(
+              e ->
+                  projectType
+                      .getRELATEDPROJECTS()
+                      .addNewRELATEDPROJECT()
+                      .addNewCHILDPROJECT()
+                      .setAccession(e));
+    }
+
+    if (!projectDto.getChildren().isEmpty()) {
+      if (null == projectType.getRELATEDPROJECTS()) projectType.addNewRELATEDPROJECTS();
+
+      projectDto
+          .getChildren()
+          .forEach(
+              e ->
+                  projectType
+                      .getRELATEDPROJECTS()
+                      .addNewRELATEDPROJECT()
+                      .addNewPARENTPROJECT()
+                      .setAccession(e));
+    }
+
+    transformAttributes(projectDto, projectType);
+
+    return document;
   }
 
   private void convertPublicationLinksToProjectLinksAndRemovePublication(Document doc) {
@@ -78,5 +127,79 @@ public class ProjectTransformer extends AbstractTransformer {
       }
     }
     return projectLinks;
+  }
+
+  private void transformIdentifiers(ProjectTransformationDTO projectDto, ProjectType projectType) {
+    // RASKO: share IDENTIFIERS code with other objects. - X
+    if (projectType.isSetIDENTIFIERS()) {
+      unsetIdentifiersSubmitterIdIfBlankAlias(projectType);
+    }
+
+    // RASKO: share code with other objects. - X
+    // Injecting SECONDARY_ID
+    if (!projectDto.getStudies().isEmpty())
+      injectSecondaries(projectType.getIDENTIFIERS(), projectDto.getStudies());
+
+    injectSecondaries(projectType.getIDENTIFIERS(), projectDto.getSecondary());
+
+    // RASKO: we should do IDENTIFIERS fixed the same way for all objects. - X
+    fixIdentifiers(projectType);
+  }
+
+  private void transformLinks(ProjectTransformationDTO projectDto, ProjectType projectType) {
+    // RASKO: share code with other objects. - X
+    retainOnlyPubmedAndURLLinks(
+        projectType.getPROJECTLINKS(),
+        projectType.getPROJECTLINKS() != null
+            ? projectType.getPROJECTLINKS().getPROJECTLINKArray()
+            : null);
+
+    if (projectDto.getSubmissionId() != null)
+      appendProjectLink(projectType, "ENA-SUBMISSION", projectDto.getSubmissionId());
+
+    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
+    // FASTQ files
+    appendProjectLink(
+        projectType,
+        ENA_FASTQ_FILES_TAG,
+        String.format(ENA_FASTQ_FILES_URL_PREFORMAT, projectDto.getProjectId()),
+        true);
+
+    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
+    // Submission files
+    appendProjectLink(
+        projectType,
+        ENA_SUBMITTED_FILES_TAG,
+        String.format(ENA_SUBMITTED_FILES_URL_PREFORMAT, projectDto.getProjectId()),
+        true);
+  }
+
+  private void transformAttributes(ProjectTransformationDTO projectDto, ProjectType projectType) {
+    // RASKO: share code with other objects. - X
+    addFirstPublicLastUpdateAttributes(projectDto, () -> createNewAttribute(projectType));
+  }
+
+  private void appendProjectLink(ProjectType projectType, String db, String id) {
+    appendProjectLink(projectType, db, id, false);
+  }
+
+  private void appendProjectLink(ProjectType projectType, String db, String id, boolean cdata) {
+    appendLink(createNewLinkXRef(projectType), db, id, cdata);
+  }
+
+  private XRefType createNewLinkXRef(ProjectType projectType) {
+    ProjectType.PROJECTLINKS links = projectType.getPROJECTLINKS();
+    links = links == null ? projectType.addNewPROJECTLINKS() : links;
+
+    return links.addNewPROJECTLINK().addNewXREFLINK();
+  }
+
+  private AttributeType createNewAttribute(ProjectType projectType) {
+    ProjectType.PROJECTATTRIBUTES attributes = projectType.getPROJECTATTRIBUTES();
+    if (attributes == null) {
+      attributes = projectType.addNewPROJECTATTRIBUTES();
+    }
+
+    return attributes.addNewPROJECTATTRIBUTE();
   }
 }

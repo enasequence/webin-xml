@@ -13,10 +13,15 @@ package uk.ac.ebi.ena.webin.xml.transformation.transformers;
 import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
-import uk.ac.ebi.ena.sra.xml.STUDYSETDocument;
+import org.w3c.dom.Node;
+import uk.ac.ebi.ena.sra.xml.SUBMISSIONSETDocument;
+import uk.ac.ebi.ena.sra.xml.SubmissionType;
+import uk.ac.ebi.ena.sra.xml.XRefType;
 import uk.ac.ebi.ena.webin.xml.transformation.WebinXmlTransformationException;
+import uk.ac.ebi.ena.webin.xml.transformation.transformers.dtos.SubmissionTransformationDTO;
 
-public class SubmissionTransformer extends AbstractTransformer {
+public class SubmissionTransformer extends AbstractTransformer
+    implements Transformer<SubmissionTransformationDTO, SUBMISSIONSETDocument> {
 
   public SubmissionTransformer(Templates transformationTemplate) {
     super(transformationTemplate);
@@ -37,8 +42,112 @@ public class SubmissionTransformer extends AbstractTransformer {
   }
 
   @Override
-  public STUDYSETDocument transformForPresentation(Document document)
+  public SUBMISSIONSETDocument transformForPresentation(
+      SubmissionTransformationDTO submissionDto, SUBMISSIONSETDocument submissionSetDocument)
       throws WebinXmlTransformationException {
-    return null;
+
+    SubmissionType submissionType =
+        submissionSetDocument.getSUBMISSIONSET().getSUBMISSIONArray()[0];
+
+    transformCommon(submissionDto, submissionDto.getSubmissionId(), submissionType);
+
+    // RASKO: change the comment to -> Remove submission actions. - X
+    // Remove submission actions.
+    if (submissionType.isSetACTIONS()) {
+      Node nodeA = submissionType.getACTIONS().getDomNode();
+      submissionType.getDomNode().removeChild(nodeA);
+    }
+
+    // RASKO: change the comment to -> Remove submission contacts. - X
+    // Remove submission contacts.
+    if (submissionType.isSetCONTACTS()) {
+      Node nodeC = submissionType.getCONTACTS().getDomNode();
+      submissionType.getDomNode().removeChild(nodeC);
+    }
+
+    // Avoid emails in comments
+    if (null != submissionType.getSubmissionComment()
+        && (submissionType.getSubmissionComment().isEmpty()
+            || submissionType.getSubmissionComment().contains("@")))
+      submissionType.unsetSubmissionComment();
+
+    transformIdentifiers(submissionDto, submissionType);
+
+    updateTitle(submissionDto, submissionType);
+
+    transformLinks(submissionDto, submissionType);
+
+    return submissionSetDocument;
+  }
+
+  private void transformIdentifiers(
+      SubmissionTransformationDTO submissionDto, SubmissionType submissionType) {
+    // RASKO: understand why we are doing this and do we need to do this: the goal is to fix the
+    // IDENTIFIERS block -> - X keep it
+    unsetIdentifiersSubmitterIdIfBlankAlias(submissionType);
+
+    // RASKO: Optimally we would retrofit the database so that we don't need to expand center name
+    // or broker name. - X keeping it.
+    // RASKO: we should do IDENTIFIERS fixed the same way for all objects. - X
+    fixIdentifiers(submissionType);
+  }
+
+  private void updateTitle(
+      SubmissionTransformationDTO submissionDto, SubmissionType submissionType) {
+    // SUBMISSION_TITLE
+    String genratedTitle = "Submitted";
+
+    if (null != submissionDto.getCenterName() && !submissionDto.getCenterName().isEmpty())
+      genratedTitle = genratedTitle + " by " + submissionDto.getCenterName();
+
+    if (null != submissionDto.getSubmissionDate()) {
+      genratedTitle = genratedTitle + " on " + submissionDto.getSubmissionDate().toUpperCase();
+    }
+
+    if (genratedTitle != null) {
+      submissionType.setTITLE(genratedTitle);
+    }
+  }
+
+  private void transformLinks(
+      SubmissionTransformationDTO submissionDto, SubmissionType submissionType) {
+    // RASKO: this is a hold over from the time we only has the submission object and nothing else.
+    // - X
+    retainOnlyPubmedLinks(
+        submissionType.getSUBMISSIONLINKS(),
+        submissionType.getSUBMISSIONLINKS() != null
+            ? submissionType.getSUBMISSIONLINKS().getSUBMISSIONLINKArray()
+            : null);
+
+    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
+    // Fastq files
+    appendSubmissionLink(
+        submissionType,
+        ENA_FASTQ_FILES_TAG,
+        String.format(ENA_FASTQ_FILES_URL_PREFORMAT, submissionDto.getSubmissionId()),
+        true);
+
+    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
+    // Submitted files
+    appendSubmissionLink(
+        submissionType,
+        ENA_SUBMITTED_FILES_TAG,
+        String.format(ENA_SUBMITTED_FILES_URL_PREFORMAT, submissionDto.getSubmissionId()),
+        true);
+
+    appendArrayExpressLink(
+        submissionDto.getSubmissionAlias(), () -> createNewLinkXRef(submissionType));
+  }
+
+  private void appendSubmissionLink(
+      SubmissionType submissionType, String db, String id, boolean cdata) {
+    appendLink(createNewLinkXRef(submissionType), db, id, cdata);
+  }
+
+  private XRefType createNewLinkXRef(SubmissionType submissionType) {
+    SubmissionType.SUBMISSIONLINKS links = submissionType.getSUBMISSIONLINKS();
+    links = links == null ? submissionType.addNewSUBMISSIONLINKS() : links;
+
+    return links.addNewSUBMISSIONLINK().addNewXREFLINK();
   }
 }

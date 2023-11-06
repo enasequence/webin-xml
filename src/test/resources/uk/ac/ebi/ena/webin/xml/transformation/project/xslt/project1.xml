@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROJECT_SET>
+    <PROJECT alias="PRJNA474793_8f0baf5759a6c03652e43fe750269a51" center_name="EMG" broker_name="EBI-EMG" accession="PRJEB42418" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <IDENTIFIERS>
+            <PRIMARY_ID>PRJEB42418</PRIMARY_ID>
+            <SUBMITTER_ID namespace="EMG">PRJNA474793_8f0baf5759a6c03652e43fe750269a51</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>EMG produced TPA metagenomics assembly of PRJNA474793 data set (Palaeogenomics of the Hydrocarbon Producing Microalga Botryococcus braunii).</TITLE>
+        <DESCRIPTION>The Third Party Annotation (TPA) assembly was derived from the primary whole genome shotgun (WGS) data set PRJNA474793, and was assembled with metaSPAdes v3.14.1. This project includes samples from the following biomes: root:Environmental:Aquatic:Freshwater:Lentic:Sediment.</DESCRIPTION>
+        <SUBMISSION_PROJECT>
+            <SEQUENCING_PROJECT/>
+        </SUBMISSION_PROJECT>
+        <PROJECT_LINKS>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>PUBMED</DB>
+                    <ID>29069476</ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+        </PROJECT_LINKS>
+        <PROJECT_ATTRIBUTES>
+            <PROJECT_ATTRIBUTE>
+                <TAG>study keyword</TAG>
+                <VALUE>TPA:assembly</VALUE>
+            </PROJECT_ATTRIBUTE>
+            <PROJECT_ATTRIBUTE>
+                <TAG>new_study_type</TAG>
+                <VALUE>Metagenomic assembly</VALUE>
+            </PROJECT_ATTRIBUTE>
+        </PROJECT_ATTRIBUTES>
+    </PROJECT>
+</PROJECT_SET>

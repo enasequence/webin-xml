@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROJECT_SET>
+    <PROJECT accession="PRJEB42418" alias="PRJNA474793_8f0baf5759a6c03652e43fe750269a51"
+             broker_name="EMG broker account, EMBL-EBI" center_name="EMG">
+        <IDENTIFIERS>
+            <PRIMARY_ID>PRJEB42418</PRIMARY_ID>
+            <SECONDARY_ID>ERP126272</SECONDARY_ID>
+            <SUBMITTER_ID namespace="EMG">PRJNA474793_8f0baf5759a6c03652e43fe750269a51</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>EMG produced TPA metagenomics assembly of PRJNA474793 data set (Palaeogenomics of the Hydrocarbon Producing Microalga Botryococcus braunii).</TITLE>
+        <DESCRIPTION>The Third Party Annotation (TPA) assembly was derived from the primary whole genome shotgun (WGS) data set PRJNA474793, and was assembled with metaSPAdes v3.14.1. This project includes samples from the following biomes: root:Environmental:Aquatic:Freshwater:Lentic:Sediment.</DESCRIPTION>
+        <SUBMISSION_PROJECT>
+            <SEQUENCING_PROJECT/>
+        </SUBMISSION_PROJECT>
+        <PROJECT_LINKS>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>PUBMED</DB>
+                    <ID>29069476</ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMISSION</DB>
+                    <ID>ERA3206924</ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>ENA-FASTQ-FILES</DB>
+                    <ID>
+                        <![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB42418&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMITTED-FILES</DB>
+                    <ID>
+                        <![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB42418&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+        </PROJECT_LINKS>
+        <PROJECT_ATTRIBUTES>
+            <PROJECT_ATTRIBUTE>
+                <TAG>study keyword</TAG>
+                <VALUE>TPA:assembly</VALUE>
+            </PROJECT_ATTRIBUTE>
+            <PROJECT_ATTRIBUTE>
+                <TAG>new_study_type</TAG>
+                <VALUE>Metagenomic assembly</VALUE>
+            </PROJECT_ATTRIBUTE>
+            <PROJECT_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>2021-01-11</VALUE>
+            </PROJECT_ATTRIBUTE>
+            <PROJECT_ATTRIBUTE>
+                <TAG>ENA-LAST-UPDATE</TAG>
+                <VALUE>2021-01-11</VALUE>
+            </PROJECT_ATTRIBUTE>
+        </PROJECT_ATTRIBUTES>
+    </PROJECT>
+</PROJECT_SET>

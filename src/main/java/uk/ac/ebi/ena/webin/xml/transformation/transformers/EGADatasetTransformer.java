@@ -13,10 +13,12 @@ package uk.ac.ebi.ena.webin.xml.transformation.transformers;
 import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
-import uk.ac.ebi.ena.sra.xml.STUDYSETDocument;
+import uk.ac.ebi.ena.sra.xml.DATASETSDocument;
 import uk.ac.ebi.ena.webin.xml.transformation.WebinXmlTransformationException;
+import uk.ac.ebi.ena.webin.xml.transformation.transformers.dtos.PresentationTransformationDTO;
 
-public class EGADatasetTransformer extends AbstractTransformer {
+public class EGADatasetTransformer extends AbstractTransformer
+    implements Transformer<PresentationTransformationDTO, DATASETSDocument> {
 
   public EGADatasetTransformer(Templates transformationTemplate) {
     super(transformationTemplate);
@@ -37,8 +39,9 @@ public class EGADatasetTransformer extends AbstractTransformer {
   }
 
   @Override
-  public STUDYSETDocument transformForPresentation(Document document)
+  public DATASETSDocument transformForPresentation(
+      PresentationTransformationDTO dto, DATASETSDocument document)
       throws WebinXmlTransformationException {
-    return null;
+    return document;
   }
 }

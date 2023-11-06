@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROJECT_SET>
+    <PROJECT alias="Bacterial_ulcerative_skin_diseases-sc-3964" center_name="SC" accession="PRJEB11481">
+        <IDENTIFIERS>
+            <PRIMARY_ID>PRJEB11481</PRIMARY_ID>
+            <SUBMITTER_ID namespace="SC">Bacterial_ulcerative_skin_diseases-sc-3964</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <NAME>Bacterial_ulcerative_skin_diseases</NAME>
+        <TITLE>Bacterial_ulcerative_skin_diseases</TITLE>
+        <DESCRIPTION>Study to use sequence capture to to investigate the nature and diversity of the bacteria causing bacterial ulcerative skin diseases
+            These data are part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http://www.sanger.ac.uk/datasharing/</DESCRIPTION>
+        <SUBMISSION_PROJECT>
+            <SEQUENCING_PROJECT/>
+        </SUBMISSION_PROJECT>
+    </PROJECT>
+</PROJECT_SET>

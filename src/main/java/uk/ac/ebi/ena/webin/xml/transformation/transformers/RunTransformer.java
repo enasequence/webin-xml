@@ -16,11 +16,16 @@ import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import uk.ac.ebi.ena.sra.xml.STUDYSETDocument;
+import uk.ac.ebi.ena.sra.xml.AttributeType;
+import uk.ac.ebi.ena.sra.xml.RUNSETDocument;
+import uk.ac.ebi.ena.sra.xml.RunType;
+import uk.ac.ebi.ena.sra.xml.XRefType;
 import uk.ac.ebi.ena.webin.xml.transformation.WebinXmlTransformationException;
 import uk.ac.ebi.ena.webin.xml.transformation.fixers.InstrumentModelEnumFixer;
+import uk.ac.ebi.ena.webin.xml.transformation.transformers.dtos.RunTransformationDTO;
 
-public class RunTransformer extends AbstractTransformer {
+public class RunTransformer extends AbstractTransformer
+    implements Transformer<RunTransformationDTO, RUNSETDocument> {
 
   private final InstrumentModelEnumFixer instrumentModelEnumFixer = new InstrumentModelEnumFixer();
 
@@ -81,14 +86,96 @@ public class RunTransformer extends AbstractTransformer {
   }
 
   @Override
-  public STUDYSETDocument transformForPresentation(Document document)
+  public RUNSETDocument transformForPresentation(
+      RunTransformationDTO runDto, RUNSETDocument runSetDocument)
       throws WebinXmlTransformationException {
-    return null;
+
+    RunType runType = runSetDocument.getRUNSET().getRUNArray()[0];
+
+    transformCommon(runDto, runDto.getRunId(), runType);
+
+    transformIdentifiers(runDto, runType);
+
+    // TITLE Generation
+    if (runType.getTITLE() == null || runType.getTITLE().isEmpty())
+      runType.setTITLE(runDto.getExperimentTitle());
+
+    transformLinks(runDto, runType);
+
+    transformAttributes(runDto, runType);
+
+    return runSetDocument;
   }
 
   private void fixInstrumentModel(Node doc, String platformPath) {
     for (Node instrumentModel : getXmlNodes(doc, platformPath + "/*/INSTRUMENT_MODEL")) {
       instrumentModelEnumFixer.fixNodeValue(instrumentModel);
     }
+  }
+
+  private void transformIdentifiers(RunTransformationDTO runDto, RunType runType) {
+    if (runDto.getRunId().startsWith("ERR"))
+      injectSecondaries(runType.getIDENTIFIERS(), runDto.getSecondary());
+
+    // RASKO: we should do IDENTIFIERS fixed the same way for all objects. - X
+    fixIdentifiers(runType);
+  }
+
+  private void transformLinks(RunTransformationDTO runDto, RunType runType) {
+    // RASKO: we should share code with other objects. - X
+    retainOnlyPubmedLinks(
+        runType.getRUNLINKS(),
+        runType.getRUNLINKS() != null ? runType.getRUNLINKS().getRUNLINKArray() : null);
+
+    if (runDto.getSubmissionId() != null)
+      appendRunLink(runType, "ENA-SUBMISSION", runDto.getSubmissionId());
+
+    // RASKO: share code with other objects. - X
+    appendArrayExpressLink(runDto.getSubmissionAlias(), () -> createNewLinkXRef(runType));
+
+    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
+    // FASTQ files
+    appendRunLink(
+        runType,
+        ENA_FASTQ_FILES_TAG,
+        String.format(ENA_FASTQ_FILES_URL_PREFORMAT, runDto.getRunId()),
+        true);
+
+    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
+    // Submitted files
+    appendRunLink(
+        runType,
+        ENA_SUBMITTED_FILES_TAG,
+        String.format(ENA_SUBMITTED_FILES_URL_PREFORMAT, runDto.getRunId()),
+        true);
+  }
+
+  private void transformAttributes(RunTransformationDTO runDto, RunType runType) {
+    // RASKO: share code with other objects. - X
+    addFirstPublicLastUpdateAttributes(runDto, () -> createNewAttribute(runType));
+  }
+
+  private void appendRunLink(RunType runType, String db, String id) {
+    appendRunLink(runType, db, id, false);
+  }
+
+  private void appendRunLink(RunType runType, String db, String id, boolean cdata) {
+    appendLink(createNewLinkXRef(runType), db, id, cdata);
+  }
+
+  private XRefType createNewLinkXRef(RunType runType) {
+    RunType.RUNLINKS links = runType.getRUNLINKS();
+    links = links == null ? runType.addNewRUNLINKS() : links;
+
+    return links.addNewRUNLINK().addNewXREFLINK();
+  }
+
+  private AttributeType createNewAttribute(RunType runType) {
+    RunType.RUNATTRIBUTES attributes = runType.getRUNATTRIBUTES();
+    if (attributes == null) {
+      attributes = runType.addNewRUNATTRIBUTES();
+    }
+
+    return attributes.addNewRUNATTRIBUTE();
   }
 }

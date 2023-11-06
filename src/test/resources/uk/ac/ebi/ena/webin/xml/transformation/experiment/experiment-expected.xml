@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EXPERIMENT_SET>
+    <EXPERIMENT accession="ERX4866416" alias="ena-EXPERIMENT-Graz University of Technical-11-01-2021-14:17:33:319-4" center_name="Graz University of Technical">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERX4866416</PRIMARY_ID>
+            <SUBMITTER_ID namespace="Graz University of Technical">ena-EXPERIMENT-Graz University of Technical-11-01-2021-14:17:33:319-4</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>original-title</TITLE>
+        <STUDY_REF accession="ERP121345">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERP121345</PRIMARY_ID>
+                <SECONDARY_ID>PRJEB37982</SECONDARY_ID>
+            </IDENTIFIERS>
+        </STUDY_REF>
+        <DESIGN>
+            <DESIGN_DESCRIPTION/>
+            <SAMPLE_DESCRIPTOR accession="ERS5524412">
+                <IDENTIFIERS>
+                    <PRIMARY_ID>ERS5524412</PRIMARY_ID>
+                    <EXTERNAL_ID namespace="BioSample">SAMEA7777175</EXTERNAL_ID>
+                </IDENTIFIERS>
+            </SAMPLE_DESCRIPTOR>
+            <LIBRARY_DESCRIPTOR>
+                <LIBRARY_NAME>unspecified</LIBRARY_NAME>
+                <LIBRARY_STRATEGY>AMPLICON</LIBRARY_STRATEGY>
+                <LIBRARY_SOURCE>GENOMIC</LIBRARY_SOURCE>
+                <LIBRARY_SELECTION>PCR</LIBRARY_SELECTION>
+                <LIBRARY_LAYOUT>
+                    <SINGLE/>
+                </LIBRARY_LAYOUT>
+            </LIBRARY_DESCRIPTOR>
+        </DESIGN>
+        <PLATFORM>
+            <ILLUMINA>
+                <INSTRUMENT_MODEL>Illumina MiSeq</INSTRUMENT_MODEL>
+            </ILLUMINA>
+        </PLATFORM>
+        <EXPERIMENT_LINKS>
+            <EXPERIMENT_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SAMPLE</DB>
+                    <ID>ERS5524412</ID>
+                </XREF_LINK>
+            </EXPERIMENT_LINK>
+            <EXPERIMENT_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMISSION</DB>
+                    <ID>ERA3206930</ID>
+                </XREF_LINK>
+            </EXPERIMENT_LINK>
+            <EXPERIMENT_LINK>
+                <XREF_LINK>
+                    <DB>ENA-FASTQ-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERX4866416&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+                </XREF_LINK>
+            </EXPERIMENT_LINK>
+            <EXPERIMENT_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMITTED-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERX4866416&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+                </XREF_LINK>
+            </EXPERIMENT_LINK>
+        </EXPERIMENT_LINKS>
+    </EXPERIMENT>
+</EXPERIMENT_SET>

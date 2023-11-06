@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SAMPLE_SET>
+    <SAMPLE accession="ERS5524409" alias="VitisC_16S_1_8_L001_R1_001" center_name="Graz University of Technical">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERS5524409</PRIMARY_ID>
+            <EXTERNAL_ID namespace="BioSample">SAMEA7777172</EXTERNAL_ID>
+            <SUBMITTER_ID namespace="Graz University of Technical">VitisC_16S_1_8_L001_R1_001</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Music</TITLE>
+        <SAMPLE_NAME>
+            <TAXON_ID>256318</TAXON_ID>
+            <SCIENTIFIC_NAME>metagenome</SCIENTIFIC_NAME>
+        </SAMPLE_NAME>
+        <SAMPLE_LINKS>
+            <SAMPLE_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMISSION</DB>
+                    <ID>ERA3206930</ID>
+                </XREF_LINK>
+            </SAMPLE_LINK>
+            <SAMPLE_LINK>
+                <XREF_LINK>
+                    <DB>ENA-FASTQ-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERS5524409&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+                </XREF_LINK>
+            </SAMPLE_LINK>
+            <SAMPLE_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMITTED-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERS5524409&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+                </XREF_LINK>
+            </SAMPLE_LINK>
+        </SAMPLE_LINKS>
+        <SAMPLE_ATTRIBUTES>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>collection date</TAG>
+                <VALUE>2019</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>environment (biome)</TAG>
+                <VALUE>ENVO:00002009</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>environment (feature)</TAG>
+                <VALUE>ENVO:00000116</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>environment (material)</TAG>
+                <VALUE>ENVO:01001121</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>geographic location (country and/or sea)</TAG>
+                <VALUE>South Africa</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>geographic location (latitude)</TAG>
+                <VALUE>-33.93953017</VALUE>
+                <UNITS>DD</UNITS>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>geographic location (longitude)</TAG>
+                <VALUE>18.74936221</VALUE>
+                <UNITS>DD</UNITS>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>investigation type</TAG>
+                <VALUE>metagenome</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>plant-associated environmental package</TAG>
+                <VALUE>plant-associated</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>project name</TAG>
+                <VALUE>music</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>sequencing method</TAG>
+                <VALUE>amplicon</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>ENA-CHECKLIST</TAG>
+                <VALUE>ERC000020</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>2021-01-11</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>ENA-LAST-UPDATE</TAG>
+                <VALUE>2021-01-11</VALUE>
+            </SAMPLE_ATTRIBUTE>
+        </SAMPLE_ATTRIBUTES>
+    </SAMPLE>
+</SAMPLE_SET>

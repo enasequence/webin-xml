@@ -1,0 +1,46 @@
+<PROJECT_SET>
+    <PROJECT accession="PRJEB11481" alias="Bacterial_ulcerative_skin_diseases-sc-3964" center_name="Wellcome Sanger Institute">
+        <IDENTIFIERS>
+            <PRIMARY_ID>PRJEB11481</PRIMARY_ID>
+            <SECONDARY_ID>ERP012875</SECONDARY_ID>
+            <SUBMITTER_ID namespace="Wellcome Sanger Institute">Bacterial_ulcerative_skin_diseases-sc-3964</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <NAME>Bacterial_ulcerative_skin_diseases</NAME>
+        <TITLE>Bacterial_ulcerative_skin_diseases</TITLE>
+        <DESCRIPTION>Study to use sequence capture to to investigate the nature and diversity of the bacteria causing bacterial ulcerative skin diseases
+            These data are part of a pre-publication release. For information on the proper use of pre-publication data shared by the Wellcome Trust Sanger Institute (including details of any publication moratoria), please see http://www.sanger.ac.uk/datasharing/</DESCRIPTION>
+        <SUBMISSION_PROJECT>
+            <SEQUENCING_PROJECT/>
+        </SUBMISSION_PROJECT>
+        <PROJECT_LINKS>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMISSION</DB>
+                    <ID>ERA526107</ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>ENA-FASTQ-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB11481&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMITTED-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB11481&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+        </PROJECT_LINKS>
+        <PROJECT_ATTRIBUTES>
+            <PROJECT_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>2016-04-19</VALUE>
+            </PROJECT_ATTRIBUTE>
+            <PROJECT_ATTRIBUTE>
+                <TAG>ENA-LAST-UPDATE</TAG>
+                <VALUE>2016-05-20</VALUE>
+            </PROJECT_ATTRIBUTE>
+        </PROJECT_ATTRIBUTES>
+    </PROJECT>
+</PROJECT_SET>
