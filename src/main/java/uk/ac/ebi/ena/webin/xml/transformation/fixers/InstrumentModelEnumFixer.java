@@ -61,6 +61,8 @@ public class InstrumentModelEnumFixer extends EnumValueFixer {
     add("Solexa 1G Genome Analyzer", "Illumina Genome Analyzer");
     add("Illumina NextSeq 500", "NextSeq 500");
     add("Illumina NextSeq 550", "NextSeq 550");
+    add("Illumina HiSeq X Ten", "HiSeq X Ten");
+    add("Illumina HiSeq X Five", "HiSeq X Five");
     add("Ion S5", "Ion Torrent S5");
     add("Ion S5 XL", "Ion Torrent S5 XL");
     add("Ion S5", "Ion Torrent S5");
