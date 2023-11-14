@@ -80,8 +80,6 @@ public class WebinXmlTransformationTest {
           dto.setStudyId("SRP301193");
           dto.setProjectId("PRJNA685328");
           dto.setSubmissionId("SRA1173157");
-//          dto.setStudyTitle(
-//              "RNA-seq analyses of livers from DEN/CCl4-treated Nod2f/f and Nod2 -KO mice");
           dto.setCenterName("BioProject");
           dto.setFirstPublic("2021-01-12");
           dto.setLastUpdated("2021-01-12");
@@ -98,8 +96,6 @@ public class WebinXmlTransformationTest {
           dto.setStudyId("ERP006120");
           dto.setProjectId("PRJEB6572");
           dto.setSubmissionId("ERA319850");
-//          dto.setStudyTitle(
-//              "Metagenomic_analysis_to_assess_anaerobic_culturability_of_human_faecal_samples");
           dto.setCenterName("Wellcome Sanger Institute");
           dto.setFirstPublic("2014-11-26");
           dto.setLastUpdated("2014-06-20");
@@ -172,7 +168,6 @@ public class WebinXmlTransformationTest {
 
           SampleTransformationDTO dto = new SampleTransformationDTO();
           dto.setSampleId("ERS5524409");
-//          dto.setBioSampleAuthority(false);
           dto.setBioSampleId("SAMEA7777172");
           dto.setSubmissionId("ERA3206930");
           dto.setSubmissionAlias(
@@ -192,7 +187,6 @@ public class WebinXmlTransformationTest {
 
           SampleTransformationDTO dto = new SampleTransformationDTO();
           dto.setSampleId("ERS000004");
-//          dto.setBioSampleAuthority(false);
           dto.setBioSampleId("SAMEA749875");
           dto.setSubmissionId("ERA000011");
           dto.setSubmissionAlias("sgrp-sc-20080711-1");
@@ -269,7 +263,6 @@ public class WebinXmlTransformationTest {
           dto.setSubmissionId("ERA3206930");
           dto.setSubmissionAlias(
               "ena-SUBMISSION-Graz University of Technical-11-01-2021-14:11:54:887-1");
-//          dto.setExperimentId("ERX4866413");
           dto.setExperimentTitle("Illumina MiSeq sequencing");
           dto.setCenterName("Graz University of Technical");
           dto.setFirstPublic("2021-01-11");
@@ -287,7 +280,6 @@ public class WebinXmlTransformationTest {
           dto.setRunId("ERR4659819");
           dto.setSubmissionId("ERA2939496");
           dto.setSubmissionAlias("ERP121228-sc-2020-10-06T16:41:38Z-2");
-//          dto.setExperimentId("ERX4582626");
           dto.setExperimentTitle(
               "Illumina NovaSeq 6000 paired end sequencing; Illumina NovaSeq 6000 paired end sequencing; COG-UK/MILK-9E05B3/SANG:200930_A00948_0190_AHNFKGDRXX/1t241");
           dto.setCenterName("Wellcome Sanger Institute");
@@ -540,7 +532,7 @@ public class WebinXmlTransformationTest {
   }
 
   private String getResourceContent(String resourcePath) throws IOException {
-    return IOUtils.toString(getResourceInputStream(resourcePath));
+    return IOUtils.toString(getResourceInputStream(resourcePath), StandardCharsets.UTF_8.name());
   }
 
   private InputStream getResourceInputStream(String resourcePath) {
