@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 EMBL - European Bioinformatics Institute
+ * Copyright 2023 EMBL - European Bioinformatics Institute
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -13,6 +13,11 @@ package uk.ac.ebi.ena.webin.xml.conversion.json.model.analysis;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.Data;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.common.Attribute;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.common.File;
@@ -20,12 +25,6 @@ import uk.ac.ebi.ena.webin.xml.conversion.json.model.common.Identifiers;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.common.RefObject;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.common.xref.Link;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.mapping.ToXmlMapper;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({

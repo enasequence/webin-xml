@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 EMBL - European Bioinformatics Institute
+ * Copyright 2023 EMBL - European Bioinformatics Institute
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -15,10 +15,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import java.util.List;
 import lombok.Data;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.receipt.message.Messages;
-
-import java.util.List;
 
 @JacksonXmlRootElement(localName = "RECEIPT")
 @JsonIgnoreProperties(ignoreUnknown = true)

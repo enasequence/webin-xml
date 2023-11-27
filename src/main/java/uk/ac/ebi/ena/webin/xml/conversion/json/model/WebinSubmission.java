@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 EMBL - European Bioinformatics Institute
+ * Copyright 2023 EMBL - European Bioinformatics Institute
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -11,6 +11,8 @@
 package uk.ac.ebi.ena.webin.xml.conversion.json.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.util.List;
+import java.util.stream.Collectors;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.analysis.Analysis;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.experiment.Experiment;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.mapping.ToXmlMapper;
@@ -19,9 +21,6 @@ import uk.ac.ebi.ena.webin.xml.conversion.json.model.run.Run;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.sample.Sample;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.study.Study;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.submission.Submission;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @JsonPropertyOrder({"submission", "samples", "studies", "projects", "experiments"})
 public class WebinSubmission implements ToXmlMapper<XmlWebinSubmission> {

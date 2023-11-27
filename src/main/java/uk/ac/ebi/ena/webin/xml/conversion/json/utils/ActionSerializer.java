@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 EMBL - European Bioinformatics Institute
+ * Copyright 2023 EMBL - European Bioinformatics Institute
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -14,9 +14,8 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import uk.ac.ebi.ena.webin.xml.conversion.json.model.submission.action.Action;
-
 import java.util.List;
+import uk.ac.ebi.ena.webin.xml.conversion.json.model.submission.action.Action;
 
 /*
 Defines how each ACTION will be written in the WEBIN submission XML

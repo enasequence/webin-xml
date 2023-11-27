@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 EMBL - European Bioinformatics Institute
+ * Copyright 2023 EMBL - European Bioinformatics Institute
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -16,6 +16,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import java.util.List;
+import java.util.Map;
 import lombok.Data;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.common.Attribute;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.common.Identifiers;
@@ -24,9 +26,6 @@ import uk.ac.ebi.ena.webin.xml.conversion.json.model.common.XmlPlatform;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.common.xref.Link;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.mapping.FromXmlMapper;
 import uk.ac.ebi.ena.webin.xml.conversion.json.utils.XmlDesignSerializer;
-
-import java.util.List;
-import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 EMBL - European Bioinformatics Institute
+ * Copyright 2023 EMBL - European Bioinformatics Institute
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
  * file except in compliance with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import java.io.InputStream;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.WebinSubmission;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.analysis.Analysis;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.analysis.XmlAnalysis;
@@ -30,10 +31,6 @@ import uk.ac.ebi.ena.webin.xml.conversion.json.model.sample.Sample;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.study.Study;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.study.XmlStudy;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.submission.Submission;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class Converter {
 
