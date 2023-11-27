@@ -67,7 +67,7 @@ public class StudyTransformer extends AbstractTransformer
   }
 
   private void transformIdentifiers(StudyTransformationDTO studyDto, StudyType studyType) {
-    // RASKO: we should do alias/accession/identifier fixes only in once place for all objects. - X
+
     unsetIdentifiersSubmitterIdIfBlankAlias(studyType);
 
     // Injecting SECONDARY_ID
@@ -79,12 +79,11 @@ public class StudyTransformer extends AbstractTransformer
     if (studyDto.getStudyId().startsWith("ERP"))
       injectSecondaries(studyType.getIDENTIFIERS(), studyDto.getSecondary());
 
-    // RASKO: we should do IDENTIFIERS fixed the same way for all objects. - X
     fixIdentifiers(studyType);
   }
 
   private void transformLinks(StudyTransformationDTO studyDto, StudyType studyType) {
-    // RASKO: we should do the same for all objects. - X
+
     retainOnlyPubmedAndURLLinks(
         studyType.getSTUDYLINKS(),
         studyType.getSTUDYLINKS() != null ? studyType.getSTUDYLINKS().getSTUDYLINKArray() : null);
@@ -94,7 +93,6 @@ public class StudyTransformer extends AbstractTransformer
 
     appendArrayExpressLink(studyType.getAlias(), () -> createNewLinkXRef(studyType));
 
-    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
     // FASTQ files
     appendStudyLink(
         studyType,
@@ -102,7 +100,6 @@ public class StudyTransformer extends AbstractTransformer
         String.format(ENA_FASTQ_FILES_URL_PREFORMAT, studyDto.getStudyId()),
         true);
 
-    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
     // Submitted files
     appendStudyLink(
         studyType,

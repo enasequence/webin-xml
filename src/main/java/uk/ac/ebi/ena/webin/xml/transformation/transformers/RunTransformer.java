@@ -117,12 +117,11 @@ public class RunTransformer extends AbstractTransformer
     if (runDto.getRunId().startsWith("ERR"))
       injectSecondaries(runType.getIDENTIFIERS(), runDto.getSecondary());
 
-    // RASKO: we should do IDENTIFIERS fixed the same way for all objects. - X
     fixIdentifiers(runType);
   }
 
   private void transformLinks(RunTransformationDTO runDto, RunType runType) {
-    // RASKO: we should share code with other objects. - X
+
     retainOnlyPubmedLinks(
         runType.getRUNLINKS(),
         runType.getRUNLINKS() != null ? runType.getRUNLINKS().getRUNLINKArray() : null);
@@ -130,10 +129,8 @@ public class RunTransformer extends AbstractTransformer
     if (runDto.getSubmissionId() != null)
       appendRunLink(runType, "ENA-SUBMISSION", runDto.getSubmissionId());
 
-    // RASKO: share code with other objects. - X
     appendArrayExpressLink(runDto.getSubmissionAlias(), () -> createNewLinkXRef(runType));
 
-    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
     // FASTQ files
     appendRunLink(
         runType,
@@ -141,7 +138,6 @@ public class RunTransformer extends AbstractTransformer
         String.format(ENA_FASTQ_FILES_URL_PREFORMAT, runDto.getRunId()),
         true);
 
-    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
     // Submitted files
     appendRunLink(
         runType,
@@ -151,7 +147,6 @@ public class RunTransformer extends AbstractTransformer
   }
 
   private void transformAttributes(RunTransformationDTO runDto, RunType runType) {
-    // RASKO: share code with other objects. - X
     addFirstPublicLastUpdateAttributes(runDto, () -> createNewAttribute(runType));
   }
 

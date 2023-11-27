@@ -75,14 +75,12 @@ public class AnalysisTransformer extends AbstractTransformer
 
   private void transformIdentifiers(
       AnalysisTransformationDTO analysisDto, AnalysisType analysisType) {
-    // RASKO: share code with other objects. - X injectSecondaries is already shared among writers
+
     if (analysisDto.getAnalysisId().startsWith("ERZ"))
       injectSecondaries(analysisType.getIDENTIFIERS(), analysisDto.getSecondary());
 
-    // RASKO: share IDENTIFIERS code with other objects. - X
     unsetIdentifiersSubmitterIdIfBlankAlias(analysisType);
 
-    // RASKO: we should do IDENTIFIERS fixed the same way for all objects. - X
     fixIdentifiers(analysisType);
   }
 
@@ -109,7 +107,7 @@ public class AnalysisTransformer extends AbstractTransformer
 
   private void transformAttributes(
       AnalysisTransformationDTO analysisDto, AnalysisType analysisType) {
-    // RASKO: share code with other objects. - X
+
     addFirstPublicLastUpdateAttributes(analysisDto, () -> createNewAttribute(analysisType));
   }
 

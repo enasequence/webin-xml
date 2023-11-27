@@ -112,7 +112,6 @@ public class ExperimentTransformer extends AbstractTransformer
 
     transformIdentifiers(experimentDto, experimentType);
 
-    // RASKO: not fully clear what is happening here but we need to refer to samples. - X keep it
     if (experimentDto.getExperimentId().startsWith("ERX"))
       expandSamples(experimentType, experimentDto.getSampleAccessions());
 
@@ -162,7 +161,6 @@ public class ExperimentTransformer extends AbstractTransformer
     if (experimentDto.getExperimentId().startsWith("ERX"))
       injectSecondaries(experimentType.getIDENTIFIERS(), experimentDto.getSecondary());
 
-    // RASKO: we should do IDENTIFIERS fixed the same way for all objects. - X
     fixIdentifiers(experimentType);
   }
 
@@ -219,7 +217,7 @@ public class ExperimentTransformer extends AbstractTransformer
 
   private void transformLinks(
       ExperimentTransformationDTO experimentDto, ExperimentType experimentType) {
-    // RASKO: share code with other objects. - X
+
     retainOnlyPubmedLinks(
         experimentType.getEXPERIMENTLINKS(),
         experimentType.getEXPERIMENTLINKS() != null
@@ -235,7 +233,6 @@ public class ExperimentTransformer extends AbstractTransformer
     if (null != experimentDto.getSubmissionId())
       appendExperimentLink(experimentType, "ENA-SUBMISSION", experimentDto.getSubmissionId());
 
-    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
     // FASTQ files
     appendExperimentLink(
         experimentType,
@@ -243,7 +240,6 @@ public class ExperimentTransformer extends AbstractTransformer
         String.format(ENA_FASTQ_FILES_URL_PREFORMAT, experimentDto.getExperimentId()),
         true);
 
-    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
     // Submitted files
     appendExperimentLink(
         experimentType,
@@ -251,7 +247,6 @@ public class ExperimentTransformer extends AbstractTransformer
         String.format(ENA_SUBMITTED_FILES_URL_PREFORMAT, experimentDto.getExperimentId()),
         true);
 
-    // RASKO: share code with other objects. - X
     appendArrayExpressLink(experimentDto.getStudyAlias(), () -> createNewLinkXRef(experimentType));
   }
 

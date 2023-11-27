@@ -130,24 +130,22 @@ public class ProjectTransformer extends AbstractTransformer
   }
 
   private void transformIdentifiers(ProjectTransformationDTO projectDto, ProjectType projectType) {
-    // RASKO: share IDENTIFIERS code with other objects. - X
+
     if (projectType.isSetIDENTIFIERS()) {
       unsetIdentifiersSubmitterIdIfBlankAlias(projectType);
     }
 
-    // RASKO: share code with other objects. - X
     // Injecting SECONDARY_ID
     if (!projectDto.getStudies().isEmpty())
       injectSecondaries(projectType.getIDENTIFIERS(), projectDto.getStudies());
 
     injectSecondaries(projectType.getIDENTIFIERS(), projectDto.getSecondary());
 
-    // RASKO: we should do IDENTIFIERS fixed the same way for all objects. - X
     fixIdentifiers(projectType);
   }
 
   private void transformLinks(ProjectTransformationDTO projectDto, ProjectType projectType) {
-    // RASKO: share code with other objects. - X
+
     retainOnlyPubmedAndURLLinks(
         projectType.getPROJECTLINKS(),
         projectType.getPROJECTLINKS() != null
@@ -157,7 +155,6 @@ public class ProjectTransformer extends AbstractTransformer
     if (projectDto.getSubmissionId() != null)
       appendProjectLink(projectType, "ENA-SUBMISSION", projectDto.getSubmissionId());
 
-    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
     // FASTQ files
     appendProjectLink(
         projectType,
@@ -165,7 +162,6 @@ public class ProjectTransformer extends AbstractTransformer
         String.format(ENA_FASTQ_FILES_URL_PREFORMAT, projectDto.getProjectId()),
         true);
 
-    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
     // Submission files
     appendProjectLink(
         projectType,
@@ -175,7 +171,6 @@ public class ProjectTransformer extends AbstractTransformer
   }
 
   private void transformAttributes(ProjectTransformationDTO projectDto, ProjectType projectType) {
-    // RASKO: share code with other objects. - X
     addFirstPublicLastUpdateAttributes(projectDto, () -> createNewAttribute(projectType));
   }
 

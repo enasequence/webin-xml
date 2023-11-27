@@ -131,8 +131,7 @@ public abstract class AbstractTransformer {
 
   protected <T extends PresentationTransformationDTO, U extends ObjectType> void transformCommon(
       T dto, String sraObjId, U objectType) {
-    // RASKO: Optimally we would retrofit the database so that we don't need to expand center name
-    // or broker name. - X
+
     if (dto.getCenterName() != null) {
       objectType.setCenterName(dto.getCenterName());
     }
@@ -140,14 +139,9 @@ public abstract class AbstractTransformer {
       objectType.setBrokerName(dto.getBrokerName());
     }
 
-    // RASKO: we should set NCBI/DDBJ broker name the same way for all objects using first two
-    // accession letters,
-    // including submission that does not do this - X
     // EMD-6683
     setNcbiDdbjBrokerNamesIfApplicable(objectType, sraObjId);
 
-    // RASKO: Removes empty broker name I think. If we do this we should do this for all object
-    // types. - X
     unsetBrokerNameIfBlank(objectType);
   }
 

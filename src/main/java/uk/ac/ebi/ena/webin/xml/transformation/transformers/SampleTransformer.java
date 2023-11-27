@@ -53,13 +53,10 @@ public class SampleTransformer extends AbstractTransformer
 
     transformIdentifiers(sampleDto, sampleType);
 
-    // RASKO: not clear exactly what this is doing. Note that we should remove unmaintained
-    // SAMPLE.FIXED* columns. - X keep
     // Generated TITLE
     if (sampleType.getSAMPLENAME() != null && sampleType.getSAMPLENAME().getTAXONID() != 0)
       generateTitle(sampleType);
 
-    // RASKO: code should be shared with other objects (e.g. submission) doing this. - X
     transformLinks(sampleDto, sampleType);
 
     transformAttributes(sampleDto, sampleType);
@@ -68,7 +65,7 @@ public class SampleTransformer extends AbstractTransformer
   }
 
   private void transformIdentifiers(SampleTransformationDTO sampleDto, SampleType sampleType) {
-    // RASKO: we should do IDENTIFIERS fixed the same way for all objects. - X
+
     unsetIdentifiersSubmitterIdIfBlankAlias(sampleType);
 
     if (sampleType.isSetIDENTIFIERS()) {
@@ -83,7 +80,6 @@ public class SampleTransformer extends AbstractTransformer
     if (sampleDto.getSampleId().startsWith("ERS"))
       injectSecondaries(sampleType.getIDENTIFIERS(), sampleDto.getSecondary());
 
-    // RASKO: we should do IDENTIFIERS fixed the same way for all objects. - X
     fixIdentifiers(sampleType);
   }
 
@@ -107,10 +103,8 @@ public class SampleTransformer extends AbstractTransformer
     if (sampleDto.getSubmissionId() != null)
       appendSampleLink(sampleType, "ENA-SUBMISSION", sampleDto.getSubmissionId());
 
-    // RASKO: we are doing the same in multiple objects. We should try to share the code. - X
     appendArrayExpressLink(sampleDto.getSubmissionAlias(), () -> createNewLinkXRef(sampleType));
 
-    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
     // FASTQ files
     appendSampleLink(
         sampleType,
@@ -118,7 +112,6 @@ public class SampleTransformer extends AbstractTransformer
         String.format(ENA_FASTQ_FILES_URL_PREFORMAT, sampleDto.getSampleId()),
         true);
 
-    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
     // Submitted files
     appendSampleLink(
         sampleType,
@@ -128,7 +121,6 @@ public class SampleTransformer extends AbstractTransformer
   }
 
   private void transformAttributes(SampleTransformationDTO sampleDto, SampleType sampleType) {
-    // RASKO: first public and last udpate setting code could be shared with other objects. - X
     addFirstPublicLastUpdateAttributes(sampleDto, () -> createNewAttribute(sampleType));
   }
 

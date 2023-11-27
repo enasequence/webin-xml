@@ -51,14 +51,12 @@ public class SubmissionTransformer extends AbstractTransformer
 
     transformCommon(submissionDto, submissionDto.getSubmissionId(), submissionType);
 
-    // RASKO: change the comment to -> Remove submission actions. - X
     // Remove submission actions.
     if (submissionType.isSetACTIONS()) {
       Node nodeA = submissionType.getACTIONS().getDomNode();
       submissionType.getDomNode().removeChild(nodeA);
     }
 
-    // RASKO: change the comment to -> Remove submission contacts. - X
     // Remove submission contacts.
     if (submissionType.isSetCONTACTS()) {
       Node nodeC = submissionType.getCONTACTS().getDomNode();
@@ -82,13 +80,9 @@ public class SubmissionTransformer extends AbstractTransformer
 
   private void transformIdentifiers(
       SubmissionTransformationDTO submissionDto, SubmissionType submissionType) {
-    // RASKO: understand why we are doing this and do we need to do this: the goal is to fix the
-    // IDENTIFIERS block -> - X keep it
+
     unsetIdentifiersSubmitterIdIfBlankAlias(submissionType);
 
-    // RASKO: Optimally we would retrofit the database so that we don't need to expand center name
-    // or broker name. - X keeping it.
-    // RASKO: we should do IDENTIFIERS fixed the same way for all objects. - X
     fixIdentifiers(submissionType);
   }
 
@@ -111,15 +105,13 @@ public class SubmissionTransformer extends AbstractTransformer
 
   private void transformLinks(
       SubmissionTransformationDTO submissionDto, SubmissionType submissionType) {
-    // RASKO: this is a hold over from the time we only has the submission object and nothing else.
-    // - X
+
     retainOnlyPubmedLinks(
         submissionType.getSUBMISSIONLINKS(),
         submissionType.getSUBMISSIONLINKS() != null
             ? submissionType.getSUBMISSIONLINKS().getSUBMISSIONLINKArray()
             : null);
 
-    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
     // Fastq files
     appendSubmissionLink(
         submissionType,
@@ -127,7 +119,6 @@ public class SubmissionTransformer extends AbstractTransformer
         String.format(ENA_FASTQ_FILES_URL_PREFORMAT, submissionDto.getSubmissionId()),
         true);
 
-    // RASKO: check with Suran if we keep this or not in the new ENA Browser endpoint. - X keep
     // Submitted files
     appendSubmissionLink(
         submissionType,
