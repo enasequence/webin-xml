@@ -41,6 +41,18 @@
             </RUN_LINK>
             <RUN_LINK>
                 <XREF_LINK>
+                    <DB>ENA-STUDY</DB>
+                    <ID>ERP121345</ID>
+                </XREF_LINK>
+            </RUN_LINK>
+            <RUN_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SAMPLE</DB>
+                    <ID>ERS5524409</ID>
+                </XREF_LINK>
+            </RUN_LINK>
+            <RUN_LINK>
+                <XREF_LINK>
                     <DB>ENA-FASTQ-FILES</DB>
                     <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERR5060344&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
                 </XREF_LINK>

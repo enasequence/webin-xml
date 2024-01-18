@@ -12,6 +12,8 @@ package uk.ac.ebi.ena.webin.xml.transformation.transformers.dtos;
 
 public class RunTransformationDTO extends PresentationTransformationDTO {
   private String runId;
+  private String studyId;
+  private String sampleId;
   private String submissionAlias;
   private String experimentTitle;
 
@@ -21,6 +23,22 @@ public class RunTransformationDTO extends PresentationTransformationDTO {
 
   public void setRunId(String runId) {
     this.runId = runId;
+  }
+
+  public String getStudyId() {
+    return studyId;
+  }
+
+  public void setStudyId(String studyId) {
+    this.studyId = studyId;
+  }
+
+  public String getSampleId() {
+    return sampleId;
+  }
+
+  public void setSampleId(String sampleId) {
+    this.sampleId = sampleId;
   }
 
   public String getSubmissionAlias() {

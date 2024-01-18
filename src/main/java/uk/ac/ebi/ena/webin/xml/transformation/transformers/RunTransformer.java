@@ -129,6 +129,10 @@ public class RunTransformer extends AbstractTransformer
     if (runDto.getSubmissionId() != null)
       appendRunLink(runType, "ENA-SUBMISSION", runDto.getSubmissionId());
 
+    appendRunLink(runType, "ENA-STUDY", runDto.getStudyId());
+
+    appendRunLink(runType, "ENA-SAMPLE", runDto.getSampleId());
+
     appendArrayExpressLink(runDto.getSubmissionAlias(), () -> createNewLinkXRef(runType));
 
     // FASTQ files

@@ -260,6 +260,8 @@ public class WebinXmlTransformationTest {
 
           RunTransformationDTO dto = new RunTransformationDTO();
           dto.setRunId("ERR5060344");
+          dto.setStudyId("ERP121345");
+          dto.setSampleId("ERS5524409");
           dto.setSubmissionId("ERA3206930");
           dto.setSubmissionAlias(
               "ena-SUBMISSION-Graz University of Technical-11-01-2021-14:11:54:887-1");
@@ -278,6 +280,8 @@ public class WebinXmlTransformationTest {
 
           RunTransformationDTO dto = new RunTransformationDTO();
           dto.setRunId("ERR4659819");
+          dto.setStudyId("ERP121228");
+          dto.setSampleId("ERS5136096");
           dto.setSubmissionId("ERA2939496");
           dto.setSubmissionAlias("ERP121228-sc-2020-10-06T16:41:38Z-2");
           dto.setExperimentTitle(
