@@ -129,9 +129,13 @@ public class RunTransformer extends AbstractTransformer
     if (runDto.getSubmissionId() != null)
       appendRunLink(runType, "ENA-SUBMISSION", runDto.getSubmissionId());
 
-    appendRunLink(runType, "ENA-STUDY", runDto.getStudyId());
+    if (runDto.getStudyId() != null && !runDto.getStudyId().isEmpty()) {
+      appendRunLink(runType, "ENA-STUDY", runDto.getStudyId());
+    }
 
-    appendRunLink(runType, "ENA-SAMPLE", runDto.getSampleId());
+    if (runDto.getSampleId() != null && !runDto.getSampleId().isEmpty()) {
+      appendRunLink(runType, "ENA-SAMPLE", runDto.getSampleId());
+    }
 
     appendArrayExpressLink(runDto.getSubmissionAlias(), () -> createNewLinkXRef(runType));
 
