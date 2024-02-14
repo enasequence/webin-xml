@@ -98,9 +98,7 @@
 		</xs:attribute>
 		<xs:attribute name="taxonomicDivision" type="xs:string" use="required">
 			<xs:annotation>
-				<xs:documentation>The taxonomic division.
-
-</xs:documentation>
+				<xs:documentation>The taxonomic division.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="geneticCode" type="xs:integer" use="optional">
@@ -111,6 +109,11 @@
 		<xs:attribute name="mitochondrialGeneticCode" type="xs:integer" use="optional">
 			<xs:annotation>
 				<xs:documentation>The translation table for mitochondrial protein coding sequences.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="newTaxId" type="xs:integer" use="optional">
+			<xs:annotation>
+				<xs:documentation>New taxonomy identifier for the merged taxon.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
