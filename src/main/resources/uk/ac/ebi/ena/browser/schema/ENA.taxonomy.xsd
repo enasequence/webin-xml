@@ -178,15 +178,6 @@
 		<xs:attribute name="rank" type="xs:string" use="optional"/>
 	</xs:complexType>
 	<xs:complexType name="MergedTaxonType">
-		<xs:sequence minOccurs="0" maxOccurs="1">
-			<xs:element minOccurs="0" name="merged">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element maxOccurs="unbounded" name="taxon" type="MergedTaxonType"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
 		<xs:attribute name="taxId" type="xs:integer" use="required"/>
 	</xs:complexType>
 	<xs:element name="taxonSet">
