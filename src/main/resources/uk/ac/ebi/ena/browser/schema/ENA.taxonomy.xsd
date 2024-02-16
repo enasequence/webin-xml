@@ -65,6 +65,17 @@
 					</xs:attribute>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="merged" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A list of tax ids merged into this taxon.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="taxon" minOccurs="1" maxOccurs="unbounded"
+									type="MergedTaxonType"> </xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="scientificName" type="xs:string" use="required">
 			<xs:annotation>
@@ -109,11 +120,6 @@
 		<xs:attribute name="mitochondrialGeneticCode" type="xs:integer" use="optional">
 			<xs:annotation>
 				<xs:documentation>The translation table for mitochondrial protein coding sequences.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="newTaxId" type="xs:integer" use="optional">
-			<xs:annotation>
-				<xs:documentation>New taxonomy identifier for the merged taxon.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
@@ -170,6 +176,9 @@
 		<xs:attribute name="commonName" type="xs:string" use="optional"/>
 		<xs:attribute name="taxId" type="xs:integer" use="required"/>
 		<xs:attribute name="rank" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="MergedTaxonType">
+		<xs:attribute name="taxId" type="xs:integer" use="required"/>
 	</xs:complexType>
 	<xs:element name="taxonSet">
 		<xs:complexType>
