@@ -10,12 +10,17 @@
  */
 package uk.ac.ebi.ena.webin.xml.transformation.transformers.dtos;
 
+import java.util.Collections;
+import java.util.Set;
+
 public class RunTransformationDTO extends PresentationTransformationDTO {
   private String runId;
   private String studyId;
-  private String sampleId;
+
   private String submissionAlias;
   private String experimentTitle;
+
+  private Set<String> sampleIds = Collections.emptySet();
 
   public String getRunId() {
     return runId;
@@ -33,12 +38,12 @@ public class RunTransformationDTO extends PresentationTransformationDTO {
     this.studyId = studyId;
   }
 
-  public String getSampleId() {
-    return sampleId;
+  public Set<String> getSampleIds() {
+    return sampleIds;
   }
 
-  public void setSampleId(String sampleId) {
-    this.sampleId = sampleId;
+  public void setSampleIds(Set<String> sampleIds) {
+    this.sampleIds = sampleIds;
   }
 
   public String getSubmissionAlias() {

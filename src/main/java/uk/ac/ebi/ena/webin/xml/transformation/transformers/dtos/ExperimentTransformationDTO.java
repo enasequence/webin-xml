@@ -20,7 +20,7 @@ public class ExperimentTransformationDTO extends PresentationTransformationDTO {
   private String instrumentModel;
   private String studyAlias;
 
-  private Set<String> samples = Collections.emptySet();
+  private Set<String> sampleIds = Collections.emptySet();
 
   private Map<String, String> sampleAccessions = Collections.emptyMap();
 
@@ -48,12 +48,12 @@ public class ExperimentTransformationDTO extends PresentationTransformationDTO {
     this.studyAlias = studyAlias;
   }
 
-  public Set<String> getSamples() {
-    return samples;
+  public Set<String> getSampleIds() {
+    return sampleIds;
   }
 
-  public void setSamples(Set<String> samples) {
-    this.samples = samples;
+  public void setSampleIds(Set<String> sampleIds) {
+    this.sampleIds = sampleIds;
   }
 
   public Map<String, String> getSampleAccessions() {

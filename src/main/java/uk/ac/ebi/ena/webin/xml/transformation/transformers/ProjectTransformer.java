@@ -136,8 +136,8 @@ public class ProjectTransformer extends AbstractTransformer
     }
 
     // Injecting SECONDARY_ID
-    if (!projectDto.getStudies().isEmpty())
-      injectSecondaries(projectType.getIDENTIFIERS(), projectDto.getStudies());
+    if (!projectDto.getStudyIds().isEmpty())
+      injectSecondaries(projectType.getIDENTIFIERS(), projectDto.getStudyIds());
 
     injectSecondaries(projectType.getIDENTIFIERS(), projectDto.getSecondary());
 

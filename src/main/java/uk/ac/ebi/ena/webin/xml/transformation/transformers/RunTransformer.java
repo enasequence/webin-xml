@@ -11,6 +11,7 @@
 package uk.ac.ebi.ena.webin.xml.transformation.transformers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
@@ -133,8 +134,11 @@ public class RunTransformer extends AbstractTransformer
       appendRunLink(runType, "ENA-STUDY", runDto.getStudyId());
     }
 
-    if (runDto.getSampleId() != null && !runDto.getSampleId().isEmpty()) {
-      appendRunLink(runType, "ENA-SAMPLE", runDto.getSampleId());
+    if (!runDto.getSampleIds().isEmpty()) {
+      appendRunLink(
+          runType,
+          "ENA-SAMPLE",
+          getRangeList(runDto.getSampleIds()).stream().collect(Collectors.joining(",")));
     }
 
     appendArrayExpressLink(runDto.getSubmissionAlias(), () -> createNewLinkXRef(runType));

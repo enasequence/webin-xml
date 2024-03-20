@@ -128,7 +128,7 @@ public class WebinXmlTransformationTest {
           dto.setBrokerName("EMG broker account, EMBL-EBI");
           dto.setFirstPublic("2021-01-11");
           dto.setLastUpdated("2021-01-11");
-          dto.setStudies(Collections.singleton("ERP126272"));
+          dto.setStudyIds(Collections.singleton("ERP126272"));
 
           return WebinXmlTransformation.createProjectTransformer()
               .transformForPresentation(dto, doc);
@@ -145,7 +145,7 @@ public class WebinXmlTransformationTest {
           dto.setCenterName("Wellcome Sanger Institute");
           dto.setFirstPublic("2016-04-19");
           dto.setLastUpdated("2016-05-20");
-          dto.setStudies(Collections.singleton("ERP012875"));
+          dto.setStudyIds(Collections.singleton("ERP012875"));
 
           return WebinXmlTransformation.createProjectTransformer()
               .transformForPresentation(dto, doc);
@@ -221,7 +221,7 @@ public class WebinXmlTransformationTest {
           dto.setSubmissionId("ERA3206930");
           dto.setInstrumentModel("Illumina MiSeq");
           dto.setCenterName("Graz University of Technical");
-          dto.setSamples(Collections.singleton("ERS5524412"));
+          dto.setSampleIds(Collections.singleton("ERS5524412"));
           dto.setSampleAccessions(Collections.singletonMap("ERS5524412", "SAMEA7777175"));
 
           return WebinXmlTransformation.createExperimentTransformer()
@@ -238,7 +238,7 @@ public class WebinXmlTransformationTest {
           dto.setSubmissionId("ERA000196");
           dto.setInstrumentModel("Illumina Genome Analyzer II");
           dto.setCenterName("Wellcome Sanger Institute");
-          dto.setSamples(Collections.singleton("ERS000119"));
+          dto.setSampleIds(Collections.singleton("ERS000119"));
           dto.setSampleAccessions(Collections.singletonMap("ERS000119", "SAMEA860413"));
 
           return WebinXmlTransformation.createExperimentTransformer()
@@ -261,7 +261,7 @@ public class WebinXmlTransformationTest {
           RunTransformationDTO dto = new RunTransformationDTO();
           dto.setRunId("ERR5060344");
           dto.setStudyId("ERP121345");
-          dto.setSampleId("ERS5524409");
+          dto.setSampleIds(Collections.singleton("ERS5524409"));
           dto.setSubmissionId("ERA3206930");
           dto.setSubmissionAlias(
               "ena-SUBMISSION-Graz University of Technical-11-01-2021-14:11:54:887-1");
@@ -281,7 +281,7 @@ public class WebinXmlTransformationTest {
           RunTransformationDTO dto = new RunTransformationDTO();
           dto.setRunId("ERR4659819");
           dto.setStudyId("ERP121228");
-          dto.setSampleId("ERS5136096");
+          dto.setSampleIds(Collections.singleton("ERS5136096"));
           dto.setSubmissionId("ERA2939496");
           dto.setSubmissionAlias("ERP121228-sc-2020-10-06T16:41:38Z-2");
           dto.setExperimentTitle(

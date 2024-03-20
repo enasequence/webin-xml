@@ -224,11 +224,11 @@ public class ExperimentTransformer extends AbstractTransformer
             ? experimentType.getEXPERIMENTLINKS().getEXPERIMENTLINKArray()
             : null);
 
-    if (!experimentDto.getSamples().isEmpty())
+    if (!experimentDto.getSampleIds().isEmpty())
       appendExperimentLink(
           experimentType,
           "ENA-SAMPLE",
-          getRangeList(experimentDto.getSamples()).stream().collect(Collectors.joining(",")));
+          getRangeList(experimentDto.getSampleIds()).stream().collect(Collectors.joining(",")));
 
     if (null != experimentDto.getSubmissionId())
       appendExperimentLink(experimentType, "ENA-SUBMISSION", experimentDto.getSubmissionId());

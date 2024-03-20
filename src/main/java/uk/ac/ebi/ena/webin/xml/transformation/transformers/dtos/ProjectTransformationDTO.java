@@ -17,7 +17,7 @@ public class ProjectTransformationDTO extends PresentationTransformationDTO {
 
   private String projectId;
 
-  private Set<String> studies = Collections.emptySet();
+  private Set<String> studyIds = Collections.emptySet();
   private Set<String> children = Collections.emptySet();
 
   public String getProjectId() {
@@ -28,12 +28,12 @@ public class ProjectTransformationDTO extends PresentationTransformationDTO {
     this.projectId = projectId;
   }
 
-  public Set<String> getStudies() {
-    return studies;
+  public Set<String> getStudyIds() {
+    return studyIds;
   }
 
-  public void setStudies(Set<String> studies) {
-    this.studies = studies;
+  public void setStudyIds(Set<String> studyIds) {
+    this.studyIds = studyIds;
   }
 
   public Set<String> getChildren() {
