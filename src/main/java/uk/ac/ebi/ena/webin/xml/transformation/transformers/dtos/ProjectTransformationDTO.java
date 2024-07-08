@@ -18,6 +18,8 @@ public class ProjectTransformationDTO extends PresentationTransformationDTO {
   private String projectId;
 
   private Set<String> studyIds = Collections.emptySet();
+
+  private Set<String> parents = Collections.emptySet();
   private Set<String> children = Collections.emptySet();
 
   public String getProjectId() {
@@ -34,6 +36,14 @@ public class ProjectTransformationDTO extends PresentationTransformationDTO {
 
   public void setStudyIds(Set<String> studyIds) {
     this.studyIds = studyIds;
+  }
+
+  public Set<String> getParents() {
+    return parents;
+  }
+
+  public void setParents(Set<String> parents) {
+    this.parents = parents;
   }
 
   public Set<String> getChildren() {

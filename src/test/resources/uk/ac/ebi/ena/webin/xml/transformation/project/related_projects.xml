@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROJECT_SET>
+    <PROJECT alias="ena-tol-aBufBuf1-study-umbrella-20201222" center_name="WELLCOME SANGER INSTITUTE" accession="PRJEB42238">
+        <IDENTIFIERS>
+            <PRIMARY_ID>PRJEB42238</PRIMARY_ID>
+            <SUBMITTER_ID namespace="WELLCOME SANGER INSTITUTE">ena-tol-aBufBuf1-study-umbrella-20201222</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <NAME>aBufBuf1</NAME>
+        <TITLE>Bufo bufo (common toad)</TITLE>
+        <DESCRIPTION>This project collects the sequencing data and assemblies generated for Bufo bufo, common name common toad, by the Darwin Tree of Life Project (https://www.darwintreeoflife.org/). The data under this project are made available subject to the Darwin Tree of Life Open Data Release Policy (https://www.darwintreeoflife.org/project-resources/).</DESCRIPTION>
+        <UMBRELLA_PROJECT>
+            <ORGANISM>
+                <TAXON_ID>8384</TAXON_ID>
+                <SCIENTIFIC_NAME>Bufo bufo</SCIENTIFIC_NAME>
+            </ORGANISM>
+        </UMBRELLA_PROJECT>
+    </PROJECT>
+</PROJECT_SET>

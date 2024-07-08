@@ -77,11 +77,11 @@ public class ProjectTransformer extends AbstractTransformer
                       .setAccession(e));
     }
 
-    if (!projectDto.getChildren().isEmpty()) {
+    if (!projectDto.getParents().isEmpty()) {
       if (null == projectType.getRELATEDPROJECTS()) projectType.addNewRELATEDPROJECTS();
 
       projectDto
-          .getChildren()
+          .getParents()
           .forEach(
               e ->
                   projectType

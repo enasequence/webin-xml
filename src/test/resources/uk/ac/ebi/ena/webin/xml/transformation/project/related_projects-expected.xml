@@ -1,0 +1,65 @@
+
+<PROJECT_SET>
+    <PROJECT accession="PRJEB42238" alias="ena-tol-aBufBuf1-study-umbrella-20201222" center_name="WELLCOME SANGER INSTITUTE">
+        <IDENTIFIERS>
+            <PRIMARY_ID>PRJEB42238</PRIMARY_ID>
+            <SUBMITTER_ID namespace="WELLCOME SANGER INSTITUTE">ena-tol-aBufBuf1-study-umbrella-20201222</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <NAME>aBufBuf1</NAME>
+        <TITLE>Bufo bufo (common toad)</TITLE>
+        <DESCRIPTION>This project collects the sequencing data and assemblies generated for Bufo bufo, common name common toad, by the Darwin Tree of Life Project (https://www.darwintreeoflife.org/). The data under this project are made available subject to the Darwin Tree of Life Open Data Release Policy (https://www.darwintreeoflife.org/project-resources/).</DESCRIPTION>
+        <UMBRELLA_PROJECT>
+            <ORGANISM>
+                <TAXON_ID>8384</TAXON_ID>
+                <SCIENTIFIC_NAME>Bufo bufo</SCIENTIFIC_NAME>
+            </ORGANISM>
+        </UMBRELLA_PROJECT>
+        <RELATED_PROJECTS>
+            <RELATED_PROJECT>
+                <CHILD_PROJECT accession="PRJEB42168"/>
+            </RELATED_PROJECT>
+            <RELATED_PROJECT>
+                <CHILD_PROJECT accession="PRJEB42169"/>
+            </RELATED_PROJECT>
+            <RELATED_PROJECT>
+                <CHILD_PROJECT accession="PRJEB42234"/>
+            </RELATED_PROJECT>
+            <RELATED_PROJECT>
+                <PARENT_PROJECT accession="PRJEB40665"/>
+            </RELATED_PROJECT>
+            <RELATED_PROJECT>
+                <PARENT_PROJECT accession="PRJNA489243"/>
+            </RELATED_PROJECT>
+        </RELATED_PROJECTS>
+        <PROJECT_LINKS>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMISSION</DB>
+                    <ID>ERA3203394</ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>ENA-FASTQ-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB42238&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+            <PROJECT_LINK>
+                <XREF_LINK>
+                    <DB>ENA-SUBMITTED-FILES</DB>
+                    <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB42238&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>
+                </XREF_LINK>
+            </PROJECT_LINK>
+        </PROJECT_LINKS>
+        <PROJECT_ATTRIBUTES>
+            <PROJECT_ATTRIBUTE>
+                <TAG>ENA-FIRST-PUBLIC</TAG>
+                <VALUE>2020-12-22</VALUE>
+            </PROJECT_ATTRIBUTE>
+            <PROJECT_ATTRIBUTE>
+                <TAG>ENA-LAST-UPDATE</TAG>
+                <VALUE>2021-01-08</VALUE>
+            </PROJECT_ATTRIBUTE>
+        </PROJECT_ATTRIBUTES>
+    </PROJECT>
+</PROJECT_SET>

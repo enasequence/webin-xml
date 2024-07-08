@@ -18,6 +18,8 @@ import java.io.StringWriter;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -146,6 +148,33 @@ public class WebinXmlTransformationTest {
           dto.setFirstPublic("2016-04-19");
           dto.setLastUpdated("2016-05-20");
           dto.setStudyIds(Collections.singleton("ERP012875"));
+
+          return WebinXmlTransformation.createProjectTransformer()
+              .transformForPresentation(dto, doc);
+        });
+
+    testPresentationTransformationForFile(
+        "project/related_projects",
+        xmlInputStream -> {
+          PROJECTSETDocument doc = PROJECTSETDocument.Factory.parse(xmlInputStream);
+
+          Set<String> parents = new LinkedHashSet<>();
+          parents.add("PRJEB40665");
+          parents.add("PRJNA489243");
+
+          Set<String> children = new LinkedHashSet<>();
+          children.add("PRJEB42168");
+          children.add("PRJEB42169");
+          children.add("PRJEB42234");
+
+          ProjectTransformationDTO dto = new ProjectTransformationDTO();
+          dto.setProjectId("PRJEB42238");
+          dto.setSubmissionId("ERA3203394");
+          dto.setCenterName("WELLCOME SANGER INSTITUTE");
+          dto.setFirstPublic("2020-12-22");
+          dto.setLastUpdated("2021-01-08");
+          dto.setParents(parents);
+          dto.setChildren(children);
 
           return WebinXmlTransformation.createProjectTransformer()
               .transformForPresentation(dto, doc);
