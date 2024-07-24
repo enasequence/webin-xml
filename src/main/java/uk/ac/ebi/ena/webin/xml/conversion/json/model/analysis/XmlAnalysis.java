@@ -157,6 +157,11 @@ public class XmlAnalysis implements FromXmlMapper<Analysis> {
                     });
               }
 
+              final List<XmlAnalysisType.Sequence> sequences = xmlAnalysisTypeFields.getSequences();
+              if (sequences != null) {
+                to.setSequences(sequences);
+              }
+
               xmlAnalysisTypeFields
                   .getAnalysisTypeAttributesMap()
                   .forEach(

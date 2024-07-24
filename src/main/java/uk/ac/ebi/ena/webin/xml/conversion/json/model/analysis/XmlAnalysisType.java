@@ -52,6 +52,10 @@ public class XmlAnalysisType {
     @JacksonXmlProperty(localName = "EXPERIMENT_TYPE")
     private List<String> experimentTypes;
 
+    @JacksonXmlElementWrapper(localName = "SEQUENCE", useWrapping = false)
+    @JacksonXmlProperty(localName = "SEQUENCE")
+    private List<Sequence> sequences;
+
     private Map<String, String> analysisTypeAttributesMap = new HashMap<>();
 
     @JsonAnyGetter
@@ -70,6 +74,13 @@ public class XmlAnalysisType {
   public static class Assembly {
     @JacksonXmlProperty(localName = "STANDARD")
     private RefObject assembly;
+  }
+
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  @Data
+  public static class Sequence {
+    private String accession;
+    private String label;
   }
 
   public enum AnalysisTypes {

@@ -42,6 +42,7 @@ import uk.ac.ebi.ena.webin.xml.conversion.json.model.mapping.ToXmlMapper;
   "analysis",
   "analysisType",
   "assemblies",
+  "sequences",
   "files",
   "attributes",
   "links"
@@ -77,6 +78,8 @@ public class Analysis implements ToXmlMapper<XmlAnalysis> {
 
   private List<XmlAnalysisType.Assembly> assemblies;
 
+  private List<XmlAnalysisType.Sequence> sequences;
+
   private List<File> files;
 
   private List<Attribute> attributes;
@@ -108,6 +111,7 @@ public class Analysis implements ToXmlMapper<XmlAnalysis> {
     final Map<String, String> analysisTypeElementsMap = new HashMap<>();
 
     xmlAnalysisTypeFields.setAssemblies(assemblies);
+    xmlAnalysisTypeFields.setSequences(sequences);
 
     for (final XmlAnalysisType.AnalysisTypes analysisTypes :
         XmlAnalysisType.AnalysisTypes.values()) {

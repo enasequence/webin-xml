@@ -2475,6 +2475,77 @@ public class ConverterTest {
   }
 
   @Test
+  public void testAnalysisXml_ReferenceAlignmentSequenceAccessions_ConversionToJson()
+      throws JSONException {
+    String xml =
+        "<ANALYSIS_SET>\n"
+            + "    <ANALYSIS alias=\"\">\n"
+            + "        <TITLE>Test</TITLE>\n"
+            + "        <DESCRIPTION>Test</DESCRIPTION>\n"
+            + "        <STUDY_REF refname=\"\"/>\n"
+            + "        <SAMPLE_REF refname=\"\"/>\n"
+            + "        <ANALYSIS_TYPE>\n"
+            + "            <REFERENCE_ALIGNMENT>\n"
+            + "                <ASSEMBLY>\n"
+            + "                    <STANDARD accession=\"ADAS00000000.1\"/>\n"
+            + "                </ASSEMBLY>\n"
+            + "                <SEQUENCE accession=\"GG705407.1\" label=\"GG705407\"/>\n"
+            + "                <SEQUENCE accession=\"GG705408.1\" label=\"GG705408\"/>\n"
+            + "                <SEQUENCE accession=\"GG705409.1\" label=\"GG705409\"/>"
+            + "            </REFERENCE_ALIGNMENT>\n"
+            + "        </ANALYSIS_TYPE>\n"
+            + "        <FILES>\n"
+            + "            <FILE filename=\"Bmi1_bw.bam\" filetype=\"bam\" checksum_method=\"MD5\"\n"
+            + "                  checksum=\"9840f585055afc37de353706fd31a377\"/>\n"
+            + "        </FILES>\n"
+            + "    </ANALYSIS>\n"
+            + "</ANALYSIS_SET>";
+
+    assertJson(
+        "{\n"
+            + "  \"alias\" : \"\",\n"
+            + "  \"title\" : \"Test\",\n"
+            + "  \"description\" : \"Test\",\n"
+            + "  \"study\" : {\n"
+            + "    \"alias\" : \"\"\n"
+            + "  },\n"
+            + "  \"samples\" : [ {\n"
+            + "    \"alias\" : \"\"\n"
+            + "  } ],\n"
+            + "  \"analysisType\" : \"REFERENCE_ALIGNMENT\",\n"
+            + "  \"assemblies\": [\n"
+            + "      {\n"
+            + "        \"assembly\": {\n"
+            + "          \"accession\": \"ADAS00000000.1\"\n"
+            + "        }\n"
+            + "      }\n"
+            + "    ],"
+            + "  \"sequences\": ["
+            + "    {"
+            + "      \"accession\": \"GG705407.1\","
+            + "      \"label\": \"GG705407\""
+            + "    },"
+            + "    {"
+            + "      \"accession\": \"GG705408.1\","
+            + "      \"label\": \"GG705408\""
+            + "    },"
+            + "    {"
+            + "      \"accession\": \"GG705409.1\","
+            + "      \"label\": \"GG705409\""
+            + "    }"
+            + "  ],"
+            + "  \"files\" : [ {\n"
+            + "    \"fileType\" : \"bam\",\n"
+            + "    \"checksum\" : \"9840f585055afc37de353706fd31a377\",\n"
+            + "    \"fileName\" : \"Bmi1_bw.bam\",\n"
+            + "    \"checksumMethod\" : \"MD5\"\n"
+            + "  } ],\n"
+            + "  \"attributes\" : []"
+            + "}",
+        converter.convertAnalysisXmlToJson(xml));
+  }
+
+  @Test
   public void testAnalysisXml_SequenceVariationAnalysisType_WithExperimentType_ConversionToJson()
       throws JSONException {
     String xml =
@@ -2847,71 +2918,5 @@ public class ConverterTest {
     System.out.println(actual);
 
     JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
-  }
-
-  // TODO
-  @Test
-  public void custom() {
-    String xml =
-        "<PROJECT_SET>\n"
-            + "                      <PROJECT accession=\"PRJEB42418\" alias=\"PRJNA474793_8f0baf5759a6c03652e43fe750269a51\" broker_name=\"EMG broker account, EMBL-EBI\" center_name=\"EMG\">\n"
-            + "                        <IDENTIFIERS>\n"
-            + "                          <PRIMARY_ID>PRJEB42418</PRIMARY_ID>\n"
-            + "                          <SECONDARY_ID>ERP126272</SECONDARY_ID>\n"
-            + "                          <SUBMITTER_ID namespace=\"EMG\">PRJNA474793_8f0baf5759a6c03652e43fe750269a51</SUBMITTER_ID>\n"
-            + "                        </IDENTIFIERS>\n"
-            + "                        <TITLE>EMG produced TPA metagenomics assembly of PRJNA474793 data set (Palaeogenomics of the Hydrocarbon Producing Microalga Botryococcus braunii).</TITLE>\n"
-            + "                        <DESCRIPTION>The Third Party Annotation (TPA) assembly was derived from the primary whole genome shotgun (WGS) data set PRJNA474793, and was assembled with metaSPAdes v3.14.1. This project includes samples from the following biomes: root:Environmental:Aquatic:Freshwater:Lentic:Sediment.</DESCRIPTION>\n"
-            + "                        <SUBMISSION_PROJECT>\n"
-            + "                          <SEQUENCING_PROJECT/>\n"
-            + "                        </SUBMISSION_PROJECT>\n"
-            + "                        <PROJECT_LINKS>\n"
-            + "                          <PROJECT_LINK>\n"
-            + "                            <XREF_LINK>\n"
-            + "                              <DB>PUBMED</DB>\n"
-            + "                              <ID>29069476</ID>\n"
-            + "                            </XREF_LINK>\n"
-            + "                          </PROJECT_LINK>\n"
-            + "                          <PROJECT_LINK>\n"
-            + "                            <XREF_LINK>\n"
-            + "                              <DB>ENA-SUBMISSION</DB>\n"
-            + "                              <ID>ERA3206924</ID>\n"
-            + "                            </XREF_LINK>\n"
-            + "                          </PROJECT_LINK>\n"
-            + "                          <PROJECT_LINK>\n"
-            + "                            <XREF_LINK>\n"
-            + "                              <DB>ENA-FASTQ-FILES</DB>\n"
-            + "                              <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB42418&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>\n"
-            + "                            </XREF_LINK>\n"
-            + "                          </PROJECT_LINK>\n"
-            + "                          <PROJECT_LINK>\n"
-            + "                            <XREF_LINK>\n"
-            + "                              <DB>ENA-SUBMITTED-FILES</DB>\n"
-            + "                              <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJEB42418&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>\n"
-            + "                            </XREF_LINK>\n"
-            + "                          </PROJECT_LINK>\n"
-            + "                        </PROJECT_LINKS>\n"
-            + "                        <PROJECT_ATTRIBUTES>\n"
-            + "                          <PROJECT_ATTRIBUTE>\n"
-            + "                            <TAG>study keyword</TAG>\n"
-            + "                            <VALUE>TPA:assembly</VALUE>\n"
-            + "                          </PROJECT_ATTRIBUTE>\n"
-            + "                          <PROJECT_ATTRIBUTE>\n"
-            + "                            <TAG>new_study_type</TAG>\n"
-            + "                            <VALUE>Metagenomic assembly</VALUE>\n"
-            + "                          </PROJECT_ATTRIBUTE>\n"
-            + "                          <PROJECT_ATTRIBUTE>\n"
-            + "                            <TAG>ENA-FIRST-PUBLIC</TAG>\n"
-            + "                            <VALUE>2021-01-11</VALUE>\n"
-            + "                          </PROJECT_ATTRIBUTE>\n"
-            + "                          <PROJECT_ATTRIBUTE>\n"
-            + "                            <TAG>ENA-LAST-UPDATE</TAG>\n"
-            + "                            <VALUE>2021-01-11</VALUE>\n"
-            + "                          </PROJECT_ATTRIBUTE>\n"
-            + "                        </PROJECT_ATTRIBUTES>\n"
-            + "                      </PROJECT>\n"
-            + "                    </PROJECT_SET>";
-
-    System.out.println(converter.convertProjectXmlToJson(xml));
   }
 }
