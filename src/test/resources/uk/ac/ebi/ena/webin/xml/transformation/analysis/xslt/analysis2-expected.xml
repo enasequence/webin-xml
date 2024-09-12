@@ -16,8 +16,8 @@
             <FILE filename="sequence_flatfile.tsv.gz" filetype="flatfile" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
             <FILE filename="sequence_flatfile.tsv.gz" filetype="flatfile" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
 
-            <FILE filename="sequence_flatfile.tsv.gz" filetype="agp" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
-            <FILE filename="sequence_flatfile.tsv.gz" filetype="agp" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
+            <FILE filename="sequence_flatfile.tsv.gz" filetype="scaffold_agp" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
+            <FILE filename="sequence_flatfile.tsv.gz" filetype="chromosome_agp" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
 
             <FILE filename="sequence_flatfile.tsv.gz" filetype="unlocalised_list" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
             <FILE filename="sequence_flatfile.tsv.gz" filetype="unlocalised_list" checksum_method="MD5" checksum="5a8018b5d369af96ccc07dc77b923fb1" />
