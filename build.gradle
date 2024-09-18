@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven'
     id 'maven-publish'
     id 'idea'
     id "com.diffplug.spotless" version "5.14.3"
@@ -7,7 +8,7 @@ plugins {
 
 group = 'uk.ac.ebi.ena.sra'
 archivesBaseName = 'webin-xml'
-version = '2.5.3'
+version = '2.5.4'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -60,7 +61,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.apache.xmlbeans:xmlbeans:2.6.0'
+    compile 'org.apache.xmlbeans:xmlbeans:2.6.0'
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
@@ -71,9 +72,9 @@ dependencies {
 
     // Without this, a default JDK class is used for compiling xslts that throws
     // javax.xml.transform.TransformerConfigurationException for some reason.
-    implementation 'net.sf.saxon:saxon:8.7' //9.0, 9.7
+    runtime 'net.sf.saxon:saxon:8.7' //9.0, 9.7
     // To fix a Null pointer exception thrown when a transformation is applied on an object.
-    implementation 'net.sf.saxon:saxon-dom:8.7' //9.0, 9.7
+    runtime 'net.sf.saxon:saxon-dom:8.7' //9.0, 9.7
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.xmlunit:xmlunit-core:2.9.1'
@@ -85,9 +86,9 @@ dependencies {
 task generateXMLBeanSources () {
     doLast{
         delete "src/generated/java"
-        ant.taskdef(name:'xmlbean', classname: 'org.apache.xmlbeans.impl.tool.XMLBean', classpath: configurations.compileClasspath.asPath)
+        ant.taskdef(name:'xmlbean', classname: 'org.apache.xmlbeans.impl.tool.XMLBean', classpath: configurations.compile.asPath)
         sourceSets.main.resources.files.each {File file ->
-            ant.xmlbean(schema: file.path, classgendir: "build/classes/java/main" , srcgendir: "src/generated/java", classpath: configurations.compileClasspath.asPath) {
+            ant.xmlbean(schema: file.path, classgendir: "build/classes/java/main" , srcgendir: "src/generated/java", classpath: configurations.compile.asPath) {
                 fileset(dir: file.parentFile) {
                     include(name: '*.xsdconfig')
                 }
