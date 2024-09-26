@@ -38,13 +38,6 @@
         </xsl:attribute>
     </xsl:template>
 
-    <!--scaffold_agp , chromosome_agp -> agp -->
-    <xsl:template match="/ANALYSIS_SET/ANALYSIS/FILES/FILE/@filetype[.=('scaffold_agp','chromosome_agp')]">
-        <xsl:attribute name="filetype">
-            <xsl:value-of select="'agp'"/>
-        </xsl:attribute>
-    </xsl:template>
-
     <!-- unlocalised_contig_list , unlocalised_scaffold_list-> unlocalised_list -->
     <xsl:template match="/ANALYSIS_SET/ANALYSIS/FILES/FILE/@filetype[.=('unlocalised_contig_list' ,'unlocalised_contig_list')]">
         <xsl:attribute name="filetype">
