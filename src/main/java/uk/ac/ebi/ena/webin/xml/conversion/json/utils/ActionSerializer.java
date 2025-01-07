@@ -65,6 +65,14 @@ public class ActionSerializer extends JsonSerializer<List<Action>> {
             xmlGenerator.setNextIsAttribute(false);
           }
 
+          // If target is non-null, add it as attribute
+          if (action.getTarget() != null) {
+            xmlGenerator.setNextIsAttribute(true);
+            xmlGenerator.writeFieldName("target");
+            xmlGenerator.writeString(action.getTarget());
+            xmlGenerator.setNextIsAttribute(false);
+          }
+
           // End the action type element
           xmlGenerator.writeEndObject();
 
@@ -89,6 +97,10 @@ public class ActionSerializer extends JsonSerializer<List<Action>> {
 
           if (action.getHoldUntilDate() != null) {
             jsonGenerator.writeStringField("holdUntilDate", action.getHoldUntilDate());
+          }
+
+          if (action.getTarget() != null) {
+            jsonGenerator.writeStringField("target", action.getTarget());
           }
 
           jsonGenerator.writeEndObject();
