@@ -28,7 +28,6 @@ import org.xmlunit.diff.DifferenceEvaluators;
 import org.xmlunit.diff.ElementSelectors;
 
 public class ConverterTest {
-
   private Converter converter = new Converter();
 
   @Rule public ExpectedException expectedEx = ExpectedException.none();
@@ -283,7 +282,18 @@ public class ConverterTest {
             + "   }\n"
             + "}";
 
-    System.out.println(converter.convertSubmissionJsonToXml(submissionJson));
+    assertXml(
+        "<?xml version='1.0' encoding='UTF-8'?>\n"
+            + "<WEBIN>\n"
+            + "  <SUBMISSION alias=\"subs_hold_test_1\" accession=\"\">\n"
+            + "    <ACTIONS>\n"
+            + "      <ACTION>\n"
+            + "        <RELEASE target=\"ERS17064574\"/>\n"
+            + "      </ACTION>\n"
+            + "    </ACTIONS>\n"
+            + "  </SUBMISSION>\n"
+            + "</WEBIN>",
+        converter.convertSubmissionJsonToXml(submissionJson));
   }
 
   @Test
