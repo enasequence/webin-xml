@@ -33,7 +33,6 @@ import uk.ac.ebi.ena.webin.xml.conversion.json.model.study.XmlStudy;
 import uk.ac.ebi.ena.webin.xml.conversion.json.model.submission.Submission;
 
 public class Converter {
-
   private final ObjectMapper jsonMapper = new ObjectMapper();
   private final XmlMapper xmlMapper = new XmlMapper();
 
