@@ -265,7 +265,7 @@ public class EnaSraConverterTest {
             + "    </ACTIONS>\n"
             + "  </SUBMISSION>\n"
             + "</WEBIN>",
-            enaSraConverter.convertSubmissionJsonToXml(submissionJson));
+        enaSraConverter.convertSubmissionJsonToXml(submissionJson));
   }
 
   @Test
@@ -295,7 +295,7 @@ public class EnaSraConverterTest {
             + "    </ACTIONS>\n"
             + "  </SUBMISSION>\n"
             + "</WEBIN>",
-            enaSraConverter.convertSubmissionJsonToXml(submissionJson));
+        enaSraConverter.convertSubmissionJsonToXml(submissionJson));
   }
 
   @Test

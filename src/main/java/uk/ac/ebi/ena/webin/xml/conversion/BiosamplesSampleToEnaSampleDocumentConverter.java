@@ -118,6 +118,12 @@ public class BiosamplesSampleToEnaSampleDocumentConverter {
         AttributeType attr = sampleAttributesType.addNewSAMPLEATTRIBUTE();
         attr.setTAG(attribute.getType());
         attr.setVALUE(attribute.getValue());
+
+        // Only set the UNITS if it's not null
+        String unit = attribute.getUnit();
+        if (unit != null) {
+          attr.setUNITS(unit);
+        }
       }
     }
   }
