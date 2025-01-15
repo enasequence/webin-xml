@@ -77,9 +77,6 @@ public class SampleTransformer extends AbstractTransformer
       }
     }
 
-    if (sampleDto.getSampleId().startsWith("ERS"))
-      injectSecondaries(sampleType.getIDENTIFIERS(), sampleDto.getSecondary());
-
     fixIdentifiers(sampleType);
   }
 

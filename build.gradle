@@ -1,17 +1,16 @@
 plugins {
     id 'java'
-    id 'maven'
+    id 'java-library'
     id 'maven-publish'
-    id 'idea'
-    id "com.diffplug.spotless" version "5.14.3"
+    id "com.diffplug.spotless" version "6.20.0"
 }
 
 group = 'uk.ac.ebi.ena.sra'
 archivesBaseName = 'webin-xml'
-version = '2.5.2'
+version = '3.0.0'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 sourceSets {
     main {
@@ -36,12 +35,6 @@ sourceSets {
     }
 }
 
-idea {
-    module {
-        sourceDirs += sourceSets.main.output.classesDirs
-    }
-}
-
 repositories {
     mavenLocal()
     mavenCentral()
@@ -58,23 +51,38 @@ repositories {
             header(HttpHeaderAuthentication)
         }
     }
+
+    // For BioSamples client
+    maven {
+        url 'https://gitlab.ebi.ac.uk/api/v4/projects/2669/packages/maven'
+
+        credentials(HttpHeaderCredentials) {
+            name = "Private-Token"
+            value = biosamples_gitlab_private_token
+        }
+        authentication {
+            header(HttpHeaderAuthentication)
+        }
+    }
 }
 
 dependencies {
-    compile 'org.apache.xmlbeans:xmlbeans:2.6.0'
+    api ('uk.ac.ebi.biosamples:models-core:5.+')
+
+    api 'org.apache.xmlbeans:xmlbeans:2.6.0'
+
+    api(group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.11.2')
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     implementation(group: 'commons-io', name: 'commons-io', version: '1.3.2')
 
-    implementation(group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.11.2')
-
     // Without this, a default JDK class is used for compiling xslts that throws
     // javax.xml.transform.TransformerConfigurationException for some reason.
-    runtime 'net.sf.saxon:saxon:8.7' //9.0, 9.7
+    runtimeOnly 'net.sf.saxon:saxon:8.7' //9.0, 9.7
     // To fix a Null pointer exception thrown when a transformation is applied on an object.
-    runtime 'net.sf.saxon:saxon-dom:8.7' //9.0, 9.7
+    runtimeOnly 'net.sf.saxon:saxon-dom:8.7' //9.0, 9.7
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.xmlunit:xmlunit-core:2.9.1'
@@ -83,12 +91,24 @@ dependencies {
     testImplementation 'org.skyscreamer:jsonassert:1.5.1'
 }
 
+tasks.withType(Copy).all {
+    duplicatesStrategy DuplicatesStrategy.WARN
+}
+
 task generateXMLBeanSources () {
     doLast{
         delete "src/generated/java"
-        ant.taskdef(name:'xmlbean', classname: 'org.apache.xmlbeans.impl.tool.XMLBean', classpath: configurations.compile.asPath)
+        ant.taskdef(
+                name:'xmlbean',
+                classname: 'org.apache.xmlbeans.impl.tool.XMLBean',
+                classpath: configurations.compileClasspath.asPath)
         sourceSets.main.resources.files.each {File file ->
-            ant.xmlbean(schema: file.path, classgendir: "build/classes/java/main" , srcgendir: "src/generated/java", classpath: configurations.compile.asPath) {
+            ant.xmlbean(
+                    javasource: 1.8,
+                    schema: file.path,
+                    classgendir: "build/classes/java/main" ,
+                    srcgendir: "src/generated/java",
+                    classpath: configurations.compileClasspath.asPath) {
                 fileset(dir: file.parentFile) {
                     include(name: '*.xsdconfig')
                 }

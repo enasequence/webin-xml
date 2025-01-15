@@ -1,0 +1,118 @@
+{
+  "name" : "hCoV-19/Denmark/DCGC-563136/2022",
+  "accession" : "SAMEA110688704",
+  "webinSubmissionAccountId" : "Webin-60943",
+  "taxId" : 2697049,
+  "status" : "PUBLIC",
+  "release" : "2022-08-22T12:16:24Z",
+  "update" : "2022-08-23T23:25:20.074Z",
+  "submitted" : "2022-08-22T10:48:25Z",
+  "characteristics" : {
+    "ENA-CHECKLIST" : [ {
+      "text" : "ERC000033",
+      "tag" : "attribute"
+    } ],
+    "ENA-FIRST-PUBLIC" : [ {
+      "text" : "2022-08-22",
+      "tag" : "attribute"
+    } ],
+    "ENA-LAST-UPDATE" : [ {
+      "text" : "2022-08-22",
+      "tag" : "attribute"
+    } ],
+    "External Id" : [ {
+      "text" : "SAMEA110688704",
+      "tag" : "Namespace:BioSample"
+    } ],
+    "INSDC center alias" : [ {
+      "text" : "Statens Serum Institut and the Danish Covid19 Genome Consortium (DCGC)"
+    } ],
+    "INSDC center name" : [ {
+      "text" : "statens serum institut and the danish covid19 genome consortium (dcgc)"
+    } ],
+    "INSDC first public" : [ {
+      "text" : "2022-08-22T12:16:24Z"
+    } ],
+    "INSDC last update" : [ {
+      "text" : "2022-08-22T12:16:24Z"
+    } ],
+    "INSDC status" : [ {
+      "text" : "public"
+    } ],
+    "SRA accession" : [ {
+      "text" : "ERS12786264"
+    } ],
+    "Submitter Id" : [ {
+      "text" : "hCoV-19/Denmark/DCGC-563136/2022",
+      "tag" : "Namespace:Statens Serum Institut and the Danish Covid19 Genome Consortium (DCGC)"
+    } ],
+    "collecting institution" : [ {
+      "text" : "Department of Bacteria, Parasites and Fungi, Statens Serum Institut, Copenhagen, Denmark",
+      "tag" : "attribute"
+    } ],
+    "collection date" : [ {
+      "text" : "2022-08-08",
+      "tag" : "attribute"
+    } ],
+    "collector name" : [ {
+      "text" : "Danish Covid-19 Genome Consortium",
+      "tag" : "attribute"
+    } ],
+    "description" : [ {
+      "text" : "Original"
+    } ],
+    "geographic location (country and/or sea)" : [ {
+      "text" : "Denmark",
+      "tag" : "attribute"
+    } ],
+    "geographic location (region and locality)" : [ {
+      "text" : "Nordjylland",
+      "tag" : "attribute"
+    } ],
+    "host common name" : [ {
+      "text" : "Human",
+      "tag" : "attribute"
+    } ],
+    "host description" : [ {
+      "text" : "n_infections=3,last_infection_date=2022-02-07",
+      "tag" : "attribute"
+    } ],
+    "host health state" : [ {
+      "text" : "not provided",
+      "tag" : "attribute"
+    } ],
+    "host scientific name" : [ {
+      "text" : "Homo sapiens",
+      "tag" : "attribute"
+    } ],
+    "host sex" : [ {
+      "text" : "not provided",
+      "tag" : "attribute"
+    } ],
+    "host subject id" : [ {
+      "text" : "not provided",
+      "tag" : "attribute"
+    } ],
+    "isolate" : [ {
+      "text" : "not provided",
+      "tag" : "attribute"
+    } ],
+    "organism" : [ {
+      "text" : "Severe acute respiratory syndrome coronavirus 2",
+      "ontologyTerms" : [ "http://purl.obolibrary.org/obo/NCBITaxon_2697049" ]
+    } ],
+    "sample capture status" : [ {
+      "text" : "active surveillance in response to outbreak",
+      "tag" : "attribute"
+    } ],
+    "title" : [ {
+      "text" : "hCoV-19/Denmark/DCGC-563136/2022"
+    } ]
+  },
+  "externalReferences" : [ {
+    "url" : "https://www.ebi.ac.uk/ena/browser/view/SAMEA110688704",
+    "duo" : [ ]
+  } ],
+  "submittedVia" : "PIPELINE_IMPORT",
+  "create" : "2022-08-22T09:47:27.227Z"
+}

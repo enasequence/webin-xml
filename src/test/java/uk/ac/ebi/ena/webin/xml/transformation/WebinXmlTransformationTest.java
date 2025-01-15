@@ -29,6 +29,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.apache.commons.io.IOUtils;
+import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.XmlOptions;
 import org.junit.Assert;
@@ -49,6 +50,8 @@ import uk.ac.ebi.ena.sra.xml.RUNSETDocument;
 import uk.ac.ebi.ena.sra.xml.SAMPLESETDocument;
 import uk.ac.ebi.ena.sra.xml.STUDYSETDocument;
 import uk.ac.ebi.ena.sra.xml.SUBMISSIONSETDocument;
+import uk.ac.ebi.ena.webin.xml.conversion.BiosamplesSampleToEnaSampleDocumentConverter;
+import uk.ac.ebi.ena.webin.xml.conversion.BiosamplesSampleToEnaSampleDocumentConverterTest;
 import uk.ac.ebi.ena.webin.xml.transformation.transformers.Transformer;
 import uk.ac.ebi.ena.webin.xml.transformation.transformers.dtos.AnalysisTransformationDTO;
 import uk.ac.ebi.ena.webin.xml.transformation.transformers.dtos.ExperimentTransformationDTO;
@@ -471,9 +474,6 @@ public class WebinXmlTransformationTest {
     String inputResourcePath = filePrefix + INPUT_FILE_SUFFIX;
     String expectedResourcePath = filePrefix + EXPECTED_FILE_SUFFIX;
 
-    System.out.println("----------------------------------------");
-    System.out.println("Input file: " + inputResourcePath);
-
     Document inputDocument = parseXmlFromInputStream(getResourceInputStream(inputResourcePath));
     addSetRootElementIfMissing(inputDocument, rootElementName, rootElementSetName);
     Document actualDocument = transformer.transform(inputDocument);
@@ -481,6 +481,26 @@ public class WebinXmlTransformationTest {
     String actual = writeXmlToString(actualDocument);
     String expected = getResourceContent(expectedResourcePath);
 
+    testXmls(expected, actual, expectedResourcePath, inputResourcePath);
+  }
+
+  private void testPresentationTransformationForFile(
+      String filePrefix, ApplyTransformation applyTransformation) throws Exception {
+
+    String inputResourcePath = filePrefix + INPUT_FILE_SUFFIX;
+    String expectedResourcePath = filePrefix + EXPECTED_FILE_SUFFIX;
+
+    try (InputStream inputIs = getResourceInputStream(inputResourcePath)) {
+
+      String actual = writeXmlToString(applyTransformation.apply(inputIs));
+      String expected = getResourceContent(expectedResourcePath);
+
+      testXmls(expected, actual, expectedResourcePath, inputResourcePath);
+    }
+  }
+
+  private void testXmls(
+      String expected, String actual, String expectedResourcePath, String actualResourcePath) {
     Diff diff =
         DiffBuilder.compare(Input.fromString(expected))
             .withTest(Input.fromString(actual))
@@ -501,58 +521,15 @@ public class WebinXmlTransformationTest {
 
       // Normalise xmls and report comparison failure.
       throw new ComparisonFailure(
-          "XMLs are different. InputFile : "
-              + inputResourcePath
-              + ", ExpectedFile : "
-              + expectedResourcePath,
-          writeXmlToString(parseXmlFromString(expected)),
-          writeXmlToString(actualDocument));
+          String.format(
+              "XMLs are different. InputFile : %s, ExpectedFile : %s",
+              actualResourcePath, expectedResourcePath),
+          expected,
+          actual);
     }
-  }
 
-  private void testPresentationTransformationForFile(
-      String filePrefix, ApplyTransformation applyTransformation) throws Exception {
-
-    String inputResourcePath = filePrefix + INPUT_FILE_SUFFIX;
-    String expectedResourcePath = filePrefix + EXPECTED_FILE_SUFFIX;
-
-    try (InputStream inputIs = getResourceInputStream(inputResourcePath)) {
-      XmlOptions options = new XmlOptions();
-      options.setUseCDataBookmarks();
-
-      String actual = applyTransformation.apply(inputIs).xmlText(options);
-      String expected = getResourceContent(expectedResourcePath);
-
-      Diff diff =
-          DiffBuilder.compare(Input.fromString(expected))
-              .withTest(Input.fromString(actual))
-              .ignoreComments()
-              .ignoreWhitespace()
-              .withDifferenceEvaluator(DifferenceEvaluators.Default)
-              .build();
-
-      if (diff.hasDifferences()) {
-        System.out.println("First " + MAX_XML_DIFFERENCE_COUNT + " differences:");
-        int differenceCount = 0;
-        for (Difference difference : diff.getDifferences()) {
-          if (++differenceCount > MAX_XML_DIFFERENCE_COUNT) {
-            break;
-          }
-          System.out.println("    " + difference.toString());
-        }
-
-        // Normalise xmls and report comparison failure.
-        throw new ComparisonFailure(
-            String.format(
-                "XMLs are different. InputFile : %s, ExpectedFile : %s",
-                inputResourcePath, expectedResourcePath),
-            expected,
-            actual);
-      }
-
-      if (expected.contains("<![CDATA[")) {
-        Assert.assertTrue("XML is missing CDATA tag.", actual.contains("<![CDATA["));
-      }
+    if (expected.contains("<![CDATA[")) {
+      Assert.assertTrue("XML is missing CDATA tag.", actual.contains("<![CDATA["));
     }
   }
 
@@ -601,7 +578,15 @@ public class WebinXmlTransformationTest {
     return doc;
   }
 
-  public static String writeXmlToString(Document document) throws TransformerException {
+  private XmlOptions getParsingXmlOptions() {
+    XmlOptions xmlOptions = new XmlOptions();
+    xmlOptions.setLoadLineNumbers(XmlOptions.LOAD_LINE_NUMBERS);
+    xmlOptions.setCharacterEncoding("UTF-8");
+    xmlOptions.setLoadStripComments();
+    return xmlOptions;
+  }
+
+  public String writeXmlToString(Document document) throws TransformerException {
     // Create a TransformerFactory
     TransformerFactory transformerFactory = TransformerFactory.newInstance();
 
@@ -624,6 +609,13 @@ public class WebinXmlTransformationTest {
     transformer.transform(source, result);
 
     return stringWriter.toString();
+  }
+
+  public String writeXmlToString(XmlObject xmlObject) {
+    XmlOptions options = new XmlOptions();
+    options.setUseCDataBookmarks();
+
+    return xmlObject.xmlText(options);
   }
 
   private static interface ApplyTransformation {
