@@ -26,6 +26,7 @@
             <xs:simpleType>
                 <xs:restriction base="xs:string">
                     <xs:enumeration value="tab"/>
+                    <xs:enumeration value="tsv"/>
                     <xs:enumeration value="bam"/>
                     <xs:enumeration value="bai"/>
                     <xs:enumeration value="cram"/>
@@ -110,7 +111,7 @@
                     <xs:element maxOccurs="1" minOccurs="0" name="TITLE" type="xs:string">
                         <xs:annotation>
                             <xs:documentation>Title of the analysis object which will be displayed in
-                        search results. </xs:documentation>
+                                search results. </xs:documentation>
                         </xs:annotation>
                     </xs:element>
                     <xs:element maxOccurs="1" minOccurs="0" name="DESCRIPTION" type="xs:string">
@@ -131,7 +132,7 @@
                     <xs:element name="SAMPLE_REF" maxOccurs="unbounded" minOccurs="0">
                         <xs:annotation>
                             <xs:documentation>One of more samples associated with the
-                        analysis.</xs:documentation>
+                                analysis.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
                             <xs:complexContent>
@@ -155,7 +156,7 @@
                     <xs:element name="RUN_REF" maxOccurs="unbounded" minOccurs="0">
                         <xs:annotation>
                             <xs:documentation>One or more runs associated with the
-                        analysis.</xs:documentation>
+                                analysis.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
                             <xs:complexContent>
@@ -172,7 +173,7 @@
                     <xs:element name="ANALYSIS_REF" maxOccurs="unbounded" minOccurs="0">
                         <xs:annotation>
                             <xs:documentation>One or more analyses associated with the
-                        analysis.</xs:documentation>
+                                analysis.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
                             <xs:complexContent>
@@ -193,7 +194,7 @@
                         <xs:complexType>
                             <xs:choice>
                                 <xs:element name="REFERENCE_ALIGNMENT"
-                                    type="com:ReferenceSequenceType">
+                                            type="com:ReferenceSequenceType">
                                     <xs:annotation>
                                         <xs:documentation/>
                                     </xs:annotation>
@@ -203,28 +204,28 @@
                                         <xs:complexContent>
                                             <xs:extension base="com:ReferenceSequenceType">
                                                 <xs:sequence>
-                                                  <xs:element name="EXPERIMENT_TYPE" minOccurs="0"
-                                                  maxOccurs="unbounded">
-                                                  <xs:simpleType>
-                                                  <xs:restriction base="xs:string">
-                                                  <xs:enumeration value="Whole genome sequencing"/>
-                                                  <xs:enumeration
-                                                  value="Whole transcriptome sequencing"/>
-                                                  <xs:enumeration value="Exome sequencing"/>
-                                                  <xs:enumeration value="Genotyping by array"/>
-                                                  <xs:enumeration value="transcriptomics"/>
-                                                  <xs:enumeration value="Curation"/>
-                                                  <xs:enumeration value="Genotyping by sequencing"/>
-                                                  <xs:enumeration value="Target sequencing"/>
-                                                  </xs:restriction>
-                                                  </xs:simpleType>
-                                                  </xs:element>
-                                                  <xs:element minOccurs="0" name="PROGRAM"
-                                                  type="xs:string"/>
-                                                  <xs:element name="PLATFORM" type="xs:string"
-                                                  minOccurs="0"/>
-                                                  <xs:element minOccurs="0" name="IMPUTATION"
-                                                  type="xs:boolean"/>
+                                                    <xs:element name="EXPERIMENT_TYPE" minOccurs="0"
+                                                                maxOccurs="unbounded">
+                                                        <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                                <xs:enumeration value="Whole genome sequencing"/>
+                                                                <xs:enumeration
+                                                                        value="Whole transcriptome sequencing"/>
+                                                                <xs:enumeration value="Exome sequencing"/>
+                                                                <xs:enumeration value="Genotyping by array"/>
+                                                                <xs:enumeration value="transcriptomics"/>
+                                                                <xs:enumeration value="Curation"/>
+                                                                <xs:enumeration value="Genotyping by sequencing"/>
+                                                                <xs:enumeration value="Target sequencing"/>
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+                                                    <xs:element minOccurs="0" name="PROGRAM"
+                                                                type="xs:string"/>
+                                                    <xs:element name="PLATFORM" type="xs:string"
+                                                                minOccurs="0"/>
+                                                    <xs:element minOccurs="0" name="IMPUTATION"
+                                                                type="xs:boolean"/>
                                                 </xs:sequence>
                                             </xs:extension>
                                         </xs:complexContent>
@@ -236,54 +237,54 @@
                                             <xs:element name="NAME" type="xs:string"/>
                                             <xs:element minOccurs="0" name="TYPE">
                                                 <xs:simpleType>
-                                                  <xs:restriction base="xs:string">
-                                                  <xs:enumeration value="clone or isolate">
-                                                  <xs:annotation>
-                                                  <xs:documentation>An assembly of reads from an isolated cultured organism, tissues, cells or a cell line.
+                                                    <xs:restriction base="xs:string">
+                                                        <xs:enumeration value="clone or isolate">
+                                                            <xs:annotation>
+                                                                <xs:documentation>An assembly of reads from an isolated cultured organism, tissues, cells or a cell line.
                                                                 </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="primary metagenome">
-                                                  <xs:annotation>
-                                                  <xs:documentation>An original metagenome assembly prior to binning from a sampled biome or collection of sampled biomes without attempt to separate taxa.
+                                                            </xs:annotation>
+                                                        </xs:enumeration>
+                                                        <xs:enumeration value="primary metagenome">
+                                                            <xs:annotation>
+                                                                <xs:documentation>An original metagenome assembly prior to binning from a sampled biome or collection of sampled biomes without attempt to separate taxa.
                                                                 </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration value="binned metagenome">
-                                                  <xs:annotation>
-                                                  <xs:documentation>A set of contigs drawn from primary or unbinned metagenomes grouped into a single-taxon set.
+                                                            </xs:annotation>
+                                                        </xs:enumeration>
+                                                        <xs:enumeration value="binned metagenome">
+                                                            <xs:annotation>
+                                                                <xs:documentation>A set of contigs drawn from primary or unbinned metagenomes grouped into a single-taxon set.
                                                                 </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration
-                                                  value="Metagenome-Assembled Genome (MAG)">
-                                                  <xs:annotation>
-                                                  <xs:documentation>A single-taxon assembly based on a binned metagenome asserted to be a close representation to an actual individual genome (that could match an already existing isolate or represent a novel isolate).
+                                                            </xs:annotation>
+                                                        </xs:enumeration>
+                                                        <xs:enumeration
+                                                                value="Metagenome-Assembled Genome (MAG)">
+                                                            <xs:annotation>
+                                                                <xs:documentation>A single-taxon assembly based on a binned metagenome asserted to be a close representation to an actual individual genome (that could match an already existing isolate or represent a novel isolate).
                                                                 </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration
-                                                  value="Environmental Single-Cell Amplified Genome (SAG)">
-                                                  <xs:annotation>
-                                                  <xs:documentation>A genome assembly from amplified environmental sampled single-cell DNA.
+                                                            </xs:annotation>
+                                                        </xs:enumeration>
+                                                        <xs:enumeration
+                                                                value="Environmental Single-Cell Amplified Genome (SAG)">
+                                                            <xs:annotation>
+                                                                <xs:documentation>A genome assembly from amplified environmental sampled single-cell DNA.
                                                                 </xs:documentation>
-                                                  </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration
-                                                          value="COVID-19 outbreak">
-                                                      <xs:annotation>
-                                                          <xs:documentation>A genome assembly specific to COVID-19 outbreak.
-                                                          </xs:documentation>
-                                                      </xs:annotation>
-                                                  </xs:enumeration>
-                                                  <xs:enumeration
-                                                          value="clinical isolate assembly">
-                                                      <xs:annotation>
-                                                          <xs:documentation>A bacterial pathogen genome assembly.
-                                                          </xs:documentation>
-                                                      </xs:annotation>
-                                                  </xs:enumeration>
-                                                  </xs:restriction>
+                                                            </xs:annotation>
+                                                        </xs:enumeration>
+                                                        <xs:enumeration
+                                                                value="COVID-19 outbreak">
+                                                            <xs:annotation>
+                                                                <xs:documentation>A genome assembly specific to COVID-19 outbreak.
+                                                                </xs:documentation>
+                                                            </xs:annotation>
+                                                        </xs:enumeration>
+                                                        <xs:enumeration
+                                                                value="clinical isolate assembly">
+                                                            <xs:annotation>
+                                                                <xs:documentation>A bacterial pathogen genome assembly.
+                                                                </xs:documentation>
+                                                            </xs:annotation>
+                                                        </xs:enumeration>
+                                                    </xs:restriction>
                                                 </xs:simpleType>
                                             </xs:element>
                                             <xs:element name="PARTIAL" type="xs:boolean"> </xs:element>
@@ -291,21 +292,21 @@
                                             <xs:element name="PROGRAM" type="xs:string"/>
                                             <xs:element name="PLATFORM" type="xs:string"/>
                                             <xs:element minOccurs="0" name="MIN_GAP_LENGTH"
-                                                type="xs:integer"/>
+                                                        type="xs:integer"/>
                                             <xs:element minOccurs="0" name="MOL_TYPE">
                                                 <xs:simpleType>
-                                                  <xs:restriction base="xs:string">
-                                                  <xs:enumeration value="genomic DNA"/>
-                                                  <xs:enumeration value="genomic RNA"/>
-                                                  <xs:enumeration value="viral cRNA"/>
-                                                  </xs:restriction>
+                                                    <xs:restriction base="xs:string">
+                                                        <xs:enumeration value="genomic DNA"/>
+                                                        <xs:enumeration value="genomic RNA"/>
+                                                        <xs:enumeration value="viral cRNA"/>
+                                                    </xs:restriction>
                                                 </xs:simpleType>
                                             </xs:element>
                                             <xs:element minOccurs="0" name="TPA" type="xs:boolean"/>
                                             <xs:element minOccurs="0" name="AUTHORS"
-                                                type="xs:string"/>
+                                                        type="xs:string"/>
                                             <xs:element minOccurs="0" name="ADDRESS"
-                                                type="xs:string"/>
+                                                        type="xs:string"/>
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
@@ -313,9 +314,9 @@
                                     <xs:complexType>
                                         <xs:sequence>
                                             <xs:element minOccurs="0" name="AUTHORS"
-                                                type="xs:string"/>
+                                                        type="xs:string"/>
                                             <xs:element minOccurs="0" name="ADDRESS"
-                                                type="xs:string"/>
+                                                        type="xs:string"/>
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
@@ -336,13 +337,13 @@
                                             <xs:element name="PROGRAM" type="xs:string"/>
                                             <xs:element name="PLATFORM">
                                                 <xs:simpleType>
-                                                  <xs:restriction base="xs:string">
-                                                  <xs:enumeration value="BioNano"/>
-                                                  </xs:restriction>
+                                                    <xs:restriction base="xs:string">
+                                                        <xs:enumeration value="BioNano"/>
+                                                    </xs:restriction>
                                                 </xs:simpleType>
                                             </xs:element>
                                             <xs:element minOccurs="0" name="DESCRIPTION"
-                                                type="xs:string"/>
+                                                        type="xs:string"/>
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>
@@ -367,9 +368,9 @@
                                             <xs:element name="PLATFORM" type="xs:string"/>
                                             <xs:element minOccurs="0" name="TPA" type="xs:boolean"/>
                                             <xs:element minOccurs="0" name="AUTHORS"
-                                                type="xs:string"/>
+                                                        type="xs:string"/>
                                             <xs:element minOccurs="0" name="ADDRESS"
-                                                type="xs:string"/>
+                                                        type="xs:string"/>
                                             <xs:element minOccurs="0" name="TYPE">
                                                 <xs:simpleType>
                                                     <xs:restriction base="xs:string">
@@ -397,19 +398,19 @@
                                             <xs:element name="NAME" type="xs:string"/>
                                             <xs:element name="TAXONOMY_SYSTEM" type="xs:string"/>
                                             <xs:element minOccurs="0" name="TAXONOMY_SYSTEM_VERSION"
-                                                type="xs:string"/>
+                                                        type="xs:string"/>
                                             <xs:element minOccurs="0" name="CUSTOM_FIELDS">
                                                 <xs:complexType>
-                                                  <xs:sequence maxOccurs="unbounded" minOccurs="0">
-                                                  <xs:element name="FIELD">
-                                                      <xs:complexType>
-                                                          <xs:sequence>
-                                                          <xs:element name="NAME"/>
-                                                          <xs:element name="DESCRIPTION"/>
-                                                          </xs:sequence>
-                                                      </xs:complexType>
-                                                  </xs:element>
-                                                  </xs:sequence>
+                                                    <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                                                        <xs:element name="FIELD">
+                                                            <xs:complexType>
+                                                                <xs:sequence>
+                                                                    <xs:element name="NAME"/>
+                                                                    <xs:element name="DESCRIPTION"/>
+                                                                </xs:sequence>
+                                                            </xs:complexType>
+                                                        </xs:element>
+                                                    </xs:sequence>
                                                 </xs:complexType>
                                             </xs:element>
                                         </xs:sequence>
@@ -418,6 +419,8 @@
                                 <xs:element name="ASSEMBLY_ANNOTATION" type="com:ReferenceSequenceType"></xs:element>
                                 <xs:element name="SEQUENCE_CONSENSUS"/>
                                 <xs:element name="FILTERED_VARIATION"/>
+                                <xs:element name="TARGETED_SEQUENCE_SET"/>
+                                <xs:element name="ENVIRONMENTAL_SEQUENCE_SET"/>
                             </xs:choice>
                         </xs:complexType>
                     </xs:element>
@@ -425,13 +428,13 @@
                         <xs:element name="FILES">
                             <xs:annotation>
                                 <xs:documentation>Files associated with the
-                                        analysis.</xs:documentation>
+                                    analysis.</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
 
                                 <xs:sequence>
                                     <xs:element maxOccurs="unbounded" minOccurs="1" name="FILE"
-                                        type="AnalysisFileType"/>
+                                                type="AnalysisFileType"/>
                                 </xs:sequence>
 
                             </xs:complexType>
@@ -440,24 +443,24 @@
                     <xs:element maxOccurs="1" minOccurs="0" name="ANALYSIS_LINKS">
                         <xs:annotation>
                             <xs:documentation> Links to resources related to this analysis.
-                    </xs:documentation>
+                            </xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
                             <xs:sequence minOccurs="1">
                                 <xs:element name="ANALYSIS_LINK" type="com:LinkType"
-                                    maxOccurs="unbounded"/>
+                                            maxOccurs="unbounded"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
                     <xs:element maxOccurs="1" minOccurs="0" name="ANALYSIS_ATTRIBUTES">
                         <xs:annotation>
                             <xs:documentation>Properties and attributes of an analysis. These can be
-                        entered as free-form tag-value pairs.</xs:documentation>
+                                entered as free-form tag-value pairs.</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
                             <xs:sequence minOccurs="1">
                                 <xs:element name="ANALYSIS_ATTRIBUTE" type="com:AttributeType"
-                                    maxOccurs="unbounded"/>
+                                            maxOccurs="unbounded"/>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>
@@ -465,7 +468,7 @@
                 <xs:attribute name="analysis_center" type="xs:string" use="optional">
                     <xs:annotation>
                         <xs:documentation>If applicable, the center name of the institution responsible
-                    for this analysis. </xs:documentation>
+                            for this analysis. </xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
                 <xs:attribute name="analysis_date" type="xs:dateTime" use="optional">

@@ -1,0 +1,38 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ANALYSIS_SET>
+    <ANALYSIS
+            alias="hipsci.rel-2016-01.rnaseq.transcripts.sc-20160209.sample_HPSI0114i-eipl_3"
+            center_name="SC" broker_name="ENA" analysis_center="SC"
+            analysis_date="2016-02-09T10:10:10.0Z" accession="ERZ266973">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERZ266973</PRIMARY_ID>
+            <SUBMITTER_ID
+                    namespace="SC">hipsci.rel-2016-01.rnaseq.transcripts.sc-20160209.sample_HPSI0114i-eipl_3</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>HipSci RNA-seq transcripts counts (sample
+            HPSI0114i-eipl_3)</TITLE>
+        <DESCRIPTION>HipSci RNA-seq abundances of transcripts estimated
+            by kallisto</DESCRIPTION>
+        <STUDY_REF accession="ERP007111" refcenter="SC"
+                   refname="HipSci___RNAseq___healthy_volunteers-sc-3302">
+            <IDENTIFIERS>
+                <PRIMARY_ID>ERP007111</PRIMARY_ID>
+                <SUBMITTER_ID
+                        namespace="SC">HipSci___RNAseq___healthy_volunteers-sc-3302</SUBMITTER_ID>
+            </IDENTIFIERS>
+        </STUDY_REF>
+        <ANALYSIS_TYPE>
+            <ENVIRONMENTAL_SEQUENCE_SET/>
+        </ANALYSIS_TYPE>
+        <FILES>
+            <FILE
+                    filename="ERZ266/ERZ266973/HPSI0114i-eipl_3.GRCh37.75.cdna.kallisto.transcripts.abundance.rnaseq.20160125.tsv.gz"
+                    filetype="other" checksum_method="MD5"
+                    checksum="3185384933bd6dd54a5b869336c751df"/>
+            <FILE
+                    filename="ERZ266/ERZ266973/HPSI0114i-eipl_3.GRCh37.75.cdna.kallisto.transcripts.abundance.rnaseq.fasta.gz"
+                    filetype="other" checksum_method="MD5"
+                    checksum="3185384933bd6dd54a5b869336c752df"/>
+        </FILES>
+    </ANALYSIS>
+</ANALYSIS_SET>

@@ -1281,7 +1281,7 @@ public class EnaSraConverterTest {
             + "                  \"id\" : \"22820990\"\n"
             + "                }\n"
             + "              } ],\n"
-            + "              \"sequencingProject\" : { \"locusTagPrefixes\" : [ ] }\n"
+            + "              \"sequencingProject\" : {}\n"
             + "            }",
         enaSraConverter.convertProjectXmlToJson(xml));
   }
@@ -2536,8 +2536,7 @@ public class EnaSraConverterTest {
             + "    \"checksum\" : \"9840f585055afc37de353706fd31a377\",\n"
             + "    \"fileName\" : \"Bmi1_bw.bam\",\n"
             + "    \"checksumMethod\" : \"MD5\"\n"
-            + "  } ],\n"
-            + "  \"attributes\" : [ ]"
+            + "  } ]\n"
             + "}\n",
         enaSraConverter.convertAnalysisXmlToJson(xml));
   }

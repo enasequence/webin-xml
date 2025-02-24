@@ -575,13 +575,13 @@ public class WebinXmlTransformationTest {
     return doc;
   }
 
-  private XmlOptions getParsingXmlOptions() {
+  /*private XmlOptions getParsingXmlOptions() {
     XmlOptions xmlOptions = new XmlOptions();
     xmlOptions.setLoadLineNumbers(XmlOptions.LOAD_LINE_NUMBERS);
     xmlOptions.setCharacterEncoding("UTF-8");
     xmlOptions.setLoadStripComments();
     return xmlOptions;
-  }
+  }*/
 
   public String writeXmlToString(Document document) throws TransformerException {
     // Create a TransformerFactory
