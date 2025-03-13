@@ -577,7 +577,7 @@ public class WebinXmlTransformationTest {
 
   private XmlOptions getParsingXmlOptions() {
     XmlOptions xmlOptions = new XmlOptions();
-    xmlOptions.setLoadLineNumbers(XmlOptions.LOAD_LINE_NUMBERS);
+    xmlOptions.setLoadLineNumbers();
     xmlOptions.setCharacterEncoding("UTF-8");
     xmlOptions.setLoadStripComments();
     return xmlOptions;

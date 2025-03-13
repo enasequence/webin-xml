@@ -26,6 +26,7 @@
             <xs:simpleType>
                 <xs:restriction base="xs:string">
                     <xs:enumeration value="tab"/>
+                    <xs:enumeration value="tsv"/>
                     <xs:enumeration value="bam"/>
                     <xs:enumeration value="bai"/>
                     <xs:enumeration value="cram"/>
@@ -418,6 +419,8 @@
                                 <xs:element name="ASSEMBLY_ANNOTATION" type="com:ReferenceSequenceType"></xs:element>
                                 <xs:element name="SEQUENCE_CONSENSUS"/>
                                 <xs:element name="FILTERED_VARIATION"/>
+                                <xs:element name="TARGETED_SEQUENCE_SET"/>
+                                <xs:element name="ENVIRONMENTAL_SEQUENCE_SET"/>
                             </xs:choice>
                         </xs:complexType>
                     </xs:element>
