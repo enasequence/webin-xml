@@ -7,7 +7,7 @@ plugins {
 
 group = 'uk.ac.ebi.ena.sra'
 archivesBaseName = 'webin-xml'
-version = '3.0.0'
+version = '3.1.0-dev-04'
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
@@ -116,6 +116,7 @@ task generateXMLBeanSources () {
         }
     }
 }
+
 
 compileJava.dependsOn generateXMLBeanSources
 publish.dependsOn build

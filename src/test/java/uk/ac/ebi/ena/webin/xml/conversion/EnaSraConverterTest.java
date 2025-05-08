@@ -463,8 +463,6 @@ public class EnaSraConverterTest {
             + "      }\n"
             + "   ]\n"
             + "}";
-
-    System.out.println(enaSraConverter.convertSubmissionJsonToXml(webinSubmissionJson));
   }
 
   @Test
@@ -2872,15 +2870,6 @@ public class EnaSraConverterTest {
    * receipt date.
    */
   private void assertReceiptXml(String expected, String actual) {
-    System.out.println("---------------------------------------------");
-    System.out.println("EXPECTED");
-    System.out.println("---------------------------------------------");
-    System.out.println(expected);
-    System.out.println("---------------------------------------------");
-    System.out.println("ACTUAL");
-    System.out.println("---------------------------------------------");
-    System.out.println(actual);
-
     actual = actual.replaceAll("\\<\\?xml.*\\n", "");
     Diff diff =
         DiffBuilder.compare(expected)
@@ -2912,15 +2901,6 @@ public class EnaSraConverterTest {
   }
 
   private void assertXml(String expected, String actual) {
-    System.out.println("---------------------------------------------");
-    System.out.println("EXPECTED");
-    System.out.println("---------------------------------------------");
-    System.out.println(expected);
-    System.out.println("---------------------------------------------");
-    System.out.println("ACTUAL");
-    System.out.println("---------------------------------------------");
-    System.out.println(actual);
-
     actual = actual.replaceAll("\\<\\?xml.*\\n", "");
     Diff diff =
         DiffBuilder.compare(expected)
@@ -2946,15 +2926,6 @@ public class EnaSraConverterTest {
    * receipt date.
    */
   public static void assertReceiptJson(String expected, String actual) throws JSONException {
-    System.out.println("---------------------------------------------");
-    System.out.println("EXPECTED");
-    System.out.println("---------------------------------------------");
-    System.out.println(expected);
-    System.out.println("---------------------------------------------");
-    System.out.println("ACTUAL");
-    System.out.println("---------------------------------------------");
-    System.out.println(actual);
-
     JSONAssert.assertEquals(
         expected,
         actual,

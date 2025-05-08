@@ -129,6 +129,11 @@ public abstract class AbstractTransformer {
 
   // Following is related to presentation
 
+  /**
+   * - Set/override center and broker names in XML document if they are available in the dto.<br>
+   * - Depending on given SRA object ID, sets either NCBI or DDBJ as broker names.<br>
+   * - Remove broker name field if it is blank.
+   */
   protected <T extends PresentationTransformationDTO, U extends ObjectType> void transformCommon(
       T dto, String sraObjId, U objectType) {
 
@@ -148,9 +153,9 @@ public abstract class AbstractTransformer {
   private <T extends ObjectType> void setNcbiDdbjBrokerNamesIfApplicable(
       T enaObject, String objectId) {
     if (enaObject.getBrokerName() == null || enaObject.getBrokerName().isEmpty()) {
-      if (objectId.startsWith("SRP")) {
+      if (objectId.startsWith("SRP") || objectId.startsWith("SRS")) {
         enaObject.setBrokerName("NCBI");
-      } else if (objectId.startsWith("DRP")) {
+      } else if (objectId.startsWith("DRP") || objectId.startsWith("DRS")) {
         enaObject.setBrokerName("DDBJ");
       }
     }
@@ -177,6 +182,10 @@ public abstract class AbstractTransformer {
     }
   }
 
+  /**
+   * Sets center name as namespace attribute of submitter ID if center name and submitter ID
+   * information is present.
+   */
   protected void fixIdentifiers(ObjectType objectType) {
     IdentifierType identifierType = objectType.getIDENTIFIERS();
     if (identifierType != null) {

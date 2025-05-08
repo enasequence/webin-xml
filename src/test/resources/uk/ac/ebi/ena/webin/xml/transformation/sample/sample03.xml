@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SAMPLE_SET>
+    <SAMPLE alias="VitisC_16S_1_8_L001_R1_001" center_name="Graz University of Technical" accession="ERS5524409">
+        <IDENTIFIERS>
+            <PRIMARY_ID>ERS5524409</PRIMARY_ID>
+            <EXTERNAL_ID namespace="BioSample">SAMEA7777172</EXTERNAL_ID>
+            <SUBMITTER_ID namespace="Graz University of Technical">VitisC_16S_1_8_L001_R1_001</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>Music</TITLE>
+        <SAMPLE_NAME>
+            <TAXON_ID>256318</TAXON_ID>
+            <SCIENTIFIC_NAME>metagenome</SCIENTIFIC_NAME>
+        </SAMPLE_NAME>
+    </SAMPLE>
+</SAMPLE_SET>

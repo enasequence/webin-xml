@@ -41,21 +41,22 @@ public class BiosamplesSampleToEnaSampleDocumentConverterTest {
   private BiosamplesSampleToEnaSampleDocumentConverter converter =
       new BiosamplesSampleToEnaSampleDocumentConverter();
 
-  public static Sample getDefaultTestSample() {
-    return getBiosamplesSample("/uk/ac/ebi/ena/webin/xml/conversion/biosamples/sample.json");
+  public static Sample loadSampleFromFile(String fileName) {
+    return getBiosamplesSample("/uk/ac/ebi/ena/webin/xml/conversion/biosamples/" + fileName);
   }
 
   @Test
-  public void test() {
+  public void test01() {
+    String expectedAlias = "hCoV-19/Denmark/DCGC-563136/2022";
     String expectedAccession = "SAMEA110688704";
+    String expectedPrimaryId = expectedAccession;
+    String expectedSubmitterId = expectedAlias;
     long expectedTaxId = 2697049l;
     String expectedOrganism = "Severe acute respiratory syndrome coronavirus 2";
-    String expectedTitle = "hCoV-19/Denmark/DCGC-563136/2022";
-    String expectedSubmitterId = expectedTitle;
-    String expectedSubmitterIdNamespace =
-        "Statens Serum Institut and the Danish Covid19 Genome Consortium (DCGC)";
+    String expectedTitle = expectedAlias;
+    String expectedDescription = "Original";
 
-    Sample biosampleSSample = getDefaultTestSample();
+    Sample biosampleSSample = loadSampleFromFile("sample01.json");
 
     SAMPLESETDocument enaSampleDocument = converter.convert(biosampleSSample);
 
@@ -63,15 +64,16 @@ public class BiosamplesSampleToEnaSampleDocumentConverterTest {
     Assert.assertEquals(1, enaSampleDocument.getSAMPLESET().getSAMPLEArray().length);
 
     SampleType sampleType = enaSampleDocument.getSAMPLESET().getSAMPLEArray(0);
-    Assert.assertEquals(expectedAccession, sampleType.getAlias());
+    Assert.assertEquals(expectedAlias, sampleType.getAlias());
+    Assert.assertEquals(expectedAccession, sampleType.getAccession());
     Assert.assertEquals(
-        expectedAccession, sampleType.getIDENTIFIERS().getSECONDARYIDArray(0).getStringValue());
+        expectedPrimaryId, sampleType.getIDENTIFIERS().getPRIMARYID().getStringValue());
+    Assert.assertEquals(0, sampleType.getIDENTIFIERS().getSECONDARYIDArray().length);
     Assert.assertEquals(
         expectedSubmitterId, sampleType.getIDENTIFIERS().getSUBMITTERID().getStringValue());
-    Assert.assertEquals(
-        expectedSubmitterIdNamespace, sampleType.getIDENTIFIERS().getSUBMITTERID().getNamespace());
+    Assert.assertEquals(0, sampleType.getIDENTIFIERS().getEXTERNALIDArray().length);
     Assert.assertEquals(expectedTitle, sampleType.getTITLE());
-    Assert.assertNull(sampleType.getDESCRIPTION());
+    Assert.assertEquals(expectedDescription, sampleType.getDESCRIPTION());
 
     SampleType.SAMPLENAME sampleNameType = sampleType.getSAMPLENAME();
     Assert.assertEquals(expectedTaxId, sampleNameType.getTAXONID());
@@ -80,6 +82,63 @@ public class BiosamplesSampleToEnaSampleDocumentConverterTest {
     AttributeType[] enaSampleAttributes =
         sampleType.getSAMPLEATTRIBUTES().getSAMPLEATTRIBUTEArray();
     Assert.assertEquals(24, enaSampleAttributes.length);
+
+    biosampleSSample
+        .getAttributes()
+        .forEach(
+            biosamplesSampleAttribute -> {
+              if (ATTRIBUTES_SKIPPED_BY_CONVERTER.stream()
+                  .filter(
+                      skippedAttributeName ->
+                          skippedAttributeName.equalsIgnoreCase(
+                              biosamplesSampleAttribute.getType()))
+                  .findFirst()
+                  .isEmpty()) {
+                assertAttribute(
+                    enaSampleAttributes,
+                    biosamplesSampleAttribute.getType(),
+                    biosamplesSampleAttribute.getValue());
+              }
+            });
+  }
+
+  @Test
+  public void test02() {
+    String expectedAlias = "INPT#4";
+    String expectedAccession = "SAMN00849598";
+    String expectedPrimaryId = expectedAccession;
+    String expectedSubmitterId = expectedAlias;
+    long expectedTaxId = 433733l;
+    String expectedOrganism = "human lung metagenome";
+    String expectedTitle = "GAO_CF_Bv6v4 INPT#4";
+    String expectedDescription = expectedOrganism;
+
+    Sample biosampleSSample = loadSampleFromFile("sample02.json");
+
+    SAMPLESETDocument enaSampleDocument = converter.convert(biosampleSSample);
+
+    Assert.assertNotNull(enaSampleDocument);
+    Assert.assertEquals(1, enaSampleDocument.getSAMPLESET().getSAMPLEArray().length);
+
+    SampleType sampleType = enaSampleDocument.getSAMPLESET().getSAMPLEArray(0);
+    Assert.assertEquals(expectedAlias, sampleType.getAlias());
+    Assert.assertEquals(expectedAccession, sampleType.getAccession());
+    Assert.assertEquals(
+        expectedPrimaryId, sampleType.getIDENTIFIERS().getPRIMARYID().getStringValue());
+    Assert.assertEquals(0, sampleType.getIDENTIFIERS().getSECONDARYIDArray().length);
+    Assert.assertEquals(
+        expectedSubmitterId, sampleType.getIDENTIFIERS().getSUBMITTERID().getStringValue());
+    Assert.assertEquals(0, sampleType.getIDENTIFIERS().getEXTERNALIDArray().length);
+    Assert.assertEquals(expectedTitle, sampleType.getTITLE());
+    Assert.assertEquals(expectedDescription, sampleType.getDESCRIPTION());
+
+    SampleType.SAMPLENAME sampleNameType = sampleType.getSAMPLENAME();
+    Assert.assertEquals(expectedTaxId, sampleNameType.getTAXONID());
+    Assert.assertEquals(expectedOrganism, sampleNameType.getSCIENTIFICNAME());
+
+    AttributeType[] enaSampleAttributes =
+        sampleType.getSAMPLEATTRIBUTES().getSAMPLEATTRIBUTEArray();
+    Assert.assertEquals(9, enaSampleAttributes.length);
 
     biosampleSSample
         .getAttributes()

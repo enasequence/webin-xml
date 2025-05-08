@@ -67,15 +67,15 @@
 
 
    <!-- filter attributes -->
-    <xsl:variable name="filtered-attribute-tags" select="normalize-space( ' ENA-SPOT-COUNT ENA-BASE-COUNT ENA-FIRST-PUBLIC ENA-LAST-UPDATE ENA-LAST-UPDATED ' )" />
-    <xsl:variable name="filtered-attribute-tags-cs" select="concat( ',,', translate( $filtered-attribute-tags, ' ', ',' ), ',' )" />
+    <xsl:variable name="filtered-attribute-tags-cs" select="concat(',,',
+        'ENA-SPOT-COUNT,ENA-BASE-COUNT,ENA-FIRST-PUBLIC,ENA-LAST-UPDATE,ENA-LAST-UPDATED,ENA first public',
+        ',')" />
     <xsl:template name="filter-attributes">
         <xsl:variable name="attribute-tag" select="TAG" />
         <xsl:variable name="attribute-value" select="VALUE" />
         <xsl:variable name="attribute-units" select="UNITS" />
-        <xsl:if test="not( empty( normalize-space( $attribute-tag ) ) ) and not(contains(
-            concat( ', ', normalize-space($filtered-attribute-tags), ', ' ),
-            concat( ' ', $attribute-tag, ' ' ) ) )">
+        <xsl:if test="not( empty( normalize-space( $attribute-tag ) ) ) and
+            not(contains($filtered-attribute-tags-cs, $attribute-tag ) )">
 			<!--xsl:if test="normalize-space( ./TAG )"-->
 	            <xsl:copy>
     	            <xsl:apply-templates select="TAG"/>

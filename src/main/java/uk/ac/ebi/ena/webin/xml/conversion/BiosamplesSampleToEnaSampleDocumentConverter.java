@@ -20,7 +20,8 @@ import uk.ac.ebi.ena.sra.xml.QualifiedNameType;
 import uk.ac.ebi.ena.sra.xml.SAMPLESETDocument;
 import uk.ac.ebi.ena.sra.xml.SampleType;
 
-// Code in this class was borrowed from uk.ac.ebi.ena.sra.biosamples.retrieval.BioSampleParser in
+// Code in this class was originally borrowed from
+// uk.ac.ebi.ena.sra.biosamples.retrieval.BioSampleParser in
 // sub-sra\sra-core.
 public class BiosamplesSampleToEnaSampleDocumentConverter {
 
@@ -37,13 +38,15 @@ public class BiosamplesSampleToEnaSampleDocumentConverter {
     SAMPLESETDocument enaSampleDocument = SAMPLESETDocument.Factory.newInstance();
 
     SampleType sampleType = enaSampleDocument.addNewSAMPLESET().addNewSAMPLE();
-    sampleType.setAlias(biosamplesSample.getAccession());
-    // TODO ask dipayan whether biosamples accession should be a primary id instead of secondary.
-    // also ask him that if biosamples sample has SRA accession in it then should that be used as
-    // secondary?
+    // TODO ask dipayan if name should be used as alias and accession should be set in the accession
+    // field.
+    sampleType.setAlias(biosamplesSample.getName());
+    sampleType.setAccession(biosamplesSample.getAccession());
+
+    // TODO keep or remove after talking to dipayan
     sampleType
         .addNewIDENTIFIERS()
-        .addNewSECONDARYID()
+        .addNewPRIMARYID()
         .setStringValue(biosamplesSample.getAccession());
 
     setSubmitterId(biosamplesSample, sampleType);
@@ -73,6 +76,9 @@ public class BiosamplesSampleToEnaSampleDocumentConverter {
           }
         }
       }
+    } else {
+      QualifiedNameType submitterId = sampleType.getIDENTIFIERS().addNewSUBMITTERID();
+      submitterId.setStringValue(biosamplesSample.getName());
     }
   }
 
@@ -111,6 +117,9 @@ public class BiosamplesSampleToEnaSampleDocumentConverter {
           // TODO ask dipayan why description is not set alongside title above.
           sampleType.setDESCRIPTION(attribute.getValue());
         }
+        // TODO this was not here originally. it was copied from above for testing purposes. keep or
+        // remove after talking to dipayan.
+        sampleType.setDESCRIPTION(attribute.getValue());
       } else if (TITLE.equalsIgnoreCase(type)) {
         sampleType.setTITLE(attribute.getValue());
         isSetTitle = true;
