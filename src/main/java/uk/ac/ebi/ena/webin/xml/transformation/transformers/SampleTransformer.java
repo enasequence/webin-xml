@@ -118,6 +118,7 @@ public class SampleTransformer extends AbstractTransformer
   }
 
   private void transformAttributes(SampleTransformationDTO sampleDto, SampleType sampleType) {
+    addEnaStatusIdAttribute(sampleDto, () -> createNewAttribute(sampleType));
     addFirstPublicLastUpdateAttributes(sampleDto, () -> createNewAttribute(sampleType));
   }
 

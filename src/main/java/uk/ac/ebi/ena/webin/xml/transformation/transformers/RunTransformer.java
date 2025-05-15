@@ -159,7 +159,11 @@ public class RunTransformer extends AbstractTransformer
   }
 
   private void transformAttributes(RunTransformationDTO runDto, RunType runType) {
+    addEnaStatusIdAttribute(runDto, () -> createNewAttribute(runType));
     addFirstPublicLastUpdateAttributes(runDto, () -> createNewAttribute(runType));
+
+    addBaseOrSpotCount(runDto.getBaseCount(), runType, "ENA-BASE-COUNT");
+    addBaseOrSpotCount(runDto.getSpotCount(), runType, "ENA-SPOT-COUNT");
   }
 
   private void appendRunLink(RunType runType, String db, String id) {
@@ -184,5 +188,13 @@ public class RunTransformer extends AbstractTransformer
     }
 
     return attributes.addNewRUNATTRIBUTE();
+  }
+
+  private void addBaseOrSpotCount(Long count, RunType runType, String attributeName) {
+    if (count != null) {
+      AttributeType att = createNewAttribute(runType);
+      att.setTAG(attributeName);
+      att.setVALUE(count.toString());
+    }
   }
 }

@@ -50,6 +50,10 @@
                 <VALUE>Metagenomic assembly</VALUE>
             </PROJECT_ATTRIBUTE>
             <PROJECT_ATTRIBUTE>
+                <TAG>ENA-STATUS-ID</TAG>
+                <VALUE>4</VALUE>
+            </PROJECT_ATTRIBUTE>
+            <PROJECT_ATTRIBUTE>
                 <TAG>ENA-FIRST-PUBLIC</TAG>
                 <VALUE>2021-01-11</VALUE>
             </PROJECT_ATTRIBUTE>

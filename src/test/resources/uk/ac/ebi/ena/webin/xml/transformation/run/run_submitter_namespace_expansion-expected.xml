@@ -49,12 +49,24 @@
         </RUN_LINKS>
         <RUN_ATTRIBUTES>
             <RUN_ATTRIBUTE>
+                <TAG>ENA-STATUS-ID</TAG>
+                <VALUE>4</VALUE>
+            </RUN_ATTRIBUTE>
+            <RUN_ATTRIBUTE>
                 <TAG>ENA-FIRST-PUBLIC</TAG>
                 <VALUE>2020-10-07</VALUE>
             </RUN_ATTRIBUTE>
             <RUN_ATTRIBUTE>
                 <TAG>ENA-LAST-UPDATE</TAG>
                 <VALUE>2020-10-06</VALUE>
+            </RUN_ATTRIBUTE>
+            <RUN_ATTRIBUTE>
+                <TAG>ENA-BASE-COUNT</TAG>
+                <VALUE>490101964</VALUE>
+            </RUN_ATTRIBUTE>
+            <RUN_ATTRIBUTE>
+                <TAG>ENA-SPOT-COUNT</TAG>
+                <VALUE>2330393</VALUE>
             </RUN_ATTRIBUTE>
         </RUN_ATTRIBUTES>
     </RUN>

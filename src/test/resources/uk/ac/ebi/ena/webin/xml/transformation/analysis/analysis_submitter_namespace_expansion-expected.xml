@@ -33,6 +33,10 @@
         </ANALYSIS_LINKS>
         <ANALYSIS_ATTRIBUTES>
             <ANALYSIS_ATTRIBUTE>
+                <TAG>ENA-STATUS-ID</TAG>
+                <VALUE>4</VALUE>
+            </ANALYSIS_ATTRIBUTE>
+            <ANALYSIS_ATTRIBUTE>
                 <TAG>ENA-FIRST-PUBLIC</TAG>
                 <VALUE>2016-05-16</VALUE>
             </ANALYSIS_ATTRIBUTE>

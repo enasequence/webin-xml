@@ -109,6 +109,7 @@ public class StudyTransformer extends AbstractTransformer
   }
 
   private void transformAttributes(StudyTransformationDTO studyDto, StudyType studyType) {
+    addEnaStatusIdAttribute(studyDto, () -> createNewAttribute(studyType));
     addFirstPublicLastUpdateAttributes(studyDto, () -> createNewAttribute(studyType));
 
     // ArrayExpress Accession

@@ -22,6 +22,9 @@ public class RunTransformationDTO extends PresentationTransformationDTO {
 
   private Set<String> sampleIds = Collections.emptySet();
 
+  private Long baseCount;
+  private Long spotCount;
+
   public String getRunId() {
     return runId;
   }
@@ -60,5 +63,21 @@ public class RunTransformationDTO extends PresentationTransformationDTO {
 
   public void setExperimentTitle(String experimentTitle) {
     this.experimentTitle = experimentTitle;
+  }
+
+  public Long getBaseCount() {
+    return baseCount;
+  }
+
+  public void setBaseCount(Long baseCount) {
+    this.baseCount = baseCount;
+  }
+
+  public Long getSpotCount() {
+    return spotCount;
+  }
+
+  public void setSpotCount(Long spotCount) {
+    this.spotCount = spotCount;
   }
 }
