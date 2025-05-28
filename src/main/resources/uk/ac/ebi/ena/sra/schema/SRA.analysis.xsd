@@ -53,6 +53,8 @@
                     <xs:enumeration value="manifest"/>
                     <xs:enumeration value="csi"/>
                     <xs:enumeration value="bcf_aggregate"/>
+                    <xs:enumeration value="sample_tsv"/>
+                    <xs:enumeration value="tax_tsv"/>
                     <xs:enumeration value="other"/>
                 </xs:restriction>
             </xs:simpleType>
