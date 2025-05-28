@@ -1272,7 +1272,6 @@ public class EnaSraConverterTest {
             + "              \"title\" : \"Test_Title\",\n"
             + "              \"description\" : \"It has recently been shown that RNA 3' end formation plays a widespread role in controlling gene expression than previously thought. In order to examine the impact of regulated 3' end formation genome-wide we applied Direct RNA Sequencing by Helicos to A. thaliana. With these data we show the authentic transcriptome in unprecedented detail and how 3' gene end formation impacts genome organization. We reveal extreme heterogeneity in RNA 3' ends, discover previously unrecognized non-coding RNAs and propose widespread re-annotation of the genome. We explain the origin of most poly(A)+ antisense RNAs and identify cis-elements that control 3' end formation in different registers. These findings are essential to understand what the genome actually encodes, how it is organized and the impact of regulated 3' end formation on these processes.\",\n"
             + "              \"sequencingProject\" : {\n"
-            + "                \"locusTagPrefixes\" : [ ]\n"
             + "              },\n"
             + "              \"attributes\" : [ {\n"
             + "                \"tag\" : \"ENA-SUBMISSION-TOOL\",\n"
@@ -2538,8 +2537,7 @@ public class EnaSraConverterTest {
             + "    \"checksum\" : \"9840f585055afc37de353706fd31a377\",\n"
             + "    \"fileName\" : \"Bmi1_bw.bam\",\n"
             + "    \"checksumMethod\" : \"MD5\"\n"
-            + "  } ],\n"
-            + "  \"attributes\" : [ ]"
+            + "  } ]\n"
             + "}\n",
         enaSraConverter.convertAnalysisXmlToJson(xml));
   }

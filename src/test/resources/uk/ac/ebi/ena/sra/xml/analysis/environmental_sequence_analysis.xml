@@ -26,12 +26,16 @@
         </ANALYSIS_TYPE>
         <FILES>
             <FILE
-                    filename="ERZ266/ERZ266973/HPSI0114i-eipl_3.GRCh37.75.cdna.kallisto.transcripts.abundance.rnaseq.20160125.tsv.gz"
-                    filetype="other" checksum_method="MD5"
+                    filename="ERZ266/ERZ266973/HPSI0114i-eipl_3.GRCh37.75.cdna.kallisto.transcripts.abundance.rnaseq.20160125_sample_tsv.tsv.gz"
+                    filetype="sample_tsv" checksum_method="MD5"
                     checksum="3185384933bd6dd54a5b869336c751df"/>
             <FILE
-                    filename="ERZ266/ERZ266973/HPSI0114i-eipl_3.GRCh37.75.cdna.kallisto.transcripts.abundance.rnaseq.fasta.gz"
-                    filetype="other" checksum_method="MD5"
+                    filename="ERZ266/ERZ266973/HPSI0114i-eipl_3.GRCh37.75.cdna.kallisto.transcripts.abundance.rnaseq.20160125_tax_tsv.tsv.gz"
+                    filetype="tax_tsv" checksum_method="MD5"
+                    checksum="3185384933bd6dd54a5b869336c751df"/>
+            <FILE
+                    filename="ERZ266/ERZ266973/HPSI0114i-eipl_3.GRCh37.75.cdna.kallisto.transcripts.abundance.rnaseq_fasta_file.fasta.gz"
+                    filetype="fasta" checksum_method="MD5"
                     checksum="3185384933bd6dd54a5b869336c752df"/>
         </FILES>
     </ANALYSIS>
