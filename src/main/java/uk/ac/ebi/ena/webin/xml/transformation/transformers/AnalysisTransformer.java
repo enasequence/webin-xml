@@ -107,7 +107,7 @@ public class AnalysisTransformer extends AbstractTransformer
 
   private void transformAttributes(
       AnalysisTransformationDTO analysisDto, AnalysisType analysisType) {
-
+    addEnaStatusIdAttribute(analysisDto, () -> createNewAttribute(analysisType));
     addFirstPublicLastUpdateAttributes(analysisDto, () -> createNewAttribute(analysisType));
   }
 

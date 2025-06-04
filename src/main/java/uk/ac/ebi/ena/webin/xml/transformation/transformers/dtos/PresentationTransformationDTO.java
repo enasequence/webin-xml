@@ -23,6 +23,8 @@ public class PresentationTransformationDTO {
   private String firstPublic;
   private String lastUpdated;
 
+  private Integer statusId;
+
   private Set<String> secondary = Collections.emptySet();
 
   public String getSubmissionId() {
@@ -63,6 +65,14 @@ public class PresentationTransformationDTO {
 
   public void setLastUpdated(String lastUpdated) {
     this.lastUpdated = lastUpdated;
+  }
+
+  public Integer getStatusId() {
+    return statusId;
+  }
+
+  public void setStatusId(Integer statusId) {
+    this.statusId = statusId;
   }
 
   public Set<String> getSecondary() {

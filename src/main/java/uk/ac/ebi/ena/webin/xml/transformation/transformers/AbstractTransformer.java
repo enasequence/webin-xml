@@ -273,6 +273,13 @@ public abstract class AbstractTransformer {
       appendAttribute(attributeTypeSupplier, "ENA-LAST-UPDATE", inpObj.getLastUpdated());
   }
 
+  protected <T extends PresentationTransformationDTO> void addEnaStatusIdAttribute(
+      T inpObj, Supplier<AttributeType> attributeTypeSupplier) {
+    if (inpObj.getStatusId() != null) {
+      appendAttribute(attributeTypeSupplier, "ENA-STATUS-ID", inpObj.getStatusId().toString());
+    }
+  }
+
   protected void appendAttribute(
       Supplier<AttributeType> attributeTypeSupplier, String tag, String value) {
     if (tag == null || tag.replaceAll(" ", "").isEmpty()) {

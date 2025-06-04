@@ -35,6 +35,10 @@
         </STUDY_LINKS>
         <STUDY_ATTRIBUTES>
             <STUDY_ATTRIBUTE>
+                <TAG>ENA-STATUS-ID</TAG>
+                <VALUE>4</VALUE>
+            </STUDY_ATTRIBUTE>
+            <STUDY_ATTRIBUTE>
                 <TAG>ENA-FIRST-PUBLIC</TAG>
                 <VALUE>2021-01-12</VALUE>
             </STUDY_ATTRIBUTE>

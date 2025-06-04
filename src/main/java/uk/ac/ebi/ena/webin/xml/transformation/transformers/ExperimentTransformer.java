@@ -18,14 +18,7 @@ import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import uk.ac.ebi.ena.sra.xml.AttributeType;
-import uk.ac.ebi.ena.sra.xml.EXPERIMENTSETDocument;
-import uk.ac.ebi.ena.sra.xml.ExperimentType;
-import uk.ac.ebi.ena.sra.xml.IdentifierType;
-import uk.ac.ebi.ena.sra.xml.PoolMemberType;
-import uk.ac.ebi.ena.sra.xml.QualifiedNameType;
-import uk.ac.ebi.ena.sra.xml.SampleDescriptorType;
-import uk.ac.ebi.ena.sra.xml.XRefType;
+import uk.ac.ebi.ena.sra.xml.*;
 import uk.ac.ebi.ena.webin.xml.transformation.WebinXmlTransformationException;
 import uk.ac.ebi.ena.webin.xml.transformation.fixers.InstrumentModelEnumFixer;
 import uk.ac.ebi.ena.webin.xml.transformation.fixers.LibrarySourceEnumFixer;
@@ -121,6 +114,8 @@ public class ExperimentTransformer extends AbstractTransformer
         null == experimentDto.getInstrumentModel() ? "" : experimentDto.getInstrumentModel());
 
     transformLinks(experimentDto, experimentType);
+
+    transformAttributes(experimentDto, experimentType);
 
     return experimentSetDocument;
   }
@@ -248,6 +243,11 @@ public class ExperimentTransformer extends AbstractTransformer
         true);
 
     appendArrayExpressLink(experimentDto.getStudyAlias(), () -> createNewLinkXRef(experimentType));
+  }
+
+  private void transformAttributes(
+      ExperimentTransformationDTO experimentDto, ExperimentType experimentType) {
+    addEnaStatusIdAttribute(experimentDto, () -> createNewAttribute(experimentType));
   }
 
   private void appendExperimentLink(ExperimentType experimentType, String db, String id) {

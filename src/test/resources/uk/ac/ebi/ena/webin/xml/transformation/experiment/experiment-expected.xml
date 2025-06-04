@@ -61,5 +61,11 @@
                 </XREF_LINK>
             </EXPERIMENT_LINK>
         </EXPERIMENT_LINKS>
+        <EXPERIMENT_ATTRIBUTES>
+            <EXPERIMENT_ATTRIBUTE>
+                <TAG>ENA-STATUS-ID</TAG>
+                <VALUE>4</VALUE>
+            </EXPERIMENT_ATTRIBUTE>
+        </EXPERIMENT_ATTRIBUTES>
     </EXPERIMENT>
 </EXPERIMENT_SET>

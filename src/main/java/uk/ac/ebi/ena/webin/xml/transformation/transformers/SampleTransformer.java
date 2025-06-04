@@ -137,6 +137,7 @@ public class SampleTransformer extends AbstractTransformer
 
   /** Adds first public and last update in the list of attributes if they are present. */
   private void transformAttributes(SampleTransformationDTO sampleDto, SampleType sampleType) {
+    addEnaStatusIdAttribute(sampleDto, () -> createNewAttribute(sampleType));
     addFirstPublicLastUpdateAttributes(sampleDto, () -> createNewAttribute(sampleType));
   }
 

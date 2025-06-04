@@ -7,7 +7,7 @@ plugins {
 
 group = 'uk.ac.ebi.ena.sra'
 archivesBaseName = 'webin-xml'
-version = '3.1.0-dev-04'
+version = '3.2.0-dev-01'
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
@@ -68,9 +68,7 @@ repositories {
 
 dependencies {
     api ('uk.ac.ebi.biosamples:models-core:5.+')
-
-    api 'org.apache.xmlbeans:xmlbeans:2.6.0'
-
+    api 'org.apache.xmlbeans:xmlbeans:5.2.0'
     api(group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.11.2')
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
@@ -104,7 +102,6 @@ task generateXMLBeanSources () {
                 classpath: configurations.compileClasspath.asPath)
         sourceSets.main.resources.files.each {File file ->
             ant.xmlbean(
-                    javasource: 1.8,
                     schema: file.path,
                     classgendir: "build/classes/java/main" ,
                     srcgendir: "src/generated/java",

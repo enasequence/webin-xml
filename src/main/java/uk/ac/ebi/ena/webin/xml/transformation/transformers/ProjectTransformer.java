@@ -171,6 +171,7 @@ public class ProjectTransformer extends AbstractTransformer
   }
 
   private void transformAttributes(ProjectTransformationDTO projectDto, ProjectType projectType) {
+    addEnaStatusIdAttribute(projectDto, () -> createNewAttribute(projectType));
     addFirstPublicLastUpdateAttributes(projectDto, () -> createNewAttribute(projectType));
   }
 

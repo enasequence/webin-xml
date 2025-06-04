@@ -37,6 +37,10 @@
                 <VALUE>Q31.4</VALUE>
             </SAMPLE_ATTRIBUTE>
             <SAMPLE_ATTRIBUTE>
+                <TAG>ENA-STATUS-ID</TAG>
+                <VALUE>4</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
                 <TAG>ENA-FIRST-PUBLIC</TAG>
                 <VALUE>2010-02-26</VALUE>
             </SAMPLE_ATTRIBUTE>
