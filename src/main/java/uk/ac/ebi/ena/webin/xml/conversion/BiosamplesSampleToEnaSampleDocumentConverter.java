@@ -38,12 +38,9 @@ public class BiosamplesSampleToEnaSampleDocumentConverter {
     SAMPLESETDocument enaSampleDocument = SAMPLESETDocument.Factory.newInstance();
 
     SampleType sampleType = enaSampleDocument.addNewSAMPLESET().addNewSAMPLE();
-    // TODO ask dipayan if name should be used as alias and accession should be set in the accession
-    // field.
     sampleType.setAlias(biosamplesSample.getName());
     sampleType.setAccession(biosamplesSample.getAccession());
 
-    // TODO keep or remove after talking to dipayan
     sampleType
         .addNewIDENTIFIERS()
         .addNewPRIMARYID()
@@ -77,6 +74,10 @@ public class BiosamplesSampleToEnaSampleDocumentConverter {
         }
       }
     } else {
+      // This might interfere with how webin-rest uses documents created by this class. In the near
+      // future,
+      // the way sample proxies are handled in webin-rest is going to be changed. When that happens,
+      // this will no longer be an issue for webin-rest.
       QualifiedNameType submitterId = sampleType.getIDENTIFIERS().addNewSUBMITTERID();
       submitterId.setStringValue(biosamplesSample.getName());
     }
@@ -109,17 +110,14 @@ public class BiosamplesSampleToEnaSampleDocumentConverter {
       } else if (DESCRIPTION.equalsIgnoreCase(type)
           || DESCRIPTION1.equalsIgnoreCase(type)
           || DESCRIPTION2.equalsIgnoreCase(type)) {
+
+        sampleType.setDESCRIPTION(attribute.getValue());
+
         // If title has not been set yet then use description as title.
         if (!isSetTitle) {
           sampleType.setTITLE(attribute.getValue());
           isSetTitle = true;
-        } else {
-          // TODO ask dipayan why description is not set alongside title above.
-          sampleType.setDESCRIPTION(attribute.getValue());
         }
-        // TODO this was not here originally. it was copied from above for testing purposes. keep or
-        // remove after talking to dipayan.
-        sampleType.setDESCRIPTION(attribute.getValue());
       } else if (TITLE.equalsIgnoreCase(type)) {
         sampleType.setTITLE(attribute.getValue());
         isSetTitle = true;
