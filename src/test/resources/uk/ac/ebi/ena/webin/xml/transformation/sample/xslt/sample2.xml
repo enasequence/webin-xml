@@ -28,6 +28,11 @@
                 <VALUE>test</VALUE>
                 <UNITS>test</UNITS>
             </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>ENA first public</TAG>
+                <VALUE>test</VALUE>
+                <UNITS>test</UNITS>
+            </SAMPLE_ATTRIBUTE>
         </SAMPLE_ATTRIBUTES>
     </SAMPLE>
 </SAMPLE_SET>

@@ -10,6 +10,7 @@
  */
 package uk.ac.ebi.ena.webin.xml.transformation.transformers;
 
+import java.util.stream.Stream;
 import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
@@ -64,13 +65,30 @@ public class SampleTransformer extends AbstractTransformer
     return sampleSetDocument;
   }
 
+  /**
+   * - Remove submitter ID if alias is not present.<br>
+   * - Create secondary identifiers if not present.<br>
+   * - Set Biosamples ID as external ID if possible.<br>
+   * - Set center name as namespace attribute of submitter ID if possible.
+   */
   private void transformIdentifiers(SampleTransformationDTO sampleDto, SampleType sampleType) {
 
     unsetIdentifiersSubmitterIdIfBlankAlias(sampleType);
 
+    if (!sampleDto.getSecondary().isEmpty()) {
+      injectSecondaries(sampleType.getIDENTIFIERS(), sampleDto.getSecondary());
+    }
+
     if (sampleType.isSetIDENTIFIERS()) {
       // append BioSample identifier
-      if (sampleDto.getSampleId().startsWith("ERS") && sampleDto.getBioSampleId() != null) {
+      if (sampleDto.getBioSampleId() != null
+          && sampleType.getIDENTIFIERS() != null
+          && Stream.of(sampleType.getIDENTIFIERS().getEXTERNALIDArray())
+              .noneMatch(
+                  qualifiedNameType ->
+                      qualifiedNameType
+                          .getStringValue()
+                          .equalsIgnoreCase(sampleDto.getBioSampleId()))) {
         QualifiedNameType bioSampleNameType = sampleType.getIDENTIFIERS().addNewEXTERNALID();
         bioSampleNameType.setStringValue(sampleDto.getBioSampleId());
         bioSampleNameType.setNamespace("BioSample");
@@ -80,7 +98,7 @@ public class SampleTransformer extends AbstractTransformer
     fixIdentifiers(sampleType);
   }
 
-  /** Get fixed tax id of the sample XML from DB and inject that to the sample XML */
+  /** If present, uses sample's scientific name as title if title is not set. */
   private void generateTitle(SampleType sampleType) {
     String title = sampleType.getTITLE();
     if (null == title || title.isEmpty()) {
@@ -117,6 +135,7 @@ public class SampleTransformer extends AbstractTransformer
         true);
   }
 
+  /** Adds first public and last update in the list of attributes if they are present. */
   private void transformAttributes(SampleTransformationDTO sampleDto, SampleType sampleType) {
     addEnaStatusIdAttribute(sampleDto, () -> createNewAttribute(sampleType));
     addFirstPublicLastUpdateAttributes(sampleDto, () -> createNewAttribute(sampleType));
