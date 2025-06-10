@@ -1,0 +1,55 @@
+{
+  "name" : "INPT#4",
+  "accession" : "SAMN00849598",
+  "domain" : "self.BiosampleImportNCBI",
+  "taxId" : 433733,
+  "status" : "PUBLIC",
+  "release" : "2012-10-17T07:44:10.777Z",
+  "update" : "2022-03-28T17:22:51.339Z",
+  "submitted" : "2012-04-05T11:23:17.920Z",
+  "characteristics" : {
+    "External Id" : [ {
+      "text" : "SAMN00849598",
+      "tag" : "Namespace:BioSample"
+    } ],
+    "INSDC center name" : [ {
+      "text" : "MBL"
+    } ],
+    "INSDC first public" : [ {
+      "text" : "2012-10-17T07:44:10.777Z"
+    } ],
+    "INSDC last update" : [ {
+      "text" : "2014-03-29T08:49:09.850Z"
+    } ],
+    "INSDC secondary accession" : [ {
+      "text" : "SRS308070"
+    } ],
+    "INSDC status" : [ {
+      "text" : "live"
+    } ],
+    "NCBI submission model" : [ {
+      "text" : "Generic"
+    } ],
+    "NCBI submission package" : [ {
+      "text" : "Generic.1.0"
+    } ],
+    "SRA accession" : [ {
+      "text" : "SRS308070"
+    } ],
+    "description" : [ {
+      "text" : "human lung metagenome"
+    } ],
+    "organism" : [ {
+      "text" : "human lung metagenome",
+      "ontologyTerms" : [ "http://purl.obolibrary.org/obo/NCBITaxon_433733" ]
+    } ],
+    "title" : [ {
+      "text" : "GAO_CF_Bv6v4 INPT#4"
+    } ]
+  },
+  "externalReferences" : [ {
+    "url" : "https://www.ebi.ac.uk/ena/data/view/SAMN00849598"
+  } ],
+  "submittedVia" : "JSON_API",
+  "create" : "2012-04-05T11:23:17.920Z"
+}

@@ -194,7 +194,7 @@ public class WebinXmlTransformationTest {
   @Test
   public void testSamplePresentationTransformation() throws Exception {
     testPresentationTransformationForFile(
-        "sample/sample",
+        "sample/sample01",
         xmlInputStream -> {
           SAMPLESETDocument doc = SAMPLESETDocument.Factory.parse(xmlInputStream);
 
@@ -208,6 +208,38 @@ public class WebinXmlTransformationTest {
           dto.setStatusId(4);
           dto.setFirstPublic("2021-01-11");
           dto.setLastUpdated("2021-01-11");
+
+          return WebinXmlTransformation.createSampleTransformer()
+              .transformForPresentation(dto, doc);
+        });
+
+    testPresentationTransformationForFile(
+        "sample/sample02",
+        xmlInputStream -> {
+          SAMPLESETDocument doc = SAMPLESETDocument.Factory.parse(xmlInputStream);
+
+          SampleTransformationDTO dto = new SampleTransformationDTO();
+          dto.setSampleId("SRS308070");
+          dto.setBioSampleId("SAMN00849598");
+          dto.setSecondary(Collections.singleton("SRS308070"));
+          dto.setCenterName("MBL");
+
+          return WebinXmlTransformation.createSampleTransformer()
+              .transformForPresentation(dto, doc);
+        });
+
+    testPresentationTransformationForFile(
+        "sample/sample03",
+        xmlInputStream -> {
+          SAMPLESETDocument doc = SAMPLESETDocument.Factory.parse(xmlInputStream);
+
+          SampleTransformationDTO dto = new SampleTransformationDTO();
+          dto.setSampleId("ERS5524409");
+          dto.setBioSampleId("SAMEA7777172");
+          dto.setSubmissionId("ERA3206930");
+          dto.setSubmissionAlias(
+              "ena-SUBMISSION-Graz University of Technical-11-01-2021-14:11:54:887-1");
+          dto.setCenterName("Graz University of Technical");
 
           return WebinXmlTransformation.createSampleTransformer()
               .transformForPresentation(dto, doc);
