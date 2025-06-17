@@ -1,0 +1,52 @@
+<SAMPLE_SET>
+    <SAMPLE accession="SAMN00849598" alias="INPT#4" center_name="MBL">
+        <IDENTIFIERS>
+            <PRIMARY_ID>SAMN00849598</PRIMARY_ID>
+            <SUBMITTER_ID>INPT#4</SUBMITTER_ID>
+        </IDENTIFIERS>
+        <TITLE>GAO_CF_Bv6v4 INPT#4</TITLE>
+        <SAMPLE_NAME>
+            <TAXON_ID>433733</TAXON_ID>
+            <SCIENTIFIC_NAME>human lung metagenome</SCIENTIFIC_NAME>
+        </SAMPLE_NAME>
+        <DESCRIPTION>human lung metagenome</DESCRIPTION>
+        <SAMPLE_ATTRIBUTES>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>External Id</TAG>
+                <VALUE>SAMN00849598</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>INSDC center name</TAG>
+                <VALUE>MBL</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>INSDC first public</TAG>
+                <VALUE>2012-10-17T07:44:10.777Z</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>INSDC last update</TAG>
+                <VALUE>2014-03-29T08:49:09.850Z</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>INSDC secondary accession</TAG>
+                <VALUE>SRS308070</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>INSDC status</TAG>
+                <VALUE>live</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>NCBI submission model</TAG>
+                <VALUE>Generic</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>NCBI submission package</TAG>
+                <VALUE>Generic.1.0</VALUE>
+            </SAMPLE_ATTRIBUTE>
+            <SAMPLE_ATTRIBUTE>
+                <TAG>SRA accession</TAG>
+                <VALUE>SRS308070</VALUE>
+            </SAMPLE_ATTRIBUTE>
+        </SAMPLE_ATTRIBUTES>
+    </SAMPLE>
+</SAMPLE_SET>

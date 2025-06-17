@@ -20,7 +20,8 @@ import uk.ac.ebi.ena.sra.xml.QualifiedNameType;
 import uk.ac.ebi.ena.sra.xml.SAMPLESETDocument;
 import uk.ac.ebi.ena.sra.xml.SampleType;
 
-// Code in this class was borrowed from uk.ac.ebi.ena.sra.biosamples.retrieval.BioSampleParser in
+// Code in this class was originally borrowed from
+// uk.ac.ebi.ena.sra.biosamples.retrieval.BioSampleParser in
 // sub-sra\sra-core.
 public class BiosamplesSampleToEnaSampleDocumentConverter {
 
@@ -37,13 +38,12 @@ public class BiosamplesSampleToEnaSampleDocumentConverter {
     SAMPLESETDocument enaSampleDocument = SAMPLESETDocument.Factory.newInstance();
 
     SampleType sampleType = enaSampleDocument.addNewSAMPLESET().addNewSAMPLE();
-    sampleType.setAlias(biosamplesSample.getAccession());
-    // TODO ask dipayan whether biosamples accession should be a primary id instead of secondary.
-    // also ask him that if biosamples sample has SRA accession in it then should that be used as
-    // secondary?
+    sampleType.setAlias(biosamplesSample.getName());
+    sampleType.setAccession(biosamplesSample.getAccession());
+
     sampleType
         .addNewIDENTIFIERS()
-        .addNewSECONDARYID()
+        .addNewPRIMARYID()
         .setStringValue(biosamplesSample.getAccession());
 
     setSubmitterId(biosamplesSample, sampleType);
@@ -73,6 +73,13 @@ public class BiosamplesSampleToEnaSampleDocumentConverter {
           }
         }
       }
+    } else {
+      // This might interfere with how webin-rest uses documents created by this class. In the near
+      // future,
+      // the way sample proxies are handled in webin-rest is going to be changed. When that happens,
+      // this will no longer be an issue for webin-rest.
+      QualifiedNameType submitterId = sampleType.getIDENTIFIERS().addNewSUBMITTERID();
+      submitterId.setStringValue(biosamplesSample.getName());
     }
   }
 
@@ -103,13 +110,13 @@ public class BiosamplesSampleToEnaSampleDocumentConverter {
       } else if (DESCRIPTION.equalsIgnoreCase(type)
           || DESCRIPTION1.equalsIgnoreCase(type)
           || DESCRIPTION2.equalsIgnoreCase(type)) {
+
+        sampleType.setDESCRIPTION(attribute.getValue());
+
         // If title has not been set yet then use description as title.
         if (!isSetTitle) {
           sampleType.setTITLE(attribute.getValue());
           isSetTitle = true;
-        } else {
-          // TODO ask dipayan why description is not set alongside title above.
-          sampleType.setDESCRIPTION(attribute.getValue());
         }
       } else if (TITLE.equalsIgnoreCase(type)) {
         sampleType.setTITLE(attribute.getValue());

@@ -50,6 +50,9 @@ public class Submission {
   @JacksonXmlProperty(localName = "TITLE", isAttribute = true)
   private String title;
 
+  @JacksonXmlProperty(localName = "lab_name", isAttribute = true)
+  private String labName;
+
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IDENTIFIERS")
   private Identifiers identifiers;

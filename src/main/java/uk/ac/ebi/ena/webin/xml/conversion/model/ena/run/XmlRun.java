@@ -109,7 +109,10 @@ public class XmlRun implements FromXmlMapper<Run> {
       to.setInstrumentModel(instrumentEntry.getValue().entrySet().iterator().next().getValue());
     }
 
-    to.setFiles(dataBlock.getFiles());
+    if (dataBlock != null) {
+      to.setFiles(dataBlock.getFiles());
+    }
+
     to.setAttributes(attributes);
     to.setLinks(links);
 
