@@ -34,6 +34,8 @@ public class EnaSraConverterTest {
 
   @Rule public ExpectedException expectedEx = ExpectedException.none();
 
+  // submission
+
   @Test
   public void testConvertSubmissionJsonToXml() {
     final String webinSubmissionJson =
@@ -466,6 +468,57 @@ public class EnaSraConverterTest {
   }
 
   @Test
+  public void testConvertSubmissionXmlWithLabNameToJson() throws JSONException {
+    String submissionXml =
+        "<SUBMISSION_SET>\n"
+            + "  <SUBMISSION accession=\"ERA245046\" alias=\"CNS_ALP_01_08_2013\" center_name=\"Genoscope\" lab_name=\"The Genoscope center\" submission_date=\"2013-08-01T00:00:00\">\n"
+            + "    <IDENTIFIERS>\n"
+            + "      <PRIMARY_ID>ERA245046</PRIMARY_ID>\n"
+            + "      <SUBMITTER_ID namespace=\"Genoscope\">CNS_ALP_01_08_2013</SUBMITTER_ID>\n"
+            + "    </IDENTIFIERS>\n"
+            + "    <TITLE>Submitted by Genoscope on 01-AUG-2013</TITLE>\n"
+            + "    <SUBMISSION_LINKS>\n"
+            + "      <SUBMISSION_LINK>\n"
+            + "        <XREF_LINK>\n"
+            + "          <DB>ENA-FASTQ-FILES</DB>\n"
+            + "          <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERA245046&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>\n"
+            + "        </XREF_LINK>\n"
+            + "      </SUBMISSION_LINK>\n"
+            + "      <SUBMISSION_LINK>\n"
+            + "        <XREF_LINK>\n"
+            + "          <DB>ENA-SUBMITTED-FILES</DB>\n"
+            + "          <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERA245046&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>\n"
+            + "        </XREF_LINK>\n"
+            + "      </SUBMISSION_LINK>\n"
+            + "    </SUBMISSION_LINKS>\n"
+            + "  </SUBMISSION>\n"
+            + "</SUBMISSION_SET>";
+
+    assertJson(
+        "{\n"
+            + "  \"alias\" : \"CNS_ALP_01_08_2013\",\n"
+            + "  \"accession\" : \"ERA245046\",\n"
+            + "  \"centerName\" : \"Genoscope\",\n"
+            + "  \"submissionDate\" : \"2013-08-01T00:00:00\",\n"
+            + "  \"title\" : \"Submitted by Genoscope on 01-AUG-2013\",\n"
+            + "  \"identifiers\" : { },\n"
+            + "  \"links\" : [ {\n"
+            + "    \"xrefLink\" : {\n"
+            + "      \"db\" : \"ENA-FASTQ-FILES\",\n"
+            + "      \"id\" : \"https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERA245046&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes\"\n"
+            + "    }\n"
+            + "  }, {\n"
+            + "    \"xrefLink\" : {\n"
+            + "      \"db\" : \"ENA-SUBMITTED-FILES\",\n"
+            + "      \"id\" : \"https://www.ebi.ac.uk/ena/portal/api/filereport?accession=ERA245046&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format\"\n"
+            + "    }\n"
+            + "  } ],\n"
+            + "  \"labName\" : \"The Genoscope center\"\n"
+            + "}",
+        enaSraConverter.convertSubmissionXmlToJson(submissionXml));
+  }
+
+  @Test
   public void testConvertInvalidSubmissionJsonToXml() {
     expectedEx.expect(WebinXmlConversionException.class);
 
@@ -512,6 +565,8 @@ public class EnaSraConverterTest {
 
     enaSraConverter.convertSubmissionJsonToXml(webinSubmissionJson);
   }
+
+  // receipt
 
   @Test
   public void testConvertReceiptJsonToXml() {
@@ -712,6 +767,8 @@ public class EnaSraConverterTest {
             + "}",
         enaSraConverter.convertReceiptXmlToJson(receiptXml));
   }
+
+  // sample
 
   @Test
   public void testConvertSampleXmlToJson() throws JSONException {
@@ -992,7 +1049,7 @@ public class EnaSraConverterTest {
         enaSraConverter.convertSampleXmlToJson(sampleXml));
   }
 
-  // PROJECT data model tests
+  // project
 
   @Test
   public void testConvertSequencingProjectJsonToXml() {
@@ -1618,6 +1675,8 @@ public class EnaSraConverterTest {
         enaSraConverter.convertProjectXmlToJson(xml));
   }
 
+  // experiment
+
   @Test
   public void testExperimentJsonConversionToXmlExperimentLibraryLayoutPaired() {
     String json =
@@ -1898,6 +1957,8 @@ public class EnaSraConverterTest {
             + "}");
   }
 
+  // run
+
   @Test
   public void testRunJsonConversionToXml() {
     String json =
@@ -2169,6 +2230,149 @@ public class EnaSraConverterTest {
             + "}\n",
         enaSraConverter.convertRunXmlToJson(xml));
   }
+
+  @Test
+  public void testRunXmlWithoutDataBlockConversionToJson() throws JSONException {
+    String xml =
+        "<RUN_SET>\n"
+            + "  <RUN accession=\"SRR27804374\" alias=\"GSM8055017_r1\" broker_name=\"NCBI\">\n"
+            + "    <IDENTIFIERS>\n"
+            + "      <PRIMARY_ID>SRR27804374</PRIMARY_ID>\n"
+            + "      <EXTERNAL_ID namespace=\"GEO\">GSM8055017_r1</EXTERNAL_ID>\n"
+            + "      <SUBMITTER_ID namespace=\"\">GSM8055017_r1</SUBMITTER_ID>\n"
+            + "    </IDENTIFIERS>\n"
+            + "    <TITLE>NextSeq 500 sequencing; GSM8055017: F123 GAM library f123_1NP_GAM180410_A12_1_S89_R1_001; Mus musculus; OTHER</TITLE>\n"
+            + "    <EXPERIMENT_REF accession=\"SRX23467668\">\n"
+            + "      <IDENTIFIERS>\n"
+            + "        <PRIMARY_ID>SRX23467668</PRIMARY_ID>\n"
+            + "        <EXTERNAL_ID namespace=\"GEO\">GSM8055017_r1</EXTERNAL_ID>\n"
+            + "      </IDENTIFIERS>\n"
+            + "    </EXPERIMENT_REF>\n"
+            + "    <RUN_LINKS>\n"
+            + "      <RUN_LINK>\n"
+            + "        <XREF_LINK>\n"
+            + "          <DB>ENA-SUBMISSION</DB>\n"
+            + "          <ID>SRA1795198</ID>\n"
+            + "        </XREF_LINK>\n"
+            + "      </RUN_LINK>\n"
+            + "      <RUN_LINK>\n"
+            + "        <XREF_LINK>\n"
+            + "          <DB>ENA-STUDY</DB>\n"
+            + "          <ID>SRP487132</ID>\n"
+            + "        </XREF_LINK>\n"
+            + "      </RUN_LINK>\n"
+            + "      <RUN_LINK>\n"
+            + "        <XREF_LINK>\n"
+            + "          <DB>ENA-SAMPLE</DB>\n"
+            + "          <ID>SRS20320187</ID>\n"
+            + "        </XREF_LINK>\n"
+            + "      </RUN_LINK>\n"
+            + "      <RUN_LINK>\n"
+            + "        <XREF_LINK>\n"
+            + "          <DB>ENA-FASTQ-FILES</DB>\n"
+            + "          <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRR27804374&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes]]></ID>\n"
+            + "        </XREF_LINK>\n"
+            + "      </RUN_LINK>\n"
+            + "      <RUN_LINK>\n"
+            + "        <XREF_LINK>\n"
+            + "          <DB>ENA-SUBMITTED-FILES</DB>\n"
+            + "          <ID><![CDATA[https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRR27804374&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format]]></ID>\n"
+            + "        </XREF_LINK>\n"
+            + "      </RUN_LINK>\n"
+            + "    </RUN_LINKS>\n"
+            + "    <RUN_ATTRIBUTES>\n"
+            + "      <RUN_ATTRIBUTE>\n"
+            + "        <TAG>loader</TAG>\n"
+            + "        <VALUE>fastq-load.py</VALUE>\n"
+            + "      </RUN_ATTRIBUTE>\n"
+            + "      <RUN_ATTRIBUTE>\n"
+            + "        <TAG>ENA-STATUS-ID</TAG>\n"
+            + "        <VALUE>4</VALUE>\n"
+            + "      </RUN_ATTRIBUTE>\n"
+            + "      <RUN_ATTRIBUTE>\n"
+            + "        <TAG>ENA-FIRST-PUBLIC</TAG>\n"
+            + "        <VALUE>2025-02-23</VALUE>\n"
+            + "      </RUN_ATTRIBUTE>\n"
+            + "      <RUN_ATTRIBUTE>\n"
+            + "        <TAG>ENA-LAST-UPDATE</TAG>\n"
+            + "        <VALUE>2025-02-23</VALUE>\n"
+            + "      </RUN_ATTRIBUTE>\n"
+            + "      <RUN_ATTRIBUTE>\n"
+            + "        <TAG>ENA-BASE-COUNT</TAG>\n"
+            + "        <VALUE>180862923</VALUE>\n"
+            + "      </RUN_ATTRIBUTE>\n"
+            + "      <RUN_ATTRIBUTE>\n"
+            + "        <TAG>ENA-SPOT-COUNT</TAG>\n"
+            + "        <VALUE>2573382</VALUE>\n"
+            + "      </RUN_ATTRIBUTE>\n"
+            + "    </RUN_ATTRIBUTES>\n"
+            + "  </RUN>\n"
+            + "</RUN_SET>";
+
+    assertJson(
+        "{\n"
+            + "  \"alias\" : \"GSM8055017_r1\",\n"
+            + "  \"accession\" : \"SRR27804374\",\n"
+            + "  \"identifiers\" : {\n"
+            + "    \"externalAccessions\" : [ {\n"
+            + "      \"db\" : \"GEO\",\n"
+            + "      \"id\" : \"GSM8055017_r1\"\n"
+            + "    } ]\n"
+            + "  },\n"
+            + "  \"title\" : \"NextSeq 500 sequencing; GSM8055017: F123 GAM library f123_1NP_GAM180410_A12_1_S89_R1_001; Mus musculus; OTHER\",\n"
+            + "  \"experiment\" : {\n"
+            + "    \"accession\" : \"SRX23467668\"\n"
+            + "  },\n"
+            + "  \"attributes\" : [ {\n"
+            + "    \"tag\" : \"loader\",\n"
+            + "    \"value\" : \"fastq-load.py\"\n"
+            + "  }, {\n"
+            + "    \"tag\" : \"ENA-STATUS-ID\",\n"
+            + "    \"value\" : \"4\"\n"
+            + "  }, {\n"
+            + "    \"tag\" : \"ENA-FIRST-PUBLIC\",\n"
+            + "    \"value\" : \"2025-02-23\"\n"
+            + "  }, {\n"
+            + "    \"tag\" : \"ENA-LAST-UPDATE\",\n"
+            + "    \"value\" : \"2025-02-23\"\n"
+            + "  }, {\n"
+            + "    \"tag\" : \"ENA-BASE-COUNT\",\n"
+            + "    \"value\" : \"180862923\"\n"
+            + "  }, {\n"
+            + "    \"tag\" : \"ENA-SPOT-COUNT\",\n"
+            + "    \"value\" : \"2573382\"\n"
+            + "  } ],\n"
+            + "  \"links\" : [ {\n"
+            + "    \"xrefLink\" : {\n"
+            + "      \"db\" : \"ENA-SUBMISSION\",\n"
+            + "      \"id\" : \"SRA1795198\"\n"
+            + "    }\n"
+            + "  }, {\n"
+            + "    \"xrefLink\" : {\n"
+            + "      \"db\" : \"ENA-STUDY\",\n"
+            + "      \"id\" : \"SRP487132\"\n"
+            + "    }\n"
+            + "  }, {\n"
+            + "    \"xrefLink\" : {\n"
+            + "      \"db\" : \"ENA-SAMPLE\",\n"
+            + "      \"id\" : \"SRS20320187\"\n"
+            + "    }\n"
+            + "  }, {\n"
+            + "    \"xrefLink\" : {\n"
+            + "      \"db\" : \"ENA-FASTQ-FILES\",\n"
+            + "      \"id\" : \"https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRR27804374&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes\"\n"
+            + "    }\n"
+            + "  }, {\n"
+            + "    \"xrefLink\" : {\n"
+            + "      \"db\" : \"ENA-SUBMITTED-FILES\",\n"
+            + "      \"id\" : \"https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRR27804374&result=read_run&fields=run_accession,submitted_ftp,submitted_md5,submitted_bytes,submitted_format\"\n"
+            + "    }\n"
+            + "  } ]\n"
+            + "}",
+        enaSraConverter.convertRunXmlToJson(xml));
+  }
+
+  // analysis
 
   @Test
   /*
@@ -2864,6 +3068,8 @@ public class EnaSraConverterTest {
             + "</ANALYSIS>\n",
         enaSraConverter.convertAnalysisJsonToXml(json));
   }
+
+  //
 
   /**
    * Asserts that the expected Receipt XML matches the actual Receipt XML. Ignores accession and
