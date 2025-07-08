@@ -7,7 +7,7 @@ plugins {
 
 group = 'uk.ac.ebi.ena.sra'
 archivesBaseName = 'webin-xml'
-version = '3.5.1'
+version = '3.5.2'
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
@@ -67,7 +67,10 @@ repositories {
 }
 
 dependencies {
-    api ('uk.ac.ebi.biosamples:models-core:5.+')
+    // With api ('uk.ac.ebi.biosamples:models-core:5.+'), gradle started throwing following error one day:
+    //      inconsistent module metadata found. Descriptor: uk.ac.ebi.biosamples:models-core:5.3.12-RC1 Errors: bad version: expected='5.3.13-SNAPSHOT' found='5.3.12-RC1'
+    // Had to use the following fixed version to get past the problem. We should see investigate why this happened with Biosamples team and go back to using 5.+ format.
+    api ('uk.ac.ebi.biosamples:models-core:5.3.12-RC1')
     api 'org.apache.xmlbeans:xmlbeans:5.2.0'
     api(group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.11.2')
 
