@@ -67,12 +67,7 @@ repositories {
 }
 
 dependencies {
-    // The dynamic version format i.e. x.+ has thrown the following error in the past:
-    //      api ('uk.ac.ebi.biosamples:models-core:5.+')
-    //      inconsistent module metadata found. Descriptor: uk.ac.ebi.biosamples:models-core:5.3.12-RC1 Errors: bad version: expected='5.3.13-SNAPSHOT' found='5.3.12-RC1'
-    // The work around it was to remove the dynamic part and use a fixed version i.e. x.x.x e.g.
-    // If this ever happens again then use the fixed format as a temporary solution and share the error with Biosamples team so they can address it.
-    api ('uk.ac.ebi.biosamples:models-core:5.+')
+    api ('uk.ac.ebi.biosamples:models-core:5.3.13-SNAPSHOT')
     api 'org.apache.xmlbeans:xmlbeans:5.2.0'
     api(group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.11.2')
 
