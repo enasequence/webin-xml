@@ -67,7 +67,7 @@ repositories {
 }
 
 dependencies {
-    api ('uk.ac.ebi.biosamples:models-core:5.3.13-SNAPSHOT')
+    api ('uk.ac.ebi.biosamples:models-core:5.3.12')
     api 'org.apache.xmlbeans:xmlbeans:5.2.0'
     api(group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.11.2')
 
@@ -78,9 +78,9 @@ dependencies {
 
     // Without this, a default JDK class is used for compiling xslts that throws
     // javax.xml.transform.TransformerConfigurationException for some reason.
-    runtimeOnly 'net.sf.saxon:saxon:8.7' //9.0, 9.7
+    runtimeOnly 'net.sf.saxon:saxon:8.7'
     // To fix a Null pointer exception thrown when a transformation is applied on an object.
-    runtimeOnly 'net.sf.saxon:saxon-dom:8.7' //9.0, 9.7
+    runtimeOnly 'net.sf.saxon:saxon-dom:8.7'
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.xmlunit:xmlunit-core:2.9.1'
