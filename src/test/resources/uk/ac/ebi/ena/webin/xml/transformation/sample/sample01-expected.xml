@@ -83,8 +83,8 @@
                 <VALUE>ERC000020</VALUE>
             </SAMPLE_ATTRIBUTE>
             <SAMPLE_ATTRIBUTE>
-                <TAG>ENA-STATUS-ID</TAG>
-                <VALUE>4</VALUE>
+                <TAG>ENA-STATUS</TAG>
+                <VALUE>PUBLIC</VALUE>
             </SAMPLE_ATTRIBUTE>
             <SAMPLE_ATTRIBUTE>
                 <TAG>ENA-FIRST-PUBLIC</TAG>

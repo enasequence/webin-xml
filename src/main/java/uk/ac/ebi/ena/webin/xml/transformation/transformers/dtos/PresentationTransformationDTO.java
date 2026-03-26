@@ -23,7 +23,7 @@ public class PresentationTransformationDTO {
   private String firstPublic;
   private String lastUpdated;
 
-  private Integer statusId;
+  private String status;
 
   private Set<String> secondary = Collections.emptySet();
 
@@ -67,12 +67,12 @@ public class PresentationTransformationDTO {
     this.lastUpdated = lastUpdated;
   }
 
-  public Integer getStatusId() {
-    return statusId;
+  public String getStatus() {
+    return status;
   }
 
-  public void setStatusId(Integer statusId) {
-    this.statusId = statusId;
+  public void setStatus(String status) {
+    this.status = status;
   }
 
   public Set<String> getSecondary() {

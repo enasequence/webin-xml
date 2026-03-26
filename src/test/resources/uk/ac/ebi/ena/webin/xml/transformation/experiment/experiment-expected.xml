@@ -63,8 +63,8 @@
         </EXPERIMENT_LINKS>
         <EXPERIMENT_ATTRIBUTES>
             <EXPERIMENT_ATTRIBUTE>
-                <TAG>ENA-STATUS-ID</TAG>
-                <VALUE>4</VALUE>
+                <TAG>ENA-STATUS</TAG>
+                <VALUE>PUBLIC</VALUE>
             </EXPERIMENT_ATTRIBUTE>
         </EXPERIMENT_ATTRIBUTES>
     </EXPERIMENT>

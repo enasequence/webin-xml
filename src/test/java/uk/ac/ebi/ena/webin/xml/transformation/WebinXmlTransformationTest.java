@@ -81,7 +81,7 @@ public class WebinXmlTransformationTest {
           dto.setProjectId("PRJNA685328");
           dto.setSubmissionId("SRA1173157");
           dto.setCenterName("BioProject");
-          dto.setStatusId(4);
+          dto.setStatus("public");
           dto.setFirstPublic("2021-01-12");
           dto.setLastUpdated("2021-01-12");
 
@@ -98,7 +98,7 @@ public class WebinXmlTransformationTest {
           dto.setProjectId("PRJEB6572");
           dto.setSubmissionId("ERA319850");
           dto.setCenterName("Wellcome Sanger Institute");
-          dto.setStatusId(4);
+          dto.setStatus("public");
           dto.setFirstPublic("2014-11-26");
           dto.setLastUpdated("2014-06-20");
 
@@ -128,7 +128,7 @@ public class WebinXmlTransformationTest {
           dto.setSubmissionId("ERA3206924");
           dto.setCenterName("EMG");
           dto.setBrokerName("EMG broker account, EMBL-EBI");
-          dto.setStatusId(4);
+          dto.setStatus("public");
           dto.setFirstPublic("2021-01-11");
           dto.setLastUpdated("2021-01-11");
           dto.setStudyIds(Collections.singleton("ERP126272"));
@@ -146,7 +146,7 @@ public class WebinXmlTransformationTest {
           dto.setProjectId("PRJEB11481");
           dto.setSubmissionId("ERA526107");
           dto.setCenterName("Wellcome Sanger Institute");
-          dto.setStatusId(4);
+          dto.setStatus("public");
           dto.setFirstPublic("2016-04-19");
           dto.setLastUpdated("2016-05-20");
           dto.setStudyIds(Collections.singleton("ERP012875"));
@@ -173,7 +173,7 @@ public class WebinXmlTransformationTest {
           dto.setProjectId("PRJEB42238");
           dto.setSubmissionId("ERA3203394");
           dto.setCenterName("WELLCOME SANGER INSTITUTE");
-          dto.setStatusId(4);
+          dto.setStatus("public");
           dto.setFirstPublic("2020-12-22");
           dto.setLastUpdated("2021-01-08");
           dto.setParents(parents);
@@ -205,7 +205,7 @@ public class WebinXmlTransformationTest {
           dto.setSubmissionAlias(
               "ena-SUBMISSION-Graz University of Technical-11-01-2021-14:11:54:887-1");
           dto.setCenterName("Graz University of Technical");
-          dto.setStatusId(4);
+          dto.setStatus("public");
           dto.setFirstPublic("2021-01-11");
           dto.setLastUpdated("2021-01-11");
 
@@ -256,7 +256,7 @@ public class WebinXmlTransformationTest {
           dto.setSubmissionId("ERA000011");
           dto.setSubmissionAlias("sgrp-sc-20080711-1");
           dto.setCenterName("Wellcome Sanger Institute");
-          dto.setStatusId(4);
+          dto.setStatus("public");
           dto.setFirstPublic("2010-02-26");
           dto.setLastUpdated("2018-03-09");
 
@@ -289,7 +289,7 @@ public class WebinXmlTransformationTest {
           dto.setCenterName("Graz University of Technical");
           dto.setSampleIds(Collections.singleton("ERS5524412"));
           dto.setSampleAccessions(Collections.singletonMap("ERS5524412", "SAMEA7777175"));
-          dto.setStatusId(4);
+          dto.setStatus("public");
 
           return WebinXmlTransformation.createExperimentTransformer()
               .transformForPresentation(dto, doc);
@@ -307,7 +307,7 @@ public class WebinXmlTransformationTest {
           dto.setCenterName("Wellcome Sanger Institute");
           dto.setSampleIds(Collections.singleton("ERS000119"));
           dto.setSampleAccessions(Collections.singletonMap("ERS000119", "SAMEA860413"));
-          dto.setStatusId(4);
+          dto.setStatus("public");
 
           return WebinXmlTransformation.createExperimentTransformer()
               .transformForPresentation(dto, doc);
@@ -335,7 +335,7 @@ public class WebinXmlTransformationTest {
               "ena-SUBMISSION-Graz University of Technical-11-01-2021-14:11:54:887-1");
           dto.setExperimentTitle("Illumina MiSeq sequencing");
           dto.setCenterName("Graz University of Technical");
-          dto.setStatusId(4);
+          dto.setStatus("public");
           dto.setFirstPublic("2021-01-11");
           dto.setLastUpdated("2021-01-11");
           dto.setBaseCount(2334659l);
@@ -358,7 +358,7 @@ public class WebinXmlTransformationTest {
           dto.setExperimentTitle(
               "Illumina NovaSeq 6000 paired end sequencing; Illumina NovaSeq 6000 paired end sequencing; COG-UK/MILK-9E05B3/SANG:200930_A00948_0190_AHNFKGDRXX/1t241");
           dto.setCenterName("Wellcome Sanger Institute");
-          dto.setStatusId(4);
+          dto.setStatus("public");
           dto.setFirstPublic("2020-10-07");
           dto.setLastUpdated("2020-10-06");
           dto.setBaseCount(490101964l);
@@ -390,7 +390,7 @@ public class WebinXmlTransformationTest {
           dto.setSubmissionId("ERA3271590");
           dto.setStudyId("ERP126153");
           dto.setCenterName("UNIVERSITY OF CALIFORNIA - DAVIS");
-          dto.setStatusId(4);
+          dto.setStatus("public");
           dto.setFirstPublic("2021-01-13");
           dto.setLastUpdated("2021-01-12");
           dto.setSampleAccessions(Collections.singletonMap("ERS3583620", "SAMEA104728908"));
@@ -409,7 +409,7 @@ public class WebinXmlTransformationTest {
           dto.setSubmissionId("ERA610683");
           dto.setStudyId("ERP014691");
           dto.setCenterName("Wellcome Sanger Institute");
-          dto.setStatusId(4);
+          dto.setStatus("public");
           dto.setFirstPublic("2016-05-16");
           dto.setLastUpdated("2016-06-17");
           dto.setSampleAccessions(Collections.singletonMap("ERS1094210", "SAMEA3907076"));

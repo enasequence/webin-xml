@@ -275,8 +275,8 @@ public abstract class AbstractTransformer {
 
   protected <T extends PresentationTransformationDTO> void addEnaStatusIdAttribute(
       T inpObj, Supplier<AttributeType> attributeTypeSupplier) {
-    if (inpObj.getStatusId() != null) {
-      appendAttribute(attributeTypeSupplier, "ENA-STATUS-ID", inpObj.getStatusId().toString());
+    if (inpObj.getStatus() != null) {
+      appendAttribute(attributeTypeSupplier, "ENA-STATUS", inpObj.getStatus().toUpperCase());
     }
   }
 

@@ -34,8 +34,8 @@
         </PROJECT_LINKS>
         <PROJECT_ATTRIBUTES>
             <PROJECT_ATTRIBUTE>
-                <TAG>ENA-STATUS-ID</TAG>
-                <VALUE>4</VALUE>
+                <TAG>ENA-STATUS</TAG>
+                <VALUE>PUBLIC</VALUE>
             </PROJECT_ATTRIBUTE>
             <PROJECT_ATTRIBUTE>
                 <TAG>ENA-FIRST-PUBLIC</TAG>
