@@ -30,6 +30,7 @@ import uk.ac.ebi.ena.webin.xml.conversion.model.ena.mapping.ToXmlMapper;
   "name",
   "title",
   "description",
+  "collaborators",
   "sequencingProject",
   "adminProject",
   "relatedProjects",
@@ -47,6 +48,7 @@ public class Project implements ToXmlMapper<XmlProject> {
   private String name;
   private String title;
   private String description;
+  private List<Collaborator> collaborators;
   private SequencingProject sequencingProject;
   private AdminProject adminProject;
 
@@ -68,6 +70,7 @@ public class Project implements ToXmlMapper<XmlProject> {
     to.setName(name);
     to.setTitle(title);
     to.setDescription(description);
+    to.setCollaborators(collaborators);
 
     if (sequencingProject != null && sequencingProject.getLocusTagPrefixes() == null) {
       sequencingProject.setLocusTagPrefixes(Collections.emptyList());

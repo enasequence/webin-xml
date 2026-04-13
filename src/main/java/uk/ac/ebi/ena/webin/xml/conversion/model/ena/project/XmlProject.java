@@ -33,6 +33,7 @@ import uk.ac.ebi.ena.webin.xml.conversion.model.ena.mapping.FromXmlMapper;
   "name",
   "title",
   "description",
+  "collaborators",
   "sequencingProject",
   "adminProject",
   "relatedProjects",
@@ -66,6 +67,10 @@ public class XmlProject implements FromXmlMapper<Project> {
   @JacksonXmlProperty(localName = "DESCRIPTION")
   private String description;
 
+  @JacksonXmlElementWrapper(localName = "COLLABORATORS")
+  @JacksonXmlProperty(localName = "COLLABORATOR")
+  private List<Collaborator> collaborators;
+
   @JacksonXmlProperty(localName = "SUBMISSION_PROJECT")
   private SequencingProject sequencingProject;
 
@@ -96,6 +101,7 @@ public class XmlProject implements FromXmlMapper<Project> {
     to.setName(name);
     to.setTitle(title);
     to.setDescription(description);
+    to.setCollaborators(collaborators);
     to.setSequencingProject(sequencingProject);
     to.setAdminProject(adminProject);
     to.setRelatedProjects(relatedProjects);
