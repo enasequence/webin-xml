@@ -38,6 +38,7 @@
                     <xs:enumeration value="wig"/>
                     <xs:enumeration value="bed"/>
                     <xs:enumeration value="gff"/>
+                    <xs:enumeration value="gff3"/>
                     <xs:enumeration value="gfa"/>
                     <xs:enumeration value="fasta"/>
                     <xs:enumeration value="fastq"/>
