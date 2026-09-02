@@ -324,6 +324,17 @@
                                     </xs:complexType>
                                 </xs:element>
                                 <xs:element name="SEQUENCE_ANNOTATION" type="com:ReferenceSequenceType"></xs:element>
+                                <xs:element name="DECOUPLED_ANNOTATION">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element maxOccurs="1" minOccurs="1" name="PRIMARY_ID" type="xs:string">
+                                                <xs:annotation>
+                                                    <xs:documentation>The primary identifier of the parent submission.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:element>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
                                 <xs:element name="REFERENCE_SEQUENCE">
                                     <xs:complexType> </xs:complexType>
                                 </xs:element>
